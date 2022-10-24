@@ -3,7 +3,7 @@ export default [
   { path: '/patients', component: '@/pages/patients/patients' },
   {
     name: 'forgotUsername',
-    path: '/login/forgotPassword',
+    path: '/login/forgotUsername',
     component: '@/pages/Login/ForgotUsername/forgotUsername',
   },
   {
