@@ -6,7 +6,8 @@
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "test:coverage": "umi-test --coverage",
+    "commit":"git-cz"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -19,6 +20,11 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -28,6 +34,7 @@
     "@umijs/plugin-initial-state": "^2.4.0",
     "@umijs/plugin-model": "^2.6.2",
     "ahooks": "^3.7.2",
+    "commitizen": "^4.2.5",
     "react": "17.x",
     "react-dom": "17.x",
     "umi": "^3.5.34",
