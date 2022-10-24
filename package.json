@@ -7,17 +7,21 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
-    "commit":"git-cz"
+    "commit": "git-cz",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint-staged": "lint-staged",
+    "tsc": "tsc --noEmit"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
+    "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
     ]
   },
   "config": {
@@ -29,6 +33,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.9",
+    "@umijs/fabric": "^3.0.0",
     "@umijs/plugin-crossorigin": "^1.2.1",
     "@umijs/plugin-dva": "^0.13.2",
     "@umijs/plugin-initial-state": "^2.4.0",
@@ -43,9 +48,13 @@
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
     "@umijs/test": "^3.5.34",
-    "lint-staged": "^10.0.7",
-    "prettier": "^2.2.0",
+    "eslint": "^8.26.0",
+    "eslint-plugin-react": "^7.31.10",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.7.1",
     "typescript": "^4.1.2",
     "yorkie": "^2.0.0"
   }
