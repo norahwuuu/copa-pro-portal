@@ -1,0 +1,88 @@
+.button {
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 20px 0 20px 20px;
+    border: 1px solid #707070;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    background-image: none;
+    transition: all 0.1s;
+    user-select: none;
+    touch-action: manipulation;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 22px;
+}
+
+.slim-button {
+    line-height: 22px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 20px 0 20px 20px;
+    border: 1px solid #707070;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    background-image: none;
+    transition: all 0.1s;
+    user-select: none;
+    touch-action: manipulation;
+    font-style: italic;
+    font-weight: bold;
+    padding: 3px 20px;
+}
+
+.button-default {
+    color: #D1000D;
+    border: 1px solid #707070;
+    background: #FFF 0% 0% no-repeat padding-box;
+    &:hover {
+        background: #218389 0% 0% no-repeat padding-box;
+        border: 1px solid #218389;
+        color: #fff;
+    }
+}
+
+.button-gray {
+    color: #D1000D;
+    background: #F3F3F3 0% 0% no-repeat padding-box;
+    border: 1px solid #F3F3F3;
+    &:hover {
+        background: #EEE 0% 0% no-repeat padding-box;
+        border: 1px solid #EEE;
+        color: #8E1F1D;
+    }
+}
+
+.button-red {
+    color: #fff;
+    background: #D1000D 0% 0% no-repeat padding-box;
+    border: 1px solid #D2010E;
+    &:hover {
+        background: #ED999E 0% 0% no-repeat padding-box;
+        border: 1px solid #ED999E;
+        color: #FFF;
+    }
+}
+
+.button-disabled {
+    color: #959392;
+    background: #D6D6D6 0% 0% no-repeat padding-box;
+    border: 1px solid #D6D6D6;
+}
+
+.button-cancel {
+    color: #333;
+    background: #FFF 0% 0% no-repeat padding-box;
+    border: 1px solid #fff;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: underline;
+        background: #FFF 0% 0% no-repeat padding-box;
+        border: 1px solid #585655;
+    }
+}

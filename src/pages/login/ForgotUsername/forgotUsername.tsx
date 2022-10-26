@@ -1,16 +1,30 @@
-import CenterRectangle from '@/components/CenterRectangle/centerRectangle';
-import styles from './forgotUsername.less';
+import React from "react";
+import Button from "@/components/Button/button";
+import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
+import styles from "./forgotUsername.less";
+import { history } from "umi";
+import LoginLogo from "@/components/LoginLogo/loginLogo";
+import Draft from "@/components/Draft/draft";
+import Footer from "@/components/Footer/footer";
+
 const ForgotUsername = () => {
   return (
-    <CenterRectangle mainTitle="Forgot username?">
-      <div className={styles.forgotUsername}>
-        <div className={styles.text1}>
-          Please call your customer service agent at:
+    <>
+      <CenterRectangle className={styles.box} mainTitle="Forgot username?">
+        <LoginLogo />
+        <Draft />
+        <div className={styles.forgotUsername}>
+          <div className={styles.text1}>
+            Please call your customer service agent at:
+          </div>
+          <div className={styles.text2}>(123) 456-7890</div>
+          <Button type={"gray"} onClick={() => history.push("/login")}>
+            Back to login
+          </Button>
         </div>
-        <div className={styles.text2}>(123) 456-7890</div>
-        <button>back to login</button>
-      </div>
-    </CenterRectangle>
+      </CenterRectangle>
+      <Footer />
+    </>
   );
 };
 export default ForgotUsername;
