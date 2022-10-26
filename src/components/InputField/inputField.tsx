@@ -36,8 +36,8 @@ const LogTextField = styled(TextField)`
   &: hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
     border: 1px solid #333;
   },
-  &: hover .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #c02820;
+  & .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #c02820 ;
   },
 
   & .MuiInputLabel-root {
@@ -45,7 +45,6 @@ const LogTextField = styled(TextField)`
     top:-8px;
     font-size:14px;
   },
-
   & .MuiFormLabel-filled {
       color:#999 !important;
       top:0;
