@@ -1,7 +1,7 @@
 export default [
   {
     path: "/",
-    component: "@/Layouts/layouts",
+    component: "@/layouts/layouts",
     routes: [
       { path: "/", component: "@/pages/Login/login" },
       { path: "/patients", component: "@/pages/patients/patients" },
