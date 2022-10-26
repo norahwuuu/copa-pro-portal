@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Draft from "@/components/Draft/draft";

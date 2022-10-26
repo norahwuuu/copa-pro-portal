@@ -1,11 +1,10 @@
-import React from "react";
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import styles from "./forgotUsername.less";
-import { history } from "umi";
-import LoginLogo from "@/components/LoginLogo/loginLogo";
 import Draft from "@/components/Draft/draft";
 import Footer from "@/components/Footer/footer";
+import LoginLogo from "@/components/LoginLogo/loginLogo";
+import { history } from "umi";
+import styles from "./forgotUsername.less";
 
 const ForgotUsername = () => {
   return (
