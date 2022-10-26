@@ -3,3 +3,10 @@ export const errorTips = {
   passEmpty: "Please enter password.",
   nonvalidEmail: "Username must be a valid emali address.",
 };
+
+export const loginText = {
+  mainTitle: "Welcome to",
+  subTitle: "[design tool offical name!]",
+  forgotUser: "Forgot username?",
+  forgotPass: "Forgot password?",
+};

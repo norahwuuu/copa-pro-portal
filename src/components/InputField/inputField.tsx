@@ -1,18 +1,19 @@
 /**
  * description：global TextField
  *
- * param:className
+ * param:subLink
  *
  * return <InputField/>
  */
 import type { TextFieldProps } from "@mui/material";
 import { TextField } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/system";
 import type { FC } from "react";
-import style from "./inputField.less";
+import styles from "./inputField.less";
 
 export type InputFieldProps = TextFieldProps & {
   className?: string;
+  subLink?: string;
 };
 
 const LogTextField = styled(TextField)`
@@ -44,7 +45,6 @@ const LogTextField = styled(TextField)`
     top:-8px;
     font-size:14px;
   },
-  
 
   & .MuiFormLabel-filled {
       color:#999 !important;
@@ -60,14 +60,26 @@ const LogTextField = styled(TextField)`
       color:#D1000D!important;
   }
 
-
   & .MuiFormHelperText-root {
     color: #d1000d!important;
     font-size: 10px;
   },
 `;
-
-const InputField: FC<InputFieldProps> = ({ ...props }) => {
-  return <LogTextField className={style.input} {...props} />;
+const InputField: FC<InputFieldProps> = ({
+  subLink = "",
+  className = "",
+  ...props
+}) => {
+  return (
+    <div className={`${styles.textBox} ${className}`}>
+      <LogTextField className={styles.input} {...props} />
+      <p
+        className={styles.subLink}
+        style={{ display: subLink !== "" ? "inline-block" : "none" }}
+      >
+        {subLink}
+      </p>
+    </div>
+  );
 };
 export default InputField;

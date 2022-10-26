@@ -1,4 +1,4 @@
-import styles from './centerRectangle.less';
+import styles from "./centerRectangle.less";
 
 export interface propsType {
   width?: string | number;
@@ -18,17 +18,17 @@ export interface propsType {
 
 const CenterRectangle = ({
   width,
-  className,
+  className = "",
   children,
   subtitle,
   mainTitle,
 }: propsType) => {
-  const classname = className ? '' : styles.centerRectangle;
+  const classname = className ? "" : styles.centerRectangle;
   const Style = {
     width: width || 409,
   };
   return (
-    <div style={Style} className={classname}>
+    <div style={Style} className={`${styles.centerRectangle} ${className}`}>
       <div className={styles.title}>
         {mainTitle && <div>{mainTitle}</div>}
         {subtitle && <div>{subtitle}</div>}
