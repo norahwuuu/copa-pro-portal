@@ -33,36 +33,70 @@ const LogTextField = styled(TextField)`
     border: 1px solid #999;
   }
   ,
-  &: hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #333;
-  },
+  & .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #333 !important;
+    border-width: 1px !important;
+  }
+  ,
+  &:hover .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #c02820;
+  }
+  ,
   & .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #c02820 ;
-  },
-
+    border: 1px solid #c02820;
+  }
+  ,
   & .MuiInputLabel-root {
+    top: -8px;
     color: #595655;
-    top:-8px;
-    font-size:14px;
-  },
+    font-size: 14px;
+  }
+  ,
   & .MuiFormLabel-filled {
-      color:#999 !important;
-      top:0;
-      font-size:1rem;
-  },
-    & .Mui-focused {
+    top: 0;
+    color: #999 !important;
+    font-size: 1rem;
+  }
+  ,
+  & .Mui-focused {
+    top: 0;
     color: #333 !important;
-    top:0;
-    font-size:1rem;
-  },
-  & .MuiFormLabel-colorError{
-      color:#D1000D!important;
+    font-size: 1rem;
+  }
+  ,
+  // 错误提示
+  & .MuiFormLabel-colorError {
+    color: #d1000d !important;
   }
 
   & .MuiFormHelperText-root {
-    color: #d1000d!important;
+    color: #d1000d !important;
     font-size: 10px;
-  },
+  }
+
+  ,
+
+  //后缀图标
+  & .MuiInputBase-root .MuiInputAdornment-positionEnd .MuiIconButton-edgeEnd {
+    margin-right: 10px;
+    padding: 0;
+  }
+  ,
+  &
+    .MuiInputBase-colorInfo
+    .MuiInputAdornment-positionEnd
+    .MuiIconButton-edgeEnd
+    .MuiSvgIcon-root {
+    color: #999;
+  }
+  ,
+  &
+    .MuiInputBase-colorError
+    .MuiInputAdornment-positionEnd
+    .MuiIconButton-edgeEnd
+    .MuiSvgIcon-root {
+    color: #d1000d;
+  }
 `;
 const InputField: FC<InputFieldProps> = ({
   subLink = "",

@@ -1,6 +1,7 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton, InputAdornment } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -17,7 +18,32 @@ const Login: FC<any> = () => {
   const [password, setPassWord] = useState<string>("");
   // password 错误类型
   const [passType, setPassType] = useState<string>("noError");
+  //password showType
+  const [showType, setShowType] = useState<boolean>(true);
 
+  // 校验是否是email 格式
+  const emailRegex = (email: string) => {
+    const email_Regex = new RegExp("^.+@[A-Z0-9a-z]+.[a-zA-Z]+$");
+    return email_Regex.test(email);
+  };
+  // 校验eamil格式
+  const checkEmail = () => {
+    if (email === "") {
+      setEmailType("emailEmpty");
+    } else if (!emailRegex(email)) {
+      setEmailType("nonvalidEmail");
+    } else {
+      setEmailType("noError");
+    }
+  };
+  // 校验密码是否格式正确
+  const checkPass = () => {
+    if (password === "") {
+      setPassType("passEmpty");
+    } else {
+      setPassType("noError");
+    }
+  };
   // 监听邮件错误类型
   useEffect(() => {
     if (emailType !== "noError") {
@@ -29,11 +55,12 @@ const Login: FC<any> = () => {
   // 监听密码错误类型
   useEffect(() => {
     if (passType !== "noError") {
-      if (passType === "") {
+      if (password === "") {
         setPassType("passEmpty");
       }
     }
   }, [password, passType]);
+
   // 点击login-btn
   const loginClick = () => {
     // 判断username
@@ -44,6 +71,7 @@ const Login: FC<any> = () => {
       setPassType("passEmpty");
     }
   };
+
   return (
     <>
       <CenterRectangle
@@ -61,6 +89,12 @@ const Login: FC<any> = () => {
               setEmailType("noError");
               setEmail(v.target.value);
             }}
+            onFocus={() => {
+              setEmailType("noError");
+            }}
+            onBlur={() => {
+              checkEmail();
+            }}
             type={"text"}
             name="Email"
             required
@@ -75,7 +109,13 @@ const Login: FC<any> = () => {
               setPassWord(v.target.value);
               setPassType("noError");
             }}
-            type={"password"}
+            onFocus={() => {
+              setPassType("noError");
+            }}
+            onBlur={() => {
+              checkPass();
+            }}
+            type={showType ? "password" : "text"}
             name="password"
             required
             label="Password"
@@ -84,10 +124,13 @@ const Login: FC<any> = () => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={() => {}}
-                    onMouseDown={() => {}}
+                    onClick={() => {
+                      setShowType(!showType);
+                    }}
                     edge="end"
-                  ></IconButton>
+                  >
+                    {showType ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
                 </InputAdornment>
               ),
             }}
