@@ -1,24 +1,31 @@
 import React from "react";
 import styles from "./button.less";
 
-export interface propsType {
+export type propsType = {
   className?: string;
   children: string;
   type?: "default" | "gray" | "red" | "disabled" | "cancel";
   size?: "default" | "slim";
   onClick?: React.MouseEventHandler<HTMLElement>;
-}
+  style?: React.CSSProperties;
+};
 
 /**
  * description：按钮
  *
  * param:type:类型;children：按钮文字
  *
- * return <Button/>
+ * return <BaseButton/>
  */
 
-const Button = (props: propsType) => {
-  const { className, children, type = "default", size = "default" } = props;
+const BaseButton = (props: propsType) => {
+  const {
+    className,
+    children,
+    type = "default",
+    size = "default",
+    ...rest
+  } = props;
   //类型样式
   let typeclasses = `button-${type}`;
   //大小样式
@@ -48,6 +55,7 @@ const Button = (props: propsType) => {
 
   return (
     <button
+      {...(rest as any)}
       className={classname}
       onClick={handleClick}
       disabled={type === "disabled"}
@@ -56,4 +64,4 @@ const Button = (props: propsType) => {
     </button>
   );
 };
-export default Button;
+export default BaseButton;

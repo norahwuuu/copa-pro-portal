@@ -16,6 +16,11 @@ export default [
         component: "@/pages/Login/ForgotPassword/forgotPassword",
       },
       {
+        name: "forgotPasswordEmail",
+        path: "/login/forgotPasswordEmail",
+        component: "@/pages/Login/ForgotPassword/forgotPasswordEmail",
+      },
+      {
         name: "recoverPassword",
         path: "/login/recoverPassword",
         component: "@/pages/Login/RecoverPassword/recoverPassword",

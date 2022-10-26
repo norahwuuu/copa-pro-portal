@@ -1,4 +1,4 @@
-import Button from "@/components/Button/button";
+import BaseButton from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Draft from "@/components/Draft/draft";
 import Footer from "@/components/Footer/footer";
@@ -17,9 +17,9 @@ const ForgotUsername = () => {
             Please call your customer service agent at:
           </div>
           <div className={styles.text2}>(123) 456-7890</div>
-          <Button type={"gray"} onClick={() => history.push("/login")}>
+          <BaseButton type={"gray"} onClick={() => history.push("/")}>
             Back to login
-          </Button>
+          </BaseButton>
         </div>
       </CenterRectangle>
       <Footer />

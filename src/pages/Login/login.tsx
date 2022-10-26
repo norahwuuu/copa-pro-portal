@@ -1,4 +1,4 @@
-import Button from "@/components/Button/button";
+import BaseButton from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
 import { IconButton, InputAdornment } from "@mui/material";
@@ -65,7 +65,7 @@ const Login: FC<any> = () => {
               ),
             }}
           />
-          <Button children="login" type="gray" />
+          <BaseButton children="login" type="gray" />
         </div>
       </CenterRectangle>
     </>
