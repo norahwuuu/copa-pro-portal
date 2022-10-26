@@ -4,7 +4,7 @@ export default [
     component: "@/layouts/layouts",
     routes: [
       { path: "/", component: "@/pages/Login/login" },
-      { path: "/patients", component: "@/pages/patients/patients" },
+      // { path: "/patients", component: "@/pages/Patients/patients" },
       {
         name: "forgotUsername",
         path: "/login/forgotUsername",

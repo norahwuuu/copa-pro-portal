@@ -1,7 +1,5 @@
-import { IconButton, InputAdornment } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 
-import InputField from "@/components/InputField/inputField";
 import { errorTips } from "./column";
 
 const Login: FC<any> = () => {
@@ -17,7 +15,7 @@ const Login: FC<any> = () => {
   }, [email, errorEmail]);
   return (
     <>
-      <InputField
+      {/* <InputField
         helperText={emailTip}
         // color="error"
         onChange={(v) => {
@@ -51,7 +49,7 @@ const Login: FC<any> = () => {
             </InputAdornment>
           ),
         }}
-      />
+      /> */}
     </>
   );
 };
