@@ -3,6 +3,20 @@ export const errorTips = {
   passEmpty: "Please enter password.",
   nonvalidEmail: "Username must be a valid emali address.",
 };
+export const errorTypes = {
+  noError: {
+    tip: "",
+  },
+  emailEmpty: {
+    tip: "Please enter username.",
+  },
+  passEmpty: {
+    tip: "Please enter password.",
+  },
+  nonvalidEmail: {
+    tip: "Username must be a valid emali address.",
+  },
+};
 
 export const loginText = {
   mainTitle: "Welcome to",
