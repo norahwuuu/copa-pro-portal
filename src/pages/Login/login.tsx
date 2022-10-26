@@ -1,4 +1,4 @@
-import Button from "@/components/Button/button";
+import BaseButton from "@/components/Button/baseButton";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -135,7 +135,7 @@ const Login: FC<any> = () => {
               ),
             }}
           />
-          <Button onClick={loginClick} children="login" type="gray" />
+          <BaseButton children="login" type="gray" />
         </div>
       </CenterRectangle>
     </>

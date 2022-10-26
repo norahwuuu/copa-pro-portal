@@ -7,7 +7,7 @@ import styles from "./styles.less";
  *
  * param:
  *
- * return <Button/>
+ * return
  */
 
 const Draft = () => {
