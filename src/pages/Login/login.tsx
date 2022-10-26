@@ -1,4 +1,4 @@
-import BaseButton from "@/components/Button/button";
+import BaseButton from "@/components/Button/baseButton";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
 import { IconButton, InputAdornment } from "@mui/material";

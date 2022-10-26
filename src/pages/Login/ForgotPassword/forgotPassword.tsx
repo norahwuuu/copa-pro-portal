@@ -1,4 +1,4 @@
-import BaseButton from "@/components/Button/button";
+import BaseButton from "@/components/Button/baseButton";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Draft from "@/components/Draft/draft";
 import Footer from "@/components/Footer/footer";
