@@ -21,6 +21,9 @@ const Login: FC<any> = () => {
   // password 错误类型
   const [passType, setPassType] = useState<string>("noError");
 
+  // callback 接口
+  const [showLoginError, setShowLoginError] = useState<boolean>(true);
+
   // 点击login-btn
   // const loginClick = () => {
   //   // 判断username
@@ -40,7 +43,7 @@ const Login: FC<any> = () => {
         mainTitle={loginText.mainTitle}
         subtitle={loginText.subTitle}
         headerInfo={{
-          show: true,
+          show: showLoginError,
           type: "error",
           info: "Username and password combination do not match our records.",
         }}
