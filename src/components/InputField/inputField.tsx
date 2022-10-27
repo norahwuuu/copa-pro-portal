@@ -1,19 +1,34 @@
 /**
- * description：global TextField
- *
- * param:subLink
- *
- * return <InputField/>
+ * global TextField : 带效果的输入框
+ * @param
+ * className:类名
+ * subLink: 输入框右下方文字
+ * subLinkClick: 输入框右下角文字点击方法回调
+ * inputType: 输入框类型--- email\pass\default
+ * inputValue: 输入框的值
+ * setInputValue: 设置输入框值得方法
+ * errorType: 错误类型---目前支持 noError\emailEmpty\passEmpty\nonvalidEmail
+ * setErrorType: 设置错误类型得方法
+ * @returns
  */
+import { errorTypes } from "@/pages/Login/column";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import type { TextFieldProps } from "@mui/material";
-import { TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { styled } from "@mui/system";
 import type { FC } from "react";
+import { useState } from "react";
 import styles from "./inputField.less";
 
 export type InputFieldProps = TextFieldProps & {
   className?: string;
   subLink?: string;
+  inputType?: string;
+  inputValue?: any;
+  setInputValue?: (arg0: string) => void;
+  errorType?: string;
+  setErrorType?: (arg0: string) => void;
+  subLinkClick?: () => void;
 };
 
 const LogTextField = styled(TextField)`
@@ -70,8 +85,10 @@ const LogTextField = styled(TextField)`
   }
 
   & .MuiFormHelperText-root {
+    margin-right: 0;
+    margin-left: 4px;
     color: #d1000d !important;
-    font-size: 10px;
+    font-size: 0.1rem;
   }
 
   ,
@@ -100,19 +117,141 @@ const LogTextField = styled(TextField)`
 `;
 const InputField: FC<InputFieldProps> = ({
   subLink = "",
+  subLinkClick,
   className = "",
+  inputType = "default",
+  inputValue,
+  setInputValue,
+  errorType,
+  setErrorType,
   ...props
 }) => {
-  return (
-    <div className={`${styles.textBox} ${className}`}>
-      <LogTextField className={styles.input} {...props} />
-      <p
-        className={styles.subLink}
-        style={{ display: subLink !== "" ? "inline-block" : "none" }}
-      >
-        {subLink}
-      </p>
-    </div>
-  );
+  //password showType
+  const [showType, setShowType] = useState<boolean>(true);
+  // 校验是否是email 格式
+  const emailRegex = (email: string) => {
+    const email_Regex = new RegExp("^.+@[A-Z0-9a-z]+.[a-zA-Z]+$");
+    return email_Regex.test(email);
+  };
+  // 校验eamil格式
+  const checkEmail = () => {
+    if (inputValue === "") {
+      setErrorType && setErrorType("emailEmpty");
+    } else if (!emailRegex(inputValue)) {
+      setErrorType && setErrorType("nonvalidEmail");
+    } else {
+      setErrorType && setErrorType("noError");
+    }
+  };
+  // 校验密码是否格式正确
+  const checkPass = () => {
+    if (inputValue === "") {
+      setErrorType && setErrorType("passEmpty");
+    } else {
+      setErrorType && setErrorType("noError");
+    }
+  };
+  switch (inputType) {
+    case "email":
+      return (
+        <div className={`${styles.textBox} ${className}`}>
+          <LogTextField
+            helperText={errorTypes[errorType].tip}
+            color={errorType !== "noError" ? "error" : "info"}
+            onChange={(v) => {
+              setErrorType("noError");
+              setInputValue(v.target.value);
+            }}
+            onFocus={() => {
+              setErrorType("noError");
+            }}
+            onBlur={() => {
+              checkEmail();
+            }}
+            className={styles.input}
+            {...props}
+          />
+          <p
+            className={styles.subLink}
+            style={{ display: subLink !== "" ? "inline-block" : "none" }}
+          >
+            <span
+              onClick={() => {
+                subLinkClick && subLinkClick();
+              }}
+            >
+              {subLink}
+            </span>
+          </p>
+        </div>
+      );
+    case "pass":
+      return (
+        <div className={`${styles.textBox} ${className}`}>
+          <LogTextField
+            helperText={errorTypes[errorType].tip}
+            type={showType ? "password" : "text"}
+            color={errorType !== "noError" ? "error" : "info"}
+            onChange={(v) => {
+              setErrorType("noError");
+              setInputValue(v.target.value);
+            }}
+            onFocus={() => {
+              setErrorType("noError");
+            }}
+            onBlur={() => {
+              checkPass();
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => {
+                      setShowType(!showType);
+                    }}
+                    edge="end"
+                  >
+                    {showType ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            className={styles.input}
+            {...props}
+          />
+          <p
+            className={styles.subLink}
+            style={{ display: subLink !== "" ? "inline-block" : "none" }}
+          >
+            <span
+              onClick={() => {
+                subLinkClick && subLinkClick();
+              }}
+            >
+              {subLink}
+            </span>
+          </p>
+        </div>
+      );
+    default:
+      return (
+        <div className={`${styles.textBox} ${className}`}>
+          <LogTextField className={styles.input} {...props} />
+          <p
+            className={styles.subLink}
+            style={{ display: subLink !== "" ? "inline-block" : "none" }}
+          >
+            <span
+              onClick={() => {
+                subLinkClick && subLinkClick();
+              }}
+            >
+              {subLink}
+            </span>
+          </p>
+        </div>
+      );
+  }
 };
 export default InputField;
