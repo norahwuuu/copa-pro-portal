@@ -39,6 +39,11 @@ const Login: FC<any> = () => {
         className={styles.loginBox}
         mainTitle={loginText.mainTitle}
         subtitle={loginText.subTitle}
+        headerInfo={{
+          show: true,
+          type: "error",
+          info: "Username and password combination do not match our records.",
+        }}
       >
         <div className={styles.formBox}>
           <InputField
