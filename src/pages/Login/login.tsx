@@ -22,7 +22,7 @@ const Login: FC<any> = () => {
   const [passType, setPassType] = useState<string>("noError");
 
   // callback 接口
-  const [showLoginError, setShowLoginError] = useState<boolean>(true);
+  const [showLoginError, setShowLoginError] = useState<boolean>(false);
 
   // 点击login-btn
   // const loginClick = () => {
