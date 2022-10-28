@@ -43,7 +43,7 @@ const Login: FC<any> = () => {
         mainTitle={loginText.mainTitle}
         subtitle={loginText.subTitle}
         headerInfo={{
-          show: true,
+          show: showLoginError,
           type: "error",
           info: "Username and password combination do not match our records.",
         }}
