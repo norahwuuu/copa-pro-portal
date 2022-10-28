@@ -3,6 +3,7 @@ import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
+import { Container } from "@mui/material";
 import { useState } from "react";
 import { history } from "umi";
 
@@ -35,7 +36,7 @@ const Login: FC<any> = () => {
   // };
 
   return (
-    <div>
+    <Container>
       <LoginLogo />
       <CenterRectangle
         className={styles.loginBox}
@@ -83,7 +84,7 @@ const Login: FC<any> = () => {
         </div>
       </CenterRectangle>
       <Footer />
-    </div>
+    </Container>
   );
 };
 export default Login;
