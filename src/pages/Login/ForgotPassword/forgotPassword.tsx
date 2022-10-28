@@ -1,6 +1,5 @@
 import BaseButton from "@/components/Button/baseButton";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import Draft from "@/components/Draft/draft";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
@@ -15,7 +14,7 @@ const ForgotPassword = () => {
   return (
     <Container>
       <LoginLogo />
-      <Draft />
+      {/* <Draft /> */}
 
       <CenterRectangle
         className={styles.box}

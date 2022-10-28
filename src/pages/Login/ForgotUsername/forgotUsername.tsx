@@ -1,6 +1,5 @@
 import BaseButton from "@/components/Button/baseButton";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import Draft from "@/components/Draft/draft";
 import Footer from "@/components/Footer/footer";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container } from "@mui/material";
@@ -11,7 +10,7 @@ const ForgotUsername = () => {
   return (
     <Container>
       <LoginLogo />
-      <Draft />
+      {/* <Draft /> */}
       <CenterRectangle className={styles.box} mainTitle="Forgot username?">
         <div className={styles.forgotUsername}>
           <div className={styles.text1}>

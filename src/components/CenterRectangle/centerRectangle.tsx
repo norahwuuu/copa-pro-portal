@@ -43,7 +43,8 @@ const CenterRectangle = ({
     <div style={Style} className={`${styles.centerRectangle} ${className}`}>
       {headerInfo.show && (
         <div className={styles.headerInfo}>
-          <div className={styles.icon} /> {headerInfo?.info}
+          <div className={styles.icon} />
+          <div className={styles.text}>{headerInfo?.info}</div>
         </div>
       )}
       <div className={styles.title}>
