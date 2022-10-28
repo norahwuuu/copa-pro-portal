@@ -20,7 +20,7 @@ export const errorTypes = {
 
 export const loginText = {
   mainTitle: "Welcome to",
-  subTitle: "[design tool offical name!]",
+  subTitle: "[design tool offical name]!",
   forgotUser: "Forgot username?",
   forgotPass: "Forgot password?",
 };
