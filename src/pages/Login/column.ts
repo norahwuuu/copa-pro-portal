@@ -14,7 +14,7 @@ export const errorTypes = {
     tip: "Please enter password.",
   },
   nonvalidEmail: {
-    tip: "Username must be a valid emali address.",
+    tip: "Username must be a valid email address.",
   },
 };
 
