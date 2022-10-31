@@ -19,7 +19,7 @@ const RecoverPassword = () => {
       <LoginLogo />
       {/* <Draft /> */}
 
-      <CenterRectangle className={styles.box} mainTitle="Recover your pasword">
+      <CenterRectangle className={styles.box} mainTitle="Recover your password">
         <div className={styles.recoverUsername}>
           <div className={styles.text1}>
             Let's set a new password for your account.
