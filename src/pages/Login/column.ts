@@ -16,6 +16,9 @@ export const errorTypes = {
   nonvalidEmail: {
     tip: "Username must be a valid email address.",
   },
+  passwordError: {
+    tip: "Username and password combination do not match our records.",
+  },
 };
 
 export const loginText = {
@@ -23,4 +26,38 @@ export const loginText = {
   subTitle: "[design tool offical name]!",
   forgotUser: "Forgot username?",
   forgotPass: "Forgot password?",
+};
+export const forgotUsernameText = {
+  mainTitle: "Forgot username?",
+  text: "Please call your customer service agent at:",
+  number: "(123) 456-7890",
+  back: "Back to login",
+};
+export const forgotPasswordText = {
+  mainTitle: "Forgot password?",
+  text: `Please provide the email address associated with your account. We
+         will send you a password reset email with instructions once we find
+         a match in our system.`,
+  reset: "Reset password",
+  cancel: "Cancel",
+};
+export const forgotPasswordTextEmail = {
+  mainTitle: "Forgot password?",
+  text: `  A reset password email with instructions will be sent if we find a
+            match in our system. Please check your inbox. It might take a few
+            minutes.`,
+  back: "Back to login",
+  footerText: "Please verify your spam folder if you didn't receive any email.",
+};
+
+export const recoverPasswordText = {
+  mainTitle: "Recover your password",
+  text: `Let's set a new password for your account.`,
+  pwd: `Password must be at least 6 characters and contain at least one
+        special character.`,
+  remind_min: "Min. 6 characters.",
+  remind_One: "One special character.",
+  name: "What was your first pet name?",
+  reset: "Reset password",
+  back: "Back to login",
 };

@@ -6,6 +6,7 @@ import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container } from "@mui/material";
 import { useState } from "react";
 import { history } from "umi";
+import { errorTypes, forgotPasswordText } from "../column";
 import styles from "./forgotPassword.less";
 
 const ForgotPassword = () => {
@@ -18,19 +19,15 @@ const ForgotPassword = () => {
 
       <CenterRectangle
         className={styles.box}
-        mainTitle="Forgot pasword?"
+        mainTitle={forgotPasswordText.mainTitle}
         headerInfo={{
           show: false,
           type: "error",
-          info: "Username and password combination do not match our records.",
+          info: errorTypes.passwordError.tip,
         }}
       >
         <div className={styles.forgotUsername}>
-          <div className={styles.text1}>
-            Please provide the email address associated with your account. We
-            will send you a password reset email with instructions once we find
-            a match in our system.
-          </div>
+          <div className={styles.text1}>{forgotPasswordText.text}</div>
           <InputField
             inputType="email"
             className={styles.inputContainer}
@@ -52,14 +49,14 @@ const ForgotPassword = () => {
                 }
               }}
             >
-              Reset password
+              {forgotPasswordText.reset}
             </BaseButton>
             <BaseButton
               className={styles.cancel}
               type={"cancel"}
               onClick={() => history.push("/")}
             >
-              Cancel
+              {forgotPasswordText.cancel}
             </BaseButton>
           </div>
         </div>
