@@ -25,15 +25,20 @@ const Login: FC<any> = () => {
   const [showLoginError, setShowLoginError] = useState<boolean>(false);
 
   // 点击login-btn
-  // const loginClick = () => {
-  //   // 判断username
-  //   if (email === "") {
-  //     setEmailType("emailEmpty");
-  //   }
-  //   if (password === "") {
-  //     setPassType("passEmpty");
-  //   }
-  // };
+  const loginClick = () => {
+    if (email === "") {
+      setEmailType("emailEmpty");
+    }
+    if (password === "") {
+      setPassType("passEmpty");
+    }
+    // 判断username
+    if (email === "1114028542@qq.com" && password === "123456") {
+      setShowLoginError(true);
+    } else {
+      setShowLoginError(false);
+    }
+  };
 
   return (
     <Container>
@@ -80,7 +85,7 @@ const Login: FC<any> = () => {
               history.push("/login/forgotPassword");
             }}
           />
-          <BaseButton children="login" type="gray" />
+          <BaseButton onClick={loginClick} children="login" type="gray" />
         </div>
       </CenterRectangle>
       <Footer />

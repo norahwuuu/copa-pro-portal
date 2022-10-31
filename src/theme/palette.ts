@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   primary: {
     light: "#df4d56",
     main: "#D1000D",
@@ -55,9 +55,7 @@ const colors = {
     },
   },
 };
-const palette = {
+export const palette = {
   mode: "light",
   ...colors,
 };
-
-export default palette;

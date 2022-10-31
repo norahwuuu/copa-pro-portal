@@ -12,10 +12,10 @@
  * @returns
  */
 import { errorTypes } from "@/pages/Login/column";
+import { colors } from "@/theme/palette";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import type { TextFieldProps } from "@mui/material";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
-import { styled, useTheme } from "@mui/system";
+import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import type { FC } from "react";
 import { useState } from "react";
 import styles from "./inputField.less";
@@ -29,6 +29,93 @@ export type InputFieldProps = TextFieldProps & {
   setErrorType?: (arg0: string) => void;
   subLinkClick?: () => void;
 };
+const errorMain = colors.error.main;
+const LogTextField = styled(TextField)`
+  & .MuiOutlinedInput-root {
+    width: 220px;
+    padding: 0;
+    border-radius: 18px;
+  }
+  ,
+  & .MuiInputBase-input {
+    width: 220px;
+    height: 36px;
+    padding: 0 15px;
+    cursor: pointer;
+  }
+  ,
+  & .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #999;
+  }
+  ,
+  & .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #333 !important;
+    border-width: 1px !important;
+  }
+  ,
+  &:hover .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #c02820;
+  }
+  ,
+  & .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #c02820;
+  }
+  ,
+  & .MuiInputLabel-root {
+    top: -8px;
+    color: #595655;
+    font-size: 14px;
+  }
+  ,
+  & .MuiFormLabel-filled {
+    top: 0;
+    color: #999 !important;
+    font-size: 1rem;
+  }
+  ,
+  & .Mui-focused {
+    top: 0;
+    color: #333 !important;
+    font-size: 1rem;
+  }
+  ,
+  // 错误提示
+  & .MuiFormLabel-colorError {
+    color: ${errorMain} !important;
+  }
+
+  & .MuiFormHelperText-root {
+    margin-right: 0;
+    margin-left: 0;
+    color: ${errorMain} !important;
+    font-size: 10px;
+    transform: scale(0.83, 0.83);
+  }
+
+  ,
+
+  //后缀图标
+  & .MuiInputBase-root .MuiInputAdornment-positionEnd .MuiIconButton-edgeEnd {
+    margin-right: 10px;
+    padding: 0;
+  }
+  ,
+  &
+    .MuiInputBase-colorInfo
+    .MuiInputAdornment-positionEnd
+    .MuiIconButton-edgeEnd
+    .MuiSvgIcon-root {
+    color: #999;
+  }
+  ,
+  &
+    .MuiInputBase-colorError
+    .MuiInputAdornment-positionEnd
+    .MuiIconButton-edgeEnd
+    .MuiSvgIcon-root {
+    color: ${errorMain};
+  }
+`;
 
 const InputField: FC<InputFieldProps> = ({
   subLink = "",
@@ -41,98 +128,6 @@ const InputField: FC<InputFieldProps> = ({
   setErrorType,
   ...props
 }) => {
-  const theme = useTheme();
-  const {
-    palette: {
-      error: { main: errorMain },
-    },
-  } = theme;
-  const LogTextField = styled(TextField)`
-    & .MuiOutlinedInput-root {
-      width: 220px;
-      padding: 0;
-      border-radius: 18px;
-    }
-    ,
-    & .MuiInputBase-input {
-      width: 220px;
-      height: 36px;
-      padding: 0 15px;
-    }
-    ,
-    & .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-      border: 1px solid #999;
-    }
-    ,
-    & .Mui-focused .MuiOutlinedInput-notchedOutline {
-      border-color: #333 !important;
-      border-width: 1px !important;
-    }
-    ,
-    &:hover .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
-      border: 1px solid #c02820;
-    }
-    ,
-    & .MuiInputBase-colorError .MuiOutlinedInput-notchedOutline {
-      border: 1px solid #c02820;
-    }
-    ,
-    & .MuiInputLabel-root {
-      top: -8px;
-      color: #595655;
-      font-size: 14px;
-    }
-    ,
-    & .MuiFormLabel-filled {
-      top: 0;
-      color: #999 !important;
-      font-size: 1rem;
-    }
-    ,
-    & .Mui-focused {
-      top: 0;
-      color: #333 !important;
-      font-size: 1rem;
-    }
-    ,
-  // 错误提示
-  & .MuiFormLabel-colorError {
-      color: ${errorMain} !important;
-    }
-
-    & .MuiFormHelperText-root {
-      margin-right: 0;
-      margin-left: 0;
-      color: ${errorMain} !important;
-      font-size: 10px;
-      transform: scale(0.83, 0.83);
-    }
-
-    ,
-
-  //后缀图标
-  & .MuiInputBase-root .MuiInputAdornment-positionEnd .MuiIconButton-edgeEnd {
-      margin-right: 10px;
-      padding: 0;
-    }
-    ,
-    &
-      .MuiInputBase-colorInfo
-      .MuiInputAdornment-positionEnd
-      .MuiIconButton-edgeEnd
-      .MuiSvgIcon-root {
-      color: #999;
-    }
-    ,
-    &
-      .MuiInputBase-colorError
-      .MuiInputAdornment-positionEnd
-      .MuiIconButton-edgeEnd
-      .MuiSvgIcon-root {
-      color: ${errorMain};
-    }
-  `;
-
   //password showType
   const [showType, setShowType] = useState<boolean>(true);
   // 校验是否是email 格式
