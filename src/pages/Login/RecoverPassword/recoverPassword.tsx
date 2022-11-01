@@ -6,6 +6,7 @@ import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container } from "@mui/material";
 import { useState } from "react";
 import { history } from "umi";
+import { recoverPasswordText } from "../column";
 import styles from "./recoverPassword.less";
 
 const RecoverPassword = () => {
@@ -19,11 +20,12 @@ const RecoverPassword = () => {
       <LoginLogo />
       {/* <Draft /> */}
 
-      <CenterRectangle className={styles.box} mainTitle="Recover your pasword">
+      <CenterRectangle
+        className={styles.box}
+        mainTitle={recoverPasswordText.mainTitle}
+      >
         <div className={styles.recoverUsername}>
-          <div className={styles.text1}>
-            Let's set a new password for your account.
-          </div>
+          <div className={styles.text1}>{recoverPasswordText.text}</div>
           <InputField
             inputType="email"
             className={styles.inputContainer}
@@ -45,19 +47,16 @@ const RecoverPassword = () => {
             inputType="pass"
           />
           <div className={styles.mid}>
-            <div className={styles.pwd}>
-              Password must be at least 6 characters and contain at least one
-              special character.
-            </div>
+            <div className={styles.pwd}>{recoverPasswordText.pwd}</div>
             <div className={styles.remind}>
-              <div className={styles.icon} /> Min. 6 characters.
+              <div className={styles.icon} /> {recoverPasswordText.remind_min}
             </div>
             <div className={styles.remind} style={{ margin: 0 }}>
-              <div className={styles.icon} /> One special character.
+              <div className={styles.icon} /> {recoverPasswordText.remind_One}
             </div>
           </div>
           <div className={styles.footerTitle}>Security question</div>
-          <div className={styles.text1}>What was your first pet name?</div>
+          <div className={styles.text1}>{recoverPasswordText.name}</div>
           <InputField
             inputType="default"
             className={styles.inputContainer}
@@ -77,14 +76,14 @@ const RecoverPassword = () => {
                 }
               }}
             >
-              Reset password
+              {recoverPasswordText.reset}
             </BaseButton>
             <BaseButton
               className={styles.cancel}
               type={"cancel"}
               onClick={() => history.push("/")}
             >
-              Back to login
+              {recoverPasswordText.back}
             </BaseButton>
           </div>
         </div>
