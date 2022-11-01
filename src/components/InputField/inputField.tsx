@@ -29,7 +29,9 @@ export type InputFieldProps = TextFieldProps & {
   setErrorType?: (arg0: string) => void;
   subLinkClick?: () => void;
 };
+
 const errorMain = colors.error.main;
+const secondaryMain = colors.secondary.main;
 const LogTextField = styled(TextField)`
   & .MuiOutlinedInput-root {
     width: 220px;
@@ -184,6 +186,7 @@ const InputField: FC<InputFieldProps> = ({
             style={{ display: subLink !== "" ? "inline-block" : "none" }}
           >
             <span
+              style={{ color: `${secondaryMain}` }}
               onClick={() => {
                 subLinkClick && subLinkClick();
               }}
@@ -234,6 +237,7 @@ const InputField: FC<InputFieldProps> = ({
             style={{ display: subLink !== "" ? "inline-block" : "none" }}
           >
             <span
+              style={{ color: `${secondaryMain}` }}
               onClick={() => {
                 subLinkClick && subLinkClick();
               }}
@@ -252,6 +256,7 @@ const InputField: FC<InputFieldProps> = ({
             style={{ display: subLink !== "" ? "inline-block" : "none" }}
           >
             <span
+              style={{ color: `${secondaryMain}` }}
               onClick={() => {
                 subLinkClick && subLinkClick();
               }}
