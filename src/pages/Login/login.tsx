@@ -85,7 +85,12 @@ const Login = () => {
               history.push("/login/forgotPassword");
             }}
           />
-          <BaseButton onClick={loginClick} children="login" type="gray" />
+          <BaseButton
+            style={{ zIndex: 1 }}
+            onClick={loginClick}
+            children="login"
+            type="gray"
+          />
         </div>
       </CenterRectangle>
       <Footer />
