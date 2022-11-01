@@ -87,7 +87,7 @@ const Login = () => {
           />
           <BaseButton
             style={{ zIndex: 1 }}
-            onClick={loginClick}
+            onMouseDown={loginClick}
             children="login"
             type="gray"
           />

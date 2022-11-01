@@ -7,6 +7,7 @@ export type baseButtonPropsType = {
   type?: "default" | "gray" | "red" | "disabled" | "cancel";
   size?: "default" | "slim";
   onClick?: React.MouseEventHandler<HTMLElement>;
+  onMouseDown?: React.MouseEventHandler<HTMLElement>;
   style?: React.CSSProperties;
 };
 
