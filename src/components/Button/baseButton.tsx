@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./button.less";
+import styles from "./baseButton.less";
 
 export type propsType = {
   className?: string;

@@ -1,4 +1,4 @@
-import styles from "./styles.less";
+import styles from "./draft.less";
 
 // export interface propsType {}
 
