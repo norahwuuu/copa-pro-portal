@@ -87,11 +87,13 @@ const LogTextField = styled(TextField)`
   }
 
   & .MuiFormHelperText-root {
+    width: 220px;
     margin-right: 0;
-    margin-left: 0;
+    margin-left: 2px;
     color: ${errorMain} !important;
     font-size: 10px;
-    transform: scale(0.83, 0.83);
+    white-space: nowrap;
+    transform: scale(0.87, 0.87);
   }
 
   ,
