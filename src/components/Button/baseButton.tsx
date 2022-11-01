@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./baseButton.less";
 
-export type propsType = {
+export type baseButtonPropsType = {
   className?: string;
   children: string;
   type?: "default" | "gray" | "red" | "disabled" | "cancel";
@@ -13,12 +13,12 @@ export type propsType = {
 /**
  * description：按钮
  *
- * param:type:类型;children：按钮文字
+ * param:type:类型;size:大小;children：按钮文字
  *
  * return <BaseButton/>
  */
 
-const BaseButton = (props: propsType) => {
+const BaseButton = (props: baseButtonPropsType) => {
   const {
     className,
     children,

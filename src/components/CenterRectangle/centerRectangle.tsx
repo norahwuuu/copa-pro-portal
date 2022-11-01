@@ -1,6 +1,6 @@
 import styles from "./centerRectangle.less";
 
-export type propsType = {
+export type centerRectanglePropsType = {
   width?: string | number;
   className?: string;
   children?: React.ReactNode;
@@ -16,7 +16,7 @@ export type propsType = {
 /**
  * description：水平盒子
  *
- * param:width?:盒子宽度默认409px;className?: 样式;children?: 盒子内容;mainTitle?:一级标题;subtitle:二级标题
+ * param:width?:盒子宽度默认409px;className?: 样式;children?: 盒子内容;mainTitle?:一级标题;subtitle:二级标题;headerInfo：盒子顶部提示语，show:是否开启，type：类型,info：文字；
  *
  * return <CenterRectangle/>
  */
@@ -32,7 +32,7 @@ const CenterRectangle = ({
     type: "error",
     info: "",
   },
-}: propsType) => {
+}: centerRectanglePropsType) => {
   const classname = className ? "" : styles.centerRectangle;
   const Style = {
     width: width || 409,
