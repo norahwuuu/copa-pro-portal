@@ -37,7 +37,6 @@ const ForgotPassword = () => {
             setErrorType={setEmailType}
             type={"text"}
             name="Email"
-            required
             label="Email"
           />
           <div className={styles.btns}>
