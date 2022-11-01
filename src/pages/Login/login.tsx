@@ -10,7 +10,7 @@ import { history } from "umi";
 import { loginText } from "./column";
 import styles from "./login.less";
 
-const Login: FC<any> = () => {
+const Login = () => {
   // username
   const [email, setEmail] = useState<string>("");
   // username  错误类型

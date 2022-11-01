@@ -23,7 +23,7 @@ export type InputFieldProps = TextFieldProps & {
   className?: string;
   subLink?: string;
   inputType?: string;
-  inputValue?: any;
+  inputValue?: string | number;
   setInputValue?: (arg0: string) => void;
   errorType?: string;
   setErrorType?: (arg0: string) => void;
@@ -115,6 +115,10 @@ const LogTextField = styled(TextField)`
     .MuiSvgIcon-root {
     color: ${errorMain};
   }
+  ,
+  & .MuiFormLabel-asterisk {
+    margin-left: -4px;
+  }
 `;
 
 const InputField: FC<InputFieldProps> = ({
@@ -131,7 +135,8 @@ const InputField: FC<InputFieldProps> = ({
   //password showType
   const [showType, setShowType] = useState<boolean>(true);
   // 校验是否是email 格式
-  const emailRegex = (email: string) => {
+  const emailRegex = (email: string | number) => {
+    email = email.toString();
     const email_Regex = new RegExp("^.+@[A-Z0-9a-z]+.[a-zA-Z]+$");
     return email_Regex.test(email);
   };
@@ -139,7 +144,7 @@ const InputField: FC<InputFieldProps> = ({
   const checkEmail = () => {
     if (inputValue === "") {
       setErrorType && setErrorType("emailEmpty");
-    } else if (!emailRegex(inputValue)) {
+    } else if (!emailRegex(inputValue || "")) {
       setErrorType && setErrorType("nonvalidEmail");
     } else {
       setErrorType && setErrorType("noError");
