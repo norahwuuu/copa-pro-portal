@@ -5,6 +5,10 @@ export default defineConfig({
   nodeModulesTransform: {
     type: "none",
   },
+  locale: {
+    baseSeparator: "-",
+    default: "en-US",
+  },
   history: { type: "hash" },
   hash: true,
   dynamicImport: {},
