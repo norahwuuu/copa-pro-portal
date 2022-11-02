@@ -132,7 +132,7 @@ const InputField: FC<InputFieldProps> = ({
   inputType = "default",
   inputValue,
   setInputValue,
-  errorType,
+  errorType = "noError",
   setErrorType,
   ...props
 }) => {
@@ -171,11 +171,11 @@ const InputField: FC<InputFieldProps> = ({
             helperText={errorTypes[errorType].tip}
             color={errorType !== "noError" ? "error" : "info"}
             onChange={(v) => {
-              setErrorType("noError");
-              setInputValue(v.target.value);
+              setErrorType && setErrorType("noError");
+              setInputValue && setInputValue(v.target.value);
             }}
             onFocus={() => {
-              setErrorType("noError");
+              setErrorType && setErrorType("noError");
             }}
             onBlur={() => {
               checkEmail();
@@ -207,11 +207,11 @@ const InputField: FC<InputFieldProps> = ({
             type={showType ? "password" : "text"}
             color={errorType !== "noError" ? "error" : "info"}
             onChange={(v) => {
-              setErrorType("noError");
-              setInputValue(v.target.value);
+              setErrorType && setErrorType("noError");
+              setInputValue && setInputValue(v.target.value);
             }}
             onFocus={() => {
-              setErrorType("noError");
+              setErrorType && setErrorType("noError");
             }}
             onBlur={() => {
               checkPass();
