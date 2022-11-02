@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pro-portal-v1
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: pro-portal-v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pro-portal-v1
+        version: "v1.0.0"
+    spec:
+      serviceAccountName: pro-portal-service-account
+      containers:
+      - name: pro-portal-v1
+        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/pro-portal:v1.0.0.48e19795a0d7503a13538e8f7fe1354f676d57d2.20221102_221946Z
+        ports:
+        - name: http
+          containerPort: 80
+        imagePullPolicy: Always
+        env:
+        - name: LOG_LEVEL
+          value: "DEBUG"
+        - name: ENVIRONMENT
+          value: "development"
+

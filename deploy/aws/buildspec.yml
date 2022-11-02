@@ -1,0 +1,62 @@
+version: 0.2
+
+env:
+  shell: bash
+  variables:
+    CRICTICAL_SEVERITY: 10
+    HIGH_SEVERITY: 50
+    MEDIUM_SEVERITY: 150
+    LOW_SEVERITY: 200
+    APP_NAME: pro-portal
+
+phases:
+  install:
+    runtime-versions:
+      docker: latest
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - GIT_HASH=$(git rev-parse HEAD)
+      - $(aws ecr get-login --region us-west-2 --no-include-email)
+      - REPOSITORY_URI=927876825924.dkr.ecr.us-west-2.amazonaws.com/$APP_NAME
+      - CURRENT_VERSION=v1.0.0
+      - IMAGE_TAG=$(echo $CURRENT_VERSION.$GIT_HASH.$(date --utc +%Y%m%d_%H%M%SZ))
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...   
+      - docker build . -t $REPOSITORY_URI:latest  -f deploy/docker/Dockerfile
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - PARAM_FILE=deploy/aws/*.params.cloudformation.json
+      - sed -i "s~##DockerImageUrl##~$REPOSITORY_URI:$IMAGE_TAG~g" $PARAM_FILE
+      - printf '[{"name":"%s","imageUri":"%s"}]' $APP_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo "$GIT_HASH" > .release_hash
+      # Validate image scan results 
+      - aws ecr wait image-scan-complete --repository-name $APP_NAME --image-id imageTag=$IMAGE_TAG
+      - |
+        aws ecr describe-image-scan-findings --repository-name $APP_NAME \
+        --image-id imageTag=$IMAGE_TAG \
+        --query 'imageScanFindings.findingSeverityCounts' > scan_results
+      - CRIC_SEV_COUNT=$(cat scan_results | jq "(.CRICTICAL // 0)")
+      - HIGH_SEV_COUNT=$(cat scan_results | jq "(.HIGH // 0)")
+      - MED_SEV_COUNT=$(cat scan_results | jq "(.MEDIUM // 0)")
+      - LOW_SEV_COUNT=$(cat scan_results | jq "(.LOW // 0)")
+      - |
+        if [[ $CRICTICAL_SEVERITY -lt $CRIC_SEV_COUNT ]] || [[ $HIGH_SEVERITY -lt $HIGH_SEV_COUNT ]] \
+            || [[ $MEDIUM_SEVERITY -lt $MED_SEV_COUNT ]] || [[ $LOW_SEVERITY -lt $LOW_SEV_COUNT ]]; then
+          echo "Error ****Build marked failed, Because docker image has some crictical or high severities"
+          exit 1;
+        fi
+artifacts:
+  files:
+    - imagedefinitions.json
+    - deploy/**/*
+    - .release_hash

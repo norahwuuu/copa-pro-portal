@@ -1,0 +1,18 @@
+[
+    {
+        "ParameterKey": "Environment",
+        "ParameterValue": "development"
+    },
+    {
+        "ParameterKey": "ContainerName",
+        "ParameterValue": "pro-portal"
+    }, 
+    {
+        "ParameterKey": "OwnerNameTag",
+        "ParameterValue": "Core API Team"
+    }, 
+    {
+        "ParameterKey": "OwnerEmailTag",
+        "ParameterValue": "mike.davis@ulabsystems.com"
+    }
+]

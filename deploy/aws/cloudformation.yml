@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Container Template Cloudform"
+Parameters: 
+  ContainerName:
+    Type: String
+  Environment:
+    Type: String
+  OwnerNameTag:
+    Type: String
+  OwnerEmailTag:
+    Type: String
+
+Resources:
+  #SSL Certificate
+  ServicePolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: !Sub "${ContainerName}-policy"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+            - codebuild:*
+            - logs:Create*
+            - logs:PutLogEvents
+            - logs:DescribeLogStreams
+            Resource: '*'
+      Roles:
+        - !Ref ServiceRole
+
+  ServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${ContainerName}-role"
+      Tags: 
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: OwnerName
+          Value: !Ref OwnerNameTag
+        - Key: OwnerEmail
+          Value: !Ref OwnerEmailTag
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [codebuild.amazonaws.com]
+            Action: ['sts:AssumeRole']
+      Path: /
+
+  # Deployment:
+  #   Type: AWS::CodeBuild::Project
+  #   Properties:
+  #     Name: Deployment
+  #     Description: A description about my project
+  #     ServiceRole: !GetAtt ServiceRole.Arn
+  #     Artifacts:
+  #       Type: NO_ARTIFACTS
+  #     Environment:
+  #       Type: LINUX_CONTAINER
+  #       ComputeType: BUILD_GENERAL1_SMALL
+  #       Image: aws/codebuild/amazonlinux2-x86_64-standard:3.0
+  #       EnvironmentVariables:
+  #       - Name: NAMESPACE
+  #         Value: !Ref Environment
+  #     Source:
+  #       Type: NO_SOURCE
+  #       BuildSpec: |
+  #         version: 0.2
+  #         env:
+  #           shell: bash
+  #         phases:
+  #           install:
+  #             runtime-versions:
+  #               docker: latest
+  #           pre_build:
+  #             commands:
+  #               - echo Logging in to Amazon ECR...
+  #               - aws --version
+  #           build:
+  #             commands:
+  #               - echo Build started on `date`
+  #               - echo Building the Docker image...   
+  #           post_build:
+  #             commands:
+  #               - echo Build completed on `date`
+  #               - echo Pushing the Docker images...
+  #     TimeoutInMinutes: 5
+

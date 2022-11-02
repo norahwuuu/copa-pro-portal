@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pro-portal-v1
+  namespace: development
+  labels:
+    app: pro-portal-v1
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: pro-portal-v1
