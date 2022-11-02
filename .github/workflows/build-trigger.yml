@@ -1,0 +1,52 @@
+name: Build Trigger to AWS Code Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+
+env:
+  AWS_ACCOUNT_ID: 927876825924
+  AWS_REGION: us-west-2                   # set this to your preferred AWS region, e.g. us-west-1
+  ENVIRONMENT: development
+  APPLICATION: ulab
+  SERVICE_NAME: pro-portal
+
+jobs:
+  zip-code-to-s3:
+    name: Zip code and copy to s3
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Branch name
+      id: branch
+      run: echo "BRANCH=$(echo ${GITHUB_HEAD_REF##*/})" >> $GITHUB_ENV}
+
+    - name: Configure AWS Credentials - US-DEV
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+        role-to-assume: arn:aws:iam::927876825924:role/Github-Actions-CrossRole
+        role-skip-session-tagging: true
+        role-duration-seconds: 3600
+        
+    - name: zip files
+      run: 'zip $SERVICE_NAME-source.zip .git . -r'
+      shell: bash
+      env:
+        SERVICE_NAME: ${{ env.SERVICE_NAME }}
+        
+    - name: copy zip file to aws s3
+      run: 'aws s3 cp $SERVICE_NAME-source.zip s3://$S3_BUCKET_NAME/$ENVIRONMENT/'
+      shell: bash
+      env:
+        SERVICE_NAME: ${{ env.SERVICE_NAME }}
+        ENVIRONMENT: ${{ env.ENVIRONMENT }}
+        S3_BUCKET_NAME: '${{ env.AWS_ACCOUNT_ID }}-${{ env.APPLICATION }}-${{ env.SERVICE_NAME }}-pipeline-artifacts'
+        

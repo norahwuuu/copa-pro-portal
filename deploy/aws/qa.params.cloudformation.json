@@ -1,0 +1,54 @@
+[
+    {
+        "ParameterKey": "Environment",
+        "ParameterValue": "qa"
+    },
+    {
+        "ParameterKey": "ContainerName",
+        "ParameterValue": "auth-role"
+    }, 
+    {
+        "ParameterKey": "OwnerNameTag",
+        "ParameterValue": "Core API Team"
+    }, 
+    {
+        "ParameterKey": "OwnerEmailTag",
+        "ParameterValue": "mike.davis@ulabsystems.com"
+    }, 
+    {
+        "ParameterKey": "PermissionsTableWrite",
+        "ParameterValue": "5"
+    }, 
+    {
+        "ParameterKey": "DockerImageUrl",
+        "ParameterValue": "##DockerImageUrl##"
+    }, 
+    {
+        "ParameterKey": "DesiredCount",
+        "ParameterValue": "2"
+    }, 
+    {
+        "ParameterKey": "PermissionsTableRead",
+        "ParameterValue": "5"
+    }, 
+    {
+        "ParameterKey": "UserOrgTableWrite",
+        "ParameterValue": "5"
+    }, 
+    {
+        "ParameterKey": "UserOrgTableRead",
+        "ParameterValue": "5"
+    }, 
+    {
+        "ParameterKey": "ContainerPort",
+        "ParameterValue": "5001"
+    }, 
+    {
+        "ParameterKey": "AuditTableRead",
+        "ParameterValue": "5"
+    }, 
+    {
+        "ParameterKey": "AuditTableWrite",
+        "ParameterValue": "5"
+    }
+]

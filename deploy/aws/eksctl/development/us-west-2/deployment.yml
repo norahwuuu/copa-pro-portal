@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-v1
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: user-service-v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-service-v1
+        version: "v1.0.0"
+    spec:
+      serviceAccountName: user-service-service-account
+      containers:
+      - name: user-service-v1
+        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/user-service:v1.0.0.c3abb63e7c8855cf02c6c598f249a7f027caa7cc.20221102_152626Z
+        ports:
+        - name: http
+          containerPort: 8000
+        imagePullPolicy: Always
+        env:
+        - name: LOG_LEVEL
+          value: "DEBUG"
+        - name: ENVIRONMENT
+          value: "development"
+        volumeMounts:
+        - name: secrets
+          mountPath: "/etc/secrets"
+          readOnly: true
+      volumes:
+      - name: secrets
+        secret:
+          secretName: user-service-development-secrets
+          optional: false
