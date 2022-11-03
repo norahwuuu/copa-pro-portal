@@ -16,7 +16,7 @@ spec:
     spec:
       serviceAccountName: pro-portal-service-account
       containers:
-      - name: pro-portal-v1
+      - name: pro-portal
         image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/pro-portal:v1.0.0.48e19795a0d7503a13538e8f7fe1354f676d57d2.20221102_221946Z
         ports:
         - name: http
