@@ -26,4 +26,7 @@ export default defineConfig({
   routes,
   fastRefresh: {},
   webpack5: {},
+  define: {
+    BASE_URL: "https://devsec.ulabsystems.net",
+  },
 });

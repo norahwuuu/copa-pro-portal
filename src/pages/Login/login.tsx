@@ -3,6 +3,7 @@ import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
+import request from "@/utils/request";
 import { Container } from "@mui/material";
 import { useState } from "react";
 import { history } from "umi";
@@ -26,17 +27,35 @@ const Login = () => {
 
   // 点击login-btn
   const loginClick = () => {
+    setShowLoginError(false);
     if (email === "") {
       setEmailType("emailEmpty");
     }
     if (password === "") {
       setPassType("passEmpty");
     }
-    // 判断username
-    if (email === "1114028542@qq.com" && password === "123456") {
-      setShowLoginError(true);
-    } else {
-      setShowLoginError(false);
+    // test login api  测试连接login 接口
+    if (
+      emailType === "noError" &&
+      passType === "noError" &&
+      email !== "" &&
+      password !== ""
+    ) {
+      // 测试登录---- admin@ulabsystems.net   Qwer12#
+      request("/api/v1/authn", {
+        method: "post",
+        data: {
+          username: email,
+          password: password,
+        },
+      }).then((r) => {
+        if (r) {
+          alert("login success!");
+          setShowLoginError(false);
+        } else {
+          setShowLoginError(true);
+        }
+      });
     }
   };
 
