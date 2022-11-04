@@ -22,6 +22,7 @@ phases:
       - REPOSITORY_URI=927876825924.dkr.ecr.us-west-2.amazonaws.com/$APP_NAME
       - CURRENT_VERSION=v1.0.0
       - IMAGE_TAG=$(echo $CURRENT_VERSION.$GIT_HASH.$(date --utc +%Y%m%d_%H%M%SZ))
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
   build:
     commands:
       - echo Build started on `date`
