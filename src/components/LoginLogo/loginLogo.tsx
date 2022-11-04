@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./styles.less";
 
 // export interface propsType {}
@@ -13,4 +14,4 @@ import styles from "./styles.less";
 const LoginLogo = () => {
   return <div className={styles.logo}>LOGO</div>;
 };
-export default LoginLogo;
+export default React.memo(LoginLogo);

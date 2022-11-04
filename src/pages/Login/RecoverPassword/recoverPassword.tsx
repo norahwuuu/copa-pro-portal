@@ -60,8 +60,6 @@ const RecoverPassword = () => {
           <InputField
             inputType="default"
             className={styles.inputContainer}
-            inputValue={email}
-            setInputValue={setEmail}
             errorType={emailType}
             setErrorType={setEmailType}
             type={"text"}

@@ -6,13 +6,11 @@ import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container } from "@mui/material";
 import { useState } from "react";
 import { history, useIntl } from "umi";
-
 import { loginText } from "./column";
 import styles from "./login.less";
 
 const Login = () => {
   const translate = useIntl();
-
   // username
   const [email, setEmail] = useState<string>("");
   // username  错误类型

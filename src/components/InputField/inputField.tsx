@@ -144,6 +144,7 @@ const InputField: FC<InputFieldProps> = ({
     const email_Regex = new RegExp("^.+@[A-Z0-9a-z]+.[a-zA-Z]+$");
     return email_Regex.test(email);
   };
+
   // 校验eamil格式
   const checkEmail = () => {
     if (inputValue === "") {

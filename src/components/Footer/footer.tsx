@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./footer.less";
 
 const Footer = () => {
@@ -20,4 +21,4 @@ const Footer = () => {
     </div>
   );
 };
-export default Footer;
+export default React.memo(Footer);
