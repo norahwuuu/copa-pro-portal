@@ -65,4 +65,4 @@ const BaseButton = (props: baseButtonPropsType) => {
     </button>
   );
 };
-export default BaseButton;
+export default React.memo(BaseButton);

@@ -6,12 +6,12 @@ import LoginLogo from "@/components/LoginLogo/loginLogo";
 import request from "@/utils/request";
 import { Container } from "@mui/material";
 import { useState } from "react";
-import { history } from "umi";
-
+import { history, useIntl } from "umi";
 import { loginText } from "./column";
 import styles from "./login.less";
 
 const Login = () => {
+  const translate = useIntl();
   // username
   const [email, setEmail] = useState<string>("");
   // username  错误类型
@@ -64,8 +64,8 @@ const Login = () => {
       <LoginLogo />
       <CenterRectangle
         className={styles.loginBox}
-        mainTitle={loginText.mainTitle}
-        subtitle={loginText.subTitle}
+        mainTitle={translate.formatMessage({ id: "title" })}
+        subtitle={translate.formatMessage({ id: "subTitle" })}
         headerInfo={{
           show: showLoginError,
           type: "error",

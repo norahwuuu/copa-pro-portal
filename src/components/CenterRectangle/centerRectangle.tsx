@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./centerRectangle.less";
 
 export type centerRectanglePropsType = {
@@ -56,4 +57,4 @@ const CenterRectangle = ({
     </div>
   );
 };
-export default CenterRectangle;
+export default React.memo(CenterRectangle);
