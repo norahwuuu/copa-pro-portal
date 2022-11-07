@@ -2,5 +2,10 @@
   "title": "Welcome to",
   "subTitle": "[design tool offical name]!",
   "forgotUser": "Forgot username?",
-  "forgotPass": "Forgot password?"
+  "forgotPasswordTitle": "Forgot password?",
+  "forgotPasswordText": "Please provide the email address associated with your account. We will send you a password reset email with instructions once we find a match in our system.",
+  "btnResetPassword": "Reset password",
+  "btnCancel": "Cancel",
+  "btnBacktoLogin": "Back to login",
+  "btnLogin": "Login"
 }

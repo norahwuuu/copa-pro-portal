@@ -1,3 +1,4 @@
+import patientRoute from "./src/pages/Patient/patient.route";
 export default [
   {
     path: "/",
@@ -24,6 +25,11 @@ export default [
         name: "recoverPassword",
         path: "/login/recoverPassword",
         component: "@/pages/Login/RecoverPassword/recoverPassword",
+      },
+      { ...patientRoute },
+      {
+        path: "/example",
+        component: "@/pages/Components/components",
       },
     ],
   },

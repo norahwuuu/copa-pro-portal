@@ -1,13 +1,14 @@
-import BaseButton from "@/components/Button/baseButton";
+import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container, Typography } from "@mui/material";
-import { history } from "umi";
+import { history, useIntl } from "umi";
 import { forgotUsernameText } from "../column";
 import styles from "./forgotUsername.less";
 
 const ForgotUsername = () => {
+  const translate = useIntl();
   return (
     <Container>
       <LoginLogo />
@@ -34,9 +35,11 @@ const ForgotUsername = () => {
           >
             {forgotUsernameText.number}
           </Typography>
-          <BaseButton type={"gray"} onClick={() => history.push("/")}>
-            {forgotUsernameText.back}
-          </BaseButton>
+          <Button
+            variant={"shade"}
+            btnLabel={translate.formatMessage({ id: "btnBacktoLogin" })}
+            onClickHandler={() => history.push("/")}
+          />
         </div>
       </CenterRectangle>
       <Footer />
