@@ -1,15 +1,16 @@
-import BaseButton from "@/components/Button/baseButton";
+import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container } from "@mui/material";
 import { useState } from "react";
-import { history } from "umi";
+import { history, useIntl } from "umi";
 import { recoverPasswordText } from "../column";
 import styles from "./recoverPassword.less";
 
 const RecoverPassword = () => {
+  const translate = useIntl();
   const [email, setEmail] = useState<string>("");
   const [emailType, setEmailType] = useState<string>("noError");
   const [password, setPassWord] = useState<string>("");
@@ -66,23 +67,23 @@ const RecoverPassword = () => {
             label="Answer"
           />
           <div className={styles.btns}>
-            <BaseButton
-              type={"gray"}
-              onClick={() => {
+            <Button
+              variant="shade"
+              btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
+              onClickHandler={() => {
                 if (emailType === "noError") {
                   history.push("/");
                 }
               }}
-            >
-              {recoverPasswordText.reset}
-            </BaseButton>
-            <BaseButton
-              className={styles.cancel}
-              type={"cancel"}
-              onClick={() => history.push("/")}
-            >
-              {recoverPasswordText.back}
-            </BaseButton>
+            />
+
+            <Button
+              variant="text"
+              btnLabel={translate.formatMessage({ id: "btnBacktoLogin" })}
+              onClickHandler={() => {
+                history.push("/");
+              }}
+            />
           </div>
         </div>
       </CenterRectangle>

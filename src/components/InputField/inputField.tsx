@@ -12,7 +12,7 @@
  * @returns
  */
 import { errorTypes } from "@/pages/Login/column";
-import { colors } from "@/theme/palette";
+import { colorObj } from "@/theme/customPalette";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import type { TextFieldProps } from "@mui/material";
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
@@ -30,8 +30,8 @@ export type InputFieldProps = TextFieldProps & {
   subLinkClick?: () => void;
 };
 
-const errorMain = colors.error.main;
-const secondaryMain = colors.secondary.main;
+const errorMain = colorObj.error.main;
+const secondaryMain = colorObj.secondary.main;
 const LogTextField = styled(TextField)`
   & .MuiOutlinedInput-root {
     width: 220px;

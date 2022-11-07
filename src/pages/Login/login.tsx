@@ -1,4 +1,4 @@
-import BaseButton from "@/components/Button/baseButton";
+import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
@@ -104,11 +104,10 @@ const Login = () => {
               history.push("/login/forgotPassword");
             }}
           />
-          <BaseButton
-            style={{ zIndex: 1 }}
-            onMouseDown={loginClick}
-            children="login"
-            type="gray"
+          <Button
+            variant="shade"
+            btnLabel={translate.formatMessage({ id: "btnLogin" })}
+            onClickHandler={loginClick}
           />
         </div>
       </CenterRectangle>

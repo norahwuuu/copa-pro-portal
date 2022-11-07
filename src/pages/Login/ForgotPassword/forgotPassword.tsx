@@ -1,15 +1,16 @@
-import BaseButton from "@/components/Button/baseButton";
+import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container } from "@mui/material";
 import { useState } from "react";
-import { history } from "umi";
+import { history, useIntl } from "umi";
 import { errorTypes, forgotPasswordText } from "../column";
 import styles from "./forgotPassword.less";
 
 const ForgotPassword = () => {
+  const translate = useIntl();
   const [email, setEmail] = useState<string>("");
   const [emailType, setEmailType] = useState<string>("noError");
   return (
@@ -40,23 +41,25 @@ const ForgotPassword = () => {
             label="Email"
           />
           <div className={styles.btns}>
-            <BaseButton
-              type={"gray"}
-              onClick={() => {
+            <Button
+              variant="shade"
+              btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
+              onClickHandler={() => {
                 if (emailType === "noError") {
                   history.push("/login/forgotPasswordEmail");
                 }
               }}
-            >
-              {forgotPasswordText.reset}
-            </BaseButton>
-            <BaseButton
-              className={styles.cancel}
-              type={"cancel"}
-              onClick={() => history.push("/")}
-            >
-              {forgotPasswordText.cancel}
-            </BaseButton>
+            />
+
+            <Button
+              variant="text"
+              btnLabel={translate.formatMessage({ id: "btnCancel" })}
+              onClickHandler={() => {
+                if (emailType === "noError") {
+                  history.push("/");
+                }
+              }}
+            />
           </div>
         </div>
       </CenterRectangle>
