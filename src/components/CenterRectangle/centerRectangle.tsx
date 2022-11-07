@@ -1,6 +1,6 @@
+import { Grid, Typography } from "@mui/material";
 import React from "react";
 import styles from "./centerRectangle.less";
-
 export type centerRectanglePropsType = {
   width?: string | number;
   className?: string;
@@ -34,27 +34,44 @@ const CenterRectangle = ({
     info: "",
   },
 }: centerRectanglePropsType) => {
-  const classname = className ? "" : styles.centerRectangle;
-  const Style = {
-    width: width || 409,
-    borderTopLeftRadius: headerInfo.show ? 0 : 20,
-    borderTopRightRadius: headerInfo.show ? 0 : 20,
-  };
   return (
-    <div style={Style} className={`${styles.centerRectangle} ${className}`}>
+    <Grid
+      sx={{
+        backgroundColor: "primary.main",
+        width: width || 409,
+        borderBottomRightRadius: headerInfo.show ? 0 : 20,
+      }}
+      className={`${styles.centerRectangle} ${className}`}
+    >
       {headerInfo.show && (
-        <div className={styles.headerInfo}>
-          <div className={styles.icon} />
-          <div className={styles.text}>{headerInfo?.info}</div>
-        </div>
+        <Grid color="primary.main">
+          <Grid className={styles.icon} />
+          <Grid className={styles.text}>{headerInfo?.info}</Grid>
+        </Grid>
       )}
-      <div className={styles.title}>
-        {mainTitle && <div>{mainTitle}</div>}
-        {subtitle && <div>{subtitle}</div>}
-      </div>
+      <Grid color="white" whiteSpace="pre-wrap">
+        {mainTitle && (
+          <Typography
+            variant="h5"
+            align="center"
+            fontFamily="ColgateReady-ExtraLight"
+          >
+            {mainTitle}
+          </Typography>
+        )}
+        {subtitle && (
+          <Typography
+            variant="body2"
+            align="center"
+            fontFamily="ColgateReady-Regular"
+          >
+            {subtitle}
+          </Typography>
+        )}
+      </Grid>
 
       {children}
-    </div>
+    </Grid>
   );
 };
 export default React.memo(CenterRectangle);

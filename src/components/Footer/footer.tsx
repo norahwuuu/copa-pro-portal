@@ -1,3 +1,5 @@
+import { footerText } from "@/pages/Login/column";
+import { Typography } from "@mui/material";
 import React from "react";
 import styles from "./footer.less";
 
@@ -7,15 +9,37 @@ const Footer = () => {
       <div className={`${styles.container} ${styles.supprt}`}>
         <div className={styles.circle}>?</div>
         <div>
-          <div className={styles.text}>Customer support: (123) 457-7890</div>
-          <div className={styles.text}>support@aligners.com</div>
+          <Typography
+            color="white"
+            variant="body2"
+            fontFamily="ColgateReady-Regular"
+          >
+            {footerText.supportN}
+          </Typography>
+          <Typography
+            color="white"
+            variant="body2"
+            fontFamily="ColgateReady-Regular"
+          >
+            {footerText.supportE}
+          </Typography>
         </div>
       </div>
       <div className={`${styles.container} ${styles.middle}`}>
-        <div className={styles.text}>
-          © 2016-2022 Aligners Inc. All Rights Reserved.
-        </div>
-        <div className={styles.text}>V. 1.0.0</div>
+        <Typography
+          color="white"
+          variant="body2"
+          fontFamily="ColgateReady-Light"
+        >
+          {footerText.mid}
+        </Typography>
+        <Typography
+          color="white"
+          variant="body2"
+          fontFamily="ColgateReady-Light"
+        >
+          {footerText.v}
+        </Typography>
       </div>
       <div className={styles.container}></div>
     </div>

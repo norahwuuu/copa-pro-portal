@@ -3,7 +3,7 @@ import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
-import { Container } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { history } from "umi";
 import { recoverPasswordText } from "../column";
@@ -25,7 +25,9 @@ const RecoverPassword = () => {
         mainTitle={recoverPasswordText.mainTitle}
       >
         <div className={styles.recoverUsername}>
-          <div className={styles.text1}>{recoverPasswordText.text}</div>
+          <Typography color="white" variant="body2">
+            {recoverPasswordText.text}
+          </Typography>
           <InputField
             inputType="email"
             className={styles.inputContainer}
@@ -46,17 +48,45 @@ const RecoverPassword = () => {
             label="Create password"
             inputType="pass"
           />
-          <div className={styles.mid}>
-            <div className={styles.pwd}>{recoverPasswordText.pwd}</div>
-            <div className={styles.remind}>
-              <div className={styles.icon} /> {recoverPasswordText.remind_min}
-            </div>
-            <div className={styles.remind} style={{ margin: 0 }}>
-              <div className={styles.icon} /> {recoverPasswordText.remind_One}
-            </div>
-          </div>
-          <div className={styles.footerTitle}>Security question</div>
-          <div className={styles.text1}>{recoverPasswordText.name}</div>
+          <Grid textAlign={"left"} mt={1.25}>
+            <Typography
+              color="white"
+              variant="caption"
+              fontFamily="ColgateReady-Light"
+            >
+              {recoverPasswordText.pwd}
+            </Typography>
+            <Grid display="flex" alignItems={"center"} mt={1.25}>
+              <div className={styles.icon} />
+              <Typography
+                color="white"
+                variant="caption"
+                lineHeight={"20px"}
+                fontFamily="ColgateReady-Light"
+              >
+                {" "}
+                {recoverPasswordText.remind}
+              </Typography>
+            </Grid>
+          </Grid>
+
+          <Typography
+            color="white"
+            variant="h5"
+            mt={4}
+            fontFamily="ColgateReady-ExtraLight"
+          >
+            {recoverPasswordText.title}{" "}
+          </Typography>
+          <Typography
+            color="white"
+            variant="body2"
+            textAlign="left"
+            mt={1}
+            fontFamily="ColgateReady-Regular"
+          >
+            {recoverPasswordText.name}
+          </Typography>
           <InputField
             inputType="default"
             className={styles.inputContainer}
@@ -67,6 +97,7 @@ const RecoverPassword = () => {
           />
           <div className={styles.btns}>
             <BaseButton
+              style={{ marginBottom: 20 }}
               type={"gray"}
               onClick={() => {
                 if (emailType === "noError") {

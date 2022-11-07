@@ -45,8 +45,9 @@ const Login = () => {
       <LoginLogo />
       <CenterRectangle
         className={styles.loginBox}
-        mainTitle={translate.formatMessage({ id: "title" })}
-        subtitle={translate.formatMessage({ id: "subTitle" })}
+        mainTitle={`${translate.formatMessage({
+          id: "title",
+        })}${"\n"}${translate.formatMessage({ id: "subTitle" })}`}
         headerInfo={{
           show: showLoginError,
           type: "error",

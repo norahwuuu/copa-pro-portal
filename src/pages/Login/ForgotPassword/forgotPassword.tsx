@@ -3,7 +3,7 @@ import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import LoginLogo from "@/components/LoginLogo/loginLogo";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { useState } from "react";
 import { history } from "umi";
 import { errorTypes, forgotPasswordText } from "../column";
@@ -27,7 +27,16 @@ const ForgotPassword = () => {
         }}
       >
         <div className={styles.forgotUsername}>
-          <div className={styles.text1}>{forgotPasswordText.text}</div>
+          <Typography
+            color="white"
+            variant="body2"
+            textAlign="left"
+            fontFamily="ColgateReady-Regular"
+          >
+            {" "}
+            {forgotPasswordText.text}
+          </Typography>
+
           <InputField
             inputType="email"
             className={styles.inputContainer}
