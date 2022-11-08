@@ -83,7 +83,6 @@ const Login = () => {
             setErrorType={setEmailType}
             type={"text"}
             name="Email"
-            required
             label="Email"
             subLinkClick={() => {
               history.push("/login/forgotUsername");
@@ -97,7 +96,6 @@ const Login = () => {
             errorType={passType}
             setErrorType={setPassType}
             name="password"
-            required
             label="Password"
             inputType="pass"
             subLinkClick={() => {
@@ -105,6 +103,12 @@ const Login = () => {
             }}
           />
           <Button
+            sxProp={{
+              "&:hover": {
+                background: "#218389",
+                color: "#fff",
+              },
+            }}
             variant="shade"
             btnLabel={translate.formatMessage({ id: "btnLogin" })}
             onClickHandler={loginClick}

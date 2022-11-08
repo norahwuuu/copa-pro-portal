@@ -31,11 +31,12 @@ export type InputFieldProps = TextFieldProps & {
 };
 
 const errorMain = colorObj.error.main;
-const secondaryMain = colorObj.secondary.main;
+const commonWhite = colorObj.common.white;
 const LogTextField = styled(TextField)`
   & .MuiOutlinedInput-root {
     width: 220px;
     padding: 0;
+    background: #fff;
     border-radius: 18px;
   }
   ,
@@ -65,18 +66,22 @@ const LogTextField = styled(TextField)`
   ,
   & .MuiInputLabel-root {
     top: -8px;
+    padding: 0 4px;
+    padding-top: 2px;
     color: #595655;
     font-size: 14px;
+    background: #fff;
+    border-radius: 10px;
   }
   ,
   & .MuiFormLabel-filled {
-    top: 0;
+    top: 0px;
     color: #999 !important;
     font-size: 1rem;
   }
   ,
   & .Mui-focused {
-    top: 0;
+    top: 0px;
     color: #333 !important;
     font-size: 1rem;
   }
@@ -87,12 +92,16 @@ const LogTextField = styled(TextField)`
   }
 
   & .MuiFormHelperText-root {
-    width: 220px;
+    width: fit-content;
     margin-right: 0;
-    margin-left: 2px;
+    margin-left: 0px;
+    padding-right: 2px;
     color: ${errorMain} !important;
     font-size: 10px;
     white-space: nowrap;
+    text-indent: 4px;
+    background: #fff;
+    border-radius: 10px;
     transform: scale(0.87, 0.87);
   }
 
@@ -189,7 +198,7 @@ const InputField: FC<InputFieldProps> = ({
             style={{ display: subLink !== "" ? "inline-block" : "none" }}
           >
             <span
-              style={{ color: `${secondaryMain}` }}
+              style={{ color: `${commonWhite}` }}
               onClick={() => {
                 subLinkClick && subLinkClick();
               }}
@@ -240,7 +249,7 @@ const InputField: FC<InputFieldProps> = ({
             style={{ display: subLink !== "" ? "inline-block" : "none" }}
           >
             <span
-              style={{ color: `${secondaryMain}` }}
+              style={{ color: `${commonWhite}` }}
               onClick={() => {
                 subLinkClick && subLinkClick();
               }}
@@ -259,7 +268,7 @@ const InputField: FC<InputFieldProps> = ({
             style={{ display: subLink !== "" ? "inline-block" : "none" }}
           >
             <span
-              style={{ color: `${secondaryMain}` }}
+              style={{ color: `${commonWhite}` }}
               onClick={() => {
                 subLinkClick && subLinkClick();
               }}
