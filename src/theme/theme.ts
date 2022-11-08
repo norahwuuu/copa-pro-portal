@@ -1,6 +1,5 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 
-// import { buttonStyle } from "./button.style"
 import customPalette, { colorObj } from "./customPalette";
 
 export const fontProps = (
@@ -21,7 +20,6 @@ export const fontProps = (
 
 const customThemeOptions: ThemeOptions = {
   spacing: [0, 5, 10, 15, 20, 25, 30],
-
   palette: customPalette,
   typography: {
     fontFamily: "Colgate Ready",

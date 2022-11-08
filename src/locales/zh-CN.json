@@ -1,11 +1,14 @@
 {
   "title": "Welcome to",
-  "subTitle": "[design tool offical name]!",
+  "subTitle": "Colgate Smile Design!",
   "forgotUser": "Forgot username?",
   "forgotPasswordTitle": "Forgot password?",
   "forgotPasswordText": "Please provide the email address associated with your account. We will send you a password reset email with instructions once we find a match in our system.",
   "btnResetPassword": "Reset password",
   "btnCancel": "Cancel",
   "btnBacktoLogin": "Back to login",
-  "btnLogin": "Login"
+  "btnLogin": "Login",
+  "newPatientHeader": "Add a new patient",
+  "overviewPatientHeader": "Patient overview",
+  "patientListHeader": "Patients"
 }
