@@ -1,14 +1,14 @@
 /**
- * global TextField : 带效果的输入框
+ * global TextField : 带效果的输入框  (Input box with effect)
  * @param
- * className:类名
- * subLink: 输入框右下方文字
- * subLinkClick: 输入框右下角文字点击方法回调
- * inputType: 输入框类型--- email\pass\default
- * inputValue: 输入框的值
- * setInputValue: 设置输入框值得方法
- * errorType: 错误类型---目前支持 noError\emailEmpty\passEmpty\nonvalidEmail
- * setErrorType: 设置错误类型得方法
+ * className:类名(class name)
+ * subLink: 输入框右下方文字(Text at the bottom right of the input box)
+ * subLinkClick: 输入框右下角文字点击方法回调(Click the method callback in the lower right corner of the input box)
+ * inputType: 输入框类型(types of input)--- email\pass\default
+ * inputValue: 输入框的值(value of input)
+ * setInputValue: 设置输入框值得方法(How to set the value of the input box)
+ * errorType: 错误类型(types of error)---noError\emailEmpty\passEmpty\nonvalidEmail
+ * setErrorType: 设置错误类型的方法(How to set the error type)
  * @returns
  */
 import { errorTypes } from "@/pages/Login/column";
