@@ -2,14 +2,21 @@ import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
-import request from "@/utils/request";
 import { Container } from "@mui/material";
+import { Dispatch } from "dva";
+import type { FC } from "react";
 import { useState } from "react";
-import { history, useIntl } from "umi";
+import { connect, history, useIntl } from "umi";
 import { loginText } from "./column";
 import styles from "./login.less";
 
-const Login = () => {
+export interface loginProps {
+  loginUser?: Dispatch;
+  setData?: Dispatch;
+  isShowLoginError?: boolean;
+}
+
+const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
   const translate = useIntl();
   // username
   const [email, setEmail] = useState<string>("");
@@ -21,12 +28,8 @@ const Login = () => {
   // password 错误类型
   const [passType, setPassType] = useState<string>("noError");
 
-  // callback 接口
-  const [showLoginError, setShowLoginError] = useState<boolean>(false);
-
   // 点击login-btn
   const loginClick = () => {
-    setShowLoginError(false);
     if (email === "") {
       setEmailType("emailEmpty");
     }
@@ -40,21 +43,11 @@ const Login = () => {
       email !== "" &&
       password !== ""
     ) {
-      // 测试登录---- admin@ulabsystems.net   Qwer12#
-      request("/api/v1/authn", {
-        method: "post",
-        data: {
+      loginUser &&
+        loginUser({
+          password,
           username: email,
-          password: password,
-        },
-      }).then((r) => {
-        if (r) {
-          alert("login success!");
-          setShowLoginError(false);
-        } else {
-          setShowLoginError(true);
-        }
-      });
+        });
     }
   };
 
@@ -67,7 +60,7 @@ const Login = () => {
         })}${"\n"}${translate.formatMessage({ id: "subTitle" })}`}
         LogoIconMt={32}
         headerInfo={{
-          show: showLoginError,
+          show: isShowLoginError,
           type: "error",
           info: "Username and password combination do not match our records.",
         }}
@@ -119,4 +112,25 @@ const Login = () => {
     </Container>
   );
 };
-export default Login;
+export default connect(
+  ({ loginSpace }: any) => {
+    const { isShowLoginError } = loginSpace;
+    return {
+      isShowLoginError,
+    };
+  },
+  (dispatch: Dispatch) => ({
+    loginUser: (payload: object) => {
+      dispatch({
+        type: "loginSpace/login",
+        payload,
+      });
+    },
+    setData: (payload: object) => {
+      dispatch({
+        type: "loginSpace/setData",
+        payload,
+      });
+    },
+  })
+)(Login);
