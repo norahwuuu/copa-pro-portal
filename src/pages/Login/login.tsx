@@ -2,7 +2,6 @@ import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
-import LoginLogo from "@/components/LoginLogo/loginLogo";
 import request from "@/utils/request";
 import { Container } from "@mui/material";
 import { useState } from "react";
@@ -61,12 +60,12 @@ const Login = () => {
 
   return (
     <Container>
-      <LoginLogo />
       <CenterRectangle
         className={styles.loginBox}
         mainTitle={`${translate.formatMessage({
           id: "title",
         })}${"\n"}${translate.formatMessage({ id: "subTitle" })}`}
+        LogoIconMt={32}
         headerInfo={{
           show: showLoginError,
           type: "error",

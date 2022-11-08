@@ -1,18 +1,30 @@
-import { Grid, Typography } from "@mui/material";
+import { Theme } from "@emotion/react";
+import { Grid, Icon, SxProps, Typography } from "@mui/material";
 import React from "react";
+import logoSvg from "../../assets/svgs/COLGATE_SMILE_LOGO_REV_RGB.svg";
 import styles from "./centerRectangle.less";
+
 export type centerRectanglePropsType = {
   width?: string | number;
   className?: string;
   children?: React.ReactNode;
   mainTitle?: string; //第一行标题
   subtitle?: string; //第二行标题
+  LogoIconMt?: number; //LogoIconMt marginbottom
+  sxProp?: SxProps<Theme>;
   headerInfo?: {
     show: boolean;
     type: "error";
     info: string;
   };
 };
+function LogoIcon(props: any) {
+  return (
+    <Icon {...props}>
+      <img src={logoSvg} />
+    </Icon>
+  );
+}
 
 /**
  * description：水平盒子
@@ -28,11 +40,13 @@ const CenterRectangle = ({
   children,
   subtitle,
   mainTitle,
+  LogoIconMt = 25, //logoSvg marginbottom px
   headerInfo = {
     show: false,
     type: "error",
     info: "",
   },
+  sxProp,
 }: centerRectanglePropsType) => {
   return (
     <Grid
@@ -40,6 +54,7 @@ const CenterRectangle = ({
         backgroundColor: "primary.main",
         width: width || 409,
         borderBottomRightRadius: headerInfo.show ? 0 : 20,
+        ...sxProp,
       }}
       className={`${styles.centerRectangle} ${className}`}
     >
@@ -50,9 +65,17 @@ const CenterRectangle = ({
         </Grid>
       )}
       <Grid color="white" whiteSpace="pre-wrap">
+        <LogoIcon
+          sx={{
+            display: "block",
+            width: "250px",
+            height: "30px",
+            margin: `0 0 ${LogoIconMt}px 30px`,
+          }}
+        />
         {mainTitle && (
           <Typography
-            variant="h5"
+            variant="h3"
             align="center"
             fontFamily="ColgateReady-ExtraLight"
           >
@@ -69,7 +92,6 @@ const CenterRectangle = ({
           </Typography>
         )}
       </Grid>
-
       {children}
     </Grid>
   );

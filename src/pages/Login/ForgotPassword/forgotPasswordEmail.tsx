@@ -1,8 +1,7 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
-import LoginLogo from "@/components/LoginLogo/loginLogo";
-import { Container } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { history, useIntl } from "umi";
 import { forgotPasswordTextEmail } from "../column";
 import styles from "./forgotPassword.less";
@@ -11,23 +10,39 @@ const ForgotPassword = () => {
   const translate = useIntl();
   return (
     <Container>
-      <LoginLogo />
-      {/* <Draft /> */}
       <CenterRectangle
         className={styles.box}
         mainTitle={forgotPasswordTextEmail.mainTitle}
       >
-        <div className={styles.forgotUsername}>
-          <div className={styles.text1}>{forgotPasswordTextEmail.text}</div>
+        <Grid textAlign={"center"}>
+          <Typography
+            variant="body1"
+            align="left"
+            color="white"
+            fontFamily="ColgateReady-Regular"
+            padding={"0 60px"}
+            mt={6}
+          >
+            {forgotPasswordTextEmail.text}
+          </Typography>
           <Button
             variant={"shade"}
             btnLabel={translate.formatMessage({ id: "btnBacktoLogin" })}
             onClickHandler={() => history.push("/")}
+            sxProp={{
+              marginTop: "20px",
+            }}
           />
-          <div className={styles.verifyFolder}>
+          <Typography
+            variant="body2"
+            align="center"
+            color="white"
+            fontFamily="ColgateReady-Regular"
+            mt={4}
+          >
             {forgotPasswordTextEmail.footerText}
-          </div>
-        </div>
+          </Typography>
+        </Grid>
       </CenterRectangle>
       <Footer />
     </Container>

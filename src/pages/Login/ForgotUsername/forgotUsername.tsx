@@ -1,7 +1,6 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
-import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container, Typography } from "@mui/material";
 import { history, useIntl } from "umi";
 import { forgotUsernameText } from "../column";
@@ -11,15 +10,13 @@ const ForgotUsername = () => {
   const translate = useIntl();
   return (
     <Container>
-      <LoginLogo />
-      {/* <Draft /> */}
       <CenterRectangle
         className={styles.box}
         mainTitle={forgotUsernameText.mainTitle}
       >
         <div className={styles.forgotUsername}>
           <Typography
-            variant="body2"
+            variant="body1"
             align="center"
             color="white"
             fontFamily="ColgateReady-Regular"

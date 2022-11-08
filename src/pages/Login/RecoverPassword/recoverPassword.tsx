@@ -2,7 +2,6 @@ import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
-import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { history, useIntl } from "umi";
@@ -18,15 +17,13 @@ const RecoverPassword = () => {
 
   return (
     <Container>
-      <LoginLogo />
-      {/* <Draft /> */}
-
       <CenterRectangle
         className={styles.box}
         mainTitle={recoverPasswordText.mainTitle}
+        LogoIconMt={15}
       >
         <div className={styles.recoverUsername}>
-          <Typography color="white" variant="body2">
+          <Typography color="white" variant="body1">
             {recoverPasswordText.text}
           </Typography>
           <InputField
@@ -41,6 +38,7 @@ const RecoverPassword = () => {
             label="Email"
           />
           <InputField
+            style={{ marginTop: 20 }}
             inputValue={password}
             setInputValue={setPassWord}
             errorType={passType}
@@ -49,7 +47,7 @@ const RecoverPassword = () => {
             label="Create password"
             inputType="pass"
           />
-          <Grid textAlign={"left"} mt={1.25}>
+          <Grid textAlign={"left"} marginTop="11px">
             <Typography
               color="white"
               variant="caption"
@@ -65,7 +63,6 @@ const RecoverPassword = () => {
                 lineHeight={"20px"}
                 fontFamily="ColgateReady-Light"
               >
-                {" "}
                 {recoverPasswordText.remind}
               </Typography>
             </Grid>
@@ -73,17 +70,17 @@ const RecoverPassword = () => {
 
           <Typography
             color="white"
-            variant="h5"
-            mt={4}
+            variant="h3"
+            mt={6}
             fontFamily="ColgateReady-ExtraLight"
           >
-            {recoverPasswordText.title}{" "}
+            {recoverPasswordText.title}
           </Typography>
           <Typography
             color="white"
-            variant="body2"
+            variant="body1"
             textAlign="left"
-            mt={1}
+            sx={{ marginTop: "8px" }}
             fontFamily="ColgateReady-Regular"
           >
             {recoverPasswordText.name}
@@ -96,25 +93,32 @@ const RecoverPassword = () => {
             type={"text"}
             label="Answer"
           />
-          <div className={styles.btns}>
-            <Button
-              variant="shade"
-              btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
-              onClickHandler={() => {
-                if (emailType === "noError") {
-                  history.push("/");
-                }
-              }}
-            />
-
-            <Button
-              variant="text"
-              btnLabel={translate.formatMessage({ id: "btnBacktoLogin" })}
-              onClickHandler={() => {
+          <Button
+            sxProp={{ marginTop: "30px" }}
+            variant="shade"
+            btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
+            onClickHandler={() => {
+              if (emailType === "noError") {
                 history.push("/");
-              }}
-            />
-          </div>
+              }
+            }}
+          />
+
+          <Button
+            sxProp={{
+              marginTop: "15px",
+              color: "white",
+              border: "1px solid transparent",
+              "&:hover": {
+                color: "#333",
+              },
+            }}
+            variant="text"
+            btnLabel={translate.formatMessage({ id: "btnBacktoLogin" })}
+            onClickHandler={() => {
+              history.push("/");
+            }}
+          />
         </div>
       </CenterRectangle>
       <Footer />

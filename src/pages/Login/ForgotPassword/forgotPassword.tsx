@@ -2,7 +2,6 @@ import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
-import LoginLogo from "@/components/LoginLogo/loginLogo";
 import { Container, Typography } from "@mui/material";
 import { useState } from "react";
 import { history, useIntl } from "umi";
@@ -15,9 +14,6 @@ const ForgotPassword = () => {
   const [emailType, setEmailType] = useState<string>("noError");
   return (
     <Container>
-      <LoginLogo />
-      {/* <Draft /> */}
-
       <CenterRectangle
         className={styles.box}
         mainTitle={forgotPasswordText.mainTitle}
@@ -30,11 +26,10 @@ const ForgotPassword = () => {
         <div className={styles.forgotUsername}>
           <Typography
             color="white"
-            variant="body2"
+            variant="body1"
             textAlign="left"
             fontFamily="ColgateReady-Regular"
           >
-            {" "}
             {forgotPasswordText.text}
           </Typography>
 
@@ -61,6 +56,14 @@ const ForgotPassword = () => {
             />
 
             <Button
+              sxProp={{
+                marginTop: "15px",
+                color: "white",
+                border: "1px solid transparent",
+                "&:hover": {
+                  color: "#333",
+                },
+              }}
               variant="text"
               btnLabel={translate.formatMessage({ id: "btnCancel" })}
               onClickHandler={() => {
