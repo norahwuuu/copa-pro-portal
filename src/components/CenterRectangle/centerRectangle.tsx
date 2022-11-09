@@ -2,8 +2,8 @@ import { Theme } from "@emotion/react";
 import { Grid, Icon, SxProps, Typography } from "@mui/material";
 import React from "react";
 import logoSvg from "../../assets/svgs/COLGATE_SMILE_LOGO_REV_RGB.svg";
+import Text from "../Text/text";
 import styles from "./centerRectangle.less";
-
 export type centerRectanglePropsType = {
   width?: string | number;
   className?: string;
@@ -59,9 +59,11 @@ const CenterRectangle = ({
       className={`${styles.centerRectangle} ${className}`}
     >
       {headerInfo.show && (
-        <Grid color="primary.main">
+        <Grid color="primary.main" className={styles.headerInfo}>
           <Grid className={styles.icon} />
-          <Grid className={styles.text}>{headerInfo?.info}</Grid>
+          <Grid className={styles.text}>
+            <Text variant={"body3"}>{headerInfo?.info}</Text>
+          </Grid>
         </Grid>
       )}
       <Grid color="white" whiteSpace="pre-wrap">
