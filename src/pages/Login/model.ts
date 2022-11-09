@@ -26,7 +26,7 @@ const MainModel: MainModelType = {
   },
 
   effects: {
-    *login({ payload }, { call, put, select }) {
+    *login({ payload }, { call, put }) {
       yield put({
         type: "setData",
         payload: {
