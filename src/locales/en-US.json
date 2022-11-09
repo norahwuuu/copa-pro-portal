@@ -10,5 +10,6 @@
   "btnLogin": "Login",
   "newPatientHeader": "Add a new patient",
   "overviewPatientHeader": "Patient overview",
-  "patientListHeader": "Patients"
+  "patientListHeader": "Patients",
+  "loginMatchError": "Username and password combination do not match our records."
 }

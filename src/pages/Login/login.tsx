@@ -3,16 +3,21 @@ import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import { Container } from "@mui/material";
-import { Dispatch } from "dva";
 import type { FC } from "react";
 import { useState } from "react";
 import { connect, history, useIntl } from "umi";
 import { loginText } from "./column";
 import styles from "./login.less";
 
+export interface LoginParamsType {
+  username: string;
+  password: string;
+}
+export interface LoginState {
+  isShowLoginError: boolean;
+}
 export interface loginProps {
-  loginUser?: Dispatch;
-  setData?: Dispatch;
+  loginUser?: (arg: LoginParamsType) => void;
   isShowLoginError?: boolean;
 }
 
@@ -113,22 +118,16 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
   );
 };
 export default connect(
-  ({ loginSpace }: any) => {
+  ({ loginSpace }: never) => {
     const { isShowLoginError } = loginSpace;
     return {
       isShowLoginError,
     };
   },
-  (dispatch: Dispatch) => ({
-    loginUser: (payload: object) => {
+  (dispatch) => ({
+    loginUser: (payload: LoginParamsType) => {
       dispatch({
-        type: "loginSpace/login",
-        payload,
-      });
-    },
-    setData: (payload: object) => {
-      dispatch({
-        type: "loginSpace/setData",
+        type: `loginSpace/login`,
         payload,
       });
     },
