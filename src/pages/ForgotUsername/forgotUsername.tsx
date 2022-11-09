@@ -1,45 +1,46 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { history, useIntl } from "umi";
-import { forgotPasswordTextEmail } from "../column";
-import styles from "./forgotPassword.less";
+import { forgotUsernameText } from "../Login/column";
+import styles from "./forgotUsername.less";
 
-const ForgotPassword = () => {
+const ForgotUsername = () => {
   const translate = useIntl();
   return (
     <Container>
       <CenterRectangle
         className={styles.box}
-        mainTitle={forgotPasswordTextEmail.mainTitle}
+        mainTitle={forgotUsernameText.mainTitle}
       >
-        <Grid textAlign={"center"}>
+        <div className={styles.forgotUsername}>
           <Typography
             variant="body1"
-            align="left"
+            align="center"
             color="white"
-            fontWeight="200"
-            padding={"0 60px"}
-            mt={6}
+            fontWeight="normal"
           >
-            {forgotPasswordTextEmail.text}
+            {forgotUsernameText.text}
+          </Typography>
+          <Typography
+            margin={"30px 0"}
+            fontSize={"18px"}
+            align="center"
+            color="white"
+            fontWeight="blod"
+          >
+            {forgotUsernameText.number}
           </Typography>
           <Button
             variant={"shade"}
             btnLabel={translate.formatMessage({ id: "btnBacktoLogin" })}
             onClickHandler={() => history.push("/")}
-            sxProp={{
-              marginTop: "20px",
-            }}
           />
-          <Typography variant="body2" align="center" color="white" mt={4}>
-            {forgotPasswordTextEmail.footerText}
-          </Typography>
-        </Grid>
+        </div>
       </CenterRectangle>
       <Footer />
     </Container>
   );
 };
-export default ForgotPassword;
+export default ForgotUsername;

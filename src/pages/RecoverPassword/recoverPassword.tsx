@@ -5,7 +5,7 @@ import InputField from "@/components/InputField/inputField";
 import { Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { history, useIntl } from "umi";
-import { recoverPasswordText } from "../column";
+import { recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
 
 const RecoverPassword = () => {

@@ -9,27 +9,27 @@ export default [
       {
         name: "forgotUsername",
         path: "/login/forgotUsername",
-        component: "@/pages/Login/ForgotUsername/forgotUsername",
+        component: "@/pages/ForgotUsername/forgotUsername",
       },
       {
         name: "forgotPassword",
         path: "/login/forgotPassword",
-        component: "@/pages/Login/ForgotPassword/forgotPassword",
+        component: "@/pages/ForgotPassword/forgotPassword",
       },
       {
         name: "forgotPasswordEmail",
         path: "/login/forgotPasswordEmail",
-        component: "@/pages/Login/ForgotPassword/forgotPasswordEmail",
+        component: "@/pages/ForgotPassword/forgotPasswordEmail",
       },
       {
         name: "recoverPassword",
         path: "/login/recoverPassword",
-        component: "@/pages/Login/RecoverPassword/recoverPassword",
+        component: "@/pages/RecoverPassword/recoverPassword",
       },
       {
         name: "changePassword",
         path: "/login/changePassword",
-        component: "@/pages/Login/ChangePassword/changePassword",
+        component: "@/pages/ChangePassword/changePassword",
       },
       { ...patientRoute },
       {
