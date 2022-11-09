@@ -8,18 +8,7 @@ import { useState } from "react";
 import { connect, history, useIntl } from "umi";
 import { loginText } from "./column";
 import styles from "./login.less";
-
-export interface LoginParamsType {
-  username: string;
-  password: string;
-}
-export interface LoginState {
-  isShowLoginError: boolean;
-}
-export interface loginProps {
-  loginUser?: (arg: LoginParamsType) => void;
-  isShowLoginError?: boolean;
-}
+import { LoginParamsType, loginProps } from "./type";
 
 const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
   const translate = useIntl();
