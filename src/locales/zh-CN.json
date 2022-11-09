@@ -6,6 +6,7 @@
   "forgotPasswordText": "Please provide the email address associated with your account. We will send you a password reset email with instructions once we find a match in our system.",
   "btnResetPassword": "Reset password",
   "btnCancel": "Cancel",
+  "btnSave": "Save",
   "btnBacktoLogin": "Back to login",
   "btnLogin": "Login",
   "newPatientHeader": "Add a new patient",

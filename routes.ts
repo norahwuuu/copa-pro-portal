@@ -26,6 +26,11 @@ export default [
         path: "/login/recoverPassword",
         component: "@/pages/Login/RecoverPassword/recoverPassword",
       },
+      {
+        name: "changePassword",
+        path: "/login/changePassword",
+        component: "@/pages/Login/ChangePassword/changePassword",
+      },
       { ...patientRoute },
       {
         path: "/example",

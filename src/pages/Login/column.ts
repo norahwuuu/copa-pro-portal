@@ -61,6 +61,17 @@ export const recoverPasswordText = {
   reset: "Reset password",
   back: "Back to login",
 };
+export const changePasswordText = {
+  mainTitle: "Change password",
+  text: `Let's set a new password for your account.`,
+  pwd: `Password must be at least 6 characters and contain at least one
+        special character.`,
+  remind: "Min. 6 characters, and one special character.",
+  title: "Security question",
+  name: "What was your first pet name?",
+  reset: "Reset password",
+  back: "Back to login",
+};
 export const footerText = {
   supportN: "Customer support: (123) 457-7890",
   supportE: `support@aligners.com`,
