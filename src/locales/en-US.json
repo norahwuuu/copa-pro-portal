@@ -6,10 +6,13 @@
   "forgotPasswordText": "Please provide the email address associated with your account. We will send you a password reset email with instructions once we find a match in our system.",
   "btnResetPassword": "Reset password",
   "btnCancel": "Cancel",
+  "btnSave": "Save",
   "btnBacktoLogin": "Back to login",
   "btnLogin": "Login",
   "newPatientHeader": "Add a new patient",
   "overviewPatientHeader": "Patient overview",
   "patientListHeader": "Patients",
-  "loginMatchError": "Username and password combination do not match our records."
+  "loginMatchError": "Username and password combination do not match our records.",
+  "oldPassword": "Old password",
+  "newPassword": "New password"
 }
