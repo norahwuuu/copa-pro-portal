@@ -19,7 +19,7 @@ const ForgotPassword = () => {
             variant="body1"
             align="left"
             color="white"
-            fontFamily="ColgateReady-Regular"
+            fontWeight="200"
             padding={"0 60px"}
             mt={6}
           >
@@ -33,13 +33,7 @@ const ForgotPassword = () => {
               marginTop: "20px",
             }}
           />
-          <Typography
-            variant="body2"
-            align="center"
-            color="white"
-            fontFamily="ColgateReady-Regular"
-            mt={4}
-          >
+          <Typography variant="body2" align="center" color="white" mt={4}>
             {forgotPasswordTextEmail.footerText}
           </Typography>
         </Grid>

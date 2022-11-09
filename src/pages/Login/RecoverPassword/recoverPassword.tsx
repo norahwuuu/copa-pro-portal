@@ -48,11 +48,7 @@ const RecoverPassword = () => {
             inputType="pass"
           />
           <Grid textAlign={"left"} marginTop="11px">
-            <Typography
-              color="white"
-              variant="caption"
-              fontFamily="ColgateReady-Light"
-            >
+            <Typography color="white" variant="caption" fontWeight="300">
               {recoverPasswordText.pwd}
             </Typography>
             <Grid display="flex" alignItems={"center"} mt={1.25}>
@@ -61,19 +57,14 @@ const RecoverPassword = () => {
                 color="white"
                 variant="caption"
                 lineHeight={"20px"}
-                fontFamily="ColgateReady-Light"
+                fontWeight="300"
               >
                 {recoverPasswordText.remind}
               </Typography>
             </Grid>
           </Grid>
 
-          <Typography
-            color="white"
-            variant="h3"
-            mt={6}
-            fontFamily="ColgateReady-ExtraLight"
-          >
+          <Typography color="white" variant="h3" mt={6} fontWeight="200">
             {recoverPasswordText.title}
           </Typography>
           <Typography
@@ -81,7 +72,6 @@ const RecoverPassword = () => {
             variant="body1"
             textAlign="left"
             sx={{ marginTop: "8px" }}
-            fontFamily="ColgateReady-Regular"
           >
             {recoverPasswordText.name}
           </Typography>

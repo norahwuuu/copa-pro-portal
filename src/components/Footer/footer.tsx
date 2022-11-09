@@ -9,35 +9,19 @@ const Footer = () => {
       <div className={`${styles.container} ${styles.supprt}`}>
         <div className={styles.circle}>?</div>
         <div>
-          <Typography
-            color="white"
-            variant="body2"
-            fontFamily="ColgateReady-Regular"
-          >
+          <Typography color="white" variant="body2" fontWeight="200">
             {footerText.supportN}
           </Typography>
-          <Typography
-            color="white"
-            variant="body2"
-            fontFamily="ColgateReady-Regular"
-          >
+          <Typography color="white" variant="body2" fontWeight="200">
             {footerText.supportE}
           </Typography>
         </div>
       </div>
       <div className={`${styles.container} ${styles.middle}`}>
-        <Typography
-          color="white"
-          variant="body2"
-          fontFamily="ColgateReady-Light"
-        >
+        <Typography color="white" variant="body2" fontWeight="300">
           {footerText.mid}
         </Typography>
-        <Typography
-          color="white"
-          variant="body2"
-          fontFamily="ColgateReady-Light"
-        >
+        <Typography color="white" variant="body2" fontWeight="300">
           {footerText.v}
         </Typography>
       </div>

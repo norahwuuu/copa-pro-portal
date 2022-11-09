@@ -76,20 +76,12 @@ const CenterRectangle = ({
           }}
         />
         {mainTitle && (
-          <Typography
-            variant="h3"
-            align="center"
-            fontFamily="ColgateReady-ExtraLight"
-          >
+          <Typography variant="h3" align="center" fontWeight="200">
             {mainTitle}
           </Typography>
         )}
         {subtitle && (
-          <Typography
-            variant="body2"
-            align="center"
-            fontFamily="ColgateReady-Regular"
-          >
+          <Typography variant="body2" align="center" fontWeight="200">
             {subtitle}
           </Typography>
         )}

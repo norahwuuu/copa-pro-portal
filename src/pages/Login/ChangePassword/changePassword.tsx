@@ -50,7 +50,7 @@ const RecoverPassword = () => {
                 color="white"
                 variant="caption"
                 lineHeight={"20px"}
-                fontFamily="ColgateReady-Light"
+                fontWeight="300"
               >
                 {changePasswordText.remind}
               </Typography>

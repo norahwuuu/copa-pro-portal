@@ -24,12 +24,7 @@ const ForgotPassword = () => {
         }}
       >
         <div className={styles.forgotUsername}>
-          <Typography
-            color="white"
-            variant="body1"
-            textAlign="left"
-            fontFamily="ColgateReady-Regular"
-          >
+          <Typography color="white" variant="body1" textAlign="left">
             {forgotPasswordText.text}
           </Typography>
 

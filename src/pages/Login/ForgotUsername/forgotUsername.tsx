@@ -19,7 +19,7 @@ const ForgotUsername = () => {
             variant="body1"
             align="center"
             color="white"
-            fontFamily="ColgateReady-Regular"
+            fontWeight="normal"
           >
             {forgotUsernameText.text}
           </Typography>
@@ -28,7 +28,7 @@ const ForgotUsername = () => {
             fontSize={"18px"}
             align="center"
             color="white"
-            fontFamily="ColgateReady-Bold"
+            fontWeight="blod"
           >
             {forgotUsernameText.number}
           </Typography>
