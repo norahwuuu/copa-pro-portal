@@ -19,16 +19,8 @@ import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import type { FC } from "react";
 import { useState } from "react";
 import styles from "./inputField.less";
-export type InputFieldProps = TextFieldProps & {
-  className?: string;
-  subLink?: string;
-  inputType?: string;
-  inputValue?: string | number;
-  setInputValue?: (arg0: string) => void;
-  errorType?: string;
-  setErrorType?: (arg0: string) => void;
-  subLinkClick?: () => void;
-};
+import { InputFieldType } from "./type";
+export type InputFieldProps = TextFieldProps & InputFieldType;
 
 const errorMain = colorObj.error.main;
 const commonWhite = colorObj.common.white;
