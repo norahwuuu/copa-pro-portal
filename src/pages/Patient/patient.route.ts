@@ -1,3 +1,5 @@
+import newPatientRoute from "./Create/createPatient.route";
+
 export const patientUrlObj = {
   createPatient: "/patient/new",
   overviewPatient: "/patient/overview",
@@ -6,20 +8,20 @@ export const patientUrlObj = {
 
 export default {
   path: "/patient",
-  exact: false,
-  component: "@/pages/Patient/patient",
+  component: "@/pages/Patient/patient.layout",
   routes: [
     {
       path: patientUrlObj.patientList,
       component: "@/pages/Patient/List/list",
     },
-    {
-      path: patientUrlObj.createPatient,
-      component: "@/pages/Patient/Create/create",
-    },
+    { ...newPatientRoute },
     {
       path: patientUrlObj.overviewPatient,
       component: "@/pages/Patient/Overview/overview",
+    },
+    {
+      path: "**", //No match redirect to default route
+      redirect: patientUrlObj.patientList,
     },
   ],
 };

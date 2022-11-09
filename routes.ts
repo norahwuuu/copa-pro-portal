@@ -1,4 +1,6 @@
+import accountRoute from "./src/pages/Account/account.route";
 import patientRoute from "./src/pages/Patient/patient.route";
+import treatmentPlanRoute from "./src/pages/TreatmentPlan/treatmentPlan.route";
 export default [
   {
     path: "/",
@@ -32,9 +34,15 @@ export default [
         component: "@/pages/ChangePassword/changePassword",
       },
       { ...patientRoute },
+      { ...treatmentPlanRoute },
+      { ...accountRoute },
       {
         path: "/example",
         component: "@/pages/Components/components",
+      },
+      {
+        path: "**", //No match redirect to default route
+        redirect: "/",
       },
     ],
   },

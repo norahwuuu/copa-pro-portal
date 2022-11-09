@@ -1,3 +1,4 @@
+import { accountUrlObj } from "@/pages/Account/account.route";
 import theme from "@/theme/theme";
 import {
   AccountCircle,
@@ -6,36 +7,29 @@ import {
   Logout,
 } from "@mui/icons-material";
 import { Button, Menu, MenuItem, MenuProps, styled } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
+import { FormattedMessage, history } from "umi";
 import Text from "../Text/text";
 
-const StyledMenu = styled((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    {...props}
-  />
-))(({ theme }) => ({
-  "& .MuiPaper-root": {
-    borderRadius: "0px 0px 20px 20px",
-    minWidth: 179,
-    boxShadow: "none",
-    border: "1px solid #777777 !important",
-    borderTop: `1px solid${theme.palette.gray?.lighten2}!important`,
-  },
-  "& .MuiMenuItem-root": {
-    ...theme.typography.body1,
-    fontWeight: 300,
-    color: theme.palette.gray?.main,
-  },
-}));
+const StyledMenu = styled((props: MenuProps) => <Menu {...props} />)(
+  ({ theme }) => ({
+    "& .MuiPaper-root": {
+      borderRadius: "0px 0px 20px 20px",
+      minWidth: 179,
+      boxShadow: "none",
+      border: "1px solid #777777 !important",
+      borderTop: `1px solid${theme.palette.gray?.lighten2}!important`,
+    },
+    "& .MuiMenuItem-root": {
+      ...theme.typography.body1,
+      fontWeight: 300,
+      color: theme.palette.gray?.main,
+      "&:hover": {
+        backgroundColor: theme.palette.gray?.lighten1,
+      },
+    },
+  })
+);
 
 const CustomizedMenus: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -46,6 +40,10 @@ const CustomizedMenus: FC = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const redirectTo = useCallback((path: string) => {
+    setAnchorEl(null);
+    history.push(path);
+  }, []);
 
   return (
     <>
@@ -70,7 +68,7 @@ const CustomizedMenus: FC = () => {
           justifyContent: "center",
           textDecoration: "none",
           minWidth: 180,
-          p: 0,
+          p: 1,
           "> span": {
             mr: 3,
           },
@@ -84,12 +82,13 @@ const CustomizedMenus: FC = () => {
           variant={"body1"}
           sxProp={{ alignSelf: "center", fontWeight: 300 }}
         >
-          {" "}
-          Brenda Smith{" "}
+          {"Brenda Smith"}
         </Text>
         <AccountCircle fontSize={"small"} sx={{ alignSelf: "center" }} />
-        {open && <ArrowDropUp sx={{ alignSelf: "center" }} />}
-        {!open && <ArrowDropDown sx={{ alignSelf: "center" }} />}
+        {open && <ArrowDropUp sx={{ alignSelf: "center", color: "inherit" }} />}
+        {!open && (
+          <ArrowDropDown sx={{ alignSelf: "center", color: "inherit" }} />
+        )}
       </Button>
 
       <StyledMenu
@@ -99,18 +98,22 @@ const CustomizedMenus: FC = () => {
         onClose={handleClose}
         elevation={0}
       >
-        <MenuItem disableRipple onClick={handleClose}>
-          My account
+        <MenuItem
+          disableRipple
+          onClick={() => redirectTo(accountUrlObj.monthlyStatement)}
+        >
+          <FormattedMessage id="myAccountMenu" />
         </MenuItem>
         <MenuItem disableRipple onClick={handleClose}>
-          Change password
+          <FormattedMessage id="changePasswordMenu" />
         </MenuItem>
         <MenuItem
           disableRipple
           onClick={handleClose}
           sx={{ "> svg": { marginLeft: 2 } }}
         >
-          Logout <Logout fontSize={"inherit"} />{" "}
+          <FormattedMessage id="logoutMenu" />{" "}
+          <Logout fontSize={"small"} sx={{ color: "inherit" }} />
         </MenuItem>
       </StyledMenu>
     </>

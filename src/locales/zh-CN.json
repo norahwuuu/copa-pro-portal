@@ -12,5 +12,19 @@
   "newPatientHeader": "Add a new patient",
   "overviewPatientHeader": "Patient overview",
   "patientListHeader": "Patients",
-  "loginMatchError": "Username and password combination do not match our records."
+  "loginMatchError": "Username and password combination do not match our records.",
+  "treatmentPlanPrepareMenu": "Prepare",
+  "treatmentPlanTreatMenu": "Treat",
+  "treatmentPlanOrderMenu": "Order",
+  "myAccountHeader": "My account",
+  "patientInformationMenu": "Patient information",
+  "clinicalInformationMenu": "Clinical information",
+  "scanMenu": "Scans",
+  "radiographAndPhotographMenu": "Radiograph & photograph",
+  "monthlyStatementMenu": "Monthly statement",
+  "manageUsersMenu": "Manage users",
+  "shippingSettingsMenu": "Shipping settings",
+  "myAccountMenu": "My account",
+  "changePasswordMenu": "Change Password",
+  "logoutMenu": "Logout"
 }
