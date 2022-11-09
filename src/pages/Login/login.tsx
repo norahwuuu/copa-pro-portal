@@ -2,14 +2,14 @@ import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
+import { colorObj } from "@/theme/customPalette";
 import { Container } from "@mui/material";
 import type { FC } from "react";
 import { useState } from "react";
 import { connect, history, useIntl } from "umi";
-import { loginText } from "./column";
 import styles from "./login.less";
 import { LoginParamsType, loginProps } from "./type";
-
+const secondaryMain = colorObj.secondary.main;
 const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
   const translate = useIntl();
   // username
@@ -63,7 +63,7 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
           <InputField
             inputType="email"
             className={styles.inputContainer}
-            subLink={loginText.forgotUser}
+            subLink={`${translate.formatMessage({ id: "forgotUser" })}`}
             inputValue={email}
             setInputValue={setEmail}
             errorType={emailType}
@@ -77,7 +77,9 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
           />
           <InputField
             className={styles.inputContainer}
-            subLink={loginText.forgotPass}
+            subLink={`${translate.formatMessage({
+              id: "forgotPasswordTitle",
+            })}`}
             inputValue={password}
             setInputValue={setPassWord}
             errorType={passType}
@@ -92,7 +94,7 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
           <Button
             sxProp={{
               "&:hover": {
-                background: "#218389",
+                background: `${secondaryMain}`,
                 color: "#fff",
               },
             }}
