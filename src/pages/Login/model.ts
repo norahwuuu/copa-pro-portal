@@ -1,10 +1,6 @@
 import { queryLogin } from "@/services/login";
 import type { Effect, Reducer } from "umi";
 
-export interface loginObj {
-  username?: string;
-  password?: string;
-}
 export interface LoginState {
   isShowLoginError: boolean;
 }
