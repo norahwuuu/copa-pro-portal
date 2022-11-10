@@ -41,6 +41,9 @@ const TretmentPlanHeader: FC = () => {
             p: 3,
             borderBottom:
               location.pathname === item.path ? "5px solid #FFFFFF" : "none",
+            "&:hover": {
+              borderBottom: "5px solid #FFFFFF",
+            },
           }}
         >
           <FormattedMessage id={item.translate} />

@@ -1,6 +1,5 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import { colorObj } from "@/theme/customPalette";
 import { Container } from "@mui/material";
@@ -104,7 +103,6 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
           />
         </div>
       </CenterRectangle>
-      <Footer />
     </Container>
   );
 };
