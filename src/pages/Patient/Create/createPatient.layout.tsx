@@ -2,32 +2,10 @@ import Text from "@/components/Text/text";
 import { Box, Grid, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
-import { createPatientUrlObj } from "./createPatient.route";
+import { navItems } from "./createPatient.config";
 
 const PatientCreate: FC<{ children: ReactChildren }> = ({ children }) => {
   const location = useLocation();
-  const navItems = [
-    {
-      id: "patientinformation",
-      path: createPatientUrlObj.createPatientInformation,
-      translate: "patientInformationMenu",
-    },
-    {
-      id: "clinicalinformation",
-      path: createPatientUrlObj.createPatinetClinicalInformation,
-      translate: "clinicalInformationMenu",
-    },
-    {
-      id: "scans",
-      path: createPatientUrlObj.createPatinetScans,
-      translate: "scanMenu",
-    },
-    {
-      id: "photograph",
-      path: createPatientUrlObj.createPatinetPhotograph,
-      translate: "radiographAndPhotographMenu",
-    },
-  ];
 
   return (
     <Box sx={{ my: 2 }}>

@@ -3,7 +3,7 @@ import Text from "@/components/Text/text";
 import { Box, Grid, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
-import { accountUrlObj } from "./account.route";
+import { navItems } from "./account.config";
 
 const AccountHeader: FC = () => {
   return (
@@ -15,23 +15,7 @@ const AccountHeader: FC = () => {
 
 const Account: FC<{ children: ReactChildren }> = ({ children }) => {
   const location = useLocation();
-  const navItems = [
-    {
-      id: "monthlystatement",
-      path: accountUrlObj.monthlyStatement,
-      translate: "monthlyStatementMenu",
-    },
-    {
-      id: "manageusers",
-      path: accountUrlObj.manageUsers,
-      translate: "manageUsersMenu",
-    },
-    {
-      id: "shippingsettings",
-      path: accountUrlObj.shippingSettings,
-      translate: "shippingSettingsMenu",
-    },
-  ];
+
   return (
     <>
       <Header>
