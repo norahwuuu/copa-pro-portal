@@ -1,6 +1,5 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import Footer from "@/components/Footer/footer";
 import { Container, Grid, Typography } from "@mui/material";
 import { history, useIntl } from "umi";
 import { forgotPasswordTextEmail } from "../Login/column";
@@ -38,7 +37,6 @@ const ForgotPassword = () => {
           </Typography>
         </Grid>
       </CenterRectangle>
-      <Footer />
     </Container>
   );
 };

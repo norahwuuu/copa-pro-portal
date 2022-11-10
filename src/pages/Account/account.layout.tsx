@@ -1,6 +1,5 @@
 import Header from "@/components/Header/header";
 import Text from "@/components/Text/text";
-import theme from "@/theme/theme";
 import { Box, Grid, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
@@ -61,16 +60,18 @@ const Account: FC<{ children: ReactChildren }> = ({ children }) => {
                 mx: 4,
                 px: 1,
                 py: 3,
-                borderBottom:
+                borderBottom: (theme) =>
                   location.pathname === item.path
                     ? `5px solid ${theme.palette.secondary.main}`
                     : "none",
-                color:
+                color: (theme) =>
                   location.pathname === item.path
                     ? theme.palette.gray?.main
                     : theme.palette.gray?.darken,
                 "&:hover": {
-                  color: theme.palette.gray?.main,
+                  color: (theme) => theme.palette.gray?.main,
+                  borderBottom: (theme) =>
+                    `5px solid ${theme.palette.secondary.main}`,
                 },
               }}
             >

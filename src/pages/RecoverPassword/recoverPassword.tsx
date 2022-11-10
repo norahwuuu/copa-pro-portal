@@ -1,6 +1,5 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import { Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
@@ -111,7 +110,6 @@ const RecoverPassword = () => {
           />
         </div>
       </CenterRectangle>
-      <Footer />
     </Container>
   );
 };
