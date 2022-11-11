@@ -22,6 +22,12 @@ spec:
         - name: http
           containerPort: 80
         imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 30
         env:
         - name: LOG_LEVEL
           value: "DEBUG"
