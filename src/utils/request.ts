@@ -142,7 +142,7 @@ async function request<T>(
   // const accessToken = await getToken(url);
 
   // if (!accessToken) {
-  //   // history.push({ pathname: "/login" });
+  //   history.push({ pathname: "/login" });
   //   // notification.error({
   //   //   message: getIntl().formatMessage({ id: "request.loginAgain" }),
   //   // });
