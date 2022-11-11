@@ -11,7 +11,7 @@
  * setErrorType: 设置错误类型的方法(How to set the error type)
  * @returns
  */
-import { errorTypes } from "@/pages/Login/column";
+import { errorTypes } from "@/pages/LoginBox/Login/column";
 import { colorObj } from "@/theme/customPalette";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import type { TextFieldProps } from "@mui/material";
