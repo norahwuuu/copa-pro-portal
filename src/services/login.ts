@@ -8,8 +8,12 @@ export async function queryLogin(params: LoginParamsType) {
   });
 }
 export async function forgotPasswordServer(params: ForgotPasswordParamsType) {
-  return request("/user-management/v1/forgot-password", {
-    method: "PUT",
-    data: { ...params },
-  });
+  return request(
+    "/api/user-management/v1/forgot-password",
+    {
+      method: "PUT",
+      data: { ...params },
+    },
+    "https://apis.dev.oemaligner.com"
+  );
 }

@@ -1,6 +1,6 @@
 import { forgotPasswordServer, queryLogin } from "@/services/login";
 import type { Effect, Reducer } from "umi";
-
+import { history } from "umi";
 export interface LoginState {
   isShowLoginError: boolean;
 }
@@ -47,8 +47,11 @@ const MainModel: MainModelType = {
       return { status, expiresAt, sessionToken, _embedded, _links };
     },
     *forgotPassword({ payload }: any, { call, put }: any) {
-      const { data } = yield call(forgotPasswordServer, payload);
-      console.log(data);
+      const { response_code } = yield call(forgotPasswordServer, payload);
+      if (response_code === 200) {
+        history.push("/login/forgotPasswordEmail");
+      } else {
+      }
       return {};
     },
   },
