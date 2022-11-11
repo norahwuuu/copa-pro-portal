@@ -9,7 +9,7 @@ export async function queryLogin(params: LoginParamsType) {
 }
 export async function forgotPasswordServer(params: ForgotPasswordParamsType) {
   return request(
-    "/api/user-management/v1/forgot-password",
+    "/user-management/v1/forgot-password",
     {
       method: "PUT",
       data: { ...params },
