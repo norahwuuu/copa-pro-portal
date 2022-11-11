@@ -1,6 +1,5 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import { colorObj } from "@/theme/customPalette";
 import { Container } from "@mui/material";
@@ -61,6 +60,7 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
       >
         <div className={styles.formBox}>
           <InputField
+            id="username"
             inputType="email"
             className={styles.inputContainer}
             subLink={`${translate.formatMessage({ id: "forgotUser" })}`}
@@ -76,6 +76,7 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
             }}
           />
           <InputField
+            id="password"
             className={styles.inputContainer}
             subLink={`${translate.formatMessage({
               id: "forgotPasswordTitle",
@@ -104,7 +105,6 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
           />
         </div>
       </CenterRectangle>
-      <Footer />
     </Container>
   );
 };

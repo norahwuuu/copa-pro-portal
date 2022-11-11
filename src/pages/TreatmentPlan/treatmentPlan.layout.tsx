@@ -2,27 +2,10 @@ import Header from "@/components/Header/header";
 import { Box, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
-import { treatmentPlanUrlObj } from "./treatmentPlan.route";
+import { navItems } from "./treatmentPlan.config";
 
 const TretmentPlanHeader: FC = () => {
   const location = useLocation();
-  const navItems = [
-    {
-      id: "treatmentplanprepare",
-      path: treatmentPlanUrlObj.prepare,
-      translate: "treatmentPlanPrepareMenu",
-    },
-    {
-      id: "treatmentplantreat",
-      path: treatmentPlanUrlObj.treat,
-      translate: "treatmentPlanTreatMenu",
-    },
-    {
-      id: "treatmentplanorder",
-      path: treatmentPlanUrlObj.order,
-      translate: "treatmentPlanOrderMenu",
-    },
-  ];
 
   return (
     <>
@@ -41,6 +24,9 @@ const TretmentPlanHeader: FC = () => {
             p: 3,
             borderBottom:
               location.pathname === item.path ? "5px solid #FFFFFF" : "none",
+            "&:hover": {
+              borderBottom: "5px solid #FFFFFF",
+            },
           }}
         >
           <FormattedMessage id={item.translate} />

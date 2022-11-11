@@ -1,10 +1,9 @@
 import Header from "@/components/Header/header";
 import Text from "@/components/Text/text";
-import theme from "@/theme/theme";
 import { Box, Grid, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
-import { accountUrlObj } from "./account.route";
+import { navItems } from "./account.config";
 
 const AccountHeader: FC = () => {
   return (
@@ -16,23 +15,7 @@ const AccountHeader: FC = () => {
 
 const Account: FC<{ children: ReactChildren }> = ({ children }) => {
   const location = useLocation();
-  const navItems = [
-    {
-      id: "monthlystatement",
-      path: accountUrlObj.monthlyStatement,
-      translate: "monthlyStatementMenu",
-    },
-    {
-      id: "manageusers",
-      path: accountUrlObj.manageUsers,
-      translate: "manageUsersMenu",
-    },
-    {
-      id: "shippingsettings",
-      path: accountUrlObj.shippingSettings,
-      translate: "shippingSettingsMenu",
-    },
-  ];
+
   return (
     <>
       <Header>
@@ -61,16 +44,18 @@ const Account: FC<{ children: ReactChildren }> = ({ children }) => {
                 mx: 4,
                 px: 1,
                 py: 3,
-                borderBottom:
+                borderBottom: (theme) =>
                   location.pathname === item.path
                     ? `5px solid ${theme.palette.secondary.main}`
                     : "none",
-                color:
+                color: (theme) =>
                   location.pathname === item.path
                     ? theme.palette.gray?.main
                     : theme.palette.gray?.darken,
                 "&:hover": {
-                  color: theme.palette.gray?.main,
+                  color: (theme) => theme.palette.gray?.main,
+                  borderBottom: (theme) =>
+                    `5px solid ${theme.palette.secondary.main}`,
                 },
               }}
             >

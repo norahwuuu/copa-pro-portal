@@ -1,6 +1,5 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import Footer from "@/components/Footer/footer";
 import InputField from "@/components/InputField/inputField";
 import { ForgotPasswordParamsType } from "@/services/type";
 import { Container, Typography } from "@mui/material";
@@ -69,7 +68,6 @@ const ForgotPassword: FC<propsType> = (props) => {
           </div>
         </div>
       </CenterRectangle>
-      <Footer />
     </Container>
   );
 };

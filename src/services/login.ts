@@ -1,5 +1,5 @@
+import { ForgotPasswordParamsType, LoginParamsType } from "@/pages/Login/type";
 import request from "@/utils/request";
-import { ForgotPasswordParamsType, LoginParamsType } from "./type";
 
 export async function queryLogin(params: LoginParamsType) {
   return request("/api/v1/authn", {
