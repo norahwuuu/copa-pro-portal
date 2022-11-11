@@ -46,7 +46,7 @@ const ForgotPassword: FC<propsType> = (props) => {
               variant="shade"
               btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
               onClickHandler={() => {
-                forgotPassword({ username: "coreapi_us_dev_18@gmail.com" });
+                forgotPassword({ username: email });
               }}
             />
 
