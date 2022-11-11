@@ -3,7 +3,6 @@
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
 // import { notification } from "antd";
-import { history } from "umi";
 import { extend } from "umi-request";
 
 export interface ReponseMessage<T> {
@@ -140,15 +139,15 @@ async function request<T>(
   options = {},
   urlPrefix = ""
 ): Promise<ReponseMessage<T>> {
-  const accessToken = await getToken(url);
+  // const accessToken = await getToken(url);
 
-  if (!accessToken) {
-    history.push({ pathname: "/login" });
-    // notification.error({
-    //   message: getIntl().formatMessage({ id: "request.loginAgain" }),
-    // });
-    return false as never;
-  }
+  // if (!accessToken) {
+  //   history.push({ pathname: "/login" });
+  //   // notification.error({
+  //   //   message: getIntl().formatMessage({ id: "request.loginAgain" }),
+  //   // });
+  //   return false as never;
+  // }
   if (urlPrefix.length > 0) {
     eRequest = extend({
       prefix: urlPrefix,
