@@ -46,7 +46,10 @@ type mapCode =
   | 503
   | 504;
 
-const requestWhite = ["/api/v1/authn", "/user-management/v1/forgot-password"];
+const requestWhite = [
+  "/api/v1/authn",
+  "/api/user-management/v1/forgot-password",
+];
 /**
  * 异常处理程序
  */
@@ -77,7 +80,7 @@ const errorHandler = ({ response }) => {
 /**
  * 配置request请求时的默认参数
  */
-const eRequest = extend({
+let eRequest = extend({
   prefix: BASE_URL,
   errorHandler, // 默认错误处理
   credentials: "include", // 默认请求是否带上cookie
@@ -134,7 +137,8 @@ const getToken = async (url: string) => {
 
 async function request<T>(
   url: string,
-  options = {}
+  options = {},
+  urlPrefix = ""
 ): Promise<ReponseMessage<T>> {
   const accessToken = await getToken(url);
 
@@ -145,7 +149,18 @@ async function request<T>(
     // });
     return false as never;
   }
-
+  if (urlPrefix.length > 0) {
+    eRequest = extend({
+      prefix: urlPrefix,
+      errorHandler, // 默认错误处理
+    });
+  } else {
+    eRequest = extend({
+      prefix: BASE_URL,
+      errorHandler, // 默认错误处理
+      credentials: "include", // 默认请求是否带上cookie
+    });
+  }
   return eRequest(url, {
     ...options,
     // headers: {
