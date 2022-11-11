@@ -1,4 +1,4 @@
-import { queryLogin } from "@/services/login";
+import { forgotPasswordServer, queryLogin } from "@/services/login";
 import type { Effect, Reducer } from "umi";
 
 export interface loginObj {
@@ -13,6 +13,7 @@ export interface MainModelType {
   state: LoginState;
   effects: {
     login: Effect;
+    forgotPassword: Effect;
   };
   reducers: {
     setData: Reducer<LoginState>;
@@ -48,6 +49,11 @@ const MainModel: MainModelType = {
         });
       }
       return { status, expiresAt, sessionToken, _embedded, _links };
+    },
+    *forgotPassword({ payload }: any, { call, put }: any) {
+      const { data } = yield call(forgotPasswordServer, payload);
+      console.log(data);
+      return {};
     },
   },
   reducers: {
