@@ -1,6 +1,7 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
+import LoginBg from "@/components/LoginBg/loginBg";
 import { ForgotPasswordParamsType } from "@/services/type";
 import { Container, Typography } from "@mui/material";
 import { FC, useState } from "react";
@@ -16,6 +17,7 @@ const ForgotPassword: FC<propsType> = (props) => {
   const [emailType, setEmailType] = useState<string>("noError");
   return (
     <Container>
+      <LoginBg />
       <CenterRectangle
         className={styles.box}
         mainTitle={forgotPasswordText.mainTitle}
