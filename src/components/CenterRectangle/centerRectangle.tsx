@@ -51,6 +51,7 @@ const CenterRectangle = ({
   return (
     <Grid
       sx={{
+        zIndex: 1,
         backgroundColor: "primary.main",
         width: width || 409,
         borderBottomRightRadius: headerInfo.show ? 0 : 20,
