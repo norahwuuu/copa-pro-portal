@@ -13,6 +13,13 @@ export default defineConfig({
   hash: true,
   dynamicImport: {},
   metas: [],
+  proxy: {
+    "/api": {
+      target: "https://apis.dev.oemaligner.com/",
+      changeOrigin: true,
+      pathRewrite: { "^/api": "" },
+    },
+  },
   lessLoader: {
     javascriptEnabled: true,
   },

@@ -46,7 +46,7 @@ type mapCode =
   | 503
   | 504;
 
-const requestWhite = ["/api/v1/authn"];
+const requestWhite = ["/api/v1/authn", "/user-management/v1/forgot-password"];
 /**
  * 异常处理程序
  */

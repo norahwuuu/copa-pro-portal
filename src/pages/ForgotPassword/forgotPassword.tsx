@@ -2,13 +2,16 @@ import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
 import LoginBg from "@/components/LoginBg/loginBg";
+import { ForgotPasswordParamsType } from "@/services/type";
 import { Container, Typography } from "@mui/material";
-import { useState } from "react";
-import { history, useIntl } from "umi";
+import { FC, useState } from "react";
+import { connect, history, useIntl } from "umi";
 import { errorTypes, forgotPasswordText } from "../Login/column";
 import styles from "./forgotPassword.less";
+import { propsType } from "./type";
 
-const ForgotPassword = () => {
+const ForgotPassword: FC<propsType> = (props) => {
+  const { forgotPassword } = props;
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
   const [emailType, setEmailType] = useState<string>("noError");
@@ -45,9 +48,7 @@ const ForgotPassword = () => {
               variant="shade"
               btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
               onClickHandler={() => {
-                if (emailType === "noError") {
-                  history.push("/login/forgotPasswordEmail");
-                }
+                forgotPassword({ username: email });
               }}
             />
 
@@ -63,9 +64,7 @@ const ForgotPassword = () => {
               variant="text"
               btnLabel={translate.formatMessage({ id: "btnCancel" })}
               onClickHandler={() => {
-                if (emailType === "noError") {
-                  history.push("/");
-                }
+                history.push("/");
               }}
             />
           </div>
@@ -74,4 +73,21 @@ const ForgotPassword = () => {
     </Container>
   );
 };
-export default ForgotPassword;
+export default connect(
+  ({}) => {
+    return {};
+  },
+  (
+    dispatch: (arg0: {
+      type: string;
+      payload: ForgotPasswordParamsType;
+    }) => void
+  ) => ({
+    forgotPassword: (payload: ForgotPasswordParamsType) => {
+      dispatch({
+        type: `loginSpace/forgotPassword`,
+        payload,
+      });
+    },
+  })
+)(ForgotPassword);
