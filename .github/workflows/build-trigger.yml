@@ -3,7 +3,8 @@ name: Build Trigger to AWS Code Pipeline
 on:
   push:
     branches:
-      - release/0.0.1
+      - release*
+      - Release*
 
 
 env:
