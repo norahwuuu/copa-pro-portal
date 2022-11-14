@@ -1,7 +1,6 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
-import LoginBg from "@/components/LoginBg/loginBg";
 import { Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { history, useIntl } from "umi";
@@ -17,7 +16,6 @@ const RecoverPassword = () => {
 
   return (
     <Container>
-      <LoginBg />
       <CenterRectangle
         sxProp={{ top: "107px" }}
         mainTitle={changePasswordText.mainTitle}

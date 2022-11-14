@@ -1,6 +1,5 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
-import LoginBg from "@/components/LoginBg/loginBg";
 import { Container, Typography } from "@mui/material";
 import { history, useIntl } from "umi";
 import { forgotUsernameText } from "../Login/column";
@@ -10,7 +9,6 @@ const ForgotUsername = () => {
   const translate = useIntl();
   return (
     <Container>
-      <LoginBg />
       <CenterRectangle
         className={styles.box}
         mainTitle={forgotUsernameText.mainTitle}

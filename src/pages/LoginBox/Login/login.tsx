@@ -1,7 +1,6 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
-import LoginBg from "@/components/LoginBg/loginBg";
 import { colorObj } from "@/theme/customPalette";
 import { Container } from "@mui/material";
 import type { FC } from "react";
@@ -106,7 +105,6 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
           />
         </div>
       </CenterRectangle>
-      <LoginBg />
     </Container>
   );
 };

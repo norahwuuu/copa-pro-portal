@@ -1,4 +1,4 @@
-import { footerText } from "@/pages/Login/column";
+import { footerText } from "@/pages/LoginBox/Login/column";
 import { Typography } from "@mui/material";
 import React from "react";
 import styles from "./footer.less";

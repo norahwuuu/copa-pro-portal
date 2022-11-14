@@ -1,12 +1,15 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
+import {
+  recoverProps,
+  resetPasswordParamsType,
+} from "@/pages/LoginBox/RecoverPassword/type";
 import { Container, Grid, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import { connect, history, useIntl } from "umi";
 import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
-import { recoverProps, resetPasswordParamsType } from "./type";
 
 const RecoverPassword: FC<recoverProps> = ({ resetPassword }) => {
   const translate = useIntl();
