@@ -38,6 +38,7 @@ export default defineConfig({
   fastRefresh: {},
   webpack5: {},
   define: {
-    BASE_URL: "https://devsec.ulabsystems.net",
+    BASE_URL: "https://apis.dev.oemaligner.com",
+    loginBASE_URL: "https://devsec.ulabsystems.net",
   },
 });

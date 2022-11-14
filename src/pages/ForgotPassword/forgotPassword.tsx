@@ -15,6 +15,16 @@ const ForgotPassword: FC<propsType> = (props) => {
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
   const [emailType, setEmailType] = useState<string>("noError");
+  // click reset-password-btn
+  const loginClick = () => {
+    if (email === "") {
+      setEmailType("emailEmpty");
+    }
+    if (emailType === "noError" && email !== "") {
+      forgotPassword && forgotPassword({ username: email });
+    }
+  };
+
   return (
     <Container>
       <LoginBg />
@@ -47,9 +57,7 @@ const ForgotPassword: FC<propsType> = (props) => {
             <Button
               variant="shade"
               btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
-              onClickHandler={() => {
-                forgotPassword({ username: email });
-              }}
+              onClickHandler={loginClick}
             />
 
             <Button
