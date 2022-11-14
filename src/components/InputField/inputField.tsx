@@ -11,13 +11,13 @@
  * setErrorType: 设置错误类型的方法(How to set the error type)
  * @returns
  */
-import { errorTypes } from "@/pages/LoginBox/Login/column";
-import { colorObj } from "@/theme/customPalette";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import type { TextFieldProps } from "@mui/material";
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import type { FC } from "react";
 import { useState } from "react";
+import { errorTypes } from "../../pages/LoginBox/Login/column";
+import { colorObj } from "../../theme/customPalette";
 import styles from "./inputField.less";
 import { InputFieldType } from "./type";
 export type InputFieldProps = TextFieldProps & InputFieldType;
