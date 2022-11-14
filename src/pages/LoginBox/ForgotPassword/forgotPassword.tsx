@@ -1,19 +1,28 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
-import { ForgotPasswordParamsType } from "@/services/type";
 import { Container, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import { connect, history, useIntl } from "umi";
 import { errorTypes, forgotPasswordText } from "../Login/column";
+import { ForgotPasswordParamsType } from "../Login/type";
 import styles from "./forgotPassword.less";
-import { propsType } from "./type";
 
-const ForgotPassword: FC<propsType> = (props) => {
+const ForgotPassword: FC<any> = (props) => {
   const { forgotPassword } = props;
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
   const [emailType, setEmailType] = useState<string>("noError");
+  // click reset-password-btn
+  const loginClick = () => {
+    if (email === "") {
+      setEmailType("emailEmpty");
+    }
+    if (emailType === "noError" && email !== "") {
+      forgotPassword && forgotPassword({ username: email });
+    }
+  };
+
   return (
     <Container>
       <CenterRectangle
@@ -45,9 +54,7 @@ const ForgotPassword: FC<propsType> = (props) => {
             <Button
               variant="shade"
               btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
-              onClickHandler={() => {
-                forgotPassword({ username: email });
-              }}
+              onClickHandler={loginClick}
             />
 
             <Button
@@ -72,7 +79,7 @@ const ForgotPassword: FC<propsType> = (props) => {
   );
 };
 export default connect(
-  ({}) => {
+  () => {
     return {};
   },
   (

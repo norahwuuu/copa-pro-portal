@@ -1,6 +1,11 @@
-import { forgotPasswordServer, queryLogin } from "@/services/login";
+import {
+  forgotPasswordServer,
+  queryLogin,
+  resetPasswordServer,
+} from "@/services/login";
 import type { Effect, Reducer } from "umi";
 import { history } from "umi";
+
 export interface LoginState {
   isShowLoginError: boolean;
 }
@@ -10,6 +15,7 @@ export interface MainModelType {
   effects: {
     login: Effect;
     forgotPassword: Effect;
+    resetPassword: Effect;
   };
   reducers: {
     setData: Reducer<LoginState>;
@@ -50,9 +56,15 @@ const MainModel: MainModelType = {
       const { response_code } = yield call(forgotPasswordServer, payload);
       if (response_code === 200) {
         history.push("/login/forgotPasswordEmail");
-      } else {
       }
-      return {};
+      return;
+    },
+    *resetPassword({ payload }: any, { call, put }: any) {
+      const { response_code } = yield call(resetPasswordServer, payload);
+      if (response_code === 200) {
+        history.push("/");
+      }
+      return;
     },
   },
   reducers: {
