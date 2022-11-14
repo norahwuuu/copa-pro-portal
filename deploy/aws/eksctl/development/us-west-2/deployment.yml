@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pro-portal-v1
+  name: pro-portal
   namespace: public
 spec:
   selector:
