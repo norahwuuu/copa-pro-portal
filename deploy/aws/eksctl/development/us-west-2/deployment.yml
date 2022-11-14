@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pro-portal-v1
-  namespace: development
+  namespace: public
 spec:
   selector:
     matchLabels:
-      app: pro-portal-v1
+      app: pro-portal
   replicas: 1
   template:
     metadata:
       labels:
-        app: pro-portal-v1
-        version: "v1.0.0"
+        app: pro-portal
+        version: "v1"
     spec:
       serviceAccountName: pro-portal-service-account
       containers:
