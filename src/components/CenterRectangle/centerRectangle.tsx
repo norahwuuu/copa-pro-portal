@@ -1,5 +1,12 @@
-import { Theme } from "@emotion/react";
-import { Grid, Icon, SxProps, Typography } from "@mui/material";
+import {
+  Grid,
+  Icon,
+  IconClasses,
+  SxProps,
+  Theme,
+  Typography,
+} from "@mui/material";
+import { CommonProps } from "@mui/material/OverridableComponent";
 import React from "react";
 import logoSvg from "../../assets/svgs/COLGATE_SMILE_LOGO_REV_RGB.svg";
 import Text from "../Text/text";
@@ -18,7 +25,35 @@ export type centerRectanglePropsType = {
     info: string;
   };
 };
-function LogoIcon(props: any) {
+function LogoIcon(
+  props: JSX.IntrinsicAttributes & { component: React.ElementType } & {
+    baseClassName?: string | undefined;
+    children?: React.ReactNode;
+    classes?: Partial<IconClasses> | undefined;
+    color?:
+      | "error"
+      | "info"
+      | "success"
+      | "inherit"
+      | "disabled"
+      | "action"
+      | "primary"
+      | "secondary"
+      | "warning"
+      | undefined;
+    fontSize?: "small" | "inherit" | "medium" | "large" | undefined;
+    sx?: SxProps<Theme> | undefined;
+  } & CommonProps &
+    Omit<
+      any,
+      | "children"
+      | "color"
+      | "fontSize"
+      | keyof CommonProps
+      | "sx"
+      | "baseClassName"
+    >
+) {
   return (
     <Icon {...props}>
       <img src={logoSvg} />

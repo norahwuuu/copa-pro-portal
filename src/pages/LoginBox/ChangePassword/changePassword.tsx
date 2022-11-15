@@ -8,7 +8,7 @@ import { changePasswordText } from "../Login/column";
 import styles from "./changePassword.less";
 
 export const specialCharacters =
-  /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im; // 特殊字符
+  /[`~!@#$%^&*()_\-+=<>?:"{}|,.;/'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im; // 特殊字符
 
 const RecoverPassword = () => {
   const translate = useIntl();

@@ -52,14 +52,14 @@ const MainModel: LoginModelType = {
       }
       return { status, expiresAt, sessionToken, _embedded, _links };
     },
-    *forgotPassword({ payload }: any, { call, put }: any) {
+    *forgotPassword({ payload }, { call }) {
       const { response_code } = yield call(forgotPasswordServer, payload);
       if (response_code === 200) {
         history.push("/login/forgotPasswordEmail");
       }
       return;
     },
-    *resetPassword({ payload }: any, { call, put }: any) {
+    *resetPassword({ payload }, { call }) {
       const { response_code } = yield call(resetPasswordServer, payload);
       if (response_code === 200) {
         history.push("/");
