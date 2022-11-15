@@ -1,11 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "cross-env PORT=3000 umi dev",
     "build": "cross-env UMI_ENV=dev umi build",
-    "start:qa": "cross-env UMI_ENV=qa umi dev",
+    "start:qa": "cross-env PORT=3000 UMI_ENV=qa umi dev",
     "build:qa": "cross-env UMI_ENV=qa umi build",
-    "start:prod": "cross-env UMI_ENV=prod umi dev",
+    "start:prod": "cross-env PORT=3000 UMI_ENV=prod umi dev",
     "build:prod": "cross-env UMI_ENV=prod umi build",
     "start:analyze": "cross-env UMI_ENV=cloud ANALYZE=1 umi dev",
     "build:analyze": "cross-env UMI_ENV=cloud umi build",
