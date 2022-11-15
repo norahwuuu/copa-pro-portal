@@ -7,12 +7,54 @@ import { history, useIntl } from "umi";
 import { changePasswordText } from "../Login/column";
 import styles from "./changePassword.less";
 
+export const specialCharacters =
+  /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im; // 特殊字符
+
 const RecoverPassword = () => {
   const translate = useIntl();
-  const [email, setEmail] = useState<string>("");
-  const [emailType, setEmailType] = useState<string>("noError");
-  const [password, setPassWord] = useState<string>("");
+  const [oldPassword, setOldPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [oldpassType, setOldPassType] = useState<string>("noError");
   const [passType, setPassType] = useState<string>("noError");
+
+  const checkPass = () => {
+    if (newPassword === "") {
+      setPassType("passEmpty");
+      return false;
+    }
+    /* Min. 6 characters, and one special character. */
+    if (
+      /[0-9a-zA-Z]/.test(newPassword) &&
+      specialCharacters.test(newPassword) &&
+      newPassword.length >= 6
+    ) {
+      return true;
+    } else {
+      setPassType("passwordFormatError");
+      return false;
+    }
+  };
+  const changePwdClick = () => {
+    if (oldPassword === "") {
+      setOldPassType("passEmpty");
+    }
+    if (newPassword === "") {
+      setPassType("passEmpty");
+    }
+    if (oldPassword !== newPassword) {
+      setPassType("passwordDifferentError");
+    }
+    if (
+      oldPassword !== "" &&
+      newPassword !== "" &&
+      oldPassword === newPassword &&
+      checkPass()
+    ) {
+      setPassType("noError");
+      setOldPassType("noError");
+      alert("save password success!");
+    }
+  };
 
   return (
     <Container>
@@ -24,18 +66,18 @@ const RecoverPassword = () => {
         <Grid className={styles.recoverUsername}>
           <InputField
             style={{ marginTop: 20 }}
-            inputValue={password}
-            setInputValue={setPassWord}
-            errorType={passType}
-            setErrorType={setPassType}
+            inputValue={oldPassword}
+            setInputValue={setOldPassword}
+            errorType={oldpassType}
+            setErrorType={setOldPassType}
             name="password"
             label={translate.formatMessage({ id: "oldPassword" })}
             inputType="pass"
           />
           <InputField
             style={{ marginTop: 20 }}
-            inputValue={password}
-            setInputValue={setPassWord}
+            inputValue={newPassword}
+            setInputValue={setNewPassword}
             errorType={passType}
             setErrorType={setPassType}
             name="password"
@@ -43,7 +85,11 @@ const RecoverPassword = () => {
             inputType="pass"
           />
           <Grid textAlign={"left"} marginTop="18px">
-            <Grid display="flex" alignItems={"center"} mt={1.25}>
+            <Grid
+              display="flex"
+              alignItems={"center"}
+              sx={{ marginTop: "10px" }}
+            >
               <div className={styles.icon} />
               <Typography
                 color="white"
@@ -68,7 +114,7 @@ const RecoverPassword = () => {
             }}
             variant="shade"
             btnLabel={translate.formatMessage({ id: "btnSave" })}
-            // onClickHandler={loginClick}
+            onClickHandler={changePwdClick}
           />
 
           <Button

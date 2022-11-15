@@ -19,6 +19,12 @@ export const errorTypes: any = {
   passwordError: {
     tip: "Username and password combination do not match our records.",
   },
+  passwordDifferentError: {
+    tip: "Please enter the same password.",
+  },
+  passwordFormatError: {
+    tip: "Wrong password format.",
+  },
   verifyQustionError: {
     tip: "Please enter Answer",
   },
