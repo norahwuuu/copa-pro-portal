@@ -8,6 +8,7 @@ import {
 import { Container, Grid, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import { connect, history, useIntl } from "umi";
+import { specialCharacters } from "../ChangePassword/changePassword";
 import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
 
@@ -19,6 +20,23 @@ const RecoverPassword: FC<recoverProps> = ({ resetPassword }) => {
   const [passType, setPassType] = useState<string>("noError");
   const [verifyQustion, setverifyQustion] = useState("");
   const [verifyQustionType, setverifyQustionType] = useState("noError");
+  const checkPass = () => {
+    if (password === "") {
+      setPassType("passEmpty");
+      return false;
+    }
+    /* Min. 6 characters, and one special character. */
+    if (
+      /[0-9a-zA-Z]/.test(password) &&
+      specialCharacters.test(password) &&
+      password.length >= 6
+    ) {
+      return true;
+    } else {
+      setPassType("passwordFormatError");
+      return false;
+    }
+  };
   const loginClick = () => {
     if (email === "") {
       setEmailType("emailEmpty");
@@ -30,7 +48,13 @@ const RecoverPassword: FC<recoverProps> = ({ resetPassword }) => {
       setverifyQustionType("verifyQustionError");
     }
 
-    if (password !== "" && email !== "" && verifyQustion !== "") {
+    if (
+      password !== "" &&
+      email !== "" &&
+      verifyQustion !== "" &&
+      checkPass()
+    ) {
+      alert("recover password success!");
       resetPassword({
         username: email,
         reset_password_token: "dfp3XBKtQFgU4PxZC8zS",
