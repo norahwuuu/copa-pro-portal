@@ -228,7 +228,13 @@ const InputField: FC<InputFieldProps> = ({
                     }}
                     edge="end"
                   >
-                    {showType ? <VisibilityOff /> : <Visibility />}
+                    {errorType === "passEmpty" ? (
+                      <></>
+                    ) : showType ? (
+                      <VisibilityOff />
+                    ) : (
+                      <Visibility />
+                    )}
                   </IconButton>
                 </InputAdornment>
               ),
