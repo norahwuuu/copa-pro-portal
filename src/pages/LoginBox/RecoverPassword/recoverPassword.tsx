@@ -1,19 +1,53 @@
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
+import {
+  recoverProps,
+  resetPasswordParamsType,
+} from "@/pages/LoginBox/RecoverPassword/type";
 import { Container, Grid, Typography } from "@mui/material";
-import { useState } from "react";
-import { history, useIntl } from "umi";
-import { recoverPasswordText } from "../Login/column";
+import { FC, useState } from "react";
+import { connect, history, useIntl } from "umi";
+import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
 
-const RecoverPassword = () => {
+const RecoverPassword: FC<recoverProps> = ({ resetPassword }) => {
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
   const [emailType, setEmailType] = useState<string>("noError");
   const [password, setPassWord] = useState<string>("");
   const [passType, setPassType] = useState<string>("noError");
+  const [verifyQustion, setverifyQustion] = useState("");
+  const [verifyQustionType, setverifyQustionType] = useState("noError");
+  const loginClick = () => {
+    if (email === "") {
+      setEmailType("emailEmpty");
+    }
+    if (password === "") {
+      setPassType("passEmpty");
+    }
+    if (verifyQustion === "") {
+      setverifyQustionType("verifyQustionError");
+    }
 
+    if (password !== "" && email !== "" && verifyQustion !== "") {
+      resetPassword({
+        username: email,
+        reset_password_token: "dfp3XBKtQFgU4PxZC8zS",
+        okta_user_id: "00u6bza7n52Ejf3lV5d7",
+        password: password,
+        answer: verifyQustion,
+        state_token: "00ZgbBRTzXiT641BqstP44ExK5T1inCw0bS_BJZrt9",
+      });
+    }
+  };
+  const checkVerifyQustion = () => {
+    if (verifyQustionType === "") {
+      setverifyQustionType && setverifyQustionType("verifyQustionError");
+    } else {
+      setverifyQustionType && setverifyQustionType("noError");
+    }
+  };
   return (
     <Container>
       <CenterRectangle
@@ -50,7 +84,11 @@ const RecoverPassword = () => {
             <Typography color="white" variant="caption" fontWeight="300">
               {recoverPasswordText.pwd}
             </Typography>
-            <Grid display="flex" alignItems={"center"} mt={1.25}>
+            <Grid
+              display="flex"
+              alignItems={"center"}
+              sx={{ marginTop: "10px" }}
+            >
               <div className={styles.icon} />
               <Typography
                 color="white"
@@ -62,7 +100,6 @@ const RecoverPassword = () => {
               </Typography>
             </Grid>
           </Grid>
-
           <Typography color="white" variant="h3" mt={6} fontWeight="200">
             {recoverPasswordText.title}
           </Typography>
@@ -75,10 +112,23 @@ const RecoverPassword = () => {
             {recoverPasswordText.name}
           </Typography>
           <InputField
+            onChange={(v) => {
+              setverifyQustion("noError");
+              setverifyQustion(v.target.value);
+            }}
+            onFocus={() => {
+              setverifyQustionType("noError");
+            }}
+            onBlur={() => {
+              checkVerifyQustion();
+            }}
+            helperText={errorTypes[verifyQustionType].tip}
             inputType="default"
+            inputValue={verifyQustion}
+            setInputValue={setverifyQustion}
             className={styles.inputContainer}
-            errorType={emailType}
-            setErrorType={setEmailType}
+            errorType={verifyQustionType}
+            setErrorType={setverifyQustionType}
             type={"text"}
             label="Answer"
           />
@@ -86,11 +136,7 @@ const RecoverPassword = () => {
             sxProp={{ marginTop: "30px" }}
             variant="shade"
             btnLabel={translate.formatMessage({ id: "btnResetPassword" })}
-            onClickHandler={() => {
-              if (emailType === "noError") {
-                history.push("/");
-              }
-            }}
+            onClickHandler={loginClick}
           />
 
           <Button
@@ -113,4 +159,16 @@ const RecoverPassword = () => {
     </Container>
   );
 };
-export default RecoverPassword;
+export default connect(
+  () => {
+    return {};
+  },
+  (dispatch) => ({
+    resetPassword: (payload: resetPasswordParamsType) => {
+      dispatch({
+        type: `loginSpace/resetPassword`,
+        payload,
+      });
+    },
+  })
+)(RecoverPassword);

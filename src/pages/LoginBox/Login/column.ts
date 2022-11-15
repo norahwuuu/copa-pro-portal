@@ -3,7 +3,7 @@ export const errorTips = {
   passEmpty: "Please enter password.",
   nonvalidEmail: "Username must be a valid email address.",
 };
-export const errorTypes = {
+export const errorTypes: any = {
   noError: {
     tip: "",
   },
@@ -18,6 +18,9 @@ export const errorTypes = {
   },
   passwordError: {
     tip: "Username and password combination do not match our records.",
+  },
+  verifyQustionError: {
+    tip: "Please enter Answer",
   },
 };
 

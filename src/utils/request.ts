@@ -137,25 +137,18 @@ const getToken = async (url: string) => {
 async function request<T>(
   url: string,
   options = {},
-  urlPrefix = ""
+  isPrefix = true
 ): Promise<ReponseMessage<T>> {
   // const accessToken = await getToken(url);
 
-  // if (!accessToken) {
-  //   history.push({ pathname: "/login" });
-  //   // notification.error({
-  //   //   message: getIntl().formatMessage({ id: "request.loginAgain" }),
-  //   // });
-  //   return false as never;
-  // }
-  if (urlPrefix.length > 0) {
+  if (isPrefix) {
     eRequest = extend({
-      prefix: urlPrefix,
+      prefix: BASE_URL, //"https://apis.dev.oemaligner.com",
       errorHandler, // 默认错误处理
     });
   } else {
     eRequest = extend({
-      prefix: BASE_URL,
+      prefix: OKTA_URL, //"https://devsec.ulabsystems.net",
       errorHandler, // 默认错误处理
       credentials: "include", // 默认请求是否带上cookie
     });

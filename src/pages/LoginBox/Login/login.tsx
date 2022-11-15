@@ -1,11 +1,12 @@
+import Button from "@/components/Button/button";
+import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
+import InputField from "@/components/InputField/inputField";
+import { colorObj } from "@/theme/customPalette";
 import { Container } from "@mui/material";
 import type { FC } from "react";
 import { useState } from "react";
-import { connect, history, useIntl } from "umi";
-import Button from "../../../components/Button/button";
-import CenterRectangle from "../../../components/CenterRectangle/centerRectangle";
-import InputField from "../../../components/InputField/inputField";
-import { colorObj } from "../../../theme/customPalette";
+import { connect } from "react-redux";
+import { history, useIntl } from "umi";
 import styles from "./login.less";
 import { LoginParamsType, loginProps } from "./type";
 const secondaryMain = colorObj.secondary.main;

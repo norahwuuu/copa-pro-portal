@@ -13,13 +13,6 @@ export default defineConfig({
   hash: true,
   dynamicImport: {},
   metas: [],
-  proxy: {
-    "/api": {
-      target: "https://apis.dev.oemaligner.com/",
-      changeOrigin: true,
-      pathRewrite: { "^/api": "" },
-    },
-  },
   lessLoader: {
     javascriptEnabled: true,
   },
@@ -38,6 +31,7 @@ export default defineConfig({
   fastRefresh: {},
   webpack5: {},
   define: {
-    BASE_URL: "https://devsec.ulabsystems.net",
+    BASE_URL: "https://apis.dev.oemaligner.com",
+    loginBASE_URL: "https://devsec.ulabsystems.net",
   },
 });

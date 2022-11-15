@@ -12,6 +12,10 @@ export interface loginProps {
   loginUser?: (arg: LoginParamsType) => void;
   isShowLoginError?: boolean;
 }
+export interface loginProps {
+  loginUser?: (arg: LoginParamsType) => void;
+  isShowLoginError?: boolean;
+}
 export interface ForgotPasswordParamsType {
   username: string;
 }
