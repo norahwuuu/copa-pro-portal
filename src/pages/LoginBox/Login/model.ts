@@ -9,7 +9,7 @@ import { history } from "umi";
 export interface LoginState {
   isShowLoginError: boolean;
 }
-export interface MainModelType {
+export interface LoginModelType {
   namespace: "loginSpace";
   state: LoginState;
   effects: {
@@ -22,7 +22,7 @@ export interface MainModelType {
   };
 }
 
-const MainModel: MainModelType = {
+const MainModel: LoginModelType = {
   namespace: "loginSpace",
   state: {
     isShowLoginError: false,
