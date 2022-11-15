@@ -2,8 +2,8 @@
 
 set -xe
 
-NAMESPACE=development
-SERVICE_NAME=user-service-v1
+NAMESPACE=public
+SERVICE_NAME=user-service
 DOCKER_IMAGE=927876825924.dkr.ecr.us-west-2.amazonaws.com/user-service:v1.0.0.c3abb63e7c8855cf02c6c598f249a7f027caa7cc.20221102_152626Z
 # kubectl config set-context --current --namespace=$NAMESPACE
 
