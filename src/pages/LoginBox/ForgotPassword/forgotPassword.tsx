@@ -47,7 +47,7 @@ const ForgotPassword: FC<forgotPasswordProps> = (props) => {
             errorType={emailType}
             setErrorType={setEmailType}
             type={"text"}
-            name="Email"
+            name="EmailForgot"
             label="Email"
           />
           <div className={styles.btns}>
