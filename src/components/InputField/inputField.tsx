@@ -17,7 +17,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import type { TextFieldProps } from "@mui/material";
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import type { FC } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./inputField.less";
 import { InputFieldType } from "./type";
 export type InputFieldProps = TextFieldProps & InputFieldType;
@@ -138,7 +138,9 @@ const InputField: FC<InputFieldProps> = ({
   ...props
 }) => {
   //password showType
-  const [showType, setShowType] = useState<boolean>(true);
+  const [showType, setShowType] = useState<boolean>(false);
+  // password is hidden
+  const [isHide, setIsHide] = useState<boolean>(true);
   // 校验是否是email 格式
   const emailRegex = (email: string | number) => {
     email = email.toString();
@@ -164,11 +166,18 @@ const InputField: FC<InputFieldProps> = ({
       setErrorType && setErrorType("noError");
     }
   };
+  // Prevent browser auto fill from causing style errors
+  useEffect(() => {
+    setTimeout(() => {
+      setShowType(true);
+    }, 1000);
+  }, []);
   switch (inputType) {
     case "email":
       return (
         <div className={`${styles.textBox} ${className}`}>
           <LogTextField
+            autoComplete="new-password"
             value={inputValue}
             helperText={errorTypes[errorType].tip}
             color={errorType !== "noError" ? "error" : "info"}
@@ -204,6 +213,7 @@ const InputField: FC<InputFieldProps> = ({
       return (
         <div className={`${styles.textBox} ${className}`}>
           <LogTextField
+            autoComplete="new-password"
             value={inputValue}
             helperText={errorTypes[errorType].tip}
             type={showType ? "password" : "text"}
@@ -216,7 +226,7 @@ const InputField: FC<InputFieldProps> = ({
               setErrorType && setErrorType("noError");
             }}
             onBlur={() => {
-              checkPass();
+              // checkPass();
             }}
             InputProps={{
               endAdornment: (
@@ -225,12 +235,13 @@ const InputField: FC<InputFieldProps> = ({
                     aria-label="toggle password visibility"
                     onClick={() => {
                       setShowType(!showType);
+                      setIsHide(!isHide);
                     }}
                     edge="end"
                   >
                     {errorType === "passEmpty" ? (
                       <></>
-                    ) : showType ? (
+                    ) : isHide ? (
                       <VisibilityOff />
                     ) : (
                       <Visibility />
