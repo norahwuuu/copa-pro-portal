@@ -159,13 +159,13 @@ const InputField: FC<InputFieldProps> = ({
     }
   };
   // 校验密码是否格式正确
-  const checkPass = () => {
-    if (inputValue === "") {
-      setErrorType && setErrorType("passEmpty");
-    } else {
-      setErrorType && setErrorType("noError");
-    }
-  };
+  // const checkPass = () => {
+  //   if (inputValue === "") {
+  //     setErrorType && setErrorType("passEmpty");
+  //   } else {
+  //     setErrorType && setErrorType("noError");
+  //   }
+  // };
   // Prevent browser auto fill from causing style errors
   useEffect(() => {
     setTimeout(() => {
