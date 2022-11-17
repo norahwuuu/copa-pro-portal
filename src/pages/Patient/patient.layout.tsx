@@ -1,5 +1,6 @@
 import Header from "@/components/Header/header";
 import Text from "@/components/Text/text";
+import { Grid } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { history, useIntl, useLocation } from "umi";
 import { createPatientUrlObj } from "./Create/createPatient.route";
@@ -34,7 +35,7 @@ const Patient: FC<{ children: ReactChildren }> = ({ children }) => {
       <Header>
         <PatientHeader />
       </Header>
-      {children}
+      <Grid sx={{ p: 1 }}>{children}</Grid>
     </>
   );
 };

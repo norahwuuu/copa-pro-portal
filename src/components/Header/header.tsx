@@ -18,9 +18,9 @@ const HEADER: FC<{ children: ReactNode }> = ({ children }) => {
           height: "60px",
         }}
       >
-        <Toolbar>
-          <Box component={"span"} sx={{ flexGrow: 1 }}>
-            <img src={Logo} alt={"logo"} loading="lazy" />
+        <Toolbar sx={{ border: "1px sild white", height: "60px" }}>
+          <Box component={"div"} sx={{ flexGrow: 1, height: "29px" }}>
+            <Box component="img" src={Logo} alt={"logo"} loading="lazy" />
           </Box>
           <Box component={"div"} sx={{ flexGrow: 1 }}>
             {children}
