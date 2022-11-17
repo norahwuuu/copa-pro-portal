@@ -17,7 +17,7 @@ const StyledMenu = styled((props: MenuProps) => <Menu {...props} />)(
       borderRadius: "0px 0px 20px 20px",
       boxShadow: "none",
       border: "1px solid #777777 !important",
-      borderTop: `1px solid${theme.palette.common.white}!important`,
+      borderTop: `1px solid #EEEEEE !important`,
       minWidth: 179,
     },
     "& .MuiMenuItem-root": {
