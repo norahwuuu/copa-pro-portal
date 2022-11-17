@@ -7,7 +7,7 @@ import {
   Logout,
 } from "@mui/icons-material";
 import { Button, Menu, MenuItem, MenuProps, styled } from "@mui/material";
-import React, { FC, useCallback } from "react";
+import { FC, useCallback, useState } from "react";
 import { FormattedMessage, history } from "umi";
 import Text from "../Text/text";
 
@@ -15,10 +15,10 @@ const StyledMenu = styled((props: MenuProps) => <Menu {...props} />)(
   ({ theme }) => ({
     "& .MuiPaper-root": {
       borderRadius: "0px 0px 20px 20px",
-      minWidth: 179,
       boxShadow: "none",
       border: "1px solid #777777 !important",
-      borderTop: `1px solid${theme.palette.gray?.lighten2}!important`,
+      borderTop: `1px solid${theme.palette.common.white}!important`,
+      minWidth: 179,
     },
     "& .MuiMenuItem-root": {
       ...theme.typography.body1,
@@ -32,7 +32,7 @@ const StyledMenu = styled((props: MenuProps) => <Menu {...props} />)(
 );
 
 const CustomizedMenus: FC = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -40,6 +40,7 @@ const CustomizedMenus: FC = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const redirectTo = useCallback((path: string) => {
     setAnchorEl(null);
     history.push(path);
@@ -48,8 +49,8 @@ const CustomizedMenus: FC = () => {
   return (
     <>
       <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
+        id="user-menu-button"
+        aria-controls={open ? "user-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
@@ -57,7 +58,7 @@ const CustomizedMenus: FC = () => {
           ...theme.typography.body1,
           fontWeight: 300,
           color: theme.palette.gray?.main,
-          height: 30,
+          height: 36,
           border: open ? "1px solid #777777" : "inherit",
           borderBottom: open ? "none" : "inherit",
           backgroundColor: theme.palette.common.white,
@@ -92,11 +93,14 @@ const CustomizedMenus: FC = () => {
       </Button>
 
       <StyledMenu
-        id="basic-menu"
+        id="user-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         elevation={0}
+        MenuListProps={{
+          "aria-labelledby": "user-menu-button",
+        }}
       >
         <MenuItem
           disableRipple
