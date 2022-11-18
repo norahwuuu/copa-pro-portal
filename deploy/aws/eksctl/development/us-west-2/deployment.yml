@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: pro-portal
-        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/pro-portal:v1.0.0.48e19795a0d7503a13538e8f7fe1354f676d57d2.20221102_221946Z
+        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/pro-portal:v1.0.0.9198be8cc8c90ea8cce5fd525d3a665309e0e687.20221118_033631Z
         ports:
         - name: http
           containerPort: 80
