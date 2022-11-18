@@ -26,5 +26,6 @@
   "shippingSettingsMenu": "Shipping settings",
   "myAccountMenu": "My account",
   "changePasswordMenu": "Change Password",
-  "logoutMenu": "Logout"
+  "logoutMenu": "Logout",
+  "recordTitle": "Records"
 }

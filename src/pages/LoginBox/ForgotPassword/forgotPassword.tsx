@@ -5,10 +5,10 @@ import { Container, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import { connect, history, useIntl } from "umi";
 import { errorTypes, forgotPasswordText } from "../Login/column";
-import { ForgotPasswordParamsType } from "../Login/type";
 import styles from "./forgotPassword.less";
+import { ForgotPasswordParamsType, forgotPasswordProps } from "./type";
 
-const ForgotPassword: FC<any> = (props) => {
+const ForgotPassword: FC<forgotPasswordProps> = (props) => {
   const { forgotPassword } = props;
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
@@ -47,7 +47,7 @@ const ForgotPassword: FC<any> = (props) => {
             errorType={emailType}
             setErrorType={setEmailType}
             type={"text"}
-            name="Email"
+            name="EmailForgot"
             label="Email"
           />
           <div className={styles.btns}>

@@ -9,18 +9,24 @@ const HEADER: FC<{ children: ReactNode }> = ({ children }) => {
     <>
       <CssBaseline />
       <AppBar
-        position="fixed"
+        position="relative"
         color="primary"
         elevation={0}
         sx={{
-          position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
           height: "60px",
         }}
       >
-        <Toolbar>
-          <Box component={"span"} sx={{ flexGrow: 1 }}>
-            <img src={Logo} alt={"logo"} loading="lazy" />
+        <Toolbar
+          sx={{
+            height: "60px",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Box component={"div"} sx={{ flexGrow: 1, height: "30px" }}>
+            <Box component="img" src={Logo} alt={"logo"} loading="lazy" />
           </Box>
           <Box component={"div"} sx={{ flexGrow: 1 }}>
             {children}
