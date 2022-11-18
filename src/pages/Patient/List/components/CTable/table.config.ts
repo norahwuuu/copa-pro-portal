@@ -7,6 +7,19 @@ export const PATIENT_STATUS = {
   ARCHIVED: "Archived",
 };
 
+export const ORDER_STATUS = {
+  IN_PRODUCTION: "In production",
+  SHIPPED: "Shipped",
+  DELIVERED: "Delivered",
+  RETAINERS_SENT: "Retainers sent",
+};
+
+export const DENTAL_MONITORING_STATUS = {
+  NOT_STARTED: "Not started",
+  TRACKING: "Tracking",
+  NOT_TRACKING: "Not tracking",
+};
+
 export const CASE_DETAILS = {
   AWAITING_PATIENT_PAYMENT: "Awaiting patient payment",
   PATIENT_DECISION_PENDING: "Patient decision pending",
@@ -45,6 +58,9 @@ export const PATIENT_STATUS_CASE_MAP = {
 export const columnKeys = {
   CASE_DETAILS: "caseDetails",
   PATIENT_STATUS: "patientStatus",
+  ORDER_STATUS: "orderSatus",
+  DENTAL_MONITORING: "dentalMonitoring",
+  LAST_MONITORING_SCAN: "lastMonitoringScan",
 };
 
 export const tableData = {
@@ -95,7 +111,7 @@ export const tableData = {
     },
     {
       name: "Order status",
-      id: "orderSatus",
+      id: columnKeys.ORDER_STATUS,
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -103,12 +119,12 @@ export const tableData = {
       },
     },
     {
-      name: "Dental monitoring",
-      id: "dentalMonitoring",
+      name: "Dental monitoring®",
+      id: columnKeys.DENTAL_MONITORING,
     },
     {
       name: "Last monitoring Scan",
-      id: "lasMonitoringScan",
+      id: "lastMonitoringScan",
     },
   ],
 };

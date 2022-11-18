@@ -27,6 +27,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export const StyledTableRow = styled(TableRow)(() => ({
   [`&.${tableRowClasses.root}`]: {
     opacity: 1,
+    height: "40px",
   },
 }));
 
@@ -49,6 +50,8 @@ export const CPaginationItem = styled(PaginationItem)(({ theme }) => ({
     background: "none",
     height: "auto",
     width: "auto",
+    marginRight: "10px !important",
+    marginLeft: "10px !important",
   },
   "&.Mui-disabled": {
     color: theme.palette.gray?.darken,
