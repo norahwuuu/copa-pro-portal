@@ -61,6 +61,7 @@ export const columnKeys = {
   ORDER_STATUS: "orderSatus",
   DENTAL_MONITORING: "dentalMonitoring",
   LAST_MONITORING_SCAN: "lastMonitoringScan",
+  LAST_NAME: "lastName",
 };
 
 export const tableData = {
@@ -75,6 +76,9 @@ export const tableData = {
       cell: {
         style: {
           fontWeight: "bold !important",
+          maxWidth: 170,
+          textOverflow: "ellipsis",
+          overflow: "hidden",
         },
       },
     },
@@ -84,6 +88,7 @@ export const tableData = {
       cell: {
         style: {
           fontWeight: "bold !important",
+          maxWidth: 100,
         },
       },
     },
@@ -106,6 +111,7 @@ export const tableData = {
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
+          width: 225,
         },
       },
     },

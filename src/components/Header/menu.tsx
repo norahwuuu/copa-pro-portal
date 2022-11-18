@@ -1,5 +1,6 @@
 import { accountUrlObj } from "@/pages/Account/account.route";
 import theme from "@/theme/theme";
+import { RowCenterAlign } from "@/theme/themen.util";
 import { Button, Menu, MenuItem, MenuProps, styled } from "@mui/material";
 import { FC, useCallback, useState } from "react";
 import { FormattedMessage, history } from "umi";
@@ -58,10 +59,7 @@ const CustomizedMenus: FC = () => {
           borderBottom: open ? "none" : "inherit",
           backgroundColor: theme.palette.common.white,
           borderRadius: open ? "20px 20px 0px 0px" : "20px",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
+          ...RowCenterAlign,
           textDecoration: "none",
           minWidth: 180,
           p: 1,

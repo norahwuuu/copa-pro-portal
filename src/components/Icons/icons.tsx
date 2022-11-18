@@ -1,8 +1,10 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
+import FolderOffIcon from "@mui/icons-material/FolderOff";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+
 import { FC } from "react";
 
 import { mdiCircleSlice3, mdiCircleSlice4, mdiDotsCircle } from "@mdi/js";
@@ -72,6 +74,8 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
       return <ArrowDropDown fontSize={fontSize} sx={sxProps} />;
     case "LogoutIcon":
       return <Logout fontSize={fontSize} sx={sxProps} />;
+    case "FolderOffIcon":
+      return <FolderOffIcon fontSize={fontSize} sx={sxProps} />;
     default:
       return <Visibility fontSize={fontSize} sx={sxProps} />;
   }

@@ -9,6 +9,7 @@ interface TitleProps {
   color?: string | "inherit";
   children?: ReactNode;
   sxProp?: SxProps<Theme>;
+  noWrap?: boolean;
   component?: ElementType;
 }
 
@@ -16,6 +17,7 @@ const Text: FC<TitleProps> = ({
   variant,
   color,
   sxProp,
+  noWrap,
   component = "span",
   children,
 }) => {
@@ -24,6 +26,7 @@ const Text: FC<TitleProps> = ({
       component={component}
       variant={variant}
       color={color}
+      noWrap={noWrap}
       sx={{ ...sxProp, opacity: 1 }}
     >
       {children}
@@ -34,6 +37,7 @@ const Text: FC<TitleProps> = ({
 Text.defaultProps = {
   sxProp: undefined,
   color: "inherit",
+  noWrap: false,
 };
 
 export default Text;

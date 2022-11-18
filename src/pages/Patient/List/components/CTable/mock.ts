@@ -7,7 +7,7 @@ export default [
   {
     id: 1,
     firstName: "E.",
-    lastName: "Rogers",
+    lastName: "Rogers789012345678",
     dateOfBirth: "09/08/1985",
     patientStatus: "Rejected",
     caseDetails: "Case too complex",

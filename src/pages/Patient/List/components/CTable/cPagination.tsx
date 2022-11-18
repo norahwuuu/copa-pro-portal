@@ -1,3 +1,4 @@
+import { RowCenterAlign } from "@/theme/themen.util";
 import { Box, TablePagination } from "@mui/material";
 import { FC, MouseEvent, useEffect, useState } from "react";
 import TablePaginationActions from "./cPaginationAction";
@@ -33,10 +34,8 @@ const CPagination: FC<IPaginationProps> = ({
     <Box
       component={"div"}
       sx={{
-        display: "flex",
-        flexDirection: "row",
+        ...RowCenterAlign,
         justifyContent: "space-between",
-        alignItems: "center",
       }}
     >
       <Box
