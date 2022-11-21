@@ -37,6 +37,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@mdi/js": "^7.0.96",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.9",
     "@umijs/fabric": "^3.0.0",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^8.19.0",
+    "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.2.2",

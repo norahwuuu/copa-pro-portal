@@ -1,5 +1,6 @@
 import Header from "@/components/Header/header";
 import Text from "@/components/Text/text";
+import { RowCenterAlign } from "@/theme/themen.util";
 import { Box, Grid, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
@@ -25,9 +26,7 @@ const Account: FC<{ children: ReactChildren }> = ({ children }) => {
         <Box
           component={"div"}
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
+            ...RowCenterAlign,
           }}
         >
           {navItems.map((item) => (
