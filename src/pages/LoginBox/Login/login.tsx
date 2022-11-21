@@ -7,7 +7,7 @@ import type { FC } from "react";
 import { useState } from "react";
 import { connect, history, useIntl } from "umi";
 import styles from "./login.less";
-import { LoginParamsType, loginProps } from "./type";
+import { LoginParamsType, loginProps, LoginState } from "./type";
 const secondaryMain = colorObj.secondary.main;
 const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
   const translate = useIntl();
@@ -109,7 +109,7 @@ const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
   );
 };
 export default connect(
-  ({ loginSpace }: never) => {
+  ({ loginSpace }: LoginState) => {
     const { isShowLoginError } = loginSpace;
     return {
       isShowLoginError,

@@ -1,3 +1,12 @@
+/**
+ *   RecordCard: overview userinfo/record card container
+ *   @param
+ *   topChildren: Contents of the top section
+ *   sxProp: card style
+ *   footChildren: bottom content
+ *   @return
+ *
+ */
 import { Box, Container, Divider } from "@mui/material";
 import { FC } from "react";
 import { RecordCardProps } from "./type";
