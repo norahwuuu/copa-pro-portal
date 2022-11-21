@@ -19,7 +19,7 @@ export const fontProps = (
 };
 
 const customThemeOptions: ThemeOptions = {
-  spacing: [0, 5, 10, 15, 20, 25, 30],
+  spacing: [0, 5, 10, 15, 20, 25, 30, 35, 40, 50],
   palette: customPalette,
   typography: {
     fontFamily: "Colgate Ready",
@@ -113,6 +113,15 @@ const customThemeOptions: ThemeOptions = {
           },
         },
       },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 1280,
+      lg: 1366,
+      xl: 1920,
     },
   },
 };
