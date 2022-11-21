@@ -122,9 +122,9 @@ const CTable: FC = () => {
             <TableBody>
               {(rowsPerPage > 0
                 ? records.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
                 : records
               ).map((row) => (
                 <StyledTableRow hover key={row.id}>
@@ -185,7 +185,7 @@ const CTable: FC = () => {
                 <ICons
                   icon={"FolderOffIcon"}
                   fontSize={"large"}
-                  sxProps={{ color: "inherit" }}
+                  sxProps={{ color: "gray.darken", fontSize: "xxx-large" }}
                 />
               </Text>
               <Text variant={"h6"}>
@@ -199,7 +199,7 @@ const CTable: FC = () => {
                 <ICons
                   icon={"FolderOffIcon"}
                   fontSize={"large"}
-                  sxProps={{ color: "gray.darken" }}
+                  sxProps={{ color: "gray.darken", fontSize: "xxx-large" }}
                 />
               </Text>
               <Text variant={"h6"}>
