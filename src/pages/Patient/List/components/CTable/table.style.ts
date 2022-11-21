@@ -11,7 +11,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     opacity: 1,
     ...theme.typography.body2,
-    color: "#464646", // have to check
+    color: theme.palette.gray?.main, // have to check
     fontWeight: "bold",
     height: "40px",
   },
@@ -20,7 +20,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     ...theme.typography.body1,
     height: "40px",
     borderBottom: "0.5px solid #CCCCCC",
-    color: "#464646",
+    color: theme.palette.gray?.main,
   },
 }));
 

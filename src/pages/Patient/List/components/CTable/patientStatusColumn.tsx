@@ -8,7 +8,6 @@ const findPatientStatus = (obj: { [key: string]: string[] }, value: string) => {
 };
 
 const PatientStatusColumn: FC<{ row: IRow }> = ({ row }) => {
-  console.log(PATIENT_STATUS_CASE_MAP, "patientStatusByCase");
   let status = findPatientStatus(PATIENT_STATUS_CASE_MAP, row.caseDetails);
   let sxProp: SxProps;
 
