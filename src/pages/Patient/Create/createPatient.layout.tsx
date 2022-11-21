@@ -1,4 +1,5 @@
 import Text from "@/components/Text/text";
+import { ColumnCenterAlign } from "@/theme/themen.util";
 import { Box, Grid, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
@@ -12,10 +13,7 @@ const PatientCreate: FC<{ children: ReactChildren }> = ({ children }) => {
       <Box
         component={"div"}
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          ...ColumnCenterAlign,
         }}
       >
         <Box component={"div"} sx={{ mb: 5 }}>

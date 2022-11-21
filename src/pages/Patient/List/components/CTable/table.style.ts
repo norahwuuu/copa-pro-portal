@@ -24,9 +24,16 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-export const StyledTableRow = styled(TableRow)(() => ({
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   [`&.${tableRowClasses.root}`]: {
     opacity: 1,
+    height: "40px",
+  },
+  "&.MuiTableRow-hover": {
+    ":hover": {
+      backgroundColor: theme.palette.gray?.lighten,
+      cursor: "pointer",
+    },
   },
 }));
 
@@ -49,6 +56,8 @@ export const CPaginationItem = styled(PaginationItem)(({ theme }) => ({
     background: "none",
     height: "auto",
     width: "auto",
+    marginRight: "10px !important",
+    marginLeft: "10px !important",
   },
   "&.Mui-disabled": {
     color: theme.palette.gray?.darken,

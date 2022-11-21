@@ -1,154 +1,103 @@
-import { mdiCircleSlice3, mdiCircleSlice4 } from "@mdi/js";
-import { ErrorOutlined, Visibility } from "@mui/icons-material";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
-import { Box, SvgIcon, SxProps } from "@mui/material";
+import ICons from "@/components/Icons/icons";
+import { Box } from "@mui/material";
 import { FC } from "react";
 import { IRow } from "./table";
 import { CASE_DETAILS } from "./table.config";
 
-const CustomIcon: FC<{
-  fontSize?: "small" | "inherit" | "large" | "medium" | undefined;
-  mdiIcon: string;
-  sxProp: SxProps;
-}> = ({ fontSize, mdiIcon, sxProp }) => {
-  return (
-    <SvgIcon fontSize={fontSize} sx={sxProp}>
-      <path d={mdiIcon} />
-    </SvgIcon>
-  );
-};
-
-const CaseDeatilsColumn: FC<{ input: string; row: IRow }> = ({
-  input,
-  row,
-}) => {
+const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
   let template;
   switch (row?.caseDetails) {
     case CASE_DETAILS.CASE_TOO_COMPLEX:
       template = (
         <>
-          {" "}
-          <HighlightOffIcon
-            sx={{ color: (theme) => theme.palette.gray?.darken }}
-            fontSize={"small"}
-          />{" "}
-          {input}{" "}
+          <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.PATIENT_DECLINED:
       template = (
         <>
-          {" "}
-          <HighlightOffIcon
-            fontSize={"small"}
-            sx={{ color: (theme) => theme.palette.gray?.darken }}
-          />{" "}
-          {input}{" "}
+          <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.PATIENT_DECISION_PENDING:
       template = (
         <>
-          {" "}
-          <PendingOutlinedIcon
-            fontSize={"small"}
-            sx={{ color: (theme) => theme.palette.secondary.main }}
-          />{" "}
-          {input}{" "}
+          <ICons icon={"PendingIcon"} sxProps={{ color: "secondary.main" }} />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.AWAITING_PATIENT_PAYMENT:
       template = (
         <>
-          {" "}
-          <CustomIcon
-            fontSize={"small"}
-            mdiIcon={mdiCircleSlice4}
-            sxProp={{ color: "secondary.main", transform: "rotate(180deg)" }}
-          />{" "}
-          {input}{" "}
+          <ICons
+            icon={"InCompleteIcon"}
+            sxProps={{ color: "secondary.main" }}
+          />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.AWAITING_DOCTOR_APPROVAL:
       template = (
         <>
-          {" "}
-          <CustomIcon
-            fontSize={"small"}
-            mdiIcon={mdiCircleSlice3}
-            sxProp={{ color: "secondary.main" }}
-          />{" "}
-          {input}{" "}
+          <ICons
+            icon={"InProgressIcon"}
+            sxProps={{ color: "secondary.main" }}
+          />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.UNDER_QUALITY_CHECK:
       template = (
         <>
-          {" "}
-          <Visibility
-            fontSize={"small"}
-            sx={{ color: (theme) => theme.palette.secondary.main }}
-          />{" "}
-          {input}{" "}
+          <ICons
+            icon={"UnderReviewIcon"}
+            sxProps={{ color: "secondary.main" }}
+          />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.NEEDS_DOCTOR_REVIEW:
       template = (
         <>
-          {" "}
-          <ErrorOutlined
-            fontSize={"small"}
-            sx={{ color: (theme) => theme.palette.warning.main }}
-          />{" "}
-          {input}{" "}
+          <ICons icon={"WarningIcon"} sxProps={{ color: "warning.main" }} />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.NEEDS_CLEANING:
       template = (
         <>
-          {" "}
-          <ErrorOutlined
-            fontSize={"small"}
-            sx={{ color: (theme) => theme.palette.warning.main }}
-          />{" "}
-          {input}{" "}
+          <ICons icon={"WarningIcon"} sxProps={{ color: "warning.main" }} />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.TEMPORARY_HEALTH_ISSUE:
       template = (
         <>
-          {" "}
-          <PendingOutlinedIcon
-            fontSize={"small"}
-            sx={{ color: (theme) => theme.palette.secondary.main }}
-          />{" "}
-          {input}{" "}
+          <ICons icon={"PendingIcon"} sxProps={{ color: "secondary.main" }} />
+          {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.PERMANENT_HEALTH_ISSUE:
       template = (
         <>
-          {" "}
-          <HighlightOffIcon
-            fontSize={"small"}
-            sx={{ color: (theme) => theme.palette.gray?.darken }}
-          />{" "}
-          {input}{" "}
+          <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
+          {row?.caseDetails}
         </>
       );
       break;
     default:
-      template = input;
+      template = row?.caseDetails;
       break;
   }
 
