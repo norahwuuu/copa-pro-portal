@@ -1,26 +1,32 @@
-import Button from "@/components/Button/button";
 import LinkText from "@/components/Button/linkText";
+import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import ShadowBox from "@/pages/Components/shadowBox";
 import { OpenInNew } from "@mui/icons-material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Box, Grid, Link, useTheme } from "@mui/material";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import { Box, Button, Grid, Link, useTheme } from "@mui/material";
 import { FC } from "react";
 import Item from "./Components/gridItem";
-
 const PatientOverview: FC = () => {
   const theme = useTheme();
   const DentalData = [
     {
       name: "Status",
       value: (
-        <Text
-          variant={"body1"}
-          color={"gray.main"}
-          sxProp={{ fontWeight: "normal" }}
-        >
-          {"Tracking"}
-        </Text>
+        <Box component={"div"} sx={{ display: "flex" }}>
+          <Text
+            variant={"body1"}
+            color={"gray.main"}
+            sxProp={{ fontWeight: "normal" }}
+          >
+            {"Tracking"}
+          </Text>
+          <ICons
+            icon="ActiveIcon"
+            sxProps={{ color: "secondary.main", marginLeft: "5px" }}
+          />
+        </Box>
       ),
     },
     {
@@ -166,10 +172,14 @@ const PatientOverview: FC = () => {
     {
       value: (
         <Button
-          variant={"outlined"}
-          btnLabel={"IPR and attachment report"}
-          sxProp={{ width: "260px", right: "30px" }}
-        />
+          variant="outlined"
+          startIcon={
+            <PictureAsPdfIcon sx={{ width: "14px", height: "14px" }} />
+          }
+          sx={{ width: "260px", right: "30px" }}
+        >
+          IPR and attachment report
+        </Button>
       ),
     },
   ];
