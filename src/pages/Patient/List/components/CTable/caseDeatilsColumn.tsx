@@ -1,21 +1,48 @@
 import ICons from "@/components/Icons/icons";
-import { Box } from "@mui/material";
+import {
+  Box,
+  styled,
+  Tooltip,
+  tooltipClasses,
+  TooltipProps,
+} from "@mui/material";
 import { FC } from "react";
+import { FormattedMessage } from "umi";
 import { IRow } from "./table";
 import { CASE_DETAILS } from "./table.config";
 
+const CTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    ...theme.typography.body1,
+    fontWeight: 300,
+    color: theme.palette.gray?.main,
+    background: "#FFFFFF 0% 0% no-repeat padding-box",
+    boxShadow: "0px 3px 6px #00000029",
+    border: `1px solid ${theme.palette.gray?.lighten3}`,
+    borderRadius: "20px 0px",
+    maxWidth: 196,
+    padding: "18px",
+    opacity: 1,
+  },
+}));
+
 const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
   let template;
+  let translate = "";
   switch (row?.caseDetails) {
     case CASE_DETAILS.CASE_TOO_COMPLEX:
+      translate = "caseTooComplexTooltip";
       template = (
         <>
-          <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
+          <ICons icon={"FailureIcon"} sxProps={{ color: "gray.darken" }} />
           {row?.caseDetails}
         </>
       );
       break;
     case CASE_DETAILS.PATIENT_DECLINED:
+      translate = "patientDeclinedTooltip";
       template = (
         <>
           <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
@@ -24,6 +51,8 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.PATIENT_DECISION_PENDING:
+      translate = "patientDecisionPendingTooltip";
+
       template = (
         <>
           <ICons icon={"PendingIcon"} sxProps={{ color: "secondary.main" }} />
@@ -32,6 +61,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.AWAITING_PATIENT_PAYMENT:
+      translate = "awaitingPatientPaymentTooltip";
       template = (
         <>
           <ICons
@@ -43,6 +73,8 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.AWAITING_DOCTOR_APPROVAL:
+      translate = "awaitingDoctorDpprovalTooltip";
+
       template = (
         <>
           <ICons
@@ -54,6 +86,8 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.UNDER_QUALITY_CHECK:
+      translate = "underQualityCheckTooltip";
+
       template = (
         <>
           <ICons
@@ -65,6 +99,8 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.NEEDS_DOCTOR_REVIEW:
+      translate = "needsDoctorReviewTooltip";
+
       template = (
         <>
           <ICons icon={"WarningIcon"} sxProps={{ color: "warning.main" }} />
@@ -102,18 +138,20 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
   }
 
   return (
-    <Box
-      component={"span"}
-      sx={{
-        fontWeight: 300,
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        " > svg": { marginRight: 1 },
-      }}
-    >
-      {template}
-    </Box>
+    <CTooltip title={translate && <FormattedMessage id={translate} />}>
+      <Box
+        component={"span"}
+        sx={{
+          fontWeight: 300,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          " > svg": { marginRight: 1 },
+        }}
+      >
+        {template}
+      </Box>
+    </CTooltip>
   );
 };
 

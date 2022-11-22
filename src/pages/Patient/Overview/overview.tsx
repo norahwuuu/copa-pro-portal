@@ -8,6 +8,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Box, Button, Grid, Link, useTheme } from "@mui/material";
 import { FC } from "react";
 import Item from "./Components/gridItem";
+import Records from "./Components/records";
 const PatientOverview: FC = () => {
   const theme = useTheme();
   const DentalData = [
@@ -246,7 +247,7 @@ const PatientOverview: FC = () => {
                 [theme.breakpoints.down("xl")]: { height: "275px" },
               }}
             >
-              Records
+              <Records />
             </ShadowBox>
           </Grid>
           <Grid item xs={12} xl={12}>
