@@ -7,8 +7,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Box, Button, Grid, Link, useTheme } from "@mui/material";
 import { FC } from "react";
-import Item from "./Components/gridItem";
-import Records from "./Components/records";
+import Item from "./components/gridItem";
+import Records from "./components/records";
 const PatientOverview: FC = () => {
   const theme = useTheme();
   const DentalData = [
