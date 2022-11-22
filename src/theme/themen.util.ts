@@ -17,7 +17,7 @@ export const RowCenterAlign = {
 export const Breakpoints = {
   xs: 0,
   sm: 600,
-  md: 900, //tablet
-  lg: 1200, // desktop
-  xl: 1536, // monitor
+  md: 1280,
+  lg: 1366,
+  xl: 1920,
 };

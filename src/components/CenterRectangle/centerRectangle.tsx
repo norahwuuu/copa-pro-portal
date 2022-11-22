@@ -1,12 +1,4 @@
-import {
-  Grid,
-  Icon,
-  IconClasses,
-  SxProps,
-  Theme,
-  Typography,
-} from "@mui/material";
-import { CommonProps } from "@mui/material/OverridableComponent";
+import { Grid, Icon, SxProps, Theme, Typography } from "@mui/material";
 import React from "react";
 import logoSvg from "../../assets/svgs/COLGATE_SMILE_LOGO_REV_RGB.svg";
 import Text from "../Text/text";
@@ -25,41 +17,6 @@ export type centerRectanglePropsType = {
     info: string;
   };
 };
-function LogoIcon(
-  props: JSX.IntrinsicAttributes & { component: React.ElementType } & {
-    baseClassName?: string | undefined;
-    children?: React.ReactNode;
-    classes?: Partial<IconClasses> | undefined;
-    color?:
-      | "error"
-      | "info"
-      | "success"
-      | "inherit"
-      | "disabled"
-      | "action"
-      | "primary"
-      | "secondary"
-      | "warning"
-      | undefined;
-    fontSize?: "small" | "inherit" | "medium" | "large" | undefined;
-    sx?: SxProps<Theme> | undefined;
-  } & CommonProps &
-    Omit<
-      any,
-      | "children"
-      | "color"
-      | "fontSize"
-      | keyof CommonProps
-      | "sx"
-      | "baseClassName"
-    >
-) {
-  return (
-    <Icon {...props}>
-      <img src={logoSvg} />
-    </Icon>
-  );
-}
 
 /**
  * description：水平盒子
@@ -103,14 +60,17 @@ const CenterRectangle = ({
         </Grid>
       )}
       <Grid color="white" whiteSpace="pre-wrap">
-        <LogoIcon
+        <Icon
           sx={{
             display: "block",
             width: "250px",
             height: "30px",
             margin: `0 0 ${LogoIconMt}px 30px`,
           }}
-        />
+        >
+          <img src={logoSvg} />
+        </Icon>
+
         {mainTitle && (
           <Typography variant="h3" align="center" fontWeight="200">
             {mainTitle}

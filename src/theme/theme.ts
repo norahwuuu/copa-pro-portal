@@ -25,7 +25,7 @@ const customThemeOptions: ThemeOptions = {
       ...Breakpoints,
     },
   },
-  spacing: [0, 5, 10, 15, 20, 25, 30],
+  spacing: [0, 5, 10, 15, 20, 25, 30, 35, 40, 50],
   palette: customPalette,
   typography: {
     fontFamily: "Colgate Ready",
