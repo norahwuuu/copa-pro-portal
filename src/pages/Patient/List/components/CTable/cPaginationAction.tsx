@@ -1,5 +1,6 @@
 import { Box, Pagination, PaginationRenderItemParams } from "@mui/material";
 import { ChangeEvent, FC } from "react";
+import { FormattedMessage } from "umi";
 import { ITablePaginationActionsProps } from "./table";
 import { CPaginationItem } from "./table.style";
 
@@ -19,6 +20,12 @@ const TablePaginationActions: FC<ITablePaginationActionsProps> = ({
     onPageChange(event, value - 1);
   };
 
+  const BtnTemplate = (key: string) => (
+    <Box component={"span"} sx={{ textDecoration: "underline" }}>
+      <FormattedMessage id={key} />
+    </Box>
+  );
+
   return (
     <Box sx={{ flexShrink: 0, ml: 2 }}>
       <Pagination
@@ -31,26 +38,10 @@ const TablePaginationActions: FC<ITablePaginationActionsProps> = ({
           return (
             <CPaginationItem
               components={{
-                last: () => (
-                  <Box component={"span"} sx={{ textDecoration: "underline" }}>
-                    Last
-                  </Box>
-                ),
-                next: () => (
-                  <Box component={"span"} sx={{ textDecoration: "underline" }}>
-                    Next
-                  </Box>
-                ),
-                first: () => (
-                  <Box component={"span"} sx={{ textDecoration: "underline" }}>
-                    First
-                  </Box>
-                ),
-                previous: () => (
-                  <Box component={"span"} sx={{ textDecoration: "underline" }}>
-                    Previous
-                  </Box>
-                ),
+                last: () => BtnTemplate("lastPagination"),
+                next: () => BtnTemplate("nextPagination"),
+                first: () => BtnTemplate("firstPagination"),
+                previous: () => BtnTemplate("previousPagination"),
               }}
               {...params}
             />

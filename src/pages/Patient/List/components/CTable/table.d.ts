@@ -14,6 +14,7 @@ export type IRow = {
 
 export type IColumn = {
   name: string;
+  translate: string;
   id: string;
   cell?: {
     [key: string]: unknown;

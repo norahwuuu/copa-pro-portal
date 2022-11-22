@@ -1,3 +1,8 @@
+export const TABLE_CONFIG = {
+  NO_OF_ROWS: 10,
+  NO_OF_ROWS_LARGE_DEVICE: 15,
+};
+
 export const PATIENT_STATUS = {
   PROSPECTIVE: "Prospective",
   PENDING: "Pending",
@@ -62,21 +67,19 @@ export const columnKeys = {
   DENTAL_MONITORING: "dentalMonitoring",
   LAST_MONITORING_SCAN: "lastMonitoringScan",
   LAST_NAME: "lastName",
+  FIRST_NAME: "firstName",
 };
 
 export const tableData = {
   columnDef: [
     {
-      name: "id",
-      id: "id",
-    },
-    {
       name: "Last name",
       id: "lastName",
+      translate: "lastName",
       cell: {
         style: {
           fontWeight: "bold !important",
-          maxWidth: 170,
+          maxWidth: 150,
           textOverflow: "ellipsis",
           overflow: "hidden",
         },
@@ -85,6 +88,7 @@ export const tableData = {
     {
       name: "First name",
       id: "firstName",
+      translate: "firstName",
       cell: {
         style: {
           fontWeight: "bold !important",
@@ -95,10 +99,12 @@ export const tableData = {
     {
       name: "Date of birth",
       id: "dateOfBirth",
+      translate: "dateOfBirth",
     },
     {
       name: "Patient Status",
       id: columnKeys.PATIENT_STATUS,
+      translate: "patientStatus",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -108,6 +114,7 @@ export const tableData = {
     {
       name: "Case Details",
       id: columnKeys.CASE_DETAILS,
+      translate: "caseDetails",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -118,6 +125,7 @@ export const tableData = {
     {
       name: "Order status",
       id: columnKeys.ORDER_STATUS,
+      translate: "orderStatus",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -126,11 +134,13 @@ export const tableData = {
     },
     {
       name: "Dental monitoring®",
+      translate: "dentalMonitoring",
       id: columnKeys.DENTAL_MONITORING,
     },
     {
       name: "Last monitoring Scan",
       id: "lastMonitoringScan",
+      translate: "lastMonitoringScan",
     },
   ],
 };
