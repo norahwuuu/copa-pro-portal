@@ -1,3 +1,11 @@
+/**
+ *   table config: Patinet table configuration
+ *   @param
+ *     row: row data
+ *   @return
+ *
+ */
+
 export const TABLE_CONFIG = {
   NO_OF_ROWS: 10,
   NO_OF_ROWS_LARGE_DEVICE: 15,

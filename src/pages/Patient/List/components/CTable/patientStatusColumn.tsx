@@ -1,3 +1,11 @@
+/**
+ *   PatientStatusColumn: Patient status column render based on status in patient table list
+ *   @param
+ *     row: row data
+ *   @return
+ *
+ */
+
 import { Box, SxProps } from "@mui/material";
 import { FC } from "react";
 import { IRow } from "./table";

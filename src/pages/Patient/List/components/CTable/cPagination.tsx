@@ -1,3 +1,11 @@
+/**
+ *   CPagination: Each column render based on coulmn type in patient table list
+ *   @param
+ *     Row: row data
+ *   @return
+ *
+ */
+
 import { RowCenterAlign } from "@/theme/themen.util";
 import { Box, TablePagination } from "@mui/material";
 import { FC, MouseEvent, useEffect, useState } from "react";

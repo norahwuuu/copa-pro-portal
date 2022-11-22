@@ -1,3 +1,10 @@
+/**
+ *   PatientStatusColumn: Order status column render based on status in patient table list
+ *   @param
+ *     row: row data
+ *   @return
+ *
+ */
 import ICons from "@/components/Icons/icons";
 import { Box } from "@mui/material";
 import { FC } from "react";
@@ -60,6 +67,7 @@ const OrderStatusColumn: FC<{ row: IRow }> = ({ row }) => {
         flexDirection: "row",
         alignItems: "center",
         " > svg": { marginRight: 1 },
+        " > img": { marginRight: 1 },
       }}
     >
       {template}

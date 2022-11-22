@@ -1,3 +1,9 @@
+/**
+ *   CTable: Reneder Patient list in table
+ *   @return
+ *
+ */
+
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import useWindowSize from "@/hooks/useWindowSize";
@@ -197,9 +203,9 @@ const CTable: FC = () => {
             <>
               <Text variant={"h6"}>
                 <ICons
-                  icon={"FolderOffIcon"}
+                  icon={"ResultOffIcon"}
                   fontSize={"large"}
-                  sxProps={{ color: "gray.darken", fontSize: "xxx-large" }}
+                  sxProps={{ color: "gray.darken", height: "60px" }}
                 />
               </Text>
               <Text variant={"h6"}>

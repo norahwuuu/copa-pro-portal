@@ -1,3 +1,12 @@
+/**
+ *   CCell: Each column render based on coulmn type in patient table list
+ *   @param
+ *     Coulmn: table column object
+ *     row: table row data
+ *   isLoading: loading boolean flag for triger skeleton UI
+ *   @return
+ *
+ */
 import { Box, Skeleton } from "@mui/material";
 import { FC } from "react";
 import CaseDeatilsColumn from "./caseDeatilsColumn";
