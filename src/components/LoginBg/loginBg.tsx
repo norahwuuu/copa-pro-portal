@@ -1,16 +1,16 @@
-import login1680 from "@/assets/images/login1680.png";
 import { Box } from "@mui/material";
 const LoginBg = () => {
   return (
     <Box
       sx={{
-        width: "1220px",
-        height: "592px",
+        width: "calc(100% - 60px)",
+        height: "calc(100% - 120px)",
         position: "absolute",
-        top: "24px",
-        left: "50%",
-        marginLeft: "-610px",
-        backgroundImage: `url(${login1680})`,
+        margin: "30px",
+        borderBottomRightRadius: "60%",
+        borderBottomLeftRadius: "20%",
+        backgroundColor: "#f6f6f6",
+        // backgroundImage: `url(${login1680})`,
       }}
     ></Box>
   );
