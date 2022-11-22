@@ -7,16 +7,18 @@
  *   @return
  *
  */
+import { colorObj } from "@/theme/customPalette";
 import { Box, Container, Divider } from "@mui/material";
 import { FC } from "react";
 import { RecordCardProps } from "./type";
 
+const grayLighten2 = colorObj.gray.lighten2;
 const boxStyle = {
   width: 584,
   height: 275,
   background: "#FFFFFF 0 % 0 % no - repeat padding - box",
   boxShadow: "0px 3px 6px #00000029",
-  border: "1px solid #EEEEEE",
+  border: `1px solid ${grayLighten2}`,
   borderRadius: 4,
 };
 const footerStyle = {

@@ -29,5 +29,6 @@
   "myAccountMenu": "My account",
   "changePasswordMenu": "Change Password",
   "logoutMenu": "Logout",
-  "recordTitle": "Records"
+  "recordTitle": "Records",
+  "uploadRecords": "Upload new record"
 }
