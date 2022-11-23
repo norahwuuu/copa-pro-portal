@@ -76,7 +76,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
         <>
           <ICons
             icon={"InCompleteIcon"}
-            sxProps={{ color: "secondary.main" }}
+            sxProps={{ color: "secondary.main", marginRight: "10px" }}
           />
           {row?.caseDetails}
         </>

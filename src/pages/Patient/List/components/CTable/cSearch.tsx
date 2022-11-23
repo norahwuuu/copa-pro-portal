@@ -1,13 +1,14 @@
 import { TextField, styled, TextFieldProps, Box } from "@mui/material"
 import React, { FC } from "react"
+import SearchIcon from '@mui/icons-material/Search';
 
 
 
 const OutlinedTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
     "& label": {
-        ...theme.typography.body3,
+        ...theme.typography.body1,
         letterSpacing: "0px",
-        color: theme.palette.gray?.main,
+        color: theme.palette.gray?.darken1,
         opacity: 1,
         "&.Mui-focused": {
             color: theme.palette.gray?.main,
@@ -46,6 +47,10 @@ const CSearch: FC = () => {
                 size={"small"}
                 id="input-with-icon-textfield"
                 label={"Search"}
+                InputProps={{
+                    startAdornment: <SearchIcon />
+                }}
+
             />
         </Box>
     )
