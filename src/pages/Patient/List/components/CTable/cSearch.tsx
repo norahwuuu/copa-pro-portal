@@ -23,20 +23,19 @@ const OutlinedTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
         fontWeight: 300,
         border: `1px solid ${theme.palette.gray?.darken}`,
         borderRadius: "18px",
-        // height: "36px",
         color: theme.palette.gray?.main,
     },
     "&:hover fieldset": {
         borderColor: theme.palette.gray?.main,
     },
-    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.gray?.main,
-        borderWidth: "1px",
-        color: theme.palette.gray?.main,
-    },
-    "&.Mui-focused.Mui-error .MuiOutlinedInput-notchedOutline": {
-        borderColor: `${theme.palette.error.main} !important`,
-        borderWidth: "1px",
+    "& .MuiOutlinedInput-root": {
+        "&.Mui-focused": {
+            "& fieldset": {
+                borderColor: `${theme.palette.gray?.main} !important `,
+                borderWidth: "1px",
+                color: theme.palette.gray?.main,
+            }
+        },
     },
 }))
 

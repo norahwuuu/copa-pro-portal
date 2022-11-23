@@ -2,9 +2,10 @@ import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import { RowCenterAlign } from "@/theme/themen.util";
 
-import { Box, Button, ButtonProps, Checkbox, FormControlLabel, Menu, MenuItem, MenuProps, styled, SxProps } from "@mui/material";
-import React, { FC } from "react";
+import { Box, Checkbox, FormControlLabel, FormControlLabelProps, Menu, MenuItem, MenuProps, styled, SxProps } from "@mui/material";
+import React, { FC, ReactElement } from "react";
 import { IFilter, IFilterOption } from "./table";
+import { StyledMenuButton } from "./table.style";
 
 
 const StyledMenu = styled((props: MenuProps) => <Menu {...props} anchorOrigin={{
@@ -20,40 +21,21 @@ const StyledMenu = styled((props: MenuProps) => <Menu {...props} anchorOrigin={{
         borderRadius: "18px",
         boxShadow: "none",
         border: "1px solid #777777 !important",
-      },
-      "& .MuiMenuItem-root": {
-        ...theme.typography.body1,
-        fontWeight: 300,
-        color: theme.palette.gray?.main,
-        "&:hover": {
-          backgroundColor: theme.palette.gray?.lighten1,
+        "& .MuiMenuItem-root": {
+          ...theme.typography.body1,
+          fontWeight: 300,
+          color: theme.palette.gray?.main,
+
+          "&:first-child:hover": {
+            backgroundColor: "transparent",
+          },
+          "&:not(:first-child):hover": {
+            backgroundColor: theme.palette.gray?.lighten1,
+          },
         },
       },
     })
   );
-
-
-const StyledMenuButton = styled(Button)<ButtonProps>(({ theme }) => ({
-  ...theme.typography.body1,
-  fontWeight: 300,
-  color: theme.palette.gray?.main,
-  border: "1px solid #777777",
-  backgroundColor: theme.palette.common.white,
-  borderRadius: "20px",
-  textDecoration: "none",
-  padding: "10px",
-  height: 35,
-  '> span': {
-    alignSelf: "center"
-  },
-  '> svg': {
-    alignSelf: "center"
-  },
-  '&:hover': {
-    textDecoration: "none",
-  },
-
-}));
 
 
 const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxProps: SxProps }> = ({ label, isOpen, type, sxProps }) => {
@@ -82,14 +64,14 @@ const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxPr
 
         {isOpen && (
           <ICons
-            icon="ArrowUpIcon"
+            icon={"KeyboardArrowUpIcon"}
             sxProps={{ color: "#C02820" }}
           />
         )}
 
         {!isOpen && (
           <ICons
-            icon="ArrowDownIcon"
+            icon={"KeyboardArrowDownIcon"}
             sxProps={{ alignSelf: "center", color: "#C02820" }}
           />
         )}
@@ -98,10 +80,28 @@ const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxPr
   )
 }
 
-const FItemCheckbox: FC<{ label: string }> = ({ label }) => {
+
+const OptionLabel = styled(FormControlLabel)<FormControlLabelProps>(({ theme }) => ({
+  "& .MuiFormControlLabel-root": {
+    color: theme.palette.primary.main,
+
+  },
+  "& .MuiFormControlLabel-label": {
+    ...theme.typography.body1,
+    fontWeight: 300,
+    color: "inherit",
+  }
+}))
+
+const FItem: FC<{ label: string, type: "filter" | "sort" }> = ({ label, type }) => {
+  let actionTemplate: ReactElement;
+  if (type === "sort") {
+    actionTemplate = <ICons icon={"CheckedIcon"} sxProps={{ color: "secondary.main", mx: 2, my: 1 }} />
+  } else {
+    actionTemplate = <Checkbox color={"secondary"} size={"small"} sx={{ py: 1 }} />
+  }
   return (
-    <FormControlLabel sx={{ width: "100%", mx: 0 }} control={<Checkbox color={"secondary"}
-      sx={{ '& .MuiSvgIcon-root': { fontSize: 18, } }} />} label={label} />
+    <OptionLabel sx={{ width: "100%", mx: 0, }} control={actionTemplate} label={label} />
   )
 }
 
@@ -138,12 +138,12 @@ const CFilter2: FC<{ filter: IFilter }> = ({ filter }) => {
         onClose={handleClose}
 
       >
-        <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "2px 10px", }} >
-          <FTitle label={filter.name} isOpen={open} sxProps={filter.styleProps} type={filter.type} />
+        <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "2px 10px", mb: 3 }} >
+          <FTitle label={filter.name} isOpen={open} sxProps={{ ...filter.styleProps }} type={filter.type} />
         </MenuItem>
         {filter.options.map((option: IFilterOption) => (
           <MenuItem sx={{ p: 0 }} key={option.id}>
-            <FItemCheckbox label={option.text} />
+            <FItem type={filter.type} label={option.text} />
           </MenuItem>
         ))}
 

@@ -4,7 +4,12 @@
  *
  */
 
+import theme from "@/theme/theme";
 import {
+  Button,
+  ButtonProps,
+  Menu,
+  MenuProps,
   PaginationItem,
   styled,
   TableCell,
@@ -68,4 +73,26 @@ export const CPaginationItem = styled(PaginationItem)(({ theme }) => ({
   "&.Mui-disabled": {
     color: theme.palette.gray?.darken,
   },
+}));
+
+export const StyledMenuButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  ...theme.typography.body1,
+  fontWeight: 300,
+  color: theme.palette.gray?.main,
+  border: "1px solid #777777",
+  backgroundColor: theme.palette.common.white,
+  borderRadius: "20px",
+  textDecoration: "none",
+  padding: "10px",
+  height: 36,
+  '> span': {
+    alignSelf: "center"
+  },
+  '> svg': {
+    alignSelf: "center"
+  },
+  '&:hover': {
+    textDecoration: "none",
+  },
+
 }));

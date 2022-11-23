@@ -7,24 +7,21 @@
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import useWindowSize from "@/hooks/useWindowSize";
+import { patientUrlObj } from "@/pages/Patient/patient.route";
 import { ColumnCenterAlign, RowCenterAlign } from "@/theme/themen.util";
 import {
-  Box,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
+  Box
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import React, { FC, useLayoutEffect, useRef, useState } from "react";
-import { FormattedMessage } from "umi";
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FormattedMessage, history } from "umi";
 import CCell from "./cCell";
 import CFilter from "./CFilter";
+import CFilteredChips from "./cFilteredChips";
 import CPagination from "./cPagination";
 import CSearch from "./cSearch";
 import mockData from "./mock";
@@ -32,10 +29,9 @@ import { IColumn } from "./table";
 import { tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
 import { StyledTableCell, StyledTableRow } from "./table.style";
 
-const CTable: FC = () => {
+const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
-  const [tablevalue, setTablevalue] = useState("records"); // TOBE remove once API integarion Done
   const [records, setRecords] = useState(mockData);
   const [width, setWidth] = useState(1);
   const [height, setHeight] = useState(1);
@@ -45,18 +41,16 @@ const CTable: FC = () => {
     setHeight(tableRef.current.clientHeight);
   }, [tableRef]);
 
-  // TOBE remove once API integarion Done
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTablevalue((event.target as HTMLInputElement).value);
+  useEffect(() => {
     if (
-      (event.target as HTMLInputElement).value === "records" ||
-      (event.target as HTMLInputElement).value === "filtering"
+      tableAction === "records" ||
+      tableAction === "filtering"
     ) {
       setRecords(mockData);
     } else {
       setRecords([]);
     }
-  };
+  }, [tableAction])
 
   const [page, setPage] = useState<number>(0);
   const rowsPerPage =
@@ -72,35 +66,6 @@ const CTable: FC = () => {
   const emptyRows = Math.max(0, (1 + page) * rowsPerPage - records.length);
   return (
     <Box component={"div"} sx={{ mb: 3, position: "relative" }}>
-      <FormControl>
-        <FormLabel id="demo-row-radio-buttons-group-label">
-          Table Action
-        </FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-          value={tablevalue}
-          onChange={handleChange}
-        >
-          <FormControlLabel value="records" control={<Radio />} label="Data" />
-          <FormControlLabel
-            value="norecords"
-            control={<Radio />}
-            label="Empty"
-          />
-          <FormControlLabel
-            value="filterempty"
-            control={<Radio />}
-            label="No search result"
-          />
-          <FormControlLabel
-            value="filtering"
-            control={<Radio />}
-            label="Loading skeleton"
-          />
-        </RadioGroup>
-      </FormControl>
       <Box
         component={"div"}
         sx={{
@@ -117,6 +82,7 @@ const CTable: FC = () => {
           </Box>
         ))}
       </Box>
+      <CFilteredChips />
 
       <Box component={"div"} sx={{ position: "absolute", width: "100%" }}>
         <TableContainer
@@ -151,14 +117,14 @@ const CTable: FC = () => {
                 )
                 : records
               ).map((row) => (
-                <StyledTableRow hover key={row.id}>
+                <StyledTableRow hover key={row.id} onClick={() => history.push(patientUrlObj.overviewPatient)}>
                   {tableData.columnDef.map((col: IColumn) => {
                     return (
                       <StyledTableCell key={col.id} sx={{ ...col.cell?.style }}>
                         <CCell
                           column={col}
                           row={row}
-                          isLoading={tablevalue === "filtering"}
+                          isLoading={tableAction === "filtering"}
                         />
                       </StyledTableCell>
                     );
@@ -182,7 +148,7 @@ const CTable: FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        {records.length > 0 && tablevalue === "records" && (
+        {records.length > 0 && tableAction === "records" && (
           <CPagination
             rowsPerPage={rowsPerPage}
             page={page}
@@ -203,7 +169,7 @@ const CTable: FC = () => {
             ...ColumnCenterAlign,
           }}
         >
-          {tablevalue === "norecords" && (
+          {tableAction === "norecords" && (
             <>
               <Text variant={"h6"}>
                 <ICons
@@ -217,7 +183,7 @@ const CTable: FC = () => {
               </Text>
             </>
           )}
-          {tablevalue === "filterempty" && (
+          {tableAction === "filterempty" && (
             <>
               <Text variant={"h6"}>
                 <ICons

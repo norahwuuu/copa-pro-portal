@@ -1,3 +1,12 @@
+/**
+ *   Icons:  In this file we have maintaining all icons at on place 
+ *   @param
+ *     fontSize: icon size
+ *     icon: icon type
+ *     sxProps: icons style props
+ *   @return
+ *
+ */
 import React from 'react'
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -7,12 +16,14 @@ import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { FC } from "react";
 
-import { mdiCircleSlice3, mdiFilter, mdiFilePdfBox } from "@mdi/js";
+import { mdiCircleSlice3, mdiFilter, mdiFilePdfBox, mdiCheckBold } from "@mdi/js";
 import {
   AccountCircle,
   ArrowDropDown,
   ArrowDropUp,
   ErrorOutlined,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
   Logout,
   Visibility,
 } from "@mui/icons-material";
@@ -69,13 +80,13 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
     case "InProgressIcon":
       return (
         <SvgIcon fontSize={fontSize} sx={sxProps}>
-          <path d={mdiCircleSlice3} />{" "}
+          <path d={mdiCircleSlice3} />
         </SvgIcon>
       );
     case "PdfIcon":
       return (
         <SvgIcon fontSize={fontSize} sx={sxProps}>
-          <path d={mdiFilePdfBox} />{" "}
+          <path d={mdiFilePdfBox} />
         </SvgIcon>
       );
     case "WarningIcon":
@@ -90,6 +101,10 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
       return <ArrowDropUp fontSize={fontSize} sx={sxProps} />;
     case "ArrowDownIcon":
       return <ArrowDropDown fontSize={fontSize} sx={sxProps} />;
+    case "KeyboardArrowUpIcon":
+      return <KeyboardArrowUp fontSize={fontSize} sx={sxProps} />;
+    case "KeyboardArrowDownIcon":
+      return <KeyboardArrowDown fontSize={fontSize} sx={sxProps} />;
     case "LogoutIcon":
       return <Logout fontSize={fontSize} sx={sxProps} />;
     case "FolderOffIcon":
@@ -113,6 +128,12 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
           loading="lazy"
           sx={{ height: "16px", ...sxProps }}
         />
+      );
+    case "CheckedIcon":
+      return (
+        <SvgIcon fontSize={fontSize} sx={sxProps}>
+          <path d={mdiCheckBold} />
+        </SvgIcon>
       );
     default:
       return <Visibility fontSize={fontSize} sx={sxProps} />;

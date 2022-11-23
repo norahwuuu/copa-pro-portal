@@ -13,7 +13,7 @@ import {
   tooltipClasses,
   TooltipProps,
 } from "@mui/material";
-import { FC } from "react";
+import React, { FC } from "react";
 import { FormattedMessage } from "umi";
 import { IRow } from "./table";
 import { CASE_DETAILS } from "./table.config";
@@ -76,7 +76,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
         <>
           <ICons
             icon={"InCompleteIcon"}
-            sxProps={{ color: "secondary.main", marginRight: "10px" }}
+            sxProps={{ color: "secondary.main", marginRight: "7px !important" }}
           />
           {row?.caseDetails}
         </>
