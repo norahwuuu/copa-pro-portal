@@ -59,5 +59,10 @@
   "underQualityCheck": "Under quality check",
   "underQualityCheckTooltip": "This case is under quality review by our treatment plan experts.",
   "needsDoctorReview": "Needs doctor review",
-  "needsDoctorReviewTooltip": "This case must be reviewed and re-approved by the doctor."
+  "needsDoctorReviewTooltip": "This case must be reviewed and re-approved by the doctor.",
+  "userInfo.edit": "Edit",
+  "userInfo.archive": "Archive",
+  "userInfo.archived": "Archived",
+  "userInfo.Unarchive": "Unarchive",
+  "userInfo.Prospective": "Prospective"
 }

@@ -9,6 +9,7 @@ import { Box, Button, Grid, Link, useTheme } from "@mui/material";
 import { FC } from "react";
 import Item from "./components/gridItem";
 import Records from "./components/records";
+import UserInfo from "./components/userInfo";
 const PatientOverview: FC = () => {
   const theme = useTheme();
   const DentalData = [
@@ -237,7 +238,7 @@ const PatientOverview: FC = () => {
                 [theme.breakpoints.down("xl")]: { height: "275px" },
               }}
             >
-              juliance Garcia
+              <UserInfo />
             </ShadowBox>
           </Grid>
           <Grid item xs={6} xl={6}>

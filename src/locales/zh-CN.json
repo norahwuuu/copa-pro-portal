@@ -28,5 +28,10 @@
   "changePasswordMenu": "Change Password",
   "logoutMenu": "Logout",
   "recordTitle": "Records",
-  "uploadRecords": "Upload new record"
+  "uploadRecords": "Upload new record",
+  "userInfo.edit": "Edit",
+  "userInfo.archive": "Archive",
+  "userInfo.archived": "Archived",
+  "userInfo.Unarchive": "Unarchive",
+  "userInfo.Prospective": "Prospective"
 }
