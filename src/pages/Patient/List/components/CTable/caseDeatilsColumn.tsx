@@ -1,3 +1,10 @@
+/**
+ *   CaseDeatilsColumn:  case details column render based on status in patient table list
+ *   @param
+ *     row: row data
+ *   @return
+ *
+ */
 import ICons from "@/components/Icons/icons";
 import {
   Box,
@@ -12,7 +19,7 @@ import { IRow } from "./table";
 import { CASE_DETAILS } from "./table.config";
 
 const CTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
+  <Tooltip {...props} classes={{ popper: className }} disableInteractive />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     ...theme.typography.body1,
@@ -25,6 +32,9 @@ const CTooltip = styled(({ className, ...props }: TooltipProps) => (
     maxWidth: 196,
     padding: "18px",
     opacity: 1,
+  },
+  "&.MuiTooltip-popper": {
+    paddingLeft: "80px",
   },
 }));
 
@@ -147,6 +157,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
           flexDirection: "row",
           alignItems: "center",
           " > svg": { marginRight: 1 },
+          " > img": { marginRight: 1 },
         }}
       >
         {template}

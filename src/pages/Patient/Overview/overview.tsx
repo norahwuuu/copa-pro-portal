@@ -176,7 +176,7 @@ const PatientOverview: FC = () => {
         <Button
           variant="outlined"
           startIcon={
-            <PictureAsPdfIcon sx={{ width: "14px", height: "14px" }} />
+            <ICons icon="PdfIcon" sxProps={{ width: "14px", height: "14px" }} />
           }
           sx={{ width: "260px", right: "30px" }}
         >

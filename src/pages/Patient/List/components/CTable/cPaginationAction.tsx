@@ -1,3 +1,13 @@
+/**
+ *   TablePaginationActions: Previous, Next action handled for patient table list
+ *   @param
+ *     count: number of record
+ *     rowsPerPage: number for rows per page
+ *     onPageChange: action  for on page change
+ *   @return
+ *
+ */
+
 import { Box, Pagination, PaginationRenderItemParams } from "@mui/material";
 import { ChangeEvent, FC } from "react";
 import { FormattedMessage } from "umi";

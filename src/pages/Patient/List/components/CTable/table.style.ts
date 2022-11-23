@@ -1,3 +1,9 @@
+/**
+ *   Table Style: Patient table styles
+ *   @return
+ *
+ */
+
 import {
   PaginationItem,
   styled,
