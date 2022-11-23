@@ -10,6 +10,7 @@
 import { Box, Container, Divider } from "@mui/material";
 import { FC } from "react";
 import { RecordCardProps } from "./type";
+import React from 'react';
 
 const boxStyle = {
   width: "100%",

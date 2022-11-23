@@ -2,6 +2,7 @@ import Text from "@/components/Text/text";
 import { Box, Grid } from "@mui/material";
 import { FC } from "react";
 import { InfoLowerBox } from "./overview.style";
+import React from 'react';
 
 const InfoItem: FC<InfoItemProps> = ({ dataSource }) => {
   return (

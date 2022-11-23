@@ -6,6 +6,8 @@ import { Box, Button, Container, Grid, SvgIcon } from "@mui/material";
 import { FC } from "react";
 import { useIntl } from "umi";
 import InfoItem from "./infoItem";
+import React from 'react';
+
 const UserInfo: FC = () => {
   const translate = useIntl();
   const birthData = [

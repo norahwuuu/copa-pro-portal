@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import styles from "./inputField.less";
 import { InputFieldType } from "./type";
 export type InputFieldProps = TextFieldProps & InputFieldType;
+import React from 'react';
 
 const errorMain = colorObj.error.main;
 const commonWhite = colorObj.common.white;

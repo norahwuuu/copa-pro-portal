@@ -1,6 +1,7 @@
 import LoginBg from "@/components/LoginBg/loginBg";
 import { Box } from "@mui/material";
 import { FC, ReactChildren } from "react";
+import React from 'react';
 
 const LoginBox: FC<{ children: ReactChildren }> = ({ children }) => {
   return (

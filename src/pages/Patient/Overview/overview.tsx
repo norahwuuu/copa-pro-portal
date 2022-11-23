@@ -10,6 +10,8 @@ import { FC } from "react";
 import Item from "./components/gridItem";
 import Records from "./components/records";
 import UserInfo from "./components/userInfo";
+import React from 'react';
+
 const PatientOverview: FC = () => {
   const theme = useTheme();
   const DentalData = [
