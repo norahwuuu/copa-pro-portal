@@ -6,7 +6,7 @@ import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { FC } from "react";
 
-import { mdiCircleSlice3 } from "@mdi/js";
+import { mdiCircleSlice3, mdiFilePdfBox } from "@mdi/js";
 import {
   AccountCircle,
   ArrowDropDown,
@@ -66,6 +66,12 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
       return (
         <SvgIcon fontSize={fontSize} sx={sxProps}>
           <path d={mdiCircleSlice3} />{" "}
+        </SvgIcon>
+      );
+    case "PdfIcon":
+      return (
+        <SvgIcon fontSize={fontSize} sx={sxProps}>
+          <path d={mdiFilePdfBox} />{" "}
         </SvgIcon>
       );
     case "WarningIcon":
