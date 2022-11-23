@@ -1,4 +1,5 @@
 module.exports = {
+  setFiles: ["<rootDir>/src/_test_/setup.js"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^@@/(.*)$": "<rootDir>/src/.umi/$1",
