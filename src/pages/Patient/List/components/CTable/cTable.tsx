@@ -21,7 +21,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import { FC, useLayoutEffect, useRef, useState } from "react";
+import React, { FC, useLayoutEffect, useRef, useState } from "react";
 import { FormattedMessage } from "umi";
 import CCell from "./cCell";
 import CPagination from "./cPagination";
@@ -128,9 +128,9 @@ const CTable: FC = () => {
             <TableBody>
               {(rowsPerPage > 0
                 ? records.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
                 : records
               ).map((row) => (
                 <StyledTableRow hover key={row.id}>
