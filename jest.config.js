@@ -6,4 +6,8 @@ module.exports = {
     "^@@/core/umiExports$":
       "<rootDir>/src/fixtures/.umi-test/core/umiExports.ts",
   },
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/.umi/",
+  ],
 };
