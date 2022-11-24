@@ -1,6 +1,7 @@
 import { Theme } from "@emotion/react";
 import { Box, SxProps } from "@mui/material";
 import { FC } from "react";
+import * as React from "react";
 
 interface ShadowBoxProps {
   children: React.ReactNode;

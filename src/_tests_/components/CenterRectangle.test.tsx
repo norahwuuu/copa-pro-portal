@@ -1,5 +1,7 @@
+import React from 'react'
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import { render, screen } from "@testing-library/react";
+
 
 test("CenterRectangle", () => {
   const props = {

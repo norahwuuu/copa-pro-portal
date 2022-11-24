@@ -4,4 +4,5 @@ interface ItemProps {
     name?: string;
     value: React.ReactNode | Element;
   }>;
+  status?: "temp" | "inProgress" | "review" | null;
 }

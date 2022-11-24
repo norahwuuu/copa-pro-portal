@@ -1,3 +1,4 @@
+import React from 'react'
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import FolderOffOutlinedIcon from "@mui/icons-material/FolderOffOutlined";
@@ -15,6 +16,8 @@ import {
   Logout,
   Visibility,
 } from "@mui/icons-material";
+import WarningIcon from '@mui/icons-material/Warning';
+
 import { Box, SvgIcon, SxProps } from "@mui/material";
 
 import incompleteSvg from "../../assets/svgs/icons/incomplete.svg";
@@ -90,6 +93,8 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
       return <Logout fontSize={fontSize} sx={sxProps} />;
     case "FolderOffIcon":
       return <FolderOffOutlinedIcon fontSize={fontSize} sx={sxProps} />;
+    case "ErrorIcon":
+      return <WarningIcon fontSize={fontSize} sx={{ color: '#FF9C00', ...sxProps }} />;
     case "ResultOffIcon":
       return (
         <Box

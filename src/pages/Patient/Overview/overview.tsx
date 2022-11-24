@@ -1,16 +1,20 @@
+import * as React from "react";
 import LinkText from "@/components/Button/linkText";
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import ShadowBox from "@/pages/Components/shadowBox";
 import { OpenInNew } from "@mui/icons-material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Box, Button, Grid, Link, useTheme } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
+import AlertDialog from "./components/bootstrapDialogt";
 import Item from "./components/gridItem";
 import Records from "./components/records";
+import Btn from "@/components/Button/button";
+
 const PatientOverview: FC = () => {
   const theme = useTheme();
+  const [alertOpen, setAlertOpen] = useState(false)
   const DentalData = [
     {
       name: "Status",
@@ -186,91 +190,120 @@ const PatientOverview: FC = () => {
   ];
 
   return (
-    <Box
-      sx={{
-        margin: "auto",
-        display: "flex",
-        flexDirection: "column",
-        [theme.breakpoints.up("xl")]: { width: "1560px", paddingTop: "71px" },
-        [theme.breakpoints.down("xl")]: {
-          width: "1184px",
-          paddingTop: "23px",
-        },
-        height: "100%",
-      }}
-    >
-      <Link
-        variant={"h6"}
+    <>
+
+      <Box
         sx={{
-          fontWeight: "Bold",
-          marginBottom: "13px",
+          margin: "auto",
           display: "flex",
-          zIndex: "999",
+          flexDirection: "column",
+          [theme.breakpoints.up("xl")]: { width: "1560px", paddingTop: "71px" },
+          [theme.breakpoints.down("xl")]: {
+            width: "1184px",
+            paddingTop: "23px",
+          },
+          height: "100%",
         }}
-        href="login"
-        color={"gray.main"}
-        underline="hover"
       >
-        {
-          <ArrowBackIcon
-            sx={{
-              fontSize: "17px",
-              fontWeight: "inherit",
-              alignSelf: "center",
-              marginRight: "5px",
-            }}
-          />
-        }
-        {"Back"}
-      </Link>
-      <Box>
-        <Grid
-          sx={{ flexGrow: 1 }}
-          container
-          rowSpacing={{ sm: 3, md: 6, lg: 6, xl: 9 }}
-          columnSpacing={{ sm: 3, md: 3, lg: 3, xl: 9 }}
+        <Link
+          variant={"h6"}
+          sx={{
+            fontWeight: "Bold",
+            marginBottom: "13px",
+            display: "flex",
+            zIndex: "999",
+          }}
+          href="login"
+          color={"gray.main"}
+          underline="hover"
         >
-          <Grid item xs={6} xl={6}>
-            <ShadowBox
-              sxProp={{
-                [theme.breakpoints.up("xl")]: { height: "300px" },
-                [theme.breakpoints.down("xl")]: { height: "275px" },
+          {
+            <ArrowBackIcon
+              sx={{
+                fontSize: "17px",
+                fontWeight: "inherit",
+                alignSelf: "center",
+                marginRight: "5px",
               }}
-            >
-              juliance Garcia
-            </ShadowBox>
+            />
+          }
+          {"Back"}
+        </Link>
+        <Box>
+          <Grid
+            sx={{ flexGrow: 1 }}
+            container
+            rowSpacing={{ sm: 3, md: 6, lg: 6, xl: 9 }}
+            columnSpacing={{ sm: 3, md: 3, lg: 3, xl: 9 }}
+          >
+            <Grid item xs={6} xl={6}>
+              <ShadowBox
+                sxProp={{
+                  [theme.breakpoints.up("xl")]: { height: "300px" },
+                  [theme.breakpoints.down("xl")]: { height: "275px" },
+                }}
+              >
+                juliance Garcia
+              </ShadowBox>
+            </Grid>
+            <Grid item xs={6} xl={6}>
+              <ShadowBox
+                sxProp={{
+                  [theme.breakpoints.up("xl")]: { height: "300px" },
+                  [theme.breakpoints.down("xl")]: { height: "275px" },
+                }}
+              >
+                <Records />
+              </ShadowBox>
+            </Grid>
+            <Grid item xs={12} xl={12}>
+              <ShadowBox>
+                <Item
+                  title={"Treatment plan"}
+                  dataSource={TreatmentData}
+                  status={null}
+                ></Item>
+              </ShadowBox>
+            </Grid>
+            <Grid item xs={6} xl={6}>
+              <ShadowBox>
+                <Item
+                  title={"Dental monitoring ®"}
+                  dataSource={DentalData}
+                ></Item>
+              </ShadowBox>
+            </Grid>
+            <Grid item xs={6} xl={6}>
+              <ShadowBox>
+                <Item title={"Order tracking"} dataSource={OrderData}></Item>
+              </ShadowBox>
+            </Grid>
           </Grid>
-          <Grid item xs={6} xl={6}>
-            <ShadowBox
-              sxProp={{
-                [theme.breakpoints.up("xl")]: { height: "300px" },
-                [theme.breakpoints.down("xl")]: { height: "275px" },
-              }}
-            >
-              <Records />
-            </ShadowBox>
-          </Grid>
-          <Grid item xs={12} xl={12}>
-            <ShadowBox>
-              <Item title={"Treatment plan"} dataSource={TreatmentData}></Item>
-            </ShadowBox>
-          </Grid>
-          <Grid item xs={6} xl={6}>
-            <ShadowBox>
-              <Item
-                title={"Dental monitoring ®"}
-                dataSource={DentalData}
-              ></Item>
-            </ShadowBox>
-          </Grid>
-          <Grid item xs={6} xl={6}>
-            <ShadowBox>
-              <Item title={"Order tracking"} dataSource={OrderData}></Item>
-            </ShadowBox>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
+      <AlertDialog open={alertOpen} title={'This case need your attention.'} content={
+        <Grid container direction={'column'} >
+          <Text variant="body1" color={"gray.main"}>
+            {"This patient's treatment plan has been reviewed and some changes have been made."}
+          </Text>
+          <Text variant="body1" color={"gray.main"} sxProp={{ fontWeight: "bold", marginTop: '20px' }}>
+            {"Comment from our reviewer:"}
+          </Text>
+          <Text variant="body1" color={"gray.main"} >
+            {"We have changed …"}
+          </Text>
+          <Text variant="h6" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+            {" Please review Tx plan and approve changes."}
+          </Text>
+          <Text variant="body1" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+            {"If you have further questions, call 1-123-456-7890"}
+          </Text>
+        </Grid>
+
+      } btns={
+        <Btn variant={"outlined"} btnLabel={"Got it!"} onClickHandler={() => setAlertOpen(false)} />
+      } />
+    </>
   );
 };
 

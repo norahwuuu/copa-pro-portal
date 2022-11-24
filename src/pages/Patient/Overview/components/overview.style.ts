@@ -1,5 +1,5 @@
 import { Box, Grid, styled } from "@mui/material";
-export const AdaptionrBox = styled(Grid)(({ theme }) => ({
+export const AdaptionBox = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
     height: "125px",
   },

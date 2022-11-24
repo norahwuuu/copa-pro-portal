@@ -3,6 +3,8 @@ import React from "react";
 import logoSvg from "../../assets/svgs/COLGATE_SMILE_LOGO_REV_RGB.svg";
 import Text from "../Text/text";
 import styles from "./centerRectangle.less";
+
+
 export type centerRectanglePropsType = {
   width?: string | number;
   className?: string;
