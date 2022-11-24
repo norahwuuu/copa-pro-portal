@@ -1,7 +1,5 @@
-import {
-  ForgotPasswordParamsType,
-  LoginParamsType,
-} from "@/pages/LoginBox/Login/type";
+import { ForgotPasswordParamsType } from "@/pages/LoginBox/ForgotPassword/type";
+import { LoginParamsType } from "@/pages/LoginBox/Login/type";
 import request from "@/utils/request";
 
 export async function queryLogin(params: LoginParamsType) {
@@ -15,13 +13,13 @@ export async function queryLogin(params: LoginParamsType) {
   );
 }
 export async function forgotPasswordServer(params: ForgotPasswordParamsType) {
-  return request("/user-management/v1/forgot-password/", {
+  return request("/user-mgmt/v1/authn/forgot-password/", {
     method: "PUT",
     data: { ...params },
   });
 }
 export async function resetPasswordServer(params: ForgotPasswordParamsType) {
-  return request("/user-management/v1/reset-password/", {
+  return request("/user-mgmt/v1/authn/reset-password/", {
     method: "PUT",
     data: { ...params },
   });
