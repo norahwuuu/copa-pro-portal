@@ -46,9 +46,9 @@
     "ahooks": "^3.7.2",
     "commitizen": "^4.2.5",
     "cross-env": "^7.0.3",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
     "redux-mock-store": "^1.5.4",
+    "react": "17.x",
+    "react-dom": "17.x",
     "umi": "^3.5.34",
     "umi-request": "^1.4.0"
   },
