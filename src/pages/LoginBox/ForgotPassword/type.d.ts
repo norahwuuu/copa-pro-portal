@@ -7,5 +7,5 @@ export interface ForgotPasswordParamsType {
 }
 
 export interface forgotPasswordProps {
-  forgotPassword: (arg: ForgotPasswordParamsType) => void;
+  forgotPassword?: (arg: ForgotPasswordParamsType) => void;
 }

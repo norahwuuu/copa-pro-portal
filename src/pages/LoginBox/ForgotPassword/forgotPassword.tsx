@@ -1,3 +1,4 @@
+import React from "react";
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
@@ -8,7 +9,7 @@ import { errorTypes, forgotPasswordText } from "../Login/column";
 import styles from "./forgotPassword.less";
 import { ForgotPasswordParamsType, forgotPasswordProps } from "./type";
 
-const ForgotPassword: FC<forgotPasswordProps> = (props) => {
+export const ForgotPassword: FC<forgotPasswordProps> = (props) => {
   const { forgotPassword } = props;
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
