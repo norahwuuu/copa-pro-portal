@@ -112,6 +112,7 @@ const UserInfo: FC = () => {
           >
             <Grid item sm={4}>
               <Box
+                title='avatar'
                 sx={{
                   width: "100px",
                   height: "100px",
@@ -149,6 +150,7 @@ const UserInfo: FC = () => {
             {translate.formatMessage({ id: "userInfo.edit" })}
           </Button>
           <Button
+            id="archive"
             sx={{ fontSize: "16px" }}
             variant="outlined"
             startIcon={

@@ -13,7 +13,7 @@ import Btn from "@/components/Button/button";
 import UserInfo from "./components/userInfo";
 import React from 'react';
 
-const PatientOverview: FC = () => {
+export const PatientOverview: FC = () => {
   const theme = useTheme();
   const [alertOpen, setAlertOpen] = useState(false)
   const DentalData = [
