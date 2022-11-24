@@ -12,6 +12,7 @@ import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import { Box, Container, Grid } from "@mui/material";
 import { FC, useState } from "react";
 import { ImageViewProps } from "./type";
+import React from 'react';
 
 const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp }) => {
   // shadow show or hidden

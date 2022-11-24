@@ -3,7 +3,7 @@ import { SxProps } from "@mui/material";
 import { FC, ReactNode } from "react";
 
 import FilledButton from "../../theme/button.style";
-
+import React from 'react';
 interface IButtonProps {
   variant: "text" | "outlined" | "contained" | "shade";
   btnLabel: string;

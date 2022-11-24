@@ -68,6 +68,144 @@ export const PATIENT_STATUS_CASE_MAP = {
   Archived: [],
 };
 
+
+export const TABLE_FILTER = {
+  "patientStatus": {
+    id: "patientStatus",
+    name: "Patient Staus",
+    type: "filter",
+    styleProps: {
+      minWidth: "160px"
+    },
+    options: [{
+      id: "all",
+      text: "View all"
+    }, {
+      id: "active",
+      text: "Active"
+    }, {
+      id: "completed",
+      text: "Completed"
+    }, {
+      id: "prospective",
+      text: "Prospective"
+    }, {
+      id: "pending",
+      text: "Pending"
+    }, {
+      id: "rejected",
+      text: "Rejected"
+    }, {
+      id: "archived",
+      text: "Archived"
+    }]
+
+  },
+  "caseDetails": {
+    id: "caseDetails",
+    name: "Case details",
+    type: "filter",
+    styleProps: {
+      minWidth: "210px"
+    },
+    options: [{
+      id: "all",
+      text: "View all"
+    }, {
+      id: "awaitingDoctorApproval",
+      text: "Awaiting doctor approval"
+    }, {
+      id: "awaitingPayment",
+      text: "Awaiting payment"
+    }, {
+      id: "decisionPending",
+      text: "Decision pending"
+    }, {
+      id: "needsDoctorReview",
+      text: "Needs doctor review"
+    }, {
+      id: "patientDeclined",
+      text: "Patient declined"
+    }, {
+      id: "tooComplex",
+      text: "Too complex"
+    }, {
+      id: "underQualityCheck",
+      text: "Under quality check"
+    }]
+  },
+  "orderStatus": {
+    id: "orderStatus",
+    type: "filter",
+    name: "Order status",
+    styleProps: {
+      minWidth: "160px"
+    },
+    options: [{
+      id: "all",
+      text: "View all"
+    }, {
+      id: "delivered",
+      text: "Delivered"
+    }, {
+      id: "inProduction",
+      text: "In Production"
+    }, {
+      id: "retainersSent",
+      text: "Retainers sent"
+    }, {
+      id: "shipped",
+      text: "Shipped"
+    }]
+
+  },
+  "dentalMonitoring": {
+    id: "dentalMonitoring",
+    type: "filter",
+    name: "Dental monitoring",
+    styleProps: {
+      minWidth: "195px"
+    },
+    options: [{
+      id: "all",
+      text: "View all"
+    }, {
+      id: "notTracking",
+      text: "Not tracking"
+    }, {
+      id: "notStarted",
+      text: "Not started"
+    }, {
+      id: "tracking",
+      text: "Tracking"
+    }],
+  },
+  "sortBy": {
+    id: "sortBy",
+    name: "Sort by",
+    type: "sort",
+    styleProps: {
+      minWidth: "175px"
+    },
+    options: [{
+      id: "lastModifiedDate",
+      text: "Last modified date"
+    }, {
+      id: "lastName",
+      text: "Last name (A-Z)"
+    }, {
+      id: "firstName",
+      text: "First name (A-Z)"
+    }, {
+      id: "DateOfBirth",
+      text: "Date of birth"
+    }, {
+      id: "lastMonitoringScan",
+      text: "Last monitoring scan"
+    }]
+  }
+}
+
 export const columnKeys = {
   CASE_DETAILS: "caseDetails",
   PATIENT_STATUS: "patientStatus",

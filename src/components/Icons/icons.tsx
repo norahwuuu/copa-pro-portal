@@ -7,7 +7,7 @@ import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { FC } from "react";
 
-import { mdiCircleSlice3, mdiFilePdfBox } from "@mdi/js";
+import { mdiCircleSlice3, mdiFilter, mdiFilePdfBox } from "@mdi/js";
 import {
   AccountCircle,
   ArrowDropDown,
@@ -20,6 +20,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 
 import { Box, SvgIcon, SxProps } from "@mui/material";
 
+import SortIcon from "@mui/icons-material/Sort";
 import incompleteSvg from "../../assets/svgs/icons/incomplete.svg";
 import notStartedSvg from "../../assets/svgs/icons/not_started.svg";
 import resultsOffSvg from "../../assets/svgs/icons/results_off.svg";
@@ -95,6 +96,14 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
       return <FolderOffOutlinedIcon fontSize={fontSize} sx={sxProps} />;
     case "ErrorIcon":
       return <WarningIcon fontSize={fontSize} sx={{ color: '#FF9C00', ...sxProps }} />;
+    case "FilterAltIcon":
+      return (
+        <SvgIcon fontSize={fontSize} sx={sxProps}>
+          <path d={mdiFilter} />
+        </SvgIcon>
+      );
+    case "SortIcon":
+      return <SortIcon fontSize={fontSize} sx={sxProps} />;
     case "ResultOffIcon":
       return (
         <Box

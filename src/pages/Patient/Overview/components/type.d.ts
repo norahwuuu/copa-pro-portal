@@ -6,3 +6,9 @@ interface ItemProps {
   }>;
   status?: "temp" | "inProgress" | "review" | null;
 }
+interface InfoItemProps {
+  dataSource: Array<{
+    name?: string;
+    value: React.ReactNode | Element;
+  }>;
+}

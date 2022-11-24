@@ -7,7 +7,7 @@
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import useWindowSize from "@/hooks/useWindowSize";
-import { ColumnCenterAlign } from "@/theme/themen.util";
+import { ColumnCenterAlign, RowCenterAlign } from "@/theme/themen.util";
 import {
   Box,
   FormControl,
@@ -21,13 +21,15 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import { FC, useLayoutEffect, useRef, useState } from "react";
+import React, { FC, useLayoutEffect, useRef, useState } from "react";
 import { FormattedMessage } from "umi";
 import CCell from "./cCell";
+import CFilter from "./CFilter";
 import CPagination from "./cPagination";
+import CSearch from "./cSearch";
 import mockData from "./mock";
 import { IColumn } from "./table";
-import { tableData, TABLE_CONFIG } from "./table.config";
+import { tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
 import { StyledTableCell, StyledTableRow } from "./table.style";
 
 const CTable: FC = () => {
@@ -99,6 +101,22 @@ const CTable: FC = () => {
           />
         </RadioGroup>
       </FormControl>
+      <Box
+        component={"div"}
+        sx={{
+          mb: 3,
+          ...RowCenterAlign,
+          justifyContent: "start",
+          "> div": { mx: 1, alignSelf: "center" },
+        }}
+      >
+        <CSearch />
+        {Object.entries(TABLE_FILTER).map(([key, item]) => (
+          <Box component={"div"} key={key}>
+            <CFilter filter={item} />{" "}
+          </Box>
+        ))}
+      </Box>
 
       <Box component={"div"} sx={{ position: "absolute", width: "100%" }}>
         <TableContainer
@@ -128,9 +146,9 @@ const CTable: FC = () => {
             <TableBody>
               {(rowsPerPage > 0
                 ? records.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
                 : records
               ).map((row) => (
                 <StyledTableRow hover key={row.id}>

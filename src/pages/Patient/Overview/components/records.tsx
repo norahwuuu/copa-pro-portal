@@ -7,6 +7,8 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Grid } from "@mui/material";
 import { FC } from "react";
 import { useIntl } from "umi";
+import React from 'react';
+
 const Records: FC = () => {
   const translate = useIntl();
   return (

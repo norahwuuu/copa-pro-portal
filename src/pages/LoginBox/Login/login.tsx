@@ -8,8 +8,10 @@ import { useState } from "react";
 import { connect, history, useIntl } from "umi";
 import styles from "./login.less";
 import { LoginParamsType, loginProps, LoginState } from "./type";
+import React from 'react';
+
 const secondaryMain = colorObj.secondary.main;
-const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
+export const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
   const translate = useIntl();
   // username
   const [email, setEmail] = useState<string>("");

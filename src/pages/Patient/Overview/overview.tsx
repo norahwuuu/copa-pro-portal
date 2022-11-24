@@ -1,4 +1,3 @@
-import * as React from "react";
 import LinkText from "@/components/Button/linkText";
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
@@ -11,6 +10,8 @@ import AlertDialog from "./components/bootstrapDialogt";
 import Item from "./components/gridItem";
 import Records from "./components/records";
 import Btn from "@/components/Button/button";
+import UserInfo from "./components/userInfo";
+import React from 'react';
 
 const PatientOverview: FC = () => {
   const theme = useTheme();
@@ -243,7 +244,7 @@ const PatientOverview: FC = () => {
                   [theme.breakpoints.down("xl")]: { height: "275px" },
                 }}
               >
-                juliance Garcia
+                <UserInfo />
               </ShadowBox>
             </Grid>
             <Grid item xs={6} xl={6}>

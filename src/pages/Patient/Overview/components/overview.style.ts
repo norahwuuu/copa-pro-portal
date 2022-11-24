@@ -24,3 +24,11 @@ export const AdaptionLowerBox = styled(Box)(({ theme }) => ({
     padding: "24px 0 0 30px",
   },
 }));
+export const InfoLowerBox = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down("xl")]: {
+    padding: "0 0 0 0px",
+  },
+  [theme.breakpoints.up("xl")]: {
+    padding: "0 0 0 0px",
+  },
+}));
