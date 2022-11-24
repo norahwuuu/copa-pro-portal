@@ -72,13 +72,14 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
           mb: 3,
           ...RowCenterAlign,
           justifyContent: "start",
+          flexWrap: "wrap",
           "> div": { mx: 1, alignSelf: "center" },
         }}
       >
         <CSearch />
         {Object.entries(TABLE_FILTER).map(([key, item]) => (
-          <Box component={"div"} key={key}>
-            <CFilter filter={item} />{" "}
+          <Box component={"div"} sx={{ my: 1 }} key={key}>
+            <CFilter filter={item} />
           </Box>
         ))}
       </Box>

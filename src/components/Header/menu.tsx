@@ -1,31 +1,67 @@
 import { accountUrlObj } from "@/pages/Account/account.route";
-import theme from "@/theme/theme";
+import { StyledMenu, StyledMenuButton } from "@/theme/filterMenu.style";
 import { RowCenterAlign } from "@/theme/themen.util";
-import { Button, Menu, MenuItem, MenuProps, styled } from "@mui/material";
-import { FC, useCallback, useState } from "react";
+import { Box, MenuItem, MenuProps, styled, SxProps } from "@mui/material";
+import React, { FC, useCallback, useState } from "react";
 import { FormattedMessage, history } from "umi";
 import ICons from "../Icons/icons";
 import Text from "../Text/text";
 
-const StyledMenu = styled((props: MenuProps) => <Menu {...props} />)(
-  ({ theme }) => ({
-    "& .MuiPaper-root": {
-      borderRadius: "0px 0px 20px 20px",
-      boxShadow: "none",
-      border: "1px solid #777777 !important",
-      borderTop: `1px solid #EEEEEE !important`,
-      minWidth: 180,
-    },
-    "& .MuiMenuItem-root": {
-      ...theme.typography.body1,
-      fontWeight: 300,
-      color: theme.palette.gray?.main,
-      "&:hover": {
-        backgroundColor: theme.palette.gray?.lighten1,
-      },
-    },
-  })
-);
+
+
+const OverwriteStyleMenu = styled((StyledMenu))<MenuProps>(() => ({
+  "& .MuiPaper-root": {
+    borderRadius: "13px",
+    mariginTop: "-3px !important"
+  }
+}))
+
+const FTitle: FC<{ label: string, isOpen: boolean, sxProps: SxProps }> = ({ label, isOpen, sxProps }) => {
+  return (
+    <>
+      <Box component={"div"} sx={{
+        ...RowCenterAlign,
+        ...sxProps,
+        justifyContent: "space-between",
+
+      }}>
+
+        <Text
+          variant={"body1"}
+          sxProp={{
+            fontWeight: 300, display: "flex",
+            alignItems: "center",
+            justifyContent: "start",
+            color: "inherit"
+          }}
+        >
+          {label}
+
+        </Text>
+        <Box sx={{ ...RowCenterAlign, alignSelf: "center" }}>
+          <ICons
+            icon="UserIcon"
+            fontSize={"small"}
+            sxProps={{ alignSelf: "center" }}
+          />
+          {isOpen && (
+            <ICons
+              icon="ArrowUpIcon"
+              sxProps={{ alignSelf: "center", color: "inherit" }}
+            />
+          )}
+          {!isOpen && (
+            <ICons
+              icon="ArrowDownIcon"
+              sxProps={{ alignSelf: "center", color: "inherit" }}
+            />
+          )}
+        </Box>
+
+      </Box>
+    </>
+  )
+}
 
 const CustomizedMenus: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -44,69 +80,37 @@ const CustomizedMenus: FC = () => {
 
   return (
     <>
-      <Button
-        id="user-menu-button"
-        aria-controls={open ? "user-menu" : undefined}
+      <StyledMenuButton
+        id="demo-positioned-button"
+        aria-controls={open ? "demo-positioned-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{
-          ...theme.typography.body1,
-          fontWeight: 300,
-          color: theme.palette.gray?.main,
-          height: 36,
-          border: open ? "1px solid #777777" : "inherit",
-          borderBottom: open ? "none" : "inherit",
-          backgroundColor: theme.palette.common.white,
-          borderRadius: open ? "20px 20px 0px 0px" : "20px",
-          ...RowCenterAlign,
-          textDecoration: "none",
-          minWidth: 180,
-          p: 1,
-          "> span": {
-            mr: 3,
-          },
-          "&:hover": {
-            border: "none",
-            textDecoration: "none",
-          },
-        }}
+        sx={{ height: open ? "32px !important" : "inherit" }}
       >
-        <Text
-          variant={"body1"}
-          sxProp={{ alignSelf: "center", fontWeight: 300 }}
-        >
-          {"Brenda Smith"}
-        </Text>
-        <ICons
-          icon="UserIcon"
-          fontSize={"small"}
-          sxProps={{ alignSelf: "center" }}
-        />
-        {open && (
-          <ICons
-            icon="ArrowUpIcon"
-            sxProps={{ alignSelf: "center", color: "inherit" }}
-          />
-        )}
-        {!open && (
-          <ICons
-            icon="ArrowDownIcon"
-            sxProps={{ alignSelf: "center", color: "inherit" }}
-          />
-        )}
-      </Button>
+        <FTitle label={"Brenda Smith"} isOpen={open} sxProps={{ minWidth: "170px" }} />
 
-      <StyledMenu
-        id="user-menu"
+      </StyledMenuButton>
+
+      <OverwriteStyleMenu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        elevation={0}
-        MenuListProps={{
-          "aria-labelledby": "user-menu-button",
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
         }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        sx={{ borderRadius: "13px", }}
       >
+        <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "5px 10px", mb: 3 }} >
+          <FTitle label={"Brenda Smith"} isOpen={open} sxProps={{ minWidth: "170px" }} />
+        </MenuItem>
         <MenuItem
           disableRipple
           onClick={() => redirectTo(accountUrlObj.monthlyStatement)}
@@ -124,7 +128,7 @@ const CustomizedMenus: FC = () => {
           <FormattedMessage id="logoutMenu" />
           <ICons icon={"LogoutIcon"} sxProps={{ color: "inherit" }} />
         </MenuItem>
-      </StyledMenu>
+      </OverwriteStyleMenu>
     </>
   );
 };

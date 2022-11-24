@@ -1,41 +1,12 @@
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
+import { StyledMenu, StyledMenuButton } from "@/theme/filterMenu.style";
 import { RowCenterAlign } from "@/theme/themen.util";
 
-import { Box, Checkbox, FormControlLabel, FormControlLabelProps, Menu, MenuItem, MenuProps, styled, SxProps } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, FormControlLabelProps, MenuItem, styled, SxProps } from "@mui/material";
 import React, { FC, ReactElement } from "react";
 import { IFilter, IFilterOption } from "./table";
-import { StyledMenuButton } from "./table.style";
 
-
-const StyledMenu = styled((props: MenuProps) => <Menu {...props} anchorOrigin={{
-  vertical: "top",
-  horizontal: "left",
-}}
-  transformOrigin={{
-    vertical: "top",
-    horizontal: "left",
-  }} />)(
-    ({ theme }) => ({
-      "& .MuiPaper-root": {
-        borderRadius: "18px",
-        boxShadow: "none",
-        border: "1px solid #777777 !important",
-        "& .MuiMenuItem-root": {
-          ...theme.typography.body1,
-          fontWeight: 300,
-          color: theme.palette.gray?.main,
-
-          "&:first-child:hover": {
-            backgroundColor: "transparent",
-          },
-          "&:not(:first-child):hover": {
-            backgroundColor: theme.palette.gray?.lighten1,
-          },
-        },
-      },
-    })
-  );
 
 
 const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxProps: SxProps }> = ({ label, isOpen, type, sxProps }) => {
@@ -105,7 +76,7 @@ const FItem: FC<{ label: string, type: "filter" | "sort" }> = ({ label, type }) 
   )
 }
 
-const CFilter2: FC<{ filter: IFilter }> = ({ filter }) => {
+const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -136,6 +107,14 @@ const CFilter2: FC<{ filter: IFilter }> = ({ filter }) => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
 
       >
         <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "2px 10px", mb: 3 }} >
@@ -153,4 +132,4 @@ const CFilter2: FC<{ filter: IFilter }> = ({ filter }) => {
   );
 };
 
-export default CFilter2;
+export default CFilter;
