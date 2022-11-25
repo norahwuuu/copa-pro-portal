@@ -3,6 +3,7 @@ import { SxProps } from "@mui/material";
 import { Variant } from "@mui/material/styles/createTypography";
 import Typography from "@mui/material/Typography";
 import { ElementType, FC, ReactNode } from "react";
+import * as React from 'react';
 
 interface TitleProps {
   variant: Variant | "h7" | "body1" | "body2" | "body3";

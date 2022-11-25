@@ -244,7 +244,7 @@ export const PatientOverview: FC = () => {
                   [theme.breakpoints.down("xl")]: { height: "275px" },
                 }}
               >
-                <UserInfo />
+                <UserInfo patientName="testPatient" achiveStatus={2} />
               </ShadowBox>
             </Grid>
             <Grid item xs={6} xl={6}>

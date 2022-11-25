@@ -12,3 +12,17 @@ interface InfoItemProps {
     value: React.ReactNode | Element;
   }>;
 }
+export const enum AchiveEnum {
+  No = 1,
+  Prospective = 2,
+  Archived = 3,
+}
+interface PatientInfoProps {
+  patientName: string;
+  birthDate?: string;
+  mobile?: string;
+  email?: string;
+  address?: string;
+  avatar?: string;
+  achiveStatus: AchiveEnum;
+}

@@ -2,6 +2,7 @@ import Text from "@/components/Text/text";
 import { Box, Grid } from "@mui/material";
 import { FC } from "react";
 import { InfoLowerBox } from "./overview.style";
+import { InfoItemProps } from './type';
 import React from 'react';
 
 const InfoItem: FC<InfoItemProps> = ({ dataSource }) => {
@@ -26,7 +27,7 @@ const InfoItem: FC<InfoItemProps> = ({ dataSource }) => {
                     {item.name}
                   </Text>
                 )}
-                <Box>{item.value}</Box>
+                <Box sx={{ minHeight: "18px" }}>{item.value}</Box>
               </Box>
             </Grid>
           )
