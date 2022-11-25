@@ -13,10 +13,10 @@ export const StyledMenu = styled(Menu)<MenuProps>(
                 fontWeight: 300,
                 color: theme.palette.gray?.main,
 
-                "&:first-child:hover": {
+                "&:first-of-type:hover": {
                     backgroundColor: "transparent",
                 },
-                "&:not(:first-child):hover": {
+                "&:not(:first-of-type):hover": {
                     backgroundColor: theme.palette.gray?.lighten1,
                 },
             },

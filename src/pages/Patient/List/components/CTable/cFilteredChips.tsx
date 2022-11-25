@@ -1,4 +1,4 @@
-import { Grid, Chip, styled, ChipProps } from "@mui/material";
+import { Grid, Chip, styled, ChipProps, Button, Link } from "@mui/material";
 import React, { FC } from "react";
 
 
@@ -39,7 +39,20 @@ const CFilteredChips: FC = () => {
             <ChipTag label="Decision pending" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
             <ChipTag label="In production" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
             <ChipTag label="Deletable" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-
+            <Link
+                component="button"
+                variant="body1"
+                color={"secondary"}
+                sx={{
+                    fontWeight: 300, marginTop: "10px",
+                    marginLeft: "5px"
+                }}
+                onClick={() => {
+                    console.info("I'm a button.");
+                }}
+            >
+                Clear all
+            </Link>
 
         </Grid>
     )

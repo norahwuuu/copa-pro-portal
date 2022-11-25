@@ -1,5 +1,5 @@
 import { Link, SxProps, Theme } from "@mui/material";
-import { FC, ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import { Link as RouterLink } from "umi";
 import * as React from 'react';
 

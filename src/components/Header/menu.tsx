@@ -81,8 +81,8 @@ const CustomizedMenus: FC = () => {
   return (
     <>
       <StyledMenuButton
-        id="demo-positioned-button"
-        aria-controls={open ? "demo-positioned-menu" : undefined}
+        id="user-button"
+        aria-controls={open ? "user-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
@@ -93,8 +93,8 @@ const CustomizedMenus: FC = () => {
       </StyledMenuButton>
 
       <OverwriteStyleMenu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
+        id="user-menu"
+        aria-labelledby="user-button"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
