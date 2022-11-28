@@ -2,15 +2,16 @@ import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
 import { Container, Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, FC } from "react";
 import { history, useIntl } from "umi";
 import { changePasswordText } from "../Login/column";
 import styles from "./changePassword.less";
+import * as React from 'react';
 
 export const specialCharacters =
   /[`~!@#$%^&*()_\-+=<>?:"{}|,.;/'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im; // 特殊字符
 
-const RecoverPassword = () => {
+export const ChangePassword: FC<any> = ({ changePasswordFn }) => {
   const translate = useIntl();
   const [oldPassword, setOldPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
@@ -52,7 +53,10 @@ const RecoverPassword = () => {
     ) {
       setPassType("noError");
       setOldPassType("noError");
-      alert("save password success!");
+      changePasswordFn && changePasswordFn({
+        oldPassword,
+        newPassword
+      })
     }
   };
 
@@ -137,4 +141,4 @@ const RecoverPassword = () => {
     </Container>
   );
 };
-export default RecoverPassword;
+export default ChangePassword;
