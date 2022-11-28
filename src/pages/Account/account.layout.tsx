@@ -5,6 +5,7 @@ import { Box, Grid, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
 import { navItems } from "./account.config";
+import React from 'react'
 
 const AccountHeader: FC = () => {
   return (
