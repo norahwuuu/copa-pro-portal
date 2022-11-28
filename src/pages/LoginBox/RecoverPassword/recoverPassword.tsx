@@ -11,8 +11,8 @@ import { connect, history, useIntl } from "umi";
 import { specialCharacters } from "../ChangePassword/changePassword";
 import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
-
-const RecoverPassword: FC<recoverProps> = ({ resetPassword }) => {
+import React from 'react';
+export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
   const [emailType, setEmailType] = useState<string>("noError");
@@ -47,15 +47,14 @@ const RecoverPassword: FC<recoverProps> = ({ resetPassword }) => {
     if (verifyQustion === "") {
       setverifyQustionType("verifyQustionError");
     }
-
+    checkPass()
     if (
       password !== "" &&
       email !== "" &&
       verifyQustion !== "" &&
       checkPass()
     ) {
-      alert("recover password success!");
-      resetPassword({
+      resetPassword && resetPassword({
         username: email,
         reset_password_token: "dfp3XBKtQFgU4PxZC8zS",
         okta_user_id: "00u6bza7n52Ejf3lV5d7",
@@ -66,7 +65,7 @@ const RecoverPassword: FC<recoverProps> = ({ resetPassword }) => {
     }
   };
   const checkVerifyQustion = () => {
-    if (verifyQustionType === "") {
+    if (verifyQustion === "") {
       setverifyQustionType && setverifyQustionType("verifyQustionError");
     } else {
       setverifyQustionType && setverifyQustionType("noError");
