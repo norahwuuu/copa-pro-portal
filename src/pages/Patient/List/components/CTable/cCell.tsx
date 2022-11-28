@@ -15,6 +15,7 @@ import OrderStatusColumn from "./orderStatusColumn";
 import PatientStatusColumn from "./patientStatusColumn";
 import { IColumn, IRow } from "./table";
 import { columnKeys } from "./table.config";
+import React from 'react';
 
 const CCell: FC<{ column: IColumn; row: IRow; isLoading?: boolean }> = ({
   column,
@@ -24,6 +25,7 @@ const CCell: FC<{ column: IColumn; row: IRow; isLoading?: boolean }> = ({
   if (isLoading) {
     return (
       <Skeleton
+        data-testid="skeleton"
         height={30}
         width={columnKeys.FIRST_NAME === column.id ? "20px" : "inherit"}
         sx={{

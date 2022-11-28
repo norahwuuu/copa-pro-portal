@@ -64,5 +64,6 @@
   "userInfo.archive": "Archive",
   "userInfo.archived": "Archived",
   "userInfo.Unarchive": "Unarchive",
-  "userInfo.Prospective": "Prospective"
+  "userInfo.Prospective": "Prospective",
+  "button.addNewPatient": "Add a new patient"
 }

@@ -89,8 +89,8 @@ const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
   return (
     <>
       <StyledMenuButton
-        id="demo-positioned-button"
-        aria-controls={open ? "demo-positioned-menu" : undefined}
+        id={`${filter.id}-button`}
+        aria-controls={open ? `${filter.id}-menu` : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
@@ -102,8 +102,8 @@ const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
       </StyledMenuButton>
 
       <StyledMenu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
+        id={`${filter.id}-menu`}
+        aria-labelledby={`${filter.id}-button`}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

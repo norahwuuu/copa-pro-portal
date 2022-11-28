@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 import { FC } from "react";
 import { IRow } from "./table";
 import { DENTAL_MONITORING_STATUS } from "./table.config";
+import React from 'react';
 
 const DentalMonitoringStatus: FC<{ row: IRow }> = ({ row }) => {
   let template;

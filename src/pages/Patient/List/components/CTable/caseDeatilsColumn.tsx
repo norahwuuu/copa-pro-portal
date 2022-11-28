@@ -14,7 +14,7 @@ import {
   TooltipProps,
 } from "@mui/material";
 import React, { FC } from "react";
-import { FormattedMessage } from "umi";
+import { FormattedMessage, useIntl } from "umi";
 import { IRow } from "./table";
 import { CASE_DETAILS } from "./table.config";
 
@@ -39,11 +39,12 @@ const CTooltip = styled(({ className, ...props }: TooltipProps) => (
 }));
 
 const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
-  let template;
-  let translate = "";
+  const translate = useIntl()
+  let template = null;
+  let translatekey = "";
   switch (row?.caseDetails) {
     case CASE_DETAILS.CASE_TOO_COMPLEX:
-      translate = "caseTooComplexTooltip";
+      translatekey = "caseTooComplexTooltip";
       template = (
         <>
           <ICons icon={"FailureIcon"} sxProps={{ color: "gray.darken" }} />
@@ -52,7 +53,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.PATIENT_DECLINED:
-      translate = "patientDeclinedTooltip";
+      translatekey = "patientDeclinedTooltip";
       template = (
         <>
           <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
@@ -61,7 +62,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.PATIENT_DECISION_PENDING:
-      translate = "patientDecisionPendingTooltip";
+      translatekey = "patientDecisionPendingTooltip";
 
       template = (
         <>
@@ -71,7 +72,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.AWAITING_PATIENT_PAYMENT:
-      translate = "awaitingPatientPaymentTooltip";
+      translatekey = "awaitingPatientPaymentTooltip";
       template = (
         <>
           <ICons
@@ -83,7 +84,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.AWAITING_DOCTOR_APPROVAL:
-      translate = "awaitingDoctorDpprovalTooltip";
+      translatekey = "awaitingDoctorDpprovalTooltip";
 
       template = (
         <>
@@ -96,7 +97,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.UNDER_QUALITY_CHECK:
-      translate = "underQualityCheckTooltip";
+      translatekey = "underQualityCheckTooltip";
 
       template = (
         <>
@@ -109,7 +110,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
       );
       break;
     case CASE_DETAILS.NEEDS_DOCTOR_REVIEW:
-      translate = "needsDoctorReviewTooltip";
+      translatekey = "needsDoctorReviewTooltip";
 
       template = (
         <>
@@ -148,7 +149,7 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
   }
 
   return (
-    <CTooltip title={translate && <FormattedMessage id={translate} />}>
+    <CTooltip title={translatekey && translate.formatMessage({ id: translatekey }) || ""}>
       <Box
         component={"span"}
         sx={{

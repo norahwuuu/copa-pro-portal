@@ -17,10 +17,10 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { FormattedMessage, history } from "umi";
+import React, { FC, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { history, useIntl } from "umi";
 import CCell from "./cCell";
-import CFilter from "./CFilter";
+import CFilter from "./cFilter";
 import CFilteredChips from "./cFilteredChips";
 import CPagination from "./cPagination";
 import CSearch from "./cSearch";
@@ -30,6 +30,7 @@ import { tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
 import { StyledTableCell, StyledTableRow } from "./table.style";
 
 const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
+  const translate = useIntl()
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
   const [records, setRecords] = useState(mockData);
@@ -64,6 +65,10 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
   };
 
   const emptyRows = Math.max(0, (1 + page) * rowsPerPage - records.length);
+
+
+
+
   return (
     <Box component={"div"} sx={{ mb: 3, position: "relative" }}>
       <Box
@@ -101,12 +106,7 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
             <TableHead>
               <StyledTableRow>
                 {tableData.columnDef.map((column) => (
-                  <StyledTableCell
-                    key={column.name}
-                    sx={{ ...column.cell?.style }}
-                  >
-                    <FormattedMessage id={column.translate} />
-                  </StyledTableCell>
+                  <StyledTableCell key={column.name} sx={{ ...column.cell?.style }} > {translate.formatMessage({ id: column.translate })} </StyledTableCell>
                 ))}
               </StyledTableRow>
             </TableHead>
@@ -180,7 +180,7 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
                 />
               </Text>
               <Text variant={"h6"}>
-                <FormattedMessage id="noPatients" />
+                {translate.formatMessage({ id: "noPatients" })}
               </Text>
             </>
           )}
@@ -194,13 +194,14 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
                 />
               </Text>
               <Text variant={"h6"}>
-                <FormattedMessage id="patientSearchResultsEmpty" />
+                {translate.formatMessage({ id: "patientSearchResultsEmpty" })}
               </Text>
               <Text
                 variant={"body1"}
                 sxProp={{ fontWeight: 300, color: "gray.main", mt: 2 }}
               >
-                <FormattedMessage id="patientSearchResultsEmptySubText" />
+                {translate.formatMessage({ id: "patientSearchResultsEmptySubText" })}
+
               </Text>
             </>
           )}

@@ -10,6 +10,7 @@ import { Box } from "@mui/material";
 import { FC } from "react";
 import { IRow } from "./table";
 import { ORDER_STATUS } from "./table.config";
+import React from "react";
 
 const OrderStatusColumn: FC<{ row: IRow }> = ({ row }) => {
   let template;

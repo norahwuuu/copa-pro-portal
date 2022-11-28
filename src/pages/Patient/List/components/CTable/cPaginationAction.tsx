@@ -10,15 +10,17 @@
 
 import { Box, Pagination, PaginationRenderItemParams } from "@mui/material";
 import { ChangeEvent, FC } from "react";
-import { FormattedMessage } from "umi";
+import { useIntl } from "umi";
 import { ITablePaginationActionsProps } from "./table";
 import { CPaginationItem } from "./table.style";
+import React from 'react';
 
 const TablePaginationActions: FC<ITablePaginationActionsProps> = ({
   count,
   rowsPerPage,
   onPageChange,
 }) => {
+  const translate = useIntl()
   const calculatePagesCount = (pageSize: number, totalCount: number) => {
     // we suppose that if we have 0 items we want 1 empty page
     return totalCount < pageSize ? 1 : Math.ceil(totalCount / pageSize);
@@ -30,9 +32,9 @@ const TablePaginationActions: FC<ITablePaginationActionsProps> = ({
     onPageChange(event, value - 1);
   };
 
-  const BtnTemplate = (key: string) => (
+  const BtnTemplate = (btnText: string) => (
     <Box component={"span"} sx={{ textDecoration: "underline" }}>
-      <FormattedMessage id={key} />
+      {btnText}
     </Box>
   );
 
@@ -48,10 +50,8 @@ const TablePaginationActions: FC<ITablePaginationActionsProps> = ({
           return (
             <CPaginationItem
               components={{
-                last: () => BtnTemplate("lastPagination"),
-                next: () => BtnTemplate("nextPagination"),
-                first: () => BtnTemplate("firstPagination"),
-                previous: () => BtnTemplate("previousPagination"),
+                next: () => BtnTemplate(translate.formatMessage({ id: "nextPagination" })),
+                previous: () => BtnTemplate(translate.formatMessage({ id: "previousPagination" })),
               }}
               {...params}
             />

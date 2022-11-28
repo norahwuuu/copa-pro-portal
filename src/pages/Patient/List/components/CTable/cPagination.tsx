@@ -11,6 +11,7 @@ import { Box, TablePagination } from "@mui/material";
 import { FC, MouseEvent, useEffect, useState } from "react";
 import TablePaginationActions from "./cPaginationAction";
 import { IPaginationProps } from "./table";
+import React from 'react';
 
 const CPagination: FC<IPaginationProps> = ({
   rowsPerPage,

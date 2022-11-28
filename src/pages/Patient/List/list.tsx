@@ -1,11 +1,12 @@
 import Button from "@/components/Button/button";
-import { Box, Container, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { Box, Container, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { FC, useState } from "react";
-import { history } from "umi";
+import { history, useIntl } from "umi";
 import { createPatientUrlObj } from "../Create/createPatient.route";
 import CTable from "./components/CTable/cTable";
 
 const PatientList: FC = () => {
+  const translate = useIntl();
   const [tablevalue, setTablevalue] = useState("records"); // TOBE remove once API integarion Done
 
   // TOBE remove once API integarion Done
@@ -58,7 +59,9 @@ const PatientList: FC = () => {
 
               <Button
                 variant={"contained"}
-                btnLabel={"Add a new patient"}
+                btnLabel={translate.formatMessage({
+                  id: "button.addNewPatient",
+                })}
                 onClickHandler={() =>
                   history.push(createPatientUrlObj.createPatientInformation)
                 }
