@@ -26,3 +26,12 @@ interface PatientInfoProps {
   avatar?: string;
   achiveStatus: AchiveEnum;
 }
+
+interface RecordsProps {
+  isEdit: boolean;
+  upper?: string;
+  lower?: string;
+  anterior?: string;
+  xRay?: string;
+  other?: string;
+}

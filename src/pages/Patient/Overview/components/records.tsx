@@ -1,4 +1,3 @@
-import testPng from "@/assets/images/login1680.png";
 import Btn from "@/components/Button/button";
 import ImageView from "@/components/ImageView/imageView";
 import RecordCard from "@/components/RecordCard/recordCard";
@@ -7,9 +6,10 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Grid } from "@mui/material";
 import { FC } from "react";
 import { useIntl } from "umi";
+import { RecordsProps } from "./type";
 import React from 'react';
 
-const Records: FC = () => {
+const Records: FC<RecordsProps> = ({ isEdit = true, upper, lower, anterior, xRay, other }) => {
   const translate = useIntl();
   return (
     <RecordCard
@@ -67,7 +67,7 @@ const Records: FC = () => {
                       </Text>
                     </Grid>
                     <Grid item>
-                      <ImageView src={testPng} />
+                      <ImageView testId="upper" src={upper} />
                     </Grid>
                   </Grid>
                 </Grid>
@@ -95,14 +95,14 @@ const Records: FC = () => {
                       </Text>
                     </Grid>
                     <Grid item>
-                      <ImageView />
+                      <ImageView testId="lower" src={lower} />
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item>
-              <ImageView sxProp={{ width: 190, height: 140 }} />
+              <ImageView testId="anterior" src={anterior} sxProp={{ width: 190, height: 140 }} />
             </Grid>
             <Grid item>
               <Grid
@@ -113,10 +113,10 @@ const Records: FC = () => {
                 alignItems="center"
               >
                 <Grid item>
-                  <ImageView />
+                  <ImageView testId="xRay" src={xRay} />
                 </Grid>
                 <Grid item>
-                  <ImageView />
+                  <ImageView testId="other" src={other} />
                 </Grid>
               </Grid>
             </Grid>
@@ -125,8 +125,9 @@ const Records: FC = () => {
       }
       footChildren={
         <Btn
-          isDisabled
-          variant="shade"
+          isDisabled={!isEdit}
+          onClickHandler={() => { console.log('click upload new record') }}
+          variant="outlined"
           startIcon={<CloudUploadIcon />}
           btnLabel={translate.formatMessage({ id: "uploadRecords" })}
         ></Btn>

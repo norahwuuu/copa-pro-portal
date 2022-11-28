@@ -6,6 +6,8 @@ import { history } from "umi";
 import React from 'react';
 import { PatientOverview } from '@/pages/Patient/Overview/overview';
 import UserInfo from '@/pages/Patient/Overview/components/userInfo';
+import Records from '@/pages/Patient/Overview/components/records';
+import testPng from '@/assets/images/left1.png';
 
 jest.mock("umi", () => ({
     connect: () => jest.fn(),
@@ -60,8 +62,47 @@ describe("Page Overview", () => {
         });
     })
     //Records
-
+    it("Should render page of records correctly", () => {
+        const testData = {
+            isEdit: true,
+        }
+        renderWithRouter(<Records {...testData} />);
+        expect(screen.getAllByText('Records').length).toBe(1);
+        expect(screen.getByTestId('upper')).toBeInTheDocument();
+        expect(screen.getByTestId('lower')).toBeInTheDocument();
+        expect(screen.getByTestId('other')).toBeInTheDocument();
+        expect(screen.getByTestId('anterior')).toBeInTheDocument();
+        expect(screen.getByTestId('xRay')).toBeInTheDocument();
+        expect(screen.getByRole('button')).toBeInTheDocument();
+    });
+    it("Should display and click the image to view the large view correctly, and close the large view correctly", async () => {
+        const testData = {
+            isEdit: true,
+            upper: testPng,
+        }
+        const { user } = renderWithRouter(<Records {...testData} />);
+        await act(async () => {
+            user.click(screen.getByTestId('upper'));
+        });
+        expect(screen.getByTestId('imageView')).toBeInTheDocument();
+        await act(async () => {
+            user.click(screen.getByTestId('removeContent'));
+        });
+        expect(screen.queryByTestId('imageView')).not.toBeInTheDocument();
+    });
+    it("Should click the Upload new record to run function correctly", async () => {
+        const testData = {
+            isEdit: true,
+        }
+        const { user } = renderWithRouter(<Records {...testData} />);
+        await act(async () => {
+            user.click(screen.getByRole('button'));
+        });
+    });
     //Treatment Plan
 
     //Dental monitoring
+
+
+    afterEach(cleanup);
 })

@@ -254,7 +254,7 @@ export const PatientOverview: FC = () => {
                   [theme.breakpoints.down("xl")]: { height: "275px" },
                 }}
               >
-                <Records />
+                <Records isEdit={true} />
               </ShadowBox>
             </Grid>
             <Grid item xs={12} xl={12}>

@@ -14,7 +14,7 @@ import { FC, useState } from "react";
 import { ImageViewProps } from "./type";
 import React from 'react';
 
-const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp }) => {
+const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp, testId = '' }) => {
   // shadow show or hidden
   const [showShadow, setShowShadow] = useState<boolean>(false);
 
@@ -24,6 +24,7 @@ const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp }) => {
     if (!maskContainer) {
       const mask = document.createElement("div");
       mask.setAttribute("id", "imageView");
+      mask.setAttribute("data-testid", "imageView");
       mask.style.width = "100%";
       mask.style.height = "100%";
       mask.style.position = "absolute";
@@ -47,6 +48,7 @@ const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp }) => {
       content.style.backgroundColor = "#fff";
       content.style.position = "relative";
       const removeContent = document.createElement("div");
+      removeContent.setAttribute('data-testid', 'removeContent');
       removeContent.style.width = "20px";
       removeContent.style.height = "20px";
       removeContent.style.position = "absolute";
@@ -77,6 +79,7 @@ const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp }) => {
     >
       {src && src !== "" ? (
         <div
+          data-testid={testId}
           onMouseOver={() => {
             setShowShadow(true);
           }}
@@ -122,6 +125,7 @@ const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp }) => {
         </div>
       ) : (
         <NoPhotographyOutlinedIcon
+          data-testid={testId}
           sx={{ color: "gray.darken" }}
           width={21}
           height={21}
