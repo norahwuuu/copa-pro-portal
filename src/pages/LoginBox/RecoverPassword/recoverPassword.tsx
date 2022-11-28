@@ -12,7 +12,6 @@ import { connect, history, useIntl } from "umi";
 import { specialCharacters } from "../ChangePassword/changePassword";
 import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
-import React from 'react';
 export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
   const translate = useIntl();
   const [email, setEmail] = useState<string>("");
