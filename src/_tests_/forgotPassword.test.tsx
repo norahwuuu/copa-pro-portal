@@ -38,9 +38,12 @@ describe("Page ForgotPassword", () => {
     it("Should render page correctly", () => {
         renderWithRouter(<ForgotPassword />);
         expect(screen.getByLabelText("Email")).toBeInTheDocument();
-        expect(screen.getByText(/Cancel/i)).toBeInTheDocument();
-        expect(screen.getByText(/Reset password/i)).toBeInTheDocument();
+        expect(screen.getByText(`Please provide the email address associated with your account. We will send you a password reset email with instructions once we find a match in our system.`)).toBeInTheDocument();
+        expect(screen.getByText('Forgot password?')).toBeInTheDocument();
+        expect(screen.getByText('Cancel')).toBeInTheDocument();
+        expect(screen.getByText('Reset password')).toBeInTheDocument();
     });
+
 
     it("Should translate message correctly", () => {
         testFormatMessage = true;
@@ -57,30 +60,6 @@ describe("Page ForgotPassword", () => {
         expect(screen.getByText(errorTips.emailEmpty)).toBeInTheDocument();
     });
 
-    // it("Should display error when email is invalid format", async () => {
-    //     const { user } = renderWithRouter(<ForgotPassword />);
-    //     const usernameField = screen.getByLabelText("Email");
-    //     await act(async () => {
-    //         user.change(screen.getByLabelText("Email"), {
-    //             target: { value: "test" },
-    //         });
-
-    //         user.change(screen.getByLabelText("Password"), {
-    //             target: { value: "test" },
-    //         });
-    //     });
-    //     // @ts-ignore
-    //     expect(screen.getByLabelText("Email").value).toBe("test");
-    //     await act(async () => {
-    //         // I had to change it from user.click(screen.getByText(/Login/, {selector: 'button'})) to user.blur(screen.getByLabelText("Email"));
-    //         // because you don't call validate on button click... You should also call form validate on click on the login
-    //         // button.
-    //         user.blur(screen.getByLabelText("Email"));
-    //     });
-
-    //     expect(screen.getByText(errorTips.nonvalidEmail)).toBeInTheDocument();
-    //     expect(screen.queryByText(errorTips.passEmpty)).toBeNull();
-    // });
 
     it("Should display error when email is invalid format", async () => {
         const { user } = renderWithRouter(<ForgotPassword />);
@@ -114,8 +93,21 @@ describe("Page ForgotPassword", () => {
 
         expect(history.push).toHaveBeenCalledWith("/");
     });
+    it("Should be able to submit form with valid username ", async () => {
+        const forgotPassword = jest.fn();
+        const { user } = renderWithRouter(<ForgotPassword forgotPassword={forgotPassword} />);
+        user.change(screen.getByLabelText("Email"), {
+            target: { value: "test@ulab.com" },
+        });
 
+        await act(async () => {
+            user.click(screen.getByText(/Reset password/, { selector: "button" }));
+        });
 
+        expect(forgotPassword).toHaveBeenCalledWith({
+            username: "test@ulab.com",
+        });
+    });
 
     afterEach(cleanup);
 });
