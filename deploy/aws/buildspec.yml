@@ -7,7 +7,6 @@ env:
     HIGH_SEVERITY: 50
     MEDIUM_SEVERITY: 150
     LOW_SEVERITY: 200
-    APP_NAME: pro-portal
 
 phases:
   install:
@@ -18,6 +17,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - GIT_HASH=$(git rev-parse HEAD)
+      - APP_NAME=$(git config --local remote.origin.url|sed -n 's#.*/\([^.]*\)#\1#p')
       - $(aws ecr get-login --region us-west-2 --no-include-email)
       - REPOSITORY_URI=927876825924.dkr.ecr.us-west-2.amazonaws.com/$APP_NAME
       - CURRENT_VERSION=v1.0.0
