@@ -12,5 +12,5 @@ export interface resetPasswordParamsType {
 }
 
 export interface recoverProps {
-  resetPassword: (arg: resetPasswordParamsType) => void;
+  resetPassword?: (arg: resetPasswordParamsType) => void;
 }
