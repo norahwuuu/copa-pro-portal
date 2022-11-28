@@ -1,3 +1,5 @@
+
+import React from 'react';
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import { Container, Grid, Typography } from "@mui/material";

@@ -5,6 +5,7 @@
  *   @return
  *
  */
+import React from 'react';
 import ICons from "@/components/Icons/icons";
 import {
   Box,
@@ -13,8 +14,8 @@ import {
   tooltipClasses,
   TooltipProps,
 } from "@mui/material";
-import React, { FC } from "react";
-import { FormattedMessage, useIntl } from "umi";
+import { FC } from "react";
+import { useIntl } from "umi";
 import { IRow } from "./table";
 import { CASE_DETAILS } from "./table.config";
 

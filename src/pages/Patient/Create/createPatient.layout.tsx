@@ -1,3 +1,4 @@
+import React from 'react';
 import Text from "@/components/Text/text";
 import { ColumnCenterAlign } from "@/theme/themen.util";
 import { Box, Grid, Link } from "@mui/material";

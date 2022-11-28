@@ -7,7 +7,7 @@
  */
 
 import { Box, SxProps } from "@mui/material";
-import { FC } from "react";
+import React, { FC } from "react";
 import { IRow } from "./table";
 import { PATIENT_STATUS, PATIENT_STATUS_CASE_MAP } from "./table.config";
 

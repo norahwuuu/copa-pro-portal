@@ -4,8 +4,7 @@ import RecordCard from "@/components/RecordCard/recordCard";
 import Text from "@/components/Text/text";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Grid } from "@mui/material";
-import { FC } from "react";
-import { useIntl } from "umi";
+import { FC } from "react"; import { useIntl } from "umi";
 import { RecordsProps } from "./type";
 import React from 'react';
 

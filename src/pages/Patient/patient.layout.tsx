@@ -1,7 +1,7 @@
 import Header from "@/components/Header/header";
 import Text from "@/components/Text/text";
 import { Grid } from "@mui/material";
-import { FC, ReactChildren } from "react";
+import React, { FC, ReactChildren } from "react";
 import { history, useIntl, useLocation } from "umi";
 import { createPatientUrlObj } from "./Create/createPatient.route";
 import { patientUrlObj } from "./patient.route";

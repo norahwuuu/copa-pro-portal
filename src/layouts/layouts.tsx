@@ -1,3 +1,4 @@
+import React from 'react';
 import Footer from "@/components/Footer/footer";
 import theme from "@/theme/theme";
 import { Box, ThemeProvider } from "@mui/material";

@@ -3,7 +3,7 @@
  *   @return
  *
  */
-
+import React from 'react';
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import useWindowSize from "@/hooks/useWindowSize";
@@ -17,7 +17,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import React, { FC, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { history, useIntl } from "umi";
 import CCell from "./cCell";
 import CFilter from "./cFilter";

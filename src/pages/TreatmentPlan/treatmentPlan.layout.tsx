@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from "@/components/Header/header";
 import { Box, Link } from "@mui/material";
 import { FC, ReactChildren } from "react";

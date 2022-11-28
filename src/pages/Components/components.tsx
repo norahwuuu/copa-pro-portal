@@ -5,8 +5,7 @@ import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import { Edit, OpenInNew } from "@mui/icons-material";
 import { Box, Grid, Paper } from "@mui/material";
-import { FC } from "react";
-
+import React, { FC } from "react";
 const CustomComponent: FC = () => {
   return (
     <Grid

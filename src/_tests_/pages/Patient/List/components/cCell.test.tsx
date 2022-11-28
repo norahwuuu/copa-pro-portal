@@ -3,7 +3,7 @@
 import CCell from "@/pages/Patient/List/components/CTable/cCell";
 import { IColumn, IRow } from "@/pages/Patient/List/components/CTable/table";
 import { tableData } from "@/pages/Patient/List/components/CTable/table.config";
-import { cleanup, screen, act } from "@testing-library/react";
+import { cleanup, screen } from "@testing-library/react";
 import React from "react"
 import { renderWithWrapper } from '../../../../util/test';
 import patientListMock from "../patientList.mock";
