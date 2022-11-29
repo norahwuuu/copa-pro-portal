@@ -17,7 +17,7 @@ import { IColumn, IRow } from "./table";
 import { columnKeys } from "./table.config";
 import React from 'react';
 
-const CCell: FC<{ column: IColumn; row: IRow; isLoading?: boolean }> = ({
+const CCell: FC<{ column: IColumn; row?: IRow; isLoading?: boolean }> = ({
   column,
   row,
   isLoading,
@@ -37,26 +37,28 @@ const CCell: FC<{ column: IColumn; row: IRow; isLoading?: boolean }> = ({
       />
     );
   }
-  if (columnKeys.CASE_DETAILS === column.id) {
-    return <CaseDeatilsColumn row={row} />;
-  }
-  if (columnKeys.PATIENT_STATUS === column.id) {
-    return <PatientStatusColumn row={row} />;
-  }
-  if (columnKeys.ORDER_STATUS === column.id) {
-    return <OrderStatusColumn row={row} />;
-  }
-  if (columnKeys.DENTAL_MONITORING === column.id) {
-    return <DentalMonitoringStatus row={row} />;
-  }
-  if (columnKeys.LAST_MONITORING_SCAN === column.id) {
-    return (
-      <Box component={"span"} sx={{ fontWeight: 300 }}>
-        {row[column.id]}
-      </Box>
-    );
-  }
-  return row[column.id];
+  if (row) {
+    if (columnKeys.CASE_DETAILS === column.id) {
+      return <CaseDeatilsColumn row={row} />;
+    }
+    if (columnKeys.PATIENT_STATUS === column.id) {
+      return <PatientStatusColumn row={row} />;
+    }
+    if (columnKeys.ORDER_STATUS === column.id) {
+      return <OrderStatusColumn row={row} />;
+    }
+    if (columnKeys.DENTAL_MONITORING === column.id) {
+      return <DentalMonitoringStatus row={row} />;
+    }
+    if (columnKeys.LAST_MONITORING_SCAN === column.id) {
+      return (
+        <Box component={"span"} sx={{ fontWeight: 300 }}>
+          {row[column.id]}
+        </Box>
+      );
+    }
+    return row[column.id];
+  } return;
 };
 
 CCell.defaultProps = {

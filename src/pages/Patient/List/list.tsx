@@ -1,18 +1,23 @@
+import React from "react";
 import Button from "@/components/Button/button";
-import { Box, Container, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { FC, useState } from "react";
-import { history, useIntl } from "umi";
+import { Box, Container } from "@mui/material";
+import { FC } from "react";
+import { connect, history, useIntl } from "umi";
 import { createPatientUrlObj } from "../Create/createPatient.route";
 import CTable from "./components/CTable/cTable";
+import { PatientListParams, PatientListState } from "./type";
 
-const PatientList: FC = () => {
+interface PatientListProps {
+  patientListState: PatientListState;
+  fetchPatients: (payload: PatientListParams) => void
+}
+
+const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatients }) => {
   const translate = useIntl();
-  const [tablevalue, setTablevalue] = useState("records"); // TOBE remove once API integarion Done
 
-  // TOBE remove once API integarion Done
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTablevalue((event.target as HTMLInputElement).value);
-  };
+  const updatePatientList = ({ page = 0, rowsPerPage = 10 }: PatientListParams) => {
+    fetchPatients({ page, rowsPerPage })
+  }
 
   return (
     <>
@@ -28,35 +33,6 @@ const PatientList: FC = () => {
                 my: 1,
               }}
             >
-              <Box component={"div"}>
-                <FormControl>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    value={tablevalue}
-                    onChange={handleChange}
-                  >
-                    <FormControlLabel value="records" control={<Radio />} label="Data" />
-                    <FormControlLabel
-                      value="norecords"
-                      control={<Radio />}
-                      label="Empty"
-                    />
-                    <FormControlLabel
-                      value="filterempty"
-                      control={<Radio />}
-                      label="No search result"
-                    />
-                    <FormControlLabel
-                      value="filtering"
-                      control={<Radio />}
-                      label="Loading skeleton"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </Box>
-
               <Button
                 variant={"contained"}
                 btnLabel={translate.formatMessage({
@@ -78,11 +54,28 @@ const PatientList: FC = () => {
               }}
             ></Box>
           </Box>
-          <CTable tableAction={tablevalue} />
+          <CTable tableAction={patientListState.resultType} lists={patientListState.lists} updatePatientList={updatePatientList} totalRecords={patientListState.totalRecords} />
         </Box>
       </Container>
     </>
   );
 };
 
-export default PatientList;
+
+
+const mapStateToProps = (state) => ({ patientListState: state.patientListModal })
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPatients: (payload: PatientListParams) => dispatch({
+      type: `patientListModal/fetchPatientList`,
+      payload,
+    }),
+
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PatientList);
+

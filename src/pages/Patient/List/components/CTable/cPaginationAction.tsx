@@ -17,6 +17,7 @@ import React from 'react';
 
 const TablePaginationActions: FC<ITablePaginationActionsProps> = ({
   count,
+  page,
   rowsPerPage,
   onPageChange,
 }) => {
@@ -42,9 +43,10 @@ const TablePaginationActions: FC<ITablePaginationActionsProps> = ({
     <Box sx={{ flexShrink: 0, ml: 2 }}>
       <Pagination
         count={calculatePagesCount(rowsPerPage, count)}
-        size="small"
-        variant="outlined"
-        shape="rounded"
+        size={"small"}
+        variant={"outlined"}
+        shape={"rounded"}
+        page={page + 1}
         onChange={handleChange}
         renderItem={(params: PaginationRenderItemParams) => {
           return (

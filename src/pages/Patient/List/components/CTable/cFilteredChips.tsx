@@ -34,12 +34,8 @@ const CFilteredChips: FC = () => {
             <ChipTag label="Active" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
             <ChipTag label="Not tracking" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
             <ChipTag label="Rejected" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Awaiting payment" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
             <ChipTag label="Shipped" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
             <ChipTag label="Under quality check" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Decision pending" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="In production" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Deletable" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
             <Link
                 component="button"
                 variant="body1"
