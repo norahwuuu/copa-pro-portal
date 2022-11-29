@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { BgLeft1, BgLeft2, BgLeft3, BgLeft4, BgLeft5, BgRight1, BgRight2, BgRight3, BgRight4 } from "./loginBg.style";
+import { BgBox, BgLeft1, BgLeft2, BgLeft3, BgLeft4, BgLeft5, BgRight1, BgRight2, BgRight3, BgRight4 } from "./loginBg.style";
 import left1 from '@/assets/images/left1.png';
 import left2 from '@/assets/images/left2.png';
 import left3 from '@/assets/images/left3.png';
@@ -9,20 +9,21 @@ import right1 from '@/assets/images/right1.png';
 import right2 from '@/assets/images/right2.png';
 import right3 from '@/assets/images/right3.png';
 import right4 from '@/assets/images/right4.png';
+import { FC, ReactChildren } from "react";
 import React from 'react';
 
 
-const LoginBg = () => {
+const LoginBg: FC<{ children: ReactChildren }> = ({ children }) => {
   return (
-    <Box
+    <BgBox
       sx={{
-        width: "calc(100% - 60px)",
-        height: "calc(100% - 120px)",
         position: "absolute",
-        margin: "30px",
         borderBottomRightRadius: "60%",
         borderBottomLeftRadius: "20%",
         backgroundColor: "#f6f6f6",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
         // backgroundImage: `url(${login1680})`,
       }}
 
@@ -54,7 +55,8 @@ const LoginBg = () => {
       <BgRight4 sx={{ position: 'absolute', width: "23px", height: "36px" }}>
         <img src={right4} />
       </BgRight4>
-    </Box>
+      {children}
+    </BgBox>
   );
 };
 export default LoginBg;

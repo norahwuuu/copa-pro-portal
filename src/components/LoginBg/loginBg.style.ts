@@ -1,4 +1,21 @@
 import { Box, styled } from "@mui/system";
+export const BgBox = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down(1365)]: {
+    width: "calc(100% - 60px)",
+    height: "calc(100% - 120px)",
+    margin: "30px",
+  },
+  [theme.breakpoints.between(1365, 1920)]: {
+    width: "calc(100% - 70px)",
+    height: "calc(100% - 140px)",
+    margin: "35px",
+  },
+  [theme.breakpoints.up(1920)]: {
+    width: "calc(100% - 100px)",
+    height: "calc(100% - 150px)",
+    margin: "50px",
+  },
+}));
 export const BgLeft1 = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down(1195)]: {
     left: "64px",
@@ -84,7 +101,7 @@ export const BgLeft4 = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.up(1920)]: {
     left: "571px",
-    top: "630px",
+    top: "582px",
   },
 }));
 export const BgLeft5 = styled(Box)(({ theme }) => ({
@@ -106,7 +123,7 @@ export const BgLeft5 = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.up(1920)]: {
     left: "522px",
-    top: "643px",
+    top: "595px",
   },
 }));
 export const BgRight1 = styled(Box)(({ theme }) => ({
