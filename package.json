@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "0.0.2",
   "scripts": {
     "start": "cross-env PORT=3000 umi dev",
     "build": "cross-env UMI_ENV=dev umi build",
@@ -57,7 +58,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^14.4.3",
-    "@types/enzyme": "^3.10.12",
     "@types/jest": "^29.2.2",
     "@types/react": "^17.0.52",
     "@types/react-dom": "^16.9.17",
@@ -65,8 +65,6 @@
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "@umijs/test": "^3.5.34",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.7",
     "eslint": "^8.26.0",
     "eslint-plugin-react": "^7.31.10",
     "file-loader": "^6.2.0",

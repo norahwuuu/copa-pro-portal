@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pro-portal
+  namespace: public
+spec:
+  selector:
+    matchLabels:
+      app: pro-portal
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pro-portal
+        version: "v1"
+    spec:
+      containers:
+      - name: pro-portal
+        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/copa-pro-portal:v1.0.0.326a3de3db2e7bbafde9affb2268b48df9819d71.20221128_173337Z
+        ports:
+        - name: http
+          containerPort: 80
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        env:
+        - name: LOG_LEVEL
+          value: "DEBUG"
+        - name: ENVIRONMENT
+          value: "qa"
