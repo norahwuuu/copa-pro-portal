@@ -41,7 +41,7 @@ const MainModel: LoginModelType = {
         payload
       );
       if (status === "SUCCESS") {
-        alert("login success!");
+        history.push("/patient/list");
       } else {
         yield put({
           type: "setData",
