@@ -11,6 +11,8 @@ import Item from "./components/gridItem";
 import Records from "./components/records";
 import Btn from "@/components/Button/button";
 import UserInfo from "./components/userInfo";
+import testPng from "@/assets/images/test.jpg";
+import testAnterior from '@/assets/images/test2.png';
 import React from 'react';
 
 export const PatientOverview: FC = () => {
@@ -244,7 +246,7 @@ export const PatientOverview: FC = () => {
                   [theme.breakpoints.down("xl")]: { height: "275px" },
                 }}
               >
-                <UserInfo patientName="testPatient" achiveStatus={2} />
+                <UserInfo patientName="Monkey D Luffy" avatar={testPng} address="East sea" email="luffy@123.com" mobile="luffy 123 456" birthDate="05/05/1994" achiveStatus={2} />
               </ShadowBox>
             </Grid>
             <Grid item xs={6} xl={6}>
@@ -254,7 +256,7 @@ export const PatientOverview: FC = () => {
                   [theme.breakpoints.down("xl")]: { height: "275px" },
                 }}
               >
-                <Records isEdit={true} />
+                <Records anterior={testAnterior} isEdit={true} />
               </ShadowBox>
             </Grid>
             <Grid item xs={12} xl={12}>
