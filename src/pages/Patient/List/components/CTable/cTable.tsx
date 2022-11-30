@@ -24,49 +24,36 @@ import CFilter from "./cFilter";
 import CFilteredChips from "./cFilteredChips";
 import CPagination from "./cPagination";
 import CSearch from "./cSearch";
-import mockData from "./mock";
-import { IColumn } from "./table";
+import { IColumn, IRow, ITableParams } from "./table";
 import { tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
 import { StyledTableCell, StyledTableRow } from "./table.style";
 
-const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
+
+const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePatientList }) => {
   const translate = useIntl()
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
-  const [records, setRecords] = useState(mockData);
   const [width, setWidth] = useState(1);
   const [height, setHeight] = useState(1);
+  const [page, setPage] = useState<number>(0);
+  const rowsPerPage = ["xl"].includes(windowSize.breakpoint) ? TABLE_CONFIG.NO_OF_ROWS_LARGE_DEVICE : TABLE_CONFIG.NO_OF_ROWS
+
+  useEffect(() => {
+    updatePatientList({ page, rowsPerPage })
+  }, [page])
 
   useLayoutEffect(() => {
     setWidth(tableRef.current.clientWidth);
     setHeight(tableRef.current.clientHeight);
   }, [tableRef]);
 
-  useEffect(() => {
-    if (
-      tableAction === "records" ||
-      tableAction === "filtering"
-    ) {
-      setRecords(mockData);
-    } else {
-      setRecords([]);
-    }
-  }, [tableAction])
-
-  const [page, setPage] = useState<number>(0);
-  const rowsPerPage =
-    records.length > 0
-      ? ["xl"].includes(windowSize.breakpoint)
-        ? TABLE_CONFIG.NO_OF_ROWS_LARGE_DEVICE
-        : TABLE_CONFIG.NO_OF_ROWS
-      : TABLE_CONFIG.NO_OF_ROWS;
   const updatePage = (page: number) => {
     setPage(page);
+    updatePatientList({ page, rowsPerPage })
+
   };
 
-  const emptyRows = Math.max(0, (1 + page) * rowsPerPage - records.length);
-
-
+  const emptyRows = Math.max(0, (1 + page) * rowsPerPage - totalRecords);
 
 
   return (
@@ -111,13 +98,7 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {(rowsPerPage > 0
-                ? records.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-                : records
-              ).map((row) => (
+              {lists.map((row) => (
                 <StyledTableRow hover key={row.id} onClick={() => history.push(patientUrlObj.overviewPatient)}>
                   {tableData.columnDef.map((col: IColumn) => {
                     return (
@@ -125,14 +106,29 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
                         <CCell
                           column={col}
                           row={row}
-                          isLoading={tableAction === "filtering"}
+                          isLoading={tableAction === "fetching"}
                         />
                       </StyledTableCell>
                     );
                   })}
                 </StyledTableRow>
               ))}
-              {!records.length && (
+
+              {tableAction === "fetching" && Array(10).fill({} as IRow).map((row, index) => (
+                <StyledTableRow key={index}>
+                  {tableData.columnDef.map((col: IColumn) => {
+                    return (
+                      <StyledTableCell key={col.id}>
+                        <CCell
+                          column={col}
+                          isLoading={tableAction === "fetching"}
+                        />
+                      </StyledTableCell>
+                    );
+                  })}
+                </StyledTableRow>
+              ))}
+              {!totalRecords && (tableAction === "noRecords" || tableAction === "filterEmpty") && (
                 <>
                   <StyledTableRow style={{ height: 40 * emptyRows }}>
                     {tableData.columnDef.map((col: IColumn) => {
@@ -149,16 +145,16 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
             </TableBody>
           </Table>
         </TableContainer>
-        {records.length > 0 && tableAction === "records" && (
+        {totalRecords > 0 && tableAction === "records" && (
           <CPagination
             rowsPerPage={rowsPerPage}
             page={page}
             updatePage={updatePage}
-            totalRecords={records.length}
+            totalRecords={totalRecords}
           />
         )}
       </Box>
-      {!records.length && (
+      {!totalRecords && (
         <Box
           component={"div"}
           sx={{
@@ -170,7 +166,7 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
             ...ColumnCenterAlign,
           }}
         >
-          {tableAction === "norecords" && (
+          {tableAction === "noRecords" && (
             <>
               <Text variant={"h6"}>
                 <ICons
@@ -184,7 +180,7 @@ const CTable: FC<{ tableAction: string }> = ({ tableAction }) => {
               </Text>
             </>
           )}
-          {tableAction === "filterempty" && (
+          {tableAction === "filterEmpty" && (
             <>
               <Text variant={"h6"}>
                 <ICons

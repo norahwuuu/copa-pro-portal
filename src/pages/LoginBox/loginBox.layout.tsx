@@ -7,8 +7,10 @@ const LoginBox: FC<{ children: ReactChildren }> = ({ children }) => {
   return (
     <>
       <Box>
-        <LoginBg />
-        {children}
+        <LoginBg>
+          {children}
+        </LoginBg>
+
       </Box>
     </>
   );

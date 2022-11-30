@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { PatientListParams, ResultType } from "../../type";
 
 export type IKeyValue = {
   [key: string]: string
@@ -34,6 +35,7 @@ export type IPaginationProps = {
 
 export type ITablePaginationActionsProps = {
   count: number;
+  page: number;
   rowsPerPage: number;
   onPageChange: (
     event: ChangeEvent<HTMLButtonElement | unknown>,
@@ -43,7 +45,7 @@ export type ITablePaginationActionsProps = {
 
 export type IFilterOption = {
   id: string,
-  text: string
+  text: string,
 }
 
 export type IFilter = {
@@ -53,3 +55,10 @@ export type IFilter = {
   styleProps?: IKeyValue;
   options: IFilterOption[];
 };
+
+export type ITableParams = {
+  tableAction: ResultType;
+  lists: IRow[];
+  updatePatientList: (payload: PatientListParams) => void;
+  totalRecords: number;
+}
