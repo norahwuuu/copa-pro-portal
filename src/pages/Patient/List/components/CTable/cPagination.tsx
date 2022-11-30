@@ -56,7 +56,7 @@ const CPagination: FC<IPaginationProps> = ({
           opacity: 1,
         }}
       >
-        {page} {`Show ${entries?.from} of ${entries?.to} entries out of ${totalRecords}`}
+        {`Show ${entries?.from} of ${entries?.to} entries out of ${totalRecords}`}
       </Box>
       <Box>
         <TablePagination

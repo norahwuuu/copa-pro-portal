@@ -5,6 +5,8 @@ import { act, cleanup, screen } from "@testing-library/react";
 import { history } from "umi";
 import React from "react"
 import { renderWithWrapper } from "@/_tests_/util/test";
+import { PatientListProps } from "@/pages/Patient/List/type";
+import patientListMock from "./patientList.mock";
 
 jest.mock("@/pages/Patient/List/components/CTable/cTable");
 
@@ -23,17 +25,28 @@ function mockUmi() {
         history: {
             push: jest.fn(),
         },
+        connect: () => (component) => {
+            return { WrappedComponent: component };
+        },
     };
 }
 jest.mock("umi", () => mockUmi());
 
-describe("Page Patient List", () => {
+xdescribe("Page Patient List", () => {
+    const patientListProps: PatientListProps = {
+        patientListState: {
+            lists: patientListMock,
+            resultType: 'records',
+            totalRecords: 15
+        },
+        fetchPatients: jest.fn()
+    }
     it("Should check patient list component rendered", () => {
-        renderWithWrapper(<PatientList />, {});
+        renderWithWrapper(<PatientList patientListState={patientListProps.patientListState} fetchPatients={patientListProps.fetchPatients} />, {});
         expect(screen.getByText(/button.addNewPatient/)).toBeInTheDocument();
     });
     it("Should check able to redirect add new patient", () => {
-        const { user } = renderWithWrapper(<PatientList />, {});
+        const { user } = renderWithWrapper(<PatientList patientListState={patientListProps.patientListState} fetchPatients={patientListProps.fetchPatients} />, {});
         act(() => {
             user.click(screen.getByText(/button.addNewPatient/));
         });

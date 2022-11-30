@@ -9,6 +9,7 @@ import CPagination from "@/pages/Patient/List/components/CTable/cPagination";
 import { tableData } from "@/pages/Patient/List/components/CTable/table.config";
 import CCell from "@/pages/Patient/List/components/CTable/cCell";
 import { renderWithWrapper } from '../../../../util/test';
+import patientListMock from "../patientList.mock";
 
 jest.mock("@/hooks/useWindowSize");
 jest.mock("@/pages/Patient/List/components/CTable/cSearch");
@@ -68,8 +69,11 @@ jest.mock("react", () => mockReact());
 
 
 describe("Component Patient Table", () => {
+    beforeEach(() => {
+        renderWithWrapper(<CTable tableAction={"records"} lists={patientListMock} totalRecords={15} updatePatientList={jest.fn} />)
+
+    })
     it("Should check patient table component rendered", () => {
-        renderWithWrapper(<CTable tableAction={"records"} />)
         expect(screen.getByTestId("patient_search")).toBeInTheDocument();
         expect(screen.getByTestId("patient_filter_chips")).toBeInTheDocument();
         expect(screen.getAllByTestId("patient_filter")).toBeTruthy()
@@ -79,7 +83,6 @@ describe("Component Patient Table", () => {
 
     });
     it("Should check patient table header render", () => {
-        renderWithWrapper(<CTable tableAction={"records"} />)
         tableData.columnDef.map((col) => {
             expect(screen.getByText(col.translate)).toBeInTheDocument()
         })
@@ -87,13 +90,14 @@ describe("Component Patient Table", () => {
 
     });
     it("Should check patient table render if 'no patients '", () => {
-        renderWithWrapper(<CTable tableAction={"norecords"} />)
+        renderWithWrapper(<CTable tableAction={"noRecords"} lists={[]} totalRecords={0} updatePatientList={jest.fn} />)
         expect(screen.getByText("noPatients")).toBeInTheDocument()
 
     });
 
     it("Should check patient table render if 'search result is empty '", () => {
-        renderWithWrapper(<CTable tableAction={"filterempty"} />)
+        renderWithWrapper(<CTable tableAction={"filterEmpty"} lists={[]} totalRecords={0} updatePatientList={jest.fn} />)
+
         expect(screen.getByText("patientSearchResultsEmpty")).toBeInTheDocument()
 
     });

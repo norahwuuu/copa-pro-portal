@@ -5,14 +5,10 @@ import { FC } from "react";
 import { connect, history, useIntl } from "umi";
 import { createPatientUrlObj } from "../Create/createPatient.route";
 import CTable from "./components/CTable/cTable";
-import { PatientListParams, PatientListState } from "./type";
+import { PatientListParams, PatientListProps } from "./type";
 
-interface PatientListProps {
-  patientListState: PatientListState;
-  fetchPatients: (payload: PatientListParams) => void
-}
 
-const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatients }) => {
+export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatients }) => {
   const translate = useIntl();
 
   const updatePatientList = ({ page = 0, rowsPerPage = 10 }: PatientListParams) => {

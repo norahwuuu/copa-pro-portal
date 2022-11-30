@@ -30,3 +30,9 @@ export interface PatientListModelType {
     }
 
 }
+
+export interface PatientListProps {
+    patientListState: PatientListState;
+    fetchPatients: (payload: PatientListParams) => void
+}
+
