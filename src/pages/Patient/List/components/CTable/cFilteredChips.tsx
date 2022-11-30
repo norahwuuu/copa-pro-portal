@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Grid, Chip, styled, ChipProps, Link } from "@mui/material";
 import { FC } from "react";
+import { TABLE_FILTER } from './table.config';
+import { IFilterOption } from './table';
 
 
 
@@ -22,34 +24,49 @@ const ChipTag = styled(Chip)<ChipProps>(({ theme }) => ({
 }))
 
 
-const CFilteredChips: FC = () => {
-    const handleDelete = () => {
-        console.info('You clicked the delete icon.');
-    };
+const CFilteredChips: FC<{ chips: { [key: string]: string[] }, updateFilters: (filter: any) => void }> = ({ chips, updateFilters }) => {
+    const [list, setList] = useState<{ [key: string]: string[] }>({})
+
+    useEffect(() => {
+        if (chips["sortBy"]) {
+            delete chips["sortBy"]
+        }
+        setList(chips)
+    }, [chips])
+
+    const handleDelete = (type: string, key: string) => {
+        list[type] = list[type].filter((c) => c !== key)
+        list[type] = list[type].filter((c) => c !== 'all')
+        setList({ ...list })
+        updateFilters({ ...list })
+    }
+
+    const getFilterTextById = (type: string, key: string) => {
+        const result = TABLE_FILTER[type].options.find((obj: IFilterOption) => obj.id === key)
+        return <ChipTag key={key} label={result.text} variant={"outlined"} size={"small"} onDelete={() => handleDelete(type, key)} sx={{ m: 1 }} />
+    }
 
     return (
         <Grid container spacing={2} sx={{ px: 2 }}>
-            <ChipTag label="Prospective" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Awaiting doctor approval" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Active" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Not tracking" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Rejected" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Shipped" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <ChipTag label="Under quality check" variant="outlined" onDelete={handleDelete} sx={{ m: 1 }} />
-            <Link
-                component="button"
-                variant="body1"
-                color={"secondary"}
-                sx={{
-                    fontWeight: 300, marginTop: "10px",
-                    marginLeft: "5px"
-                }}
-                onClick={() => {
-                    console.info("I'm a button.");
-                }}
-            >
-                Clear all
-            </Link>
+            {list && Object.keys(list).map((item) => (
+                list[item].map((chip: string) => chip !== "all" && getFilterTextById(item, chip))
+            ))}
+            {list && Object.keys(list).length > 1 &&
+                <Link
+                    component="button"
+                    variant="body1"
+                    color={"secondary"}
+                    sx={{
+                        fontWeight: 300, marginTop: "10px",
+                        marginLeft: "5px"
+                    }}
+                    onClick={() => {
+                        console.info("I'm a button.");
+                    }}
+                >
+                    Clear all
+                </Link>
+            }
 
         </Grid>
     )

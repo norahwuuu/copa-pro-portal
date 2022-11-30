@@ -36,6 +36,7 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
   const [width, setWidth] = useState(1);
   const [height, setHeight] = useState(1);
   const [page, setPage] = useState<number>(0);
+  const [filters, setFilters] = useState<{ [key: string]: string[] }>({})
   const rowsPerPage = ["xl"].includes(windowSize.breakpoint) ? TABLE_CONFIG.NO_OF_ROWS_LARGE_DEVICE : TABLE_CONFIG.NO_OF_ROWS
 
   useEffect(() => {
@@ -52,6 +53,10 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
     updatePatientList({ page, rowsPerPage })
 
   };
+
+  const updateFilterChpis = (obj: any) => {
+    setFilters({ ...filters, ...obj })
+  }
 
   const emptyRows = Math.max(0, (1 + page) * rowsPerPage - totalRecords);
 
@@ -71,11 +76,12 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
         <CSearch />
         {Object.entries(TABLE_FILTER).map(([key, item]) => (
           <Box component={"div"} sx={{ my: 1 }} key={key}>
-            <CFilter filter={item} />
+            <CFilter filter={item} filters={filters} updateFilters={updateFilterChpis} />
           </Box>
         ))}
       </Box>
-      <CFilteredChips />
+
+      <CFilteredChips chips={filters} updateFilters={updateFilterChpis} />
 
       <Box component={"div"} sx={{ position: "absolute", width: "100%" }}>
         <TableContainer

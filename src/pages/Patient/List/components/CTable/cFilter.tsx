@@ -60,11 +60,10 @@ interface IFilterItemProps {
 
 const FItem: FC<IFilterItemProps> = ({ option, type, selectedItems, updateFilter }) => {
   const [checked, setChecked] = useState<boolean>(selectedItems.includes(option.id) || selectedItems.includes("all"));
-
   let actionTemplate: ReactElement;
 
   useEffect(() => {
-    setChecked(selectedItems.includes(option.id) || selectedItems.includes("all"))
+    setChecked(selectedItems.includes(option.id) || (selectedItems.includes("all") && selectedItems.includes("archived")))
   }, [selectedItems])
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -72,7 +71,13 @@ const FItem: FC<IFilterItemProps> = ({ option, type, selectedItems, updateFilter
   };
 
   if (type === "sort") {
-    actionTemplate = <ICons icon={"CheckedIcon"} sxProps={{ color: "secondary.main", mx: 2, my: 1 }} />
+    actionTemplate = <Checkbox
+      size={"small"}
+      sx={{ py: 1 }}
+      icon={<ICons icon={"CheckedIcon"} sxProps={{ color: "gray.lighten" }} />}
+      checkedIcon={<ICons icon={"CheckedIcon"} sxProps={{ color: "secondary.main" }} />}
+      checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} />
+
   } else {
     actionTemplate = <Checkbox color={"secondary"} size={"small"} sx={{ py: 1 }} checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} />
   }
@@ -81,10 +86,15 @@ const FItem: FC<IFilterItemProps> = ({ option, type, selectedItems, updateFilter
   )
 }
 
-const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
-  const [filters, setFilters] = useState<string[]>([] as string[])
+const CFilter: FC<{ filter: IFilter, filters: { [key: string]: string[] }, updateFilters: (filter: any) => void }> = ({ filter, filters, updateFilters }) => {
+  const filterKey = filter.id;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  if (!filters[filterKey]) {
+    filters[filterKey] = []
+  }
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -93,34 +103,50 @@ const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
   };
 
   const patientStatusFilterStyle = (isLast: boolean) => {
-    if (isLast && filter.id === "patientStatus") {
+    if (isLast && filterKey === "patientStatus") {
       return { "> label": { borderTop: "1px solid #EEEEEE", py: 1 } }
     }
     return {};
   }
 
 
-  const updateFilters = (key: string) => {
-    const index = filters.indexOf(key)
-    if (index !== -1) {
-      if (key === 'all') {
-        setFilters([])
+  const updateFilter = (key: string) => {
+    console.log(".updateFilter...");
+
+    if (!filters[filterKey]) {
+      filters[filterKey] = [];
+    }
+    const index = filters[filterKey].indexOf(key)
+    //we can able to sorty by any one condtion 
+    if (filterKey === "sortBy") {
+      if (index !== -1) {
+        filters[filterKey] = filters[filterKey].filter(a => a === key);
       } else {
-        filters.splice(index, 1);
-        setFilters([...filters])
+        filters[filterKey] = [key]
       }
+
     } else {
-      if (key === 'all') {
-        setFilters([])
-        filter.options.map((option: IFilterOption) => {
-          filters.push(option.id);
-        })
-        setFilters([...filters])
+      if (index !== -1) {
+        if (key === 'all') {
+          filters[filterKey] = []
+        } else {
+          filters[filterKey] = filters[filterKey].filter(a => a !== key);
+          filters[filterKey] = filters[filterKey].filter(a => a !== "all");
+        }
       } else {
-        filters.push(key)
-        setFilters([...filters])
+        if (key === 'all') {
+          const result = filter.options.map((o: IFilterOption) => o.id);
+          filters[filterKey] = result.filter(a => a !== 'archived')
+        } else {
+          filters[filterKey] = [...filters[filterKey], key]
+        }
       }
     }
+    //here set default sortby  if sorty by empty
+    // if (filters[filterKey].length === 0 && filterKey === "sortBy") {
+    //   filters[filterKey] = ([...TABLE_CONFIG.SORT_BY_DEFAULT])
+    // }
+    updateFilters(filters)
   }
 
   return (
@@ -156,7 +182,7 @@ const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
         </MenuItem>
         {filter.options.map((option: IFilterOption, index: number) => (
           <MenuItem sx={{ p: 0, ...patientStatusFilterStyle(filter.options.length === index + 1) }} key={option.id}>
-            <FItem type={filter.type} selectedItems={filters} option={option} updateFilter={updateFilters} />
+            <FItem type={filter.type} selectedItems={filters[filterKey]} option={option} updateFilter={updateFilter} />
           </MenuItem>
         ))}
 

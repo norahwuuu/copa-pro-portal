@@ -23,8 +23,10 @@ function mockUmi() {
 jest.mock("umi", () => mockUmi());
 
 describe("Component Patient Table Filtered options", () => {
+    const list = {};
+    list[TABLE_FILTER.patientStatus.id] = TABLE_FILTER.patientStatus.options.map((c) => c.id)
     it("Should check patient table filtered options rendered", () => {
-        renderWithWrapper(<CFilteredChips />, {})
+        renderWithWrapper(<CFilteredChips chips={list} updateFilters={jest.fn()} />, {})
         expect(screen.getByText(TABLE_FILTER.patientStatus.options[3].text)).toBeInTheDocument();
     })
     afterEach(cleanup);
