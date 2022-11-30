@@ -8,6 +8,7 @@ import {
   AdaptionBox,
   AdaptionUpperBox,
 } from "./overview.style";
+import { ItemProps } from "./type";
 
 const Item: FC<ItemProps> = ({ title, dataSource, status }) => {
   const theme = useTheme();
