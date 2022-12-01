@@ -23,7 +23,9 @@ const LoginBg: FC<{ children: ReactChildren }> = ({ children }) => {
         backgroundColor: "#f6f6f6",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        minWidth: '1220px',
+        maxWidth: '1820px'
         // backgroundImage: `url(${login1680})`,
       }}
 

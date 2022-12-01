@@ -15,7 +15,7 @@ function Layout({ children, setAlert, alertProps }: propsType) {
   return (
     <ThemeProvider theme={theme}>
       <Alert setAlert={setAlert} {...alertProps} />
-      <Box>{children}</Box>
+      {children}
       <Footer />
     </ThemeProvider>
   );
