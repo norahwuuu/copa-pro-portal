@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@/components/Button/button";
 import { Box, Container } from "@mui/material";
 import { FC } from "react";
@@ -6,10 +6,15 @@ import { connect, history, useIntl } from "umi";
 import { createPatientUrlObj } from "../Create/createPatient.route";
 import CTable from "./components/CTable/cTable";
 import { PatientListParams, PatientListProps } from "./type";
+import { IFilterChips } from "./components/CTable/table";
 
 
-export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatients }) => {
+export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatients, resetFilter, updateFilter }) => {
   const translate = useIntl();
+
+  useEffect(() => {
+    resetFilter()
+  }, [])
 
   const updatePatientList = ({ page = 0, rowsPerPage = 10 }: PatientListParams) => {
     fetchPatients({ page, rowsPerPage })
@@ -50,7 +55,7 @@ export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatie
               }}
             ></Box>
           </Box>
-          <CTable tableAction={patientListState.resultType} lists={patientListState.lists} updatePatientList={updatePatientList} totalRecords={patientListState.totalRecords} />
+          <CTable props={{ ...patientListState }} lists={patientListState.lists} updatePatientList={updatePatientList} updateFilter={updateFilter} resetFilter={resetFilter} />
         </Box>
       </Container>
     </>
@@ -65,6 +70,13 @@ const mapDispatchToProps = (dispatch) => {
     fetchPatients: (payload: PatientListParams) => dispatch({
       type: `patientListModal/fetchPatientList`,
       payload,
+    }),
+    resetFilter: () => dispatch({
+      type: `patientListModal/resetFilter`,
+    }),
+    updateFilter: (payload: { filters: IFilterChips }) => dispatch({
+      type: `patientListModal/updateFilter`,
+      payload
     }),
 
   }

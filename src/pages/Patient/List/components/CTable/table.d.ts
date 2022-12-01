@@ -48,6 +48,10 @@ export type IFilterOption = {
   text: string,
 }
 
+export type IFilterChips = {
+  [key: string]: string[]
+}
+
 export type IFilter = {
   name: string;
   id: string;
@@ -57,8 +61,21 @@ export type IFilter = {
 };
 
 export type ITableParams = {
-  tableAction: ResultType;
-  lists: IRow[];
-  updatePatientList: (payload: PatientListParams) => void;
-  totalRecords: number;
+  lists: IRow[],
+  updatePatientList: (payload: PatientListParams) => void,
+  updateFilter: (payload: IFilterChips) => void,
+  resetFilter: () => void,
+  props: {
+    resultType: ResultType;
+    totalRecords: number;
+    filters: IFilterChips
+  }
+}
+
+export type ITableFilter = {
+  filter: IFilter, filters: IFilterChips, updateFilters: (filter: IFilterChips) => void
+}
+
+export type ITableFilterChips = {
+  chips: IFilterChips, resetFilter: () => void, updateFilters: (filter: IFilterChips) => void
 }

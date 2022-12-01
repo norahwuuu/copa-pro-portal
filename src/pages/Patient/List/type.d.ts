@@ -8,6 +8,9 @@ export interface PatientListState {
     lists: IRow[],
     resultType: ResultType,
     totalRecords: number
+    filters: {
+        [key: string]: string[]
+    }
 
 }
 
@@ -17,13 +20,15 @@ export interface PatientListParams {
 }
 
 export interface PatientListModelType {
-    namespace: "patientListModal";
+    namespace: "patientListModal",
     state: PatientListState;
     effects: {
-        fetchPatientList: Effect;
+        fetchPatientList: Effect
     };
     reducers: {
-        setPatientList: Reducer<PatientListState>;
+        setPatientList: Reducer<PatientListState>,
+        updateFilter: Reducer<PatientListState>,
+        resetFilter: Reducer<PatientListState>,
     };
     subscriptions: {
         setup: Subscription
@@ -34,5 +39,7 @@ export interface PatientListModelType {
 export interface PatientListProps {
     patientListState: PatientListState;
     fetchPatients: (payload: PatientListParams) => void
+    updateFilter: (payload: PatientListParams) => void
+    resetFilter: () => void
 }
 

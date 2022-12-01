@@ -150,22 +150,26 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
   }
 
   return (
-    <CTooltip title={translatekey && translate.formatMessage({ id: translatekey }) || ""}>
-      <Box
-        component={"span"}
-        sx={{
-          fontWeight: 300,
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          " > svg": { marginRight: 1 },
-          " > img": { marginRight: 1 },
-        }}
-      >
-        {template}
-      </Box>
-    </CTooltip>
-  );
+    <>
+      {row?.caseDetails && (<CTooltip title={translatekey && translate.formatMessage({ id: translatekey }) || ""}>
+        <Box
+          component={"span"}
+          sx={{
+            fontWeight: 300,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            " > svg": { marginRight: 1 },
+            " > img": { marginRight: 1 },
+          }}
+        >
+          {template}
+        </Box>
+      </CTooltip>)
+      }
+
+    </>
+  )
 };
 
 export default CaseDeatilsColumn;

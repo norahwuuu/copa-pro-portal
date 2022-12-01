@@ -1,7 +1,7 @@
 import { cleanup, screen } from "@testing-library/react";
 import { renderWithWrapper } from '../../../../util/test';
 import React from 'react'
-import { IRow } from "@/pages/Patient/List/components/CTable/table";
+import { IFilterChips, IRow } from "@/pages/Patient/List/components/CTable/table";
 import patientListMock from "../patientList.mock";
 import PatientStatusColumn from "@/pages/Patient/List/components/CTable/patientStatusColumn";
 import { PATIENT_STATUS_CASE_MAP } from "@/pages/Patient/List/components/CTable/table.config";
@@ -22,7 +22,7 @@ function mockUmi() {
 }
 jest.mock("umi", () => mockUmi());
 
-const findPatientStatus = (obj: { [key: string]: string[] }, value: string) => {
+const findPatientStatus = (obj: IFilterChips, value: string) => {
     return Object.keys(obj).find((key) => obj[key].includes(value));
 };
 

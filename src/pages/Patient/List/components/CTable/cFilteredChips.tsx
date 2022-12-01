@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Grid, Chip, styled, ChipProps, Link } from "@mui/material";
 import { FC } from "react";
 import { TABLE_FILTER } from './table.config';
-import { IFilterOption } from './table';
+import { IFilterChips, IFilterOption, ITableFilterChips } from './table';
 
 
 
@@ -24,8 +24,8 @@ const ChipTag = styled(Chip)<ChipProps>(({ theme }) => ({
 }))
 
 
-const CFilteredChips: FC<{ chips: { [key: string]: string[] }, updateFilters: (filter: any) => void }> = ({ chips, updateFilters }) => {
-    const [list, setList] = useState<{ [key: string]: string[] }>({})
+const CFilteredChips: FC<ITableFilterChips> = ({ chips, updateFilters, resetFilter }) => {
+    const [list, setList] = useState<IFilterChips>({})
 
     useEffect(() => {
         if (chips["sortBy"]) {
@@ -33,6 +33,15 @@ const CFilteredChips: FC<{ chips: { [key: string]: string[] }, updateFilters: (f
         }
         setList(chips)
     }, [chips])
+
+    const enableClearFilter = useMemo(() => {
+        let length = 0;
+        Object.keys(list).map((key: string) => {
+            length += list[key].length
+        })
+        return length;
+
+    }, [list])
 
     const handleDelete = (type: string, key: string) => {
         list[type] = list[type].filter((c) => c !== key)
@@ -43,7 +52,7 @@ const CFilteredChips: FC<{ chips: { [key: string]: string[] }, updateFilters: (f
 
     const getFilterTextById = (type: string, key: string) => {
         const result = TABLE_FILTER[type].options.find((obj: IFilterOption) => obj.id === key)
-        return <ChipTag key={key} label={result.text} variant={"outlined"} size={"small"} onDelete={() => handleDelete(type, key)} sx={{ m: 1 }} />
+        return <ChipTag key={key} label={result.text} variant={"outlined"} size={"small"} onClick={() => handleDelete(type, key)} onDelete={() => handleDelete(type, key)} sx={{ m: 1 }} />
     }
 
     return (
@@ -51,7 +60,7 @@ const CFilteredChips: FC<{ chips: { [key: string]: string[] }, updateFilters: (f
             {list && Object.keys(list).map((item) => (
                 list[item].map((chip: string) => chip !== "all" && getFilterTextById(item, chip))
             ))}
-            {list && Object.keys(list).length > 1 &&
+            {list && enableClearFilter > 0 &&
                 <Link
                     component="button"
                     variant="body1"
@@ -61,7 +70,7 @@ const CFilteredChips: FC<{ chips: { [key: string]: string[] }, updateFilters: (f
                         marginLeft: "5px"
                     }}
                     onClick={() => {
-                        console.info("I'm a button.");
+                        resetFilter()
                     }}
                 >
                     Clear all

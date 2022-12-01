@@ -38,27 +38,28 @@ const CCell: FC<{ column: IColumn; row?: IRow; isLoading?: boolean }> = ({
     );
   }
   if (row) {
-    if (columnKeys.CASE_DETAILS === column.id) {
+    if (columnKeys.CASE_DETAILS === column.id && row.caseDetails) {
       return <CaseDeatilsColumn row={row} />;
     }
-    if (columnKeys.PATIENT_STATUS === column.id) {
+    if (columnKeys.PATIENT_STATUS === column.id && row.patientStatus) {
       return <PatientStatusColumn row={row} />;
     }
-    if (columnKeys.ORDER_STATUS === column.id) {
+    if (columnKeys.ORDER_STATUS === column.id && row.orderSatus) {
       return <OrderStatusColumn row={row} />;
     }
-    if (columnKeys.DENTAL_MONITORING === column.id) {
+    if (columnKeys.DENTAL_MONITORING === column.id && row.dentalMonitoring) {
       return <DentalMonitoringStatus row={row} />;
     }
-    if (columnKeys.LAST_MONITORING_SCAN === column.id) {
+    if (columnKeys.LAST_MONITORING_SCAN === column.id && row.lasMonitoringScan) {
       return (
         <Box component={"span"} sx={{ fontWeight: 300 }}>
           {row[column.id]}
         </Box>
       );
     }
-    return row[column.id];
-  } return;
+    return row[column.id] || "";
+  }
+  return "";
 };
 
 CCell.defaultProps = {

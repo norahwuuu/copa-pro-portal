@@ -8,10 +8,10 @@
 
 import { Box, SxProps } from "@mui/material";
 import React, { FC } from "react";
-import { IRow } from "./table";
+import { IFilterChips, IRow } from "./table";
 import { PATIENT_STATUS, PATIENT_STATUS_CASE_MAP } from "./table.config";
 
-const findPatientStatus = (obj: { [key: string]: string[] }, value: string) => {
+const findPatientStatus = (obj: IFilterChips, value: string) => {
   return Object.keys(obj).find((key) => obj[key].includes(value));
 };
 
