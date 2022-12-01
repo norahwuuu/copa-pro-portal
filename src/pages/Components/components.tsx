@@ -337,6 +337,11 @@ const CustomComponent: FC = () => {
               ArrowDownIcon
               <ICons icon="ArrowDownIcon" />
             </Box>
+            <Box component={"div"}>
+              {" "}
+              ErrorIcon
+              <ICons icon="ErrorIcon" />
+            </Box>
           </Box>
         </Paper>
       </Box>
