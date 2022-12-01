@@ -14,182 +14,17 @@ import testPng from "@/assets/images/test.jpg";
 import testAnterior from '@/assets/images/test2.png';
 import React from 'react';
 import { AlertModelState, connect } from "umi";
+import { PatientOverviewProps } from "./type";
+import Treatment from "./components/treatment";
+import Monitoring from "./components/monitoring";
+import Order from "./components/order";
 
-export const PatientOverview: FC<any> = ({ setAlert }) => {
+
+
+
+export const PatientOverview: FC<PatientOverviewProps> = ({ treatmentData, dentalData, orderData, setAlert }) => {
   const theme = useTheme();
-  const DentalData = [
-    {
-      name: "Status",
-      value: (
-        <Box component={"div"} sx={{ display: "flex" }}>
-          <Text
-            variant={"body1"}
-            color={"gray.main"}
-            sxProp={{ fontWeight: "normal" }}
-          >
-            {"Tracking"}
-          </Text>
-          <ICons
-            icon="ActiveIcon"
-            sxProps={{ color: "secondary.main", marginLeft: "5px" }}
-          />
-        </Box>
-      ),
-    },
-    {
-      name: "Last monitoring date",
-      value: (
-        <Text
-          variant={"body1"}
-          color={"gray.main"}
-          sxProp={{ fontWeight: "normal" }}
-        >
-          {"12/14/2023"}
-        </Text>
-      ),
-    },
 
-    {
-      name: "More info",
-      value: (
-        <LinkText
-          to={"/auth/login"}
-          linkText={"View details"}
-          icon={
-            <OpenInNew
-              sx={{
-                fontSize: "inherit",
-                fontWeight: "inherit",
-                alignSelf: "center",
-                marginLeft: "5px",
-              }}
-            />
-          }
-        />
-      ),
-    },
-  ];
-  const OrderData = [
-    {
-      name: "Status",
-      value: (
-        <Text
-          variant={"body1"}
-          color={"gray.main"}
-          sxProp={{ fontWeight: "normal" }}
-        >
-          {"Delivered"}
-        </Text>
-      ),
-    },
-    {
-      name: "date",
-      value: (
-        <Text
-          variant={"body1"}
-          color={"gray.main"}
-          sxProp={{ fontWeight: "normal" }}
-        >
-          {"12/14/2023"}
-        </Text>
-      ),
-    },
-
-    {
-      name: "Tracking #",
-      value: (
-        <Link
-          variant={"body1"}
-          sx={{ fontWeight: "900" }}
-          href="#"
-          color={"secondary.main"}
-          underline="hover"
-        >
-          {"4567890"}
-        </Link>
-      ),
-    },
-  ];
-  const TreatmentData = [
-    {
-      name: "Number of stages",
-      value: (
-        <Text
-          variant={"body1"}
-          color={"gray.main"}
-          sxProp={{ fontWeight: "normal" }}
-        >
-          {"18"}
-        </Text>
-      ),
-    },
-    {
-      name: "Retainer shipment date",
-      value: (
-        <Text
-          variant={"body1"}
-          color={"gray.main"}
-          sxProp={{ fontWeight: "normal" }}
-        >
-          {"12/14/2023"}
-        </Text>
-      ),
-    },
-
-    {
-      name: "End of treatment date",
-      value: (
-        <Text
-          variant={"body1"}
-          color={"gray.main"}
-          sxProp={{ fontWeight: "normal" }}
-        >
-          {"12/14/2023"}
-        </Text>
-      ),
-    },
-    {
-      name: ` `,
-      value: (
-        <Link
-          variant={"body1"}
-          sx={{ fontWeight: "900" }}
-          href="#"
-          color={"secondary.main"}
-          underline="hover"
-        >
-          {"View treatment plan"}
-        </Link>
-      ),
-    },
-    {
-      name: ` `,
-      value: (
-        <Link
-          variant={"body1"}
-          sx={{ fontWeight: "900" }}
-          href="#"
-          color={"secondary.main"}
-          underline="hover"
-        >
-          {"View notes"}
-        </Link>
-      ),
-    },
-    {
-      value: (
-        <Button
-          variant="outlined"
-          startIcon={
-            <ICons icon="PdfIcon" sxProps={{ width: "14px", height: "14px" }} />
-          }
-          sx={{ width: "260px", right: "30px" }}
-        >
-          IPR and attachment report
-        </Button>
-      ),
-    },
-  ];
   function popupFunc() {
     setAlert({
       isAlert: true,
@@ -217,7 +52,6 @@ export const PatientOverview: FC<any> = ({ setAlert }) => {
       title: 'This case need your attention.'
     })
   }
-
 
   return (
     <>
@@ -289,24 +123,17 @@ export const PatientOverview: FC<any> = ({ setAlert }) => {
 
             <Grid item xs={12} xl={12}>
               <ShadowBox>
-                <Item
-                  title={"Treatment plan"}
-                  dataSource={TreatmentData}
-                  status={null}
-                ></Item>
+                <Treatment stages={treatmentData.stages} retainerDate={treatmentData.retainerDate} endDate={treatmentData.endDate} />
               </ShadowBox>
             </Grid>
             <Grid item xs={6} xl={6}>
               <ShadowBox>
-                <Item
-                  title={"Dental monitoring ®"}
-                  dataSource={DentalData}
-                ></Item>
+                <Monitoring status={dentalData.status} date={dentalData.date} />
               </ShadowBox>
             </Grid>
             <Grid item xs={6} xl={6} >
               <ShadowBox>
-                <Item title={"Order tracking"} dataSource={OrderData}></Item>
+                <Order status={orderData.status} date={orderData.date} />
               </ShadowBox>
             </Grid>
           </Grid>
@@ -319,7 +146,7 @@ export const PatientOverview: FC<any> = ({ setAlert }) => {
 
 export default connect(
   () => {
-    return {};
+    return { treatmentData: { stages: 18, retainerDate: '12/14/2023', endDate: '12/14/2023' }, dentalData: { status: 'Tracking', date: '12/14/2023' }, orderData: { status: 'Delivered', date: '12/14/2023' } };
   },
   (dispatch) => ({
     setAlert: (payload: AlertModelState) => {
