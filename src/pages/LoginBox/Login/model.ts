@@ -1,8 +1,10 @@
 import {
   forgotPasswordServer,
+  getWithoutPrompt,
   queryLogin,
   resetPasswordServer,
 } from "@/services/login";
+import { authClient } from "@/utils/common";
 import type { Effect, Reducer } from "umi";
 import { history } from "umi";
 
@@ -36,21 +38,38 @@ const MainModel: LoginModelType = {
           isShowLoginError: false,
         },
       });
-      const { status, expiresAt, sessionToken, _embedded, _links } = yield call(
-        queryLogin,
-        payload
-      );
-      if (status === "SUCCESS") {
-        history.push("/patient/list");
-      } else {
+      try {
+        const { status, sessionToken } = yield call(queryLogin, payload);
+        if (status === "SUCCESS") {
+          const { tokens } = yield call(getWithoutPrompt, sessionToken);
+          authClient.tokenManager.setTokens(tokens);
+          localStorage.token = JSON.stringify(tokens.accessToken);
+          localStorage.idToken = JSON.stringify(tokens.idToken);
+          history.push("/patient/list");
+        } else if (status === "LOCKED_OUT") {
+          yield put({
+            type: "setData",
+            payload: {
+              isShowLoginError: true,
+            },
+          });
+        } else {
+          yield put({
+            type: "setData",
+            payload: {
+              isShowLoginError: true,
+            },
+          });
+        }
+      } catch (err) {
         yield put({
           type: "setData",
           payload: {
             isShowLoginError: true,
           },
         });
+        console.log(err);
       }
-      return { status, expiresAt, sessionToken, _embedded, _links };
     },
     *forgotPassword({ payload }, { call }) {
       const { response_code } = yield call(forgotPasswordServer, payload);

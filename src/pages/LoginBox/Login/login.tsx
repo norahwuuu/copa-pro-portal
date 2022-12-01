@@ -23,6 +23,44 @@ export const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) =
   // password 错误类型
   const [passType, setPassType] = useState<string>("noError");
 
+
+
+  //     async login(email, pass, successCb, errorCb) {
+  //   if (localStorage.token) {
+  //     if (successCb) successCb()
+  //     this.onChange(true)
+  //     return
+  //   }
+  //   return await authClient.signInWithCredentials({
+  //     username: email,
+  //     password: pass
+  //   }).then(transaction => {
+  //     if (transaction.status === 'SUCCESS') {
+  //       return authClient.token.getWithoutPrompt({
+  //         clientId: authClient.options.clientId,
+  //         responseType: ['id_token', 'token'],
+  //         sessionToken: transaction.sessionToken,
+  //         redirectUri: authClient.options.redirectUri
+  //       }).then(response => {
+  //         authClient.tokenManager.setTokens(response.tokens)
+  //         localStorage.token = JSON.stringify(response.tokens.accessToken)
+  //         localStorage.idToken = JSON.stringify(response.tokens.idToken)
+
+
+
+  //         if (successCb) successCb()
+  //         this.onChange(true)
+  //       })
+  //     }
+  //     if (transaction.status === 'LOCKED_OUT') {
+  //       if (errorCb) errorCb(transaction);
+  //       this.onChange(false);
+  //     }
+  //   }).catch(err => {
+  //     if (errorCb) errorCb(err);
+  //     this.onChange(false);
+  //   })
+  // }
   // 点击login-btn
   const loginClick = () => {
     if (email === "") {
@@ -31,7 +69,6 @@ export const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) =
     if (password === "") {
       setPassType("passEmpty");
     }
-    // test login api  测试连接login 接口
     if (
       emailType === "noError" &&
       passType === "noError" &&
