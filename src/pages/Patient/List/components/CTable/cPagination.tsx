@@ -36,6 +36,7 @@ const CPagination: FC<IPaginationProps> = ({
     event: MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
+    page = newPage
     updatePage(newPage);
   };
 

@@ -1,10 +1,10 @@
 import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
-import { StyledMenu, StyledMenuButton } from "@/theme/filterMenu.style";
+import { OptionLabel, StyledMenu, StyledMenuButton } from "@/theme/filterMenu.style";
 import { RowCenterAlign } from "@/theme/themen.util";
 
-import { Box, Checkbox, FormControlLabel, FormControlLabelProps, MenuItem, styled, SxProps } from "@mui/material";
-import React, { FC, ReactElement } from "react";
+import { Box, Checkbox, MenuItem, SxProps } from "@mui/material";
+import React, { FC, ReactElement, useEffect, useState } from "react";
 import { IFilter, IFilterOption } from "./table";
 
 
@@ -51,40 +51,103 @@ const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxPr
   )
 }
 
+interface IFilterItemProps {
+  option: IFilterOption,
+  type: "filter" | "sort",
+  updateFilter: (key: string) => void,
+  selectedItems: string[]
+}
 
-const OptionLabel = styled(FormControlLabel)<FormControlLabelProps>(({ theme }) => ({
-  "& .MuiFormControlLabel-root": {
-    color: theme.palette.primary.main,
-
-  },
-  "& .MuiFormControlLabel-label": {
-    ...theme.typography.body1,
-    fontWeight: 300,
-    color: "inherit",
-  }
-}))
-
-const FItem: FC<{ label: string, type: "filter" | "sort" }> = ({ label, type }) => {
+const FItem: FC<IFilterItemProps> = ({ option, type, selectedItems, updateFilter }) => {
+  const [checked, setChecked] = useState<boolean>(selectedItems.includes(option.id) || selectedItems.includes("all"));
   let actionTemplate: ReactElement;
+
+  useEffect(() => {
+    setChecked(selectedItems.includes(option.id) || (selectedItems.includes("all") && selectedItems.includes("archived")))
+  }, [selectedItems])
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+    updateFilter(option.id);
+  };
+
   if (type === "sort") {
-    actionTemplate = <ICons icon={"CheckedIcon"} sxProps={{ color: "secondary.main", mx: 2, my: 1 }} />
+    actionTemplate = <Checkbox
+      size={"small"}
+      sx={{ py: 1 }}
+      icon={<ICons icon={"CheckedIcon"} sxProps={{ color: "gray.lighten" }} />}
+      checkedIcon={<ICons icon={"CheckedIcon"} sxProps={{ color: "secondary.main" }} />}
+      checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} />
+
   } else {
-    actionTemplate = <Checkbox color={"secondary"} size={"small"} sx={{ py: 1 }} />
+    actionTemplate = <Checkbox color={"secondary"} size={"small"} sx={{ py: 1 }} checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} />
   }
   return (
-    <OptionLabel sx={{ width: "100%", mx: 0, }} control={actionTemplate} label={label} />
+    <OptionLabel sx={{ width: "100%", mx: 0, }} control={actionTemplate} label={option.text} />
   )
 }
 
-const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
+const CFilter: FC<{ filter: IFilter, filters: { [key: string]: string[] }, updateFilters: (filter: any) => void }> = ({ filter, filters, updateFilters }) => {
+  const filterKey = filter.id;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  if (!filters[filterKey]) {
+    filters[filterKey] = []
+  }
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const patientStatusFilterStyle = (isLast: boolean) => {
+    if (isLast && filterKey === "patientStatus") {
+      return { "> label": { borderTop: "1px solid #EEEEEE", py: 1 } }
+    }
+    return {};
+  }
+
+
+  const updateFilter = (key: string) => {
+    console.log(".updateFilter...");
+
+    if (!filters[filterKey]) {
+      filters[filterKey] = [];
+    }
+    const index = filters[filterKey].indexOf(key)
+    //we can able to sorty by any one condtion 
+    if (filterKey === "sortBy") {
+      if (index !== -1) {
+        filters[filterKey] = filters[filterKey].filter(a => a === key);
+      } else {
+        filters[filterKey] = [key]
+      }
+
+    } else {
+      if (index !== -1) {
+        if (key === 'all') {
+          filters[filterKey] = []
+        } else {
+          filters[filterKey] = filters[filterKey].filter(a => a !== key);
+          filters[filterKey] = filters[filterKey].filter(a => a !== "all");
+        }
+      } else {
+        if (key === 'all') {
+          const result = filter.options.map((o: IFilterOption) => o.id);
+          filters[filterKey] = result.filter(a => a !== 'archived')
+        } else {
+          filters[filterKey] = [...filters[filterKey], key]
+        }
+      }
+    }
+    //here set default sortby  if sorty by empty
+    // if (filters[filterKey].length === 0 && filterKey === "sortBy") {
+    //   filters[filterKey] = ([...TABLE_CONFIG.SORT_BY_DEFAULT])
+    // }
+    updateFilters(filters)
+  }
 
   return (
     <>
@@ -94,9 +157,6 @@ const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{
-
-        }}
       >
         <FTitle label={filter.name} isOpen={open} sxProps={filter.styleProps} type={filter.type} />
       </StyledMenuButton>
@@ -120,9 +180,9 @@ const CFilter: FC<{ filter: IFilter }> = ({ filter }) => {
         <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "2px 10px", mb: 3 }} >
           <FTitle label={filter.name} isOpen={open} sxProps={{ ...filter.styleProps }} type={filter.type} />
         </MenuItem>
-        {filter.options.map((option: IFilterOption) => (
-          <MenuItem sx={{ p: 0 }} key={option.id}>
-            <FItem type={filter.type} label={option.text} />
+        {filter.options.map((option: IFilterOption, index: number) => (
+          <MenuItem sx={{ p: 0, ...patientStatusFilterStyle(filter.options.length === index + 1) }} key={option.id}>
+            <FItem type={filter.type} selectedItems={filters[filterKey]} option={option} updateFilter={updateFilter} />
           </MenuItem>
         ))}
 

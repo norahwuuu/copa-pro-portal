@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button, ButtonProps, Menu, MenuProps } from "@mui/material";
+import { Button, ButtonProps, FormControlLabel, FormControlLabelProps, Menu, MenuProps } from "@mui/material";
 
 
 export const StyledMenu = styled(Menu)<MenuProps>(
@@ -8,11 +8,14 @@ export const StyledMenu = styled(Menu)<MenuProps>(
             borderRadius: "18px",
             boxShadow: "none",
             border: "1px solid #777777 !important",
+            "& .MuiList-root": {
+                paddingRight: "5px",
+                paddingLeft: "5px"
+            },
             "& .MuiMenuItem-root": {
                 ...theme.typography.body1,
                 fontWeight: 300,
                 color: theme.palette.gray?.main,
-
                 "&:first-of-type:hover": {
                     backgroundColor: "transparent",
                 },
@@ -33,7 +36,7 @@ export const StyledMenuButton = styled(Button)<ButtonProps>(({ theme }) => ({
     backgroundColor: theme.palette.common.white,
     borderRadius: "20px",
     textDecoration: "none",
-    padding: "10px",
+    padding: "15px",
     height: 36,
     '> span': {
         alignSelf: "center"
@@ -46,3 +49,16 @@ export const StyledMenuButton = styled(Button)<ButtonProps>(({ theme }) => ({
     },
 
 }));
+
+
+export const OptionLabel = styled(FormControlLabel)<FormControlLabelProps>(({ theme }) => ({
+    "& .MuiFormControlLabel-root": {
+        color: theme.palette.primary.main,
+
+    },
+    "& .MuiFormControlLabel-label": {
+        ...theme.typography.body1,
+        fontWeight: 300,
+        color: "inherit",
+    }
+}))

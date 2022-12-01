@@ -5,8 +5,7 @@ import ShadowBox from "@/pages/Components/shadowBox";
 import { OpenInNew } from "@mui/icons-material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Button, Grid, Link, useTheme } from "@mui/material";
-import { FC, useState } from "react";
-import AlertDialog from "./components/bootstrapDialogt";
+import { FC, useEffect, useState } from "react";
 import Item from "./components/gridItem";
 import Records from "./components/records";
 import Btn from "@/components/Button/button";
@@ -14,10 +13,10 @@ import UserInfo from "./components/userInfo";
 import testPng from "@/assets/images/test.jpg";
 import testAnterior from '@/assets/images/test2.png';
 import React from 'react';
+import { AlertModelState, connect } from "umi";
 
-export const PatientOverview: FC = () => {
+export const PatientOverview: FC<any> = ({ setAlert }) => {
   const theme = useTheme();
-  const [alertOpen, setAlertOpen] = useState(false)
   const DentalData = [
     {
       name: "Status",
@@ -191,6 +190,34 @@ export const PatientOverview: FC = () => {
       ),
     },
   ];
+  function popupFunc() {
+    setAlert({
+      isAlert: true,
+      method: "ErrorIcon",
+      btnList: [
+        <Btn variant={"outlined"} btnLabel={"Got it!"} onClickHandler={() => setAlert({ isAlert: false })} />,
+      ],
+      content: <Grid container direction={'column'} component={"div"} >
+        <Text variant="body1" color={"gray.main"}>
+          {"This patient's treatment plan has been reviewed and some changes have been made."}
+        </Text>
+        <Text variant="body1" color={"gray.main"} sxProp={{ fontWeight: "bold", marginTop: '20px' }}>
+          {"Comment from our reviewer:"}
+        </Text>
+        <Text variant="body1" color={"gray.main"} >
+          {"We have changed …"}
+        </Text>
+        <Text variant="h6" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+          {" Please review Tx plan and approve changes."}
+        </Text>
+        <Text variant="body1" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+          {"If you have further questions, call 1-123-456-7890"}
+        </Text>
+      </Grid>,
+      title: 'This case need your attention.'
+    })
+  }
+
 
   return (
     <>
@@ -259,6 +286,7 @@ export const PatientOverview: FC = () => {
                 <Records anterior={testAnterior} isEdit={true} />
               </ShadowBox>
             </Grid>
+
             <Grid item xs={12} xl={12}>
               <ShadowBox>
                 <Item
@@ -276,38 +304,29 @@ export const PatientOverview: FC = () => {
                 ></Item>
               </ShadowBox>
             </Grid>
-            <Grid item xs={6} xl={6}>
+            <Grid item xs={6} xl={6} >
               <ShadowBox>
                 <Item title={"Order tracking"} dataSource={OrderData}></Item>
               </ShadowBox>
             </Grid>
           </Grid>
         </Box>
-      </Box>
-      <AlertDialog open={alertOpen} title={'This case need your attention.'} content={
-        <Grid container direction={'column'} >
-          <Text variant="body1" color={"gray.main"}>
-            {"This patient's treatment plan has been reviewed and some changes have been made."}
-          </Text>
-          <Text variant="body1" color={"gray.main"} sxProp={{ fontWeight: "bold", marginTop: '20px' }}>
-            {"Comment from our reviewer:"}
-          </Text>
-          <Text variant="body1" color={"gray.main"} >
-            {"We have changed …"}
-          </Text>
-          <Text variant="h6" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
-            {" Please review Tx plan and approve changes."}
-          </Text>
-          <Text variant="body1" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
-            {"If you have further questions, call 1-123-456-7890"}
-          </Text>
-        </Grid>
+      </Box >
 
-      } btns={
-        <Btn variant={"outlined"} btnLabel={"Got it!"} onClickHandler={() => setAlertOpen(false)} />
-      } />
     </>
   );
 };
 
-export default PatientOverview;
+export default connect(
+  () => {
+    return {};
+  },
+  (dispatch) => ({
+    setAlert: (payload: AlertModelState) => {
+      dispatch({
+        type: `alert/setAlert`,
+        payload,
+      });
+    },
+  })
+)(PatientOverview);
