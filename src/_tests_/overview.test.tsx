@@ -8,6 +8,9 @@ import { PatientOverview } from '@/pages/Patient/Overview/overview';
 import UserInfo from '@/pages/Patient/Overview/components/userInfo';
 import Records from '@/pages/Patient/Overview/components/records';
 import testPng from '@/assets/images/left1.png';
+import Treatment from "@/pages/Patient/Overview/components/treatment";
+import Monitoring from "@/pages/Patient/Overview/components/monitoring";
+import Order from "@/pages/Patient/Overview/components/order";
 
 jest.mock("umi", () => ({
     connect: () => jest.fn(),
@@ -26,13 +29,19 @@ describe("Page Overview", () => {
     });
     // patient info
     it("Should render page of patient info correctly", () => {
-        renderWithRouter(<PatientOverview />);
+        renderWithRouter(<PatientOverview treatmentData={{ stages: 18, retainerDate: '12/14/2023', endDate: '12/14/2023' }} dentalData={{ status: 'Tracking', date: '12/14/2023' }} orderData={{ status: 'Delivered', date: '12/14/2023' }} />);
         expect(screen.getByText('Date of birth')).toBeInTheDocument();
         expect(screen.getByText('Email')).toBeInTheDocument();
         expect(screen.getByText('Mobile')).toBeInTheDocument();
         expect(screen.getByText('Address')).toBeInTheDocument();
         expect(screen.getAllByRole('button').length).toBe(4);
         expect(screen.getByTitle('avatar')).toBeInTheDocument();
+        expect(screen.getByText('18')).toBeInTheDocument();
+        expect(screen.getByText('Tracking')).toBeInTheDocument();
+        expect(screen.getByText('Delivered')).toBeInTheDocument();
+        expect(screen.getAllByText('12/14/2023').length).toBe(4);
+
+
     });
     it("Should be displayed correct achive status and infomation value", () => {
         const testData = {
@@ -53,7 +62,7 @@ describe("Page Overview", () => {
         expect(screen.getAllByTestId('Prospective').length).toBe(1);
     });
     it("Should call click function in patientInfo ", async () => {
-        const { user } = renderWithRouter(<PatientOverview />);
+        const { user } = renderWithRouter(<PatientOverview treatmentData={{ stages: 18, retainerDate: '12/14/2023', endDate: '12/14/2023' }} dentalData={{ status: 'Tracking', date: '12/14/2023' }} orderData={{ status: 'Delivered', date: '12/14/2023' }} />);
         await act(async () => {
             user.click(screen.getByTestId('infoEdit'))
         });
@@ -99,10 +108,32 @@ describe("Page Overview", () => {
             user.click(screen.getByRole('button'));
         });
     });
-    //Treatment Plan
-
+    //Records
+    it("Should render page of Treatment Plan correctly", () => {
+        const testData = {
+            isEdit: true,
+        }
+        renderWithRouter(<Treatment stages={18} retainerDate={'12/14/2023'} endDate={'12/14/2023'} />);
+        expect(screen.getByText('18')).toBeInTheDocument();
+        expect(screen.getAllByText('12/14/2023').length).toBe(2);
+    });
     //Dental monitoring
-
-
+    it("Should render page of Dental monitoring correctly", () => {
+        const testData = {
+            isEdit: true,
+        }
+        renderWithRouter(<Monitoring status={'Tracking'} date={'12/14/2023'} />);
+        expect(screen.getByText('Tracking')).toBeInTheDocument();
+        expect(screen.getAllByText('12/14/2023').length).toBe(1);
+    });
+    //Dental monitoring
+    it("Should render page of Order Plan correctly", () => {
+        const testData = {
+            isEdit: true,
+        }
+        renderWithRouter(<Order status={'Tracking'} date={'12/14/2023'} />);
+        expect(screen.getByText('Tracking')).toBeInTheDocument();
+        expect(screen.getAllByText('12/14/2023').length).toBe(1);
+    });
     afterEach(cleanup);
 })
