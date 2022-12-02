@@ -10,6 +10,7 @@ import ICons from "@/components/Icons/icons";
 import {
   Box,
   styled,
+  SxProps,
   Tooltip,
   tooltipClasses,
   TooltipProps,
@@ -39,119 +40,97 @@ const CTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
+type props = {
+  icon: string
+  sxProps: SxProps,
+  translatekey: string
+}
+
+
+const CaseDeatilsColumn: FC<{ row: IRow, dataKey: string }> = ({ row, dataKey }) => {
   const translate = useIntl()
-  let template = null;
-  let translatekey = "";
-  switch (row?.caseDetails) {
+  let obj: props = {} as props
+  const input = row[dataKey as keyof typeof row]
+
+  switch (input) {
     case CASE_DETAILS.CASE_TOO_COMPLEX:
-      translatekey = "caseTooComplexTooltip";
-      template = (
-        <>
-          <ICons icon={"FailureIcon"} sxProps={{ color: "gray.darken" }} />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "FailureIcon",
+        sxProps: { color: "gray.darken" },
+        translatekey: "caseTooComplexTooltip"
+
+      }
       break;
     case CASE_DETAILS.PATIENT_DECLINED:
-      translatekey = "patientDeclinedTooltip";
-      template = (
-        <>
-          <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "MisuseIcon",
+        sxProps: { color: "gray.darken" },
+        translatekey: "patientDeclinedTooltip"
+      }
+
       break;
     case CASE_DETAILS.PATIENT_DECISION_PENDING:
-      translatekey = "patientDecisionPendingTooltip";
-
-      template = (
-        <>
-          <ICons icon={"PendingIcon"} sxProps={{ color: "secondary.main" }} />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "PendingIcon",
+        sxProps: { color: "secondary.main" },
+        translatekey: "patientDecisionPendingTooltip"
+      }
       break;
     case CASE_DETAILS.AWAITING_PATIENT_PAYMENT:
-      translatekey = "awaitingPatientPaymentTooltip";
-      template = (
-        <>
-          <ICons
-            icon={"InCompleteIcon"}
-            sxProps={{ color: "secondary.main", marginRight: "7px !important" }}
-          />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "InCompleteIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" },
+        translatekey: "awaitingPatientPaymentTooltip"
+
+      }
       break;
     case CASE_DETAILS.AWAITING_DOCTOR_APPROVAL:
-      translatekey = "awaitingDoctorDpprovalTooltip";
-
-      template = (
-        <>
-          <ICons
-            icon={"InProgressIcon"}
-            sxProps={{ color: "secondary.main" }}
-          />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "InProgressIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" },
+        translatekey: "awaitingDoctorDpprovalTooltip"
+      }
       break;
     case CASE_DETAILS.UNDER_QUALITY_CHECK:
-      translatekey = "underQualityCheckTooltip";
-
-      template = (
-        <>
-          <ICons
-            icon={"UnderReviewIcon"}
-            sxProps={{ color: "secondary.main" }}
-          />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "UnderReviewIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" },
+        translatekey: "underQualityCheckTooltip"
+      }
       break;
     case CASE_DETAILS.NEEDS_DOCTOR_REVIEW:
-      translatekey = "needsDoctorReviewTooltip";
+      obj = {
+        icon: "WarningIcon",
+        sxProps: { color: "warning.main", marginRight: "8px !important" },
+        translatekey: "needsDoctorReviewTooltip"
 
-      template = (
-        <>
-          <ICons icon={"WarningIcon"} sxProps={{ color: "warning.main" }} />
-          {row?.caseDetails}
-        </>
-      );
+      }
       break;
     case CASE_DETAILS.NEEDS_CLEANING:
-      template = (
-        <>
-          <ICons icon={"WarningIcon"} sxProps={{ color: "warning.main" }} />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "WarningIcon",
+        sxProps: { color: "warning.main", marginRight: "8px !important" }
+      }
       break;
     case CASE_DETAILS.TEMPORARY_HEALTH_ISSUE:
-      template = (
-        <>
-          <ICons icon={"PendingIcon"} sxProps={{ color: "secondary.main" }} />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "PendingIcon",
+        sxProps: { color: "secondary.main" }
+      }
       break;
     case CASE_DETAILS.PERMANENT_HEALTH_ISSUE:
-      template = (
-        <>
-          <ICons icon={"MisuseIcon"} sxProps={{ color: "gray.darken" }} />
-          {row?.caseDetails}
-        </>
-      );
+      obj = {
+        icon: "MisuseIcon",
+        sxProps: { color: "gray.darken" }
+      }
       break;
     default:
-      template = row?.caseDetails;
       break;
   }
 
   return (
     <>
-      {row?.caseDetails && (<CTooltip title={translatekey && translate.formatMessage({ id: translatekey }) || ""}>
+      {input && (<CTooltip title={obj && obj.translatekey && translate.formatMessage({ id: obj.translatekey }) || ""}>
         <Box
           component={"span"}
           sx={{
@@ -163,7 +142,9 @@ const CaseDeatilsColumn: FC<{ row: IRow }> = ({ row }) => {
             " > img": { marginRight: 1 },
           }}
         >
-          {template}
+          {obj && obj?.icon && <ICons icon={obj?.icon} sxProps={obj?.sxProps} />}
+          {input}
+
         </Box>
       </CTooltip>)
       }

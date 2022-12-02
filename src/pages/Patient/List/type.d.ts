@@ -16,7 +16,7 @@ export interface PatientListState {
 
 export interface PatientListParams {
     page: number,
-    rowsPerPage: number
+    rowsPerPage: number,
 }
 
 export interface PatientListModelType {

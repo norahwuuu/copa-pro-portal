@@ -9,6 +9,7 @@ export default defineConfig({
     baseSeparator: "-",
     default: "en-US",
   },
+  mock: false,
   history: { type: "hash" },
   hash: true,
   dynamicImport: {},

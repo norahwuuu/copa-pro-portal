@@ -21,26 +21,30 @@ function mockUmi() {
 }
 jest.mock("umi", () => mockUmi());
 
+const element = (row: IRow) => {
+    return <DentalMonitoringStatus row={row} dataKey={'dental_monitoring'} />
+}
+
 describe("Component patient table dental monitoring  column", () => {
 
     it("Should check patient table dental monitoring column rendered", () => {
         const rowObj: IRow = patientListMock[0]
-        renderWithWrapper(<DentalMonitoringStatus row={rowObj} />, {})
-        expect(screen.getByText(rowObj.dentalMonitoring)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.dental_monitoring)).toBeInTheDocument()
     })
 
     it("Should check patient table dental monitoring column rendered by status", () => {
         let rowObj: IRow = patientListMock[11]
-        renderWithWrapper(<DentalMonitoringStatus row={rowObj} />, {})
-        expect(screen.getByText(rowObj.dentalMonitoring)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.dental_monitoring)).toBeInTheDocument()
 
         rowObj = patientListMock[10]
-        renderWithWrapper(<DentalMonitoringStatus row={rowObj} />, {})
-        expect(screen.getByText(rowObj.dentalMonitoring)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.dental_monitoring)).toBeInTheDocument()
 
         rowObj = patientListMock[9]
-        renderWithWrapper(<DentalMonitoringStatus row={rowObj} />, {})
-        expect(screen.getByText(rowObj.dentalMonitoring)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.dental_monitoring)).toBeInTheDocument()
     })
 
 

@@ -7,20 +7,21 @@ export type IKeyValue = {
 
 export type IRow = {
   id: number;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  patientStatus: string;
-  caseDetails: string;
-  orderSatus: string;
-  dentalMonitoring: string;
-  lasMonitoringScan: string;
+  first_name: string;
+  last_name: string;
+  patient_dob: string;
+  status: string;
+  case_detail: string;
+  order_status: string;
+  dental_monitoring: string;
+  last_monitoring: string;
 };
 
 export type IColumn = {
   name: string;
   translate: string;
   id: string;
+  dataKey: string,
   cell?: {
     [key: string]: unknown;
   };

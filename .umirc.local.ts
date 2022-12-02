@@ -3,7 +3,7 @@ import { defineConfig } from "umi";
 export default defineConfig({
   proxy: {
     "/api": {
-      target: "https://apis.dev.oemaligner.com",
+      target: "http://127.0.0.1:8000", //"https://apis.dev.oemaligner.com",
       changeOrigin: true,
       pathRewrite: { "^/api": "" },
     },

@@ -6,7 +6,7 @@ import CFilter from "@/pages/Patient/List/components/CTable/cFilter";
 import CFilteredChips from "@/pages/Patient/List/components/CTable/cFilteredChips";
 import CSearch from "@/pages/Patient/List/components/CTable/cSearch";
 import CPagination from "@/pages/Patient/List/components/CTable/cPagination";
-import { tableData, TABLE_CONFIG, TABLE_FILTER } from "@/pages/Patient/List/components/CTable/table.config";
+import { tableData } from "@/pages/Patient/List/components/CTable/table.config";
 import CCell from "@/pages/Patient/List/components/CTable/cCell";
 import { renderWithWrapper } from '../../../../util/test';
 import patientListMock from "../patientList.mock";

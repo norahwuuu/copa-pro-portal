@@ -1,0 +1,7 @@
+<svg id="Active" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+  <g id="Ellipse_147" data-name="Ellipse 147" fill="#218389" stroke="#218389" stroke-width="1">
+    <circle cx="6" cy="6" r="6" stroke="none"/>
+    <circle cx="6" cy="6" r="5.5" fill="none"/>
+  </g>
+  <path id="Icon_awesome-check" data-name="Icon awesome-check" d="M2.208,9.963.1,7.569a.4.4,0,0,1,0-.521l.46-.521a.3.3,0,0,1,.46,0L2.438,8.14,5.486,4.685a.3.3,0,0,1,.46,0l.46.521a.4.4,0,0,1,0,.521L2.667,9.963A.3.3,0,0,1,2.208,9.963Z" transform="translate(2.75 -1.324)" fill="#fff"/>
+</svg>

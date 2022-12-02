@@ -37,27 +37,27 @@ const CCell: FC<{ column: IColumn; row?: IRow; isLoading?: boolean }> = ({
       />
     );
   }
-  if (row) {
-    if (columnKeys.CASE_DETAILS === column.id && row.caseDetails) {
-      return <CaseDeatilsColumn row={row} />;
+  if (row && row[column.dataKey as keyof typeof row]) {
+    if (columnKeys.CASE_DETAILS === column.id) {
+      return <CaseDeatilsColumn row={row} dataKey={column.dataKey} />;
     }
-    if (columnKeys.PATIENT_STATUS === column.id && row.patientStatus) {
-      return <PatientStatusColumn row={row} />;
+    if (columnKeys.PATIENT_STATUS === column.id) {
+      return <PatientStatusColumn row={row} dataKey={column.dataKey} />;
     }
-    if (columnKeys.ORDER_STATUS === column.id && row.orderSatus) {
-      return <OrderStatusColumn row={row} />;
+    if (columnKeys.ORDER_STATUS === column.id) {
+      return <OrderStatusColumn row={row} dataKey={column.dataKey} />;
     }
-    if (columnKeys.DENTAL_MONITORING === column.id && row.dentalMonitoring) {
-      return <DentalMonitoringStatus row={row} />;
+    if (columnKeys.DENTAL_MONITORING === column.id) {
+      return <DentalMonitoringStatus row={row} dataKey={column.dataKey} />;
     }
-    if (columnKeys.LAST_MONITORING_SCAN === column.id && row.lasMonitoringScan) {
+    if (columnKeys.LAST_MONITORING_SCAN === column.id) {
       return (
         <Box component={"span"} sx={{ fontWeight: 300 }}>
-          {row[column.id]}
+          {row[column.dataKey as keyof typeof row]}
         </Box>
       );
     }
-    return row[column.id] || "";
+    return row[column.dataKey as keyof typeof row] || "";
   }
   return "";
 };

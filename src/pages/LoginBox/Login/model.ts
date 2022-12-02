@@ -1,3 +1,4 @@
+import { patientUrlObj } from "@/pages/Patient/patient.route";
 import {
   forgotPasswordServer,
   getWithoutPrompt,
@@ -45,9 +46,7 @@ const MainModel: LoginModelType = {
           authClient.tokenManager.setTokens(tokens);
           localStorage.token = JSON.stringify(tokens.accessToken);
           localStorage.idToken = JSON.stringify(tokens.idToken);
-          history.push({
-            pathname: "/patient/list",
-          });
+          history.push({ pathname: patientUrlObj.patientList });
         } else if (status === "LOCKED_OUT") {
           yield put({
             type: "setData",

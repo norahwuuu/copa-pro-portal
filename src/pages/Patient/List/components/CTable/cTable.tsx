@@ -103,8 +103,8 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {lists.map((row) => (
-                <StyledTableRow hover key={row.id} onClick={() => history.push(patientUrlObj.overviewPatient)}>
+              {lists.map((row, index) => (
+                <StyledTableRow hover key={`${row.id}${index}`} onClick={() => history.push(patientUrlObj.overviewPatient)}>
                   {tableData.columnDef.map((col: IColumn) => {
                     return (
                       <StyledTableCell key={col.id} sx={{ ...col.cell?.style }}>
