@@ -45,7 +45,9 @@ const MainModel: LoginModelType = {
           authClient.tokenManager.setTokens(tokens);
           localStorage.token = JSON.stringify(tokens.accessToken);
           localStorage.idToken = JSON.stringify(tokens.idToken);
-          history.push("/patient/list");
+          history.push({
+            pathname: "/patient/list",
+          });
         } else if (status === "LOCKED_OUT") {
           yield put({
             type: "setData",
