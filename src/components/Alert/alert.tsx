@@ -9,7 +9,35 @@ import { styled } from "@mui/material/styles";
 import * as React from "react";
 import Text from "@/components/Text/text";
 import { AlertModelState } from "@/pages/Patient/model";
-
+/* 
+example:  
+setAlert({
+      isAlert: true,
+      method: "ErrorIcon",
+      title: 'This case need your attention.',
+      btnList: [
+        <Btn variant={"outlined"} btnLabel={"Got it!"} onClickHandler={() => setAlert({ isAlert: false })} />,
+      ],
+      content: <Grid container direction={'column'} component={"div"} >
+        <Text variant="body1" color={"gray.main"}>
+          {"This patient's treatment plan has been reviewed and some changes have been made."}
+        </Text>
+        <Text variant="body1" color={"gray.main"} sxProp={{ fontWeight: "bold", marginTop: '20px' }}>
+          {"Comment from our reviewer:"}
+        </Text>
+        <Text variant="body1" color={"gray.main"} >
+          {"We have changed …"}
+        </Text>
+        <Text variant="h6" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+          {" Please review Tx plan and approve changes."}
+        </Text>
+        <Text variant="body1" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+          {"If you have further questions, call 1-123-456-7890"}
+        </Text>
+      </Grid>,
+    })
+      
+*/
 interface AlertProps extends AlertModelState {
   setAlert: Function;
 }
@@ -42,7 +70,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 }));
 
-export default function AlertDialog({ isAlert = false, method, title = 'Title', content = '', btnList = [], setAlert, ...props }: AlertProps) {
+export default function AlertDialog({ isAlert, method, title, content, btnList, setAlert, ...props }: AlertProps) {
   return (
     <>
       <BootstrapDialog
@@ -51,7 +79,7 @@ export default function AlertDialog({ isAlert = false, method, title = 'Title', 
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle sx={{ paddingLeft: '30px' }} id="alert-dialog-title">
-          <ICons icon="ErrorIcon"
+          <ICons icon={method || 'ErrorIcon'}
             sxProps={{ width: '30px', height: '25px' }} />
           <Text variant={"h6"} color={"primary"} sxProp={{ fontWeight: 300, paddingLeft: '11px' }}>
             {title}
@@ -63,7 +91,7 @@ export default function AlertDialog({ isAlert = false, method, title = 'Title', 
           </DialogContentText>
         </DialogContent>
         <Grid textAlign={'center'} marginTop={'31px'} container direction={'column'} spacing={2}>
-          {btnList.length > 0 && btnList && btnList.map((item: React.ReactNode, index) => {
+          {btnList && btnList.length > 0 && btnList.map((item: React.ReactNode, index) => {
             return <Grid item key={index}>
               {item}
             </Grid>

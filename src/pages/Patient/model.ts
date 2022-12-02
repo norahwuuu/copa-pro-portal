@@ -1,17 +1,15 @@
 import type { ReactElement } from "react";
-import type { Effect, Reducer, Subscription } from "umi";
+import type { Effect,Reducer,Subscription } from "umi";
 
 enum Type {
-  info,
-  warning,
-  other,
+  ErrorIcon,
 }
 export interface AlertModelState {
   isAlert: boolean;
   method?: string;
   text?: string | any[];
   content?: ReactElement | string;
-  btnList?: [];
+  btnList?: Array<ReactElement>;
   title?: string;
 }
 export interface AlertModelType {

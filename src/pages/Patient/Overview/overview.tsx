@@ -53,6 +53,7 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ treatmentData, denta
     })
   }
 
+
   return (
     <>
 
