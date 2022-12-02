@@ -13,8 +13,6 @@ const PatientListModel: PatientListModelType = {
   },
   effects: {
     *fetchPatientList({ payload }, { call, put }) {
-      console.log("...payload", payload);
-
       yield put({
         type: "setPatientList",
         payload: {
