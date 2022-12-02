@@ -16,6 +16,7 @@ import PatientStatusColumn from "./patientStatusColumn";
 import { IColumn, IRow } from "./table";
 import { columnKeys } from "./table.config";
 import React from 'react';
+import { dateFormat } from "@/utils/formatter";
 
 const CCell: FC<{ column: IColumn; row?: IRow; isLoading?: boolean }> = ({
   column,
@@ -53,9 +54,12 @@ const CCell: FC<{ column: IColumn; row?: IRow; isLoading?: boolean }> = ({
     if (columnKeys.LAST_MONITORING_SCAN === column.id) {
       return (
         <Box component={"span"} sx={{ fontWeight: 300 }}>
-          {row[column.dataKey as keyof typeof row]}
+          {dateFormat(row[column.dataKey as keyof typeof row])}
         </Box>
       );
+    }
+    if (columnKeys.PATIENT_DOB === column.id) {
+      return dateFormat(row[column.dataKey as keyof typeof row], 'MM/DD/YYYY', 'YYYY-MM-DD');
     }
     return row[column.dataKey as keyof typeof row] || "";
   }

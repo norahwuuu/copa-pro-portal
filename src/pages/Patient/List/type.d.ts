@@ -17,6 +17,10 @@ export interface PatientListState {
 export interface PatientListParams {
     page: number,
     rowsPerPage: number,
+    filters: {
+        [key: string]: string[]
+    }
+
 }
 
 export interface PatientListModelType {

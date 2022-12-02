@@ -16,8 +16,8 @@ export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatie
     resetFilter()
   }, [])
 
-  const updatePatientList = ({ page = 0, rowsPerPage = 10 }: PatientListParams) => {
-    fetchPatients({ page, rowsPerPage })
+  const updatePatientList = ({ page = 0, rowsPerPage = 10, filters }: PatientListParams) => {
+    fetchPatients({ page, rowsPerPage, filters })
   }
 
   return (
@@ -55,7 +55,7 @@ export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatie
               }}
             ></Box>
           </Box>
-          <CTable props={{ ...patientListState }} lists={patientListState.lists} updatePatientList={updatePatientList} updateFilter={updateFilter} resetFilter={resetFilter} />
+          <CTable tableProps={{ ...patientListState }} lists={patientListState.lists} updatePatientList={updatePatientList} updateFilter={updateFilter} resetFilter={resetFilter} />
         </Box>
       </Container>
     </>

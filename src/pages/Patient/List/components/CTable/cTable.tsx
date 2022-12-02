@@ -29,7 +29,7 @@ import { tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
 import { StyledTableCell, StyledTableRow } from "./table.style";
 
 
-const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilter, resetFilter }) => {
+const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, updateFilter, resetFilter }) => {
   const translate = useIntl()
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
@@ -39,8 +39,8 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
   const rowsPerPage = ["xl"].includes(windowSize.breakpoint) ? TABLE_CONFIG.NO_OF_ROWS_LARGE_DEVICE : TABLE_CONFIG.NO_OF_ROWS
 
   useEffect(() => {
-    updatePatientList({ page, rowsPerPage })
-  }, [page])
+    updatePatientList({ page, rowsPerPage, filters: tableProps.filters })
+  }, [page, tableProps.filters])
 
   useLayoutEffect(() => {
     setWidth(tableRef.current.clientWidth);
@@ -49,7 +49,7 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
 
   const updatePage = (page: number) => {
     setPage(page);
-    updatePatientList({ page, rowsPerPage })
+    updatePatientList({ page, rowsPerPage, filters: tableProps.filters })
 
   };
 
@@ -57,7 +57,7 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
     updateFilter({ filters: { ...obj } })
   }
 
-  const emptyRows = Math.max(0, (1 + page) * rowsPerPage - props.totalRecords);
+  const emptyRows = Math.max(0, (1 + page) * rowsPerPage - tableProps.totalRecords);
 
 
   return (
@@ -75,12 +75,12 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
         <CSearch />
         {Object.entries(TABLE_FILTER).map(([key, item]) => (
           <Box component={"div"} sx={{ my: 1 }} key={key}>
-            <CFilter filter={item} filters={props.filters} updateFilters={updateFilterChpis} />
+            <CFilter filter={item} filters={tableProps.filters} updateFilters={updateFilterChpis} />
           </Box>
         ))}
       </Box>
 
-      <CFilteredChips chips={{ ...props.filters }} updateFilters={updateFilterChpis} resetFilter={resetFilter} />
+      <CFilteredChips chips={{ ...tableProps.filters }} updateFilters={updateFilterChpis} resetFilter={resetFilter} />
 
       <Box component={"div"} sx={{ position: "absolute", width: "100%" }}>
         <TableContainer
@@ -111,7 +111,7 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
                         <CCell
                           column={col}
                           row={row}
-                          isLoading={props.resultType === "fetching"}
+                          isLoading={tableProps.resultType === "fetching"}
                         />
                       </StyledTableCell>
                     );
@@ -119,21 +119,21 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
                 </StyledTableRow>
               ))}
 
-              {props.resultType === "fetching" && Array(rowsPerPage).fill({} as IRow).map((row, index) => (
+              {tableProps.resultType === "fetching" && Array(rowsPerPage).fill({} as IRow).map((row, index) => (
                 <StyledTableRow key={index}>
                   {tableData.columnDef.map((col: IColumn) => {
                     return (
                       <StyledTableCell key={col.id}>
                         <CCell
                           column={col}
-                          isLoading={props.resultType === "fetching"}
+                          isLoading={tableProps.resultType === "fetching"}
                         />
                       </StyledTableCell>
                     );
                   })}
                 </StyledTableRow>
               ))}
-              {!props.totalRecords && (props.resultType === "noRecords" || props.resultType === "filterEmpty") && (
+              {!tableProps.totalRecords && (tableProps.resultType === "noRecords" || tableProps.resultType === "filterEmpty") && (
                 <>
                   <StyledTableRow style={{ height: 40 * emptyRows }}>
                     {tableData.columnDef.map((col: IColumn) => {
@@ -150,17 +150,17 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
             </TableBody>
           </Table>
         </TableContainer>
-        {props.totalRecords > 0 && props.resultType === "records" && (
+        {tableProps.totalRecords > 0 && (tableProps.resultType === "records" || tableProps.resultType === "fetching") && (
           <CPagination
             rowsPerPage={rowsPerPage}
             page={page}
             updatePage={updatePage}
-            totalRecords={props.totalRecords}
+            totalRecords={tableProps.totalRecords}
           />
         )}
       </Box>
       {
-        !props.totalRecords && (
+        !tableProps.totalRecords && (
           <Box
             component={"div"}
             sx={{
@@ -172,7 +172,7 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
               ...ColumnCenterAlign,
             }}
           >
-            {props.resultType === "noRecords" && (
+            {tableProps.resultType === "noRecords" && (
               <>
                 <Text variant={"h6"}>
                   <ICons
@@ -186,7 +186,7 @@ const CTable: FC<ITableParams> = ({ props, lists, updatePatientList, updateFilte
                 </Text>
               </>
             )}
-            {props.resultType === "filterEmpty" && (
+            {tableProps.resultType === "filterEmpty" && (
               <>
                 <Text variant={"h6"}>
                   <ICons

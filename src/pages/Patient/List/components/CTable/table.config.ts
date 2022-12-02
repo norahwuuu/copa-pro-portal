@@ -192,16 +192,16 @@ export const TABLE_FILTER = {
       id: "lastModifiedDate",
       text: "Last modified date"
     }, {
-      id: "lastName",
+      id: "last_name",
       text: "Last name (A-Z)"
     }, {
-      id: "firstName",
+      id: "first_name",
       text: "First name (A-Z)"
     }, {
-      id: "DateOfBirth",
+      id: "patient_dob",
       text: "Date of birth"
     }, {
-      id: "lastMonitoringScan",
+      id: "last_monitoring",
       text: "Last monitoring scan"
     }]
   }
@@ -215,6 +215,8 @@ export const columnKeys = {
   LAST_MONITORING_SCAN: "lastMonitoringScan",
   LAST_NAME: "lastName",
   FIRST_NAME: "firstName",
+  PATIENT_DOB: "dateOfBirth",
+
 };
 
 export const tableData = {

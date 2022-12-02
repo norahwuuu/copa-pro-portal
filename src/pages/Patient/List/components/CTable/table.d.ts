@@ -66,7 +66,7 @@ export type ITableParams = {
   updatePatientList: (payload: PatientListParams) => void,
   updateFilter: (payload: IFilterChips) => void,
   resetFilter: () => void,
-  props: {
+  tableProps: {
     resultType: ResultType;
     totalRecords: number;
     filters: IFilterChips
