@@ -1,6 +1,7 @@
-import { TextField, styled, TextFieldProps, Box } from "@mui/material"
-import React, { FC } from "react"
+import { TextField, styled, TextFieldProps, Box, IconButton } from "@mui/material"
+import React, { Dispatch, FC, SetStateAction } from "react"
 import SearchIcon from '@mui/icons-material/Search';
+import ICons from "@/components/Icons/icons";
 
 
 
@@ -39,16 +40,27 @@ const OutlinedTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
     },
 }))
 
-const CSearch: FC = () => {
+const CSearch: FC<{ search: string, updateSearch: Dispatch<SetStateAction<string>> }> = ({ search, updateSearch }) => {
     return (
         <Box component={"div"}>
             <OutlinedTextField
                 size={"small"}
+                fullWidth
                 id="input-with-icon-textfield"
+                value={search}
                 label={"Search"}
                 InputProps={{
-                    startAdornment: <SearchIcon />
+                    startAdornment: <SearchIcon />,
+                    endAdornment: search && (
+                        <IconButton
+                            aria-label="search"
+                            onClick={() => updateSearch("")}
+                            sx={{ "&:hover": { backgroundColor: "transparent" } }}
+                        ><ICons icon={"CloseIcon"} sxProps={{ color: "primary.main", fontSize: "15px" }} /> </IconButton>
+                    )
+
                 }}
+                onChange={(e) => updateSearch(e.target.value)}
 
             />
         </Box>

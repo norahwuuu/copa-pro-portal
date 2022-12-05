@@ -98,13 +98,14 @@ const CustomizedMenus: FC = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        transitionDuration={50}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "center",
         }}
         sx={{ borderRadius: "13px", }}
       >

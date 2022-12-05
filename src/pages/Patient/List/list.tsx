@@ -16,8 +16,8 @@ export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatie
     resetFilter()
   }, [])
 
-  const updatePatientList = ({ page = 0, rowsPerPage = 10, filters }: PatientListParams) => {
-    fetchPatients({ page, rowsPerPage, filters })
+  const updatePatientList = ({ page = 0, rowsPerPage = 10, filters, search }: PatientListParams) => {
+    fetchPatients({ page, rowsPerPage, filters, search })
   }
 
   return (

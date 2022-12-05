@@ -13,6 +13,7 @@ import FolderOffOutlinedIcon from "@mui/icons-material/FolderOffOutlined";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import CloseIcon from '@mui/icons-material/Close';
 import { FC } from "react";
 
 import { mdiFilter, mdiFilePdfBox, mdiCheckBold } from "@mdi/js";
@@ -163,6 +164,13 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
         <SvgIcon fontSize={fontSize} sx={sxProps}>
           <path d={mdiCheckBold} />
         </SvgIcon>
+      );
+    case "CloseIcon":
+      return (
+        <CloseIcon
+          fontSize={fontSize}
+          sx={{ ...sxProps }}
+        />
       );
     default:
       return <Visibility fontSize={fontSize} sx={sxProps} />;

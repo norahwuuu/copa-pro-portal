@@ -33,14 +33,15 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
   const translate = useIntl()
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
-  const [width, setWidth] = useState(1);
-  const [height, setHeight] = useState(1);
+  const [width, setWidth] = useState<number>(1);
+  const [height, setHeight] = useState<number>(1);
   const [page, setPage] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
   const rowsPerPage = ["xl"].includes(windowSize.breakpoint) ? TABLE_CONFIG.NO_OF_ROWS_LARGE_DEVICE : TABLE_CONFIG.NO_OF_ROWS
 
   useEffect(() => {
-    updatePatientList({ page, rowsPerPage, filters: tableProps.filters })
-  }, [page, tableProps.filters])
+    updatePatientList({ page, rowsPerPage, filters: tableProps.filters, search })
+  }, [page, tableProps.filters, search])
 
   useLayoutEffect(() => {
     setWidth(tableRef.current.clientWidth);
@@ -49,7 +50,7 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
 
   const updatePage = (page: number) => {
     setPage(page);
-    updatePatientList({ page, rowsPerPage, filters: tableProps.filters })
+    updatePatientList({ page, rowsPerPage, filters: tableProps.filters, search })
 
   };
 
@@ -72,7 +73,7 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
           "> div": { mx: 1, alignSelf: "center" },
         }}
       >
-        <CSearch />
+        <CSearch search={search} updateSearch={setSearch} />
         {Object.entries(TABLE_FILTER).map(([key, item]) => (
           <Box component={"div"} sx={{ my: 1 }} key={key}>
             <CFilter filter={item} filters={tableProps.filters} updateFilters={updateFilterChpis} />

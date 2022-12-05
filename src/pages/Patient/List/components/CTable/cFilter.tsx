@@ -148,13 +148,14 @@ const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        transitionDuration={50}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "right",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "right",
         }}
 
       >

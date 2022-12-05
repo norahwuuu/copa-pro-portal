@@ -10,7 +10,8 @@ export interface PatientListState {
     totalRecords: number
     filters: {
         [key: string]: string[]
-    }
+    },
+    search: string
 
 }
 
@@ -19,7 +20,9 @@ export interface PatientListParams {
     rowsPerPage: number,
     filters: {
         [key: string]: string[]
-    }
+    },
+    search: string
+
 
 }
 

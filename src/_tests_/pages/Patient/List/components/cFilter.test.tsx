@@ -10,7 +10,7 @@ import { renderWithWrapper } from '../../../../util/test';
 
 
 const tableFilterProps: ITableFilter = {
-    filter: TABLE_FILTER.caseDetails, filters: getDefaultFilter(), updateFilters: jest.fn()
+    filter: TABLE_FILTER.case_detail, filters: getDefaultFilter(), updateFilters: jest.fn()
 }
 
 const element = (tableFilterProps: ITableFilter): ReactElement => {
@@ -21,7 +21,7 @@ const element = (tableFilterProps: ITableFilter): ReactElement => {
 describe("Component Patient Table Filter", () => {
 
     it("Should check patient table  filter component rendered", () => {
-        tableFilterProps.filter = TABLE_FILTER.orderStatus
+        tableFilterProps.filter = TABLE_FILTER.order_status
         renderWithWrapper(element(tableFilterProps), {})
         expect(screen.getByText(tableFilterProps.filter.name)).toBeInTheDocument();
     })
@@ -34,7 +34,7 @@ describe("Component Patient Table Filter", () => {
     })
 
     it("Should check able to select filter option ", () => {
-        tableFilterProps.filter = TABLE_FILTER.orderStatus
+        tableFilterProps.filter = TABLE_FILTER.order_status
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         const option = tableFilterProps.filter.options[1];
         act(() => {
@@ -51,7 +51,7 @@ describe("Component Patient Table Filter", () => {
     })
 
     it("Should check able to select/unselect all  option ", () => {
-        tableFilterProps.filter = TABLE_FILTER.caseDetails
+        tableFilterProps.filter = TABLE_FILTER.case_detail
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         const option = tableFilterProps.filter.options[0];
 

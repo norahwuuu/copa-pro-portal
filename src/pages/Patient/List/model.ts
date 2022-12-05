@@ -8,7 +8,8 @@ const PatientListModel: PatientListModelType = {
     lists: [],
     resultType: "noRecords",
     totalRecords: 0,
-    filters: {}
+    filters: {},
+    search: ""
 
   },
   effects: {
@@ -62,6 +63,8 @@ const PatientListModel: PatientListModelType = {
           state.filters[f] = [...TABLE_CONFIG.SORT_BY_DEFAULT];
         }
       })
+      //reset search Box
+      state.search = "";
       return { ...state };
     },
     setPatientList(state, { payload: { resultType, lists, totalRecords } }) {

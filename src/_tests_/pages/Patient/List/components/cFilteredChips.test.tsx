@@ -37,19 +37,19 @@ const element = (tableFilterChipsProps: ITableFilterChips): ReactElement => {
 
 
 describe("Component Patient Table Filtered options", () => {
-    tableFilterChipsProps.chips[TABLE_FILTER.orderStatus.id] = TABLE_FILTER.orderStatus.options.map((c) => c.id)
+    tableFilterChipsProps.chips[TABLE_FILTER.order_status.id] = TABLE_FILTER.order_status.options.map((c) => c.id)
 
     it("Should check patient table filtered options rendered", () => {
         renderWithWrapper(element(tableFilterChipsProps), {})
-        expect(screen.getByText(TABLE_FILTER.orderStatus.options[3].text)).toBeInTheDocument();
+        expect(screen.getByText(TABLE_FILTER.order_status.options[3].text)).toBeInTheDocument();
     })
     it("Should check able to remove filter option", () => {
         const { user } = renderWithWrapper(element(tableFilterChipsProps), {})
-        expect(screen.getByText(TABLE_FILTER.orderStatus.options[3].text)).toBeInTheDocument();
+        expect(screen.getByText(TABLE_FILTER.order_status.options[3].text)).toBeInTheDocument();
         act(() => {
-            user.click(screen.getByText(TABLE_FILTER.orderStatus.options[3].text))
+            user.click(screen.getByText(TABLE_FILTER.order_status.options[3].text))
         })
-        expect(tableFilterChipsProps.chips[TABLE_FILTER.orderStatus.id].length).toBe(TABLE_FILTER.orderStatus.options.length - 2);
+        expect(tableFilterChipsProps.chips[TABLE_FILTER.order_status.id].length).toBe(TABLE_FILTER.order_status.options.length - 2);
 
     })
     afterEach(cleanup);
