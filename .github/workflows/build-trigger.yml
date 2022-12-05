@@ -12,7 +12,7 @@ env:
   AWS_REGION: us-west-2                   # set this to your preferred AWS region, e.g. us-west-1
   ENVIRONMENT: development
   APPLICATION: ulab
-  SERVICE_NAME: pro-portal
+  SERVICE_NAME: copa-pro-portal
 
 jobs:
   zip-code-to-s3:
