@@ -1,16 +1,30 @@
 import React from 'react';
 import Text from "@/components/Text/text";
 import { ColumnCenterAlign } from "@/theme/themen.util";
-import { Box, Grid, Link } from "@mui/material";
+import { Box, Grid, Link, useTheme } from "@mui/material";
 import { FC, ReactChildren } from "react";
 import { FormattedMessage, Link as RouterLink, useLocation } from "umi";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { navItems } from "./createPatient.config";
 
 const PatientCreate: FC<{ children: ReactChildren }> = ({ children }) => {
   const location = useLocation();
-
+  const theme = useTheme();
   return (
-    <Box sx={{ my: 2 }}>
+    <Box sx={{
+      // my: 2,
+      margin: "auto",
+      display: "flex",
+      flexDirection: "column",
+      minWidth: '1280px',
+      maxWidth: '1920px',
+      [theme.breakpoints.up("xl")]: { width: "1560px", paddingTop: "71px" },
+      [theme.breakpoints.down("xl")]: {
+        width: "1184px",
+        paddingTop: "23px",
+      },
+      height: "100%",
+    }}>
       <Box
         component={"div"}
         sx={{
@@ -41,6 +55,7 @@ const PatientCreate: FC<{ children: ReactChildren }> = ({ children }) => {
                 mx: 4,
                 px: 1,
                 py: 3,
+                display: "inline-block",
                 borderBottom: (theme) =>
                   location.pathname === item.path
                     ? `5px solid ${theme.palette.secondary.main}`
@@ -61,7 +76,36 @@ const PatientCreate: FC<{ children: ReactChildren }> = ({ children }) => {
           ))}
         </Box>
       </Box>
-      <Grid container sx={{ m: 1, my: 5 }}>
+      <Link
+        variant={"h6"}
+        sx={{
+          fontWeight: "Bold",
+          marginBottom: "10px",
+          display: "flex",
+          zIndex: "999",
+          marginTop: '4px',
+          [theme.breakpoints.up('xl')]: {
+            marginTop: '87px'
+          }
+        }}
+        href=""
+        color={"gray.main"}
+        underline="hover"
+      >
+        {
+          <ArrowBackIcon
+            sx={{
+              fontSize: "20px",
+              fontWeight: "blod",
+              alignSelf: "center",
+              marginRight: "5px",
+              color: "gray.main"
+            }}
+          />
+        }
+        {"Back"}
+      </Link>
+      <Grid container>
         {children}
       </Grid>
     </Box>
