@@ -1,10 +1,14 @@
+import { caseStatusType } from "../type";
+
 interface ItemProps {
   title: string;
-  dataSource: Array<{
-    name?: string;
-    value: React.ReactNode | Element;
-  }>;
-  status?: "temp" | "inProgress" | "review" | null;
+  dataSource:
+    | any
+    | Array<{
+        name?: string;
+        value: React.ReactNode | Element;
+      }>;
+  status?: caseStatusType;
 }
 interface InfoItemProps {
   dataSource: Array<{

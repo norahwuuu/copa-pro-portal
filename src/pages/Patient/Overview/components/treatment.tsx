@@ -7,12 +7,12 @@ import { FC } from "react";
 import { useIntl } from "umi";
 import React from 'react';
 import Item from "./gridItem";
-import { treatmentDataProps } from "../type";
+import { treatmentDataProps, treatmentProps } from "../type";
 import ICons from "@/components/Icons/icons";
 
 
-const Treatment: FC<treatmentDataProps> = ({
-    stages, retainerDate, endDate
+const Treatment: FC<treatmentProps> = ({
+    caseStatus, stages, retainerDate, endDate, notePopup
 }) => {
     const translate = useIntl();
     const TreatmentData = [
@@ -24,7 +24,7 @@ const Treatment: FC<treatmentDataProps> = ({
                     color={"gray.main"}
                     sxProp={{ fontWeight: "normal" }}
                 >
-                    {stages}
+                    {stages || '-'}
                 </Text>
             ),
         },
@@ -36,7 +36,7 @@ const Treatment: FC<treatmentDataProps> = ({
                     color={"gray.main"}
                     sxProp={{ fontWeight: "normal" }}
                 >
-                    {retainerDate}
+                    {retainerDate || '-'}
                 </Text>
             ),
         },
@@ -49,19 +49,17 @@ const Treatment: FC<treatmentDataProps> = ({
                     color={"gray.main"}
                     sxProp={{ fontWeight: "normal" }}
                 >
-                    {endDate}
+                    {endDate || '-'}
 
-                    {/* {"12/14/2023"} */}
                 </Text>
             ),
         },
-        {
+        stages && caseStatus !== 'temp' && {
             name: ` `,
             value: (
                 <Link
                     variant={"body1"}
                     sx={{ fontWeight: "900" }}
-                    href="#"
                     color={"secondary.main"}
                     underline="hover"
                 >
@@ -69,30 +67,29 @@ const Treatment: FC<treatmentDataProps> = ({
                 </Link>
             ),
         },
-        {
+        stages && {
             name: ` `,
             value: (
                 <Link
                     variant={"body1"}
-                    sx={{ fontWeight: "900" }}
-                    href="#"
+                    sx={{ fontWeight: "900", cursor: 'pointer' }}
                     color={"secondary.main"}
                     underline="hover"
+                    onClick={() => notePopup()}
+
                 >
                     {"View notes"}
                 </Link>
             ),
         },
-        {
+        caseStatus !== 'inProgress' && {
             value: (
                 <Button
                     variant="outlined"
-                    startIcon={
-                        <ICons icon="PdfIcon" sxProps={{ width: "14px", height: "14px" }} />
-                    }
+
                     sx={{ width: "260px", right: "30px" }}
                 >
-                    IPR and attachment report
+                    <ICons icon="PdfIcon" sxProps={{ width: "14px", height: "14px", marginRight: '4px', marginLeft: '-4px' }} /> IPR and attachment report
                 </Button>
             ),
         },
@@ -101,7 +98,7 @@ const Treatment: FC<treatmentDataProps> = ({
         <Item
             title={"Treatment plan"}
             dataSource={TreatmentData}
-            status={null}
+            status={caseStatus}
         ></Item>
     );
 };

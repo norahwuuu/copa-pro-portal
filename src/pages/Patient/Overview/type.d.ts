@@ -13,10 +13,15 @@ export type statusDotType =
   | "ArrowUpIcon"
   | "ArrowDownIcon";
 
+export type caseStatusType = "temp" | "inProgress" | "review" | "archived";
 interface treatmentDataProps {
   stages: number;
   retainerDate: string;
   endDate: string;
+}
+interface treatmentProps extends treatmentDataProps {
+  caseStatus: caseStatusType;
+  notePopup: Function;
 }
 interface dentalDataProps {
   status: string;
@@ -32,4 +37,5 @@ export interface PatientOverviewProps {
   dentalData: dentalDataProps;
   orderData: orderDataProps;
   setAlert: Function;
+  caseStatus: caseStatusType;
 }

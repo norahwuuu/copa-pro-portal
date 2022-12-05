@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import * as React from "react";
 import Text from "@/components/Text/text";
 import { AlertModelState } from "@/pages/Patient/model";
+import { useEffect } from "react";
 /* 
 example:  
 setAlert({
@@ -55,22 +56,39 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogTitle-root": {
     padding: 0,
     paddingLeft: '30px',
-    marginBottom: '30px',
+    paddingRight: '30px',
     display: 'flex',
     alignItems: 'center',
 
 
   },
   "& .MuiDialogContent-root": {
-    width: '333px',
     margin: '0 auto',
-    padding: 0
-
+    padding: 0,
+    marginTop: '30px',
+    letterSpacing: '-0.5px',
+    position: 'relative',
+    left: '11px',
+    fontWeight: 'normal'
   },
 
 }));
 
 export default function AlertDialog({ isAlert, method, title, content, btnList, setAlert, ...props }: AlertProps) {
+
+  useEffect(() => {
+
+    return () => {
+      setAlert({
+        isAlert: false,
+        method: 'ErrorIcon',
+        btnList: [],
+        title: { text: "", sxProps: { color: "primary", variant: "h6" } },
+        content: "",
+      })
+    }
+  }, [])
+
   return (
     <>
       <BootstrapDialog
@@ -78,18 +96,18 @@ export default function AlertDialog({ isAlert, method, title, content, btnList, 
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle sx={{ paddingLeft: '30px' }} id="alert-dialog-title">
-          <ICons icon={method || 'ErrorIcon'}
-            sxProps={{ width: '30px', height: '25px' }} />
-          <Text variant={"h6"} color={"primary"} sxProp={{ fontWeight: 300, paddingLeft: '11px' }}>
-            {title}
+        <DialogTitle sx={{ paddingLeft: '30px', }} id="alert-dialog-title" color={'gray.main'}>
+          {method && <ICons icon={method || 'ErrorIcon'}
+            sxProps={{ width: '30px', height: '25px', marginRight: '11px' }} />}
+          <Text variant={'h6'} color={'primary'} sxProp={{ fontWeight: 'normal', ...title.sxProps }}>
+            {title.text}
           </Text>
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description" component={"div"}>
+        {content && <DialogContent >
+          <DialogContentText id="alert-dialog-description" component={"div"} color={'gray.main'}>
             {content}
           </DialogContentText>
-        </DialogContent>
+        </DialogContent>}
         <Grid textAlign={'center'} marginTop={'31px'} container direction={'column'} spacing={2}>
           {btnList && btnList.length > 0 && btnList.map((item: React.ReactNode, index) => {
             return <Grid item key={index}>
