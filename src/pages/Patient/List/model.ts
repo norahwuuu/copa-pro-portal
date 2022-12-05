@@ -8,12 +8,21 @@ const PatientListModel: PatientListModelType = {
     lists: [],
     resultType: "noRecords",
     totalRecords: 0,
-    filters: {},
+    filters: {
+      "sort_by": [...TABLE_CONFIG.SORT_BY_DEFAULT]
+    },
     search: ""
 
   },
   effects: {
     *fetchPatientList({ payload }, { call, put }) {
+      let filterCount = 0;
+      if (payload.filter) {
+        Object.keys((payload.filter)).map((k) => {
+          filterCount += payload.filter[k].length
+        })
+      }
+
       yield put({
         type: "setPatientList",
         payload: {
@@ -35,14 +44,25 @@ const PatientListModel: PatientListModelType = {
           });
 
         } else {
-          yield put({
-            type: "setPatientList",
-            payload: {
-              resultType: "noRecords",
-              lists: [],
-              totalRecords: 0
-            },
-          });
+          if (filterCount > 1) {
+            yield put({
+              type: "setPatientList",
+              payload: {
+                resultType: "filterEmpty",
+                lists: [],
+                totalRecords: 0
+              },
+            });
+          } else {
+            yield put({
+              type: "setPatientList",
+              payload: {
+                resultType: "noRecords",
+                lists: [],
+                totalRecords: 0
+              },
+            });
+          }
         }
       } catch (e) {
         console.log(".catch error ", e)
@@ -59,7 +79,7 @@ const PatientListModel: PatientListModelType = {
     resetFilter(state) {
       Object.keys(TABLE_FILTER).map((f) => {
         state.filters[f] = [] as string[]
-        if (f === "sortBy") {
+        if (f === "sort_by") {
           state.filters[f] = [...TABLE_CONFIG.SORT_BY_DEFAULT];
         }
       })

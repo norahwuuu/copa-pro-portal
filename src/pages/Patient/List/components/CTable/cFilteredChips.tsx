@@ -28,8 +28,8 @@ const CFilteredChips: FC<ITableFilterChips> = ({ chips, updateFilters, resetFilt
     const [list, setList] = useState<IFilterChips>({})
 
     useEffect(() => {
-        if (chips["sortBy"]) {
-            delete chips["sortBy"]
+        if (chips["sort_by"]) {
+            delete chips["sort_by"]
         }
         setList(chips)
     }, [chips])

@@ -84,7 +84,7 @@ describe("Component Patient Table Filter", () => {
 
 describe("Component patient table sort", () => {
     it("Should check able to open sort ", async () => {
-        tableFilterProps.filter = TABLE_FILTER.sortBy
+        tableFilterProps.filter = TABLE_FILTER.sort_by
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         act(() => {
             user.click(screen.getByText(tableFilterProps.filter.name))
@@ -93,7 +93,7 @@ describe("Component patient table sort", () => {
     })
 
     it("Should check checked delfault sort", async () => {
-        tableFilterProps.filter = TABLE_FILTER.sortBy
+        tableFilterProps.filter = TABLE_FILTER.sort_by
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         act(() => {
             user.click(screen.getByText(tableFilterProps.filter.name))
@@ -102,14 +102,15 @@ describe("Component patient table sort", () => {
     })
 
     it("Should check able to change sort", async () => {
-        tableFilterProps.filter = TABLE_FILTER.sortBy
+        tableFilterProps.filter = TABLE_FILTER.sort_by
         const option = tableFilterProps.filter.options[0];
 
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         act(() => {
             user.click(screen.getByText(tableFilterProps.filter.name))
         })
-        expect(screen.getByTestId(option.id)).toBeChecked();
+        const elem = screen.getByTestId(option.id);
+        expect(elem.checked).toBeFalsy()
 
         act(() => {
             user.click(screen.getByTestId(tableFilterProps.filter.options[1].id))
