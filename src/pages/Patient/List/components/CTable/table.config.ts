@@ -9,7 +9,7 @@
 export const TABLE_CONFIG = {
   NO_OF_ROWS: 10,
   NO_OF_ROWS_LARGE_DEVICE: 15,
-  SORT_BY_DEFAULT: ["lastModifiedDate"]
+  SORT_BY_DEFAULT: ["last_name"] //["lastModifiedDate"]
 };
 
 export const PATIENT_STATUS = {
@@ -147,16 +147,21 @@ export const TABLE_FILTER = {
       text: "View all"
     }, {
       id: "delivered",
-      text: "Delivered"
+      text: "Delivered",
+      dataKey: "50",
     }, {
       id: "inProduction",
-      text: "In Production"
+      text: "In Production",
+      dataKey: "20",
     }, {
       id: "retainersSent",
-      text: "Retainers sent"
+      text: "Retainers sent",
+      dataKey: "40",
+
     }, {
       id: "shipped",
-      text: "Shipped"
+      text: "Shipped",
+      dataKey: "40",
     }]
 
   },
@@ -181,29 +186,35 @@ export const TABLE_FILTER = {
       text: "Tracking"
     }],
   },
-  "sortBy": {
-    id: "sortBy",
+  "sort_by": {
+    id: "sort_by",
     name: "Sort by",
     type: "sort",
     styleProps: {
       minWidth: "175px"
     },
-    options: [{
-      id: "lastModifiedDate",
-      text: "Last modified date"
-    }, {
-      id: "last_name",
-      text: "Last name (A-Z)"
-    }, {
-      id: "first_name",
-      text: "First name (A-Z)"
-    }, {
-      id: "patient_dob",
-      text: "Date of birth"
-    }, {
-      id: "last_monitoring",
-      text: "Last monitoring scan"
-    }]
+    options: [
+      //TODO: Have to enable once backend ready
+      {
+        id: "lastModifiedDate",
+        text: "Last modified date"
+      },
+      {
+        id: "last_name",
+        text: "Last name (A-Z)"
+      }, {
+        id: "first_name",
+        text: "First name (A-Z)"
+      }, {
+        id: "patient_dob",
+        text: "Date of birth"
+      },
+      //TODO: Have to enable once backend ready
+      {
+        id: "last_monitoring",
+        text: "Last monitoring scan"
+      }
+    ]
   }
 }
 
