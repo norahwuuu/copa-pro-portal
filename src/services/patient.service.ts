@@ -2,28 +2,19 @@ import { PatientListParams } from "@/pages/Patient/List/type";
 import request from "@/utils/request";
 
 
-function delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export async function fetchPatientList(payload: PatientListParams) {
     const obj = {
         totalRecords: 0,
         data: []
     }
-    const res = await request("/patients", {
+    const { result, paging } = await request("/patient-mgmt/v1/org/3/patients/", {
         method: "GET",
-        params: { ...payload },
-    });
-    if (res && res.length > 0) {
-        obj.totalRecords = res.length;
-        obj.data = payload.rowsPerPage > 0 ? res.slice(payload.page * payload.rowsPerPage, payload.page * payload.rowsPerPage + payload.rowsPerPage) : res
+        params: { page: payload.page + 1, page_size: payload.rowsPerPage },
+    }, true);
+    if (result && result.length > 0) {
+        obj.totalRecords = paging.total_count;
+        obj.data = result
 
     }
-    //TODO: Testing Skeleton UI 
-    await delay(4000);
-    //TODO: Testing No records  
-    // obj.data = [];
-    // obj.totalRecords = 0;
     return obj || {}
 }

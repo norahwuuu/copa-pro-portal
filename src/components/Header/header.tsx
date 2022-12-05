@@ -14,24 +14,24 @@ const HEADER: FC<{ children: ReactNode }> = ({ children }) => {
         elevation={0}
         sx={{
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
-          height: "60px",
+          minHeight: "60px",
         }}
       >
         <Toolbar
           sx={{
-            height: "60px",
             display: "flex",
             flexDirection: "row",
-            alignItems: "center",
           }}
         >
-          <Box component={"div"} sx={{ flexGrow: 1, height: "30px" }}>
-            <Box component="img" src={Logo} alt={"logo"} loading="lazy" />
+          <Box component={"div"} sx={{ flexGrow: 1, paddingTop: "7px" }}>
+            <Box component="img" src={Logo} alt={"logo"} loading="lazy" sx={{ height: "21px" }} />
           </Box>
           <Box component={"div"} sx={{ flexGrow: 1 }}>
             {children}
           </Box>
-          <CustomizedMenus />
+          <Box component={"div"} >
+            <CustomizedMenus />
+          </Box>
         </Toolbar>
       </AppBar>
     </>

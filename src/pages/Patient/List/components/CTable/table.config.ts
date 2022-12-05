@@ -192,16 +192,16 @@ export const TABLE_FILTER = {
       id: "lastModifiedDate",
       text: "Last modified date"
     }, {
-      id: "lastName",
+      id: "last_name",
       text: "Last name (A-Z)"
     }, {
-      id: "firstName",
+      id: "first_name",
       text: "First name (A-Z)"
     }, {
-      id: "DateOfBirth",
+      id: "patient_dob",
       text: "Date of birth"
     }, {
-      id: "lastMonitoringScan",
+      id: "last_monitoring",
       text: "Last monitoring scan"
     }]
   }
@@ -215,6 +215,8 @@ export const columnKeys = {
   LAST_MONITORING_SCAN: "lastMonitoringScan",
   LAST_NAME: "lastName",
   FIRST_NAME: "firstName",
+  PATIENT_DOB: "dateOfBirth",
+
 };
 
 export const tableData = {
@@ -223,6 +225,7 @@ export const tableData = {
       name: "Last name",
       id: "lastName",
       translate: "lastName",
+      dataKey: "last_name",
       cell: {
         style: {
           fontWeight: "bold !important",
@@ -235,6 +238,7 @@ export const tableData = {
     {
       name: "First name",
       id: "firstName",
+      dataKey: "first_name",
       translate: "firstName",
       cell: {
         style: {
@@ -247,11 +251,14 @@ export const tableData = {
       name: "Date of birth",
       id: "dateOfBirth",
       translate: "dateOfBirth",
+      dataKey: "patient_dob",
+
     },
     {
       name: "Patient Status",
       id: columnKeys.PATIENT_STATUS,
       translate: "patientStatus",
+      dataKey: "status",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -262,6 +269,7 @@ export const tableData = {
       name: "Case Details",
       id: columnKeys.CASE_DETAILS,
       translate: "caseDetails",
+      dataKey: "case_detail",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -273,6 +281,7 @@ export const tableData = {
       name: "Order status",
       id: columnKeys.ORDER_STATUS,
       translate: "orderStatus",
+      dataKey: "order_status",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -283,11 +292,14 @@ export const tableData = {
       name: "Dental monitoring®",
       translate: "dentalMonitoring",
       id: columnKeys.DENTAL_MONITORING,
+      dataKey: "dental_monitoring",
+
     },
     {
       name: "Last monitoring Scan",
       id: "lastMonitoringScan",
       translate: "lastMonitoringScan",
+      dataKey: "last_monitoring"
     },
   ],
 };

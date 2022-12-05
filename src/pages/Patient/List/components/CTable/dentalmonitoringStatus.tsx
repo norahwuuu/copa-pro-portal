@@ -7,42 +7,44 @@
  */
 
 import ICons from "@/components/Icons/icons";
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import { FC } from "react";
 import { IRow } from "./table";
 import { DENTAL_MONITORING_STATUS } from "./table.config";
 import React from 'react';
 
-const DentalMonitoringStatus: FC<{ row: IRow }> = ({ row }) => {
-  let template;
+type props = {
+  icon: string
+  sxProps: SxProps,
+}
 
-  switch (row.dentalMonitoring) {
+const DentalMonitoringStatus: FC<{ row: IRow, dataKey: string }> = ({ row, dataKey }) => {
+  let obj: props = {} as props
+  const input = row[dataKey as keyof typeof row]
+
+
+  switch (input) {
     case DENTAL_MONITORING_STATUS.NOT_STARTED:
-      template = (
-        <>
-          <ICons icon={"NotStartedIcon"} />
-          {row.dentalMonitoring}
-        </>
-      );
+      obj = {
+        icon: "NotStartedIcon",
+        sxProps: { marginRight: "8px !important" },
+
+      }
       break;
     case DENTAL_MONITORING_STATUS.TRACKING:
-      template = (
-        <>
-          <ICons icon={"ActiveIcon"} sxProps={{ color: "secondary.main" }} />
-          {row.dentalMonitoring}
-        </>
-      );
+      obj = {
+        icon: "ActiveIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" }
+      }
       break;
     case DENTAL_MONITORING_STATUS.NOT_TRACKING:
-      template = (
-        <>
-          <ICons icon={"WarningIcon"} sxProps={{ color: "warning.main" }} />
-          {row.dentalMonitoring}
-        </>
-      );
+      obj = {
+        icon: "WarningIcon",
+        sxProps: { color: "warning.main", marginRight: "8px !important" },
+
+      }
       break;
     default:
-      template = row.dentalMonitoring;
       break;
   }
 
@@ -58,7 +60,8 @@ const DentalMonitoringStatus: FC<{ row: IRow }> = ({ row }) => {
         " > img": { marginRight: 1 },
       }}
     >
-      {template}
+      {obj && obj?.icon && <ICons icon={obj?.icon} sxProps={obj?.sxProps} />}
+      {input}
     </Box>
   );
 };

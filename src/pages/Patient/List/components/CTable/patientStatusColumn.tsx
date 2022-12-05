@@ -9,21 +9,13 @@
 import { Box, SxProps } from "@mui/material";
 import React, { FC } from "react";
 import { IRow } from "./table";
-import { PATIENT_STATUS, PATIENT_STATUS_CASE_MAP } from "./table.config";
+import { PATIENT_STATUS } from "./table.config";
 
-const findPatientStatus = (obj: { [key: string]: string[] }, value: string) => {
-  return Object.keys(obj).find((key) => obj[key].includes(value));
-};
-
-const PatientStatusColumn: FC<{ row: IRow }> = ({ row }) => {
-  let status = findPatientStatus(PATIENT_STATUS_CASE_MAP, row.caseDetails);
+const PatientStatusColumn: FC<{ row: IRow, dataKey: string }> = ({ row, dataKey }) => {
   let sxProp: SxProps;
+  const input = row[dataKey as keyof typeof row]
 
-  if (!status) {
-    status = PATIENT_STATUS.COMPLETED;
-  }
-
-  switch (status) {
+  switch (input) {
     case PATIENT_STATUS.REJECTED:
       sxProp = {
         color: "gray.darken",
@@ -61,7 +53,7 @@ const PatientStatusColumn: FC<{ row: IRow }> = ({ row }) => {
 
   return (
     <Box component={"span"} sx={sxProp}>
-      {status}
+      {input}
     </Box>
   );
 };

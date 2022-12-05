@@ -7,20 +7,21 @@ export type IKeyValue = {
 
 export type IRow = {
   id: number;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  patientStatus: string;
-  caseDetails: string;
-  orderSatus: string;
-  dentalMonitoring: string;
-  lasMonitoringScan: string;
+  first_name: string;
+  last_name: string;
+  patient_dob: string;
+  status: string;
+  case_detail: string;
+  order_status: string;
+  dental_monitoring: string;
+  last_monitoring: string;
 };
 
 export type IColumn = {
   name: string;
   translate: string;
   id: string;
+  dataKey: string,
   cell?: {
     [key: string]: unknown;
   };
@@ -48,6 +49,10 @@ export type IFilterOption = {
   text: string,
 }
 
+export type IFilterChips = {
+  [key: string]: string[]
+}
+
 export type IFilter = {
   name: string;
   id: string;
@@ -57,8 +62,21 @@ export type IFilter = {
 };
 
 export type ITableParams = {
-  tableAction: ResultType;
-  lists: IRow[];
-  updatePatientList: (payload: PatientListParams) => void;
-  totalRecords: number;
+  lists: IRow[],
+  updatePatientList: (payload: PatientListParams) => void,
+  updateFilter: (payload: IFilterChips) => void,
+  resetFilter: () => void,
+  tableProps: {
+    resultType: ResultType;
+    totalRecords: number;
+    filters: IFilterChips
+  }
+}
+
+export type ITableFilter = {
+  filter: IFilter, filters: IFilterChips, updateFilters: (filter: IFilterChips) => void
+}
+
+export type ITableFilterChips = {
+  chips: IFilterChips, resetFilter: () => void, updateFilters: (filter: IFilterChips) => void
 }

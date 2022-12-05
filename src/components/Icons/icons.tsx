@@ -8,7 +8,6 @@
  *
  */
 import React from 'react'
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import FolderOffOutlinedIcon from "@mui/icons-material/FolderOffOutlined";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -16,12 +15,11 @@ import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { FC } from "react";
 
-import { mdiCircleSlice3, mdiFilter, mdiFilePdfBox, mdiCheckBold } from "@mdi/js";
+import { mdiFilter, mdiFilePdfBox, mdiCheckBold } from "@mdi/js";
 import {
   AccountCircle,
   ArrowDropDown,
   ArrowDropUp,
-  ErrorOutlined,
   KeyboardArrowDown,
   KeyboardArrowUp,
   Logout,
@@ -33,8 +31,13 @@ import { Box, SvgIcon, SxProps } from "@mui/material";
 
 import SortIcon from "@mui/icons-material/Sort";
 import incompleteSvg from "../../assets/svgs/icons/incomplete.svg";
-import notStartedSvg from "../../assets/svgs/icons/not_started.svg";
-import resultsOffSvg from "../../assets/svgs/icons/results_off.svg";
+import notStartedSvg from "../../assets/svgs/icons/notstarted.svg";
+import resultsOffSvg from "../../assets/svgs/icons/resultsoff.svg";
+import activeSvg from "../../assets/svgs/icons/active.svg";
+import inProgressSvg from "../../assets/svgs/icons/inprogress.svg";
+import warningSvg from "../../assets/svgs/icons/warning.svg";
+import underReviewSvg from "../../assets/svgs/icons/underreview.svg";
+
 
 interface IConsProps {
   fontSize?: "small" | "inherit" | "large" | "medium" | undefined;
@@ -45,7 +48,13 @@ interface IConsProps {
 const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
   switch (icon) {
     case "ActiveIcon":
-      return <CheckCircleIcon fontSize={fontSize} sx={sxProps} />;
+      return <Box
+        component="img"
+        src={activeSvg}
+        alt={"active icon"}
+        loading="lazy"
+        sx={{ height: "16px", ...sxProps }}
+      />
     case "ArchivedIcon":
       return <CircleIcon fontSize={fontSize} sx={sxProps} />;
     case "FailureIcon":
@@ -79,9 +88,13 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
       );
     case "InProgressIcon":
       return (
-        <SvgIcon fontSize={fontSize} sx={sxProps}>
-          <path d={mdiCircleSlice3} />
-        </SvgIcon>
+        <Box
+          component="img"
+          src={inProgressSvg}
+          alt={"in progress icon"}
+          loading="lazy"
+          sx={{ height: "16px", ...sxProps }}
+        />
       );
     case "PdfIcon":
       return (
@@ -90,9 +103,25 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
         </SvgIcon>
       );
     case "WarningIcon":
-      return <ErrorOutlined fontSize={fontSize} sx={sxProps} />;
+      return (
+        <Box
+          component="img"
+          src={warningSvg}
+          alt={"warning"}
+          loading="lazy"
+          sx={{ height: "16px", ...sxProps }}
+        />
+      )
     case "UnderReviewIcon":
-      return <Visibility fontSize={fontSize} sx={sxProps} />;
+      return (
+        <Box
+          component="img"
+          src={underReviewSvg}
+          alt={"under Review"}
+          loading="lazy"
+          sx={{ height: "16px", ...sxProps }}
+        />
+      )
     case "MisuseIcon":
       return <HighlightOffIcon fontSize={fontSize} sx={sxProps} />;
     case "UserIcon":

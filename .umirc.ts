@@ -9,6 +9,7 @@ export default defineConfig({
     baseSeparator: "-",
     default: "en-US",
   },
+  mock: false,
   history: { type: "hash" },
   hash: true,
   dynamicImport: {},
@@ -30,8 +31,4 @@ export default defineConfig({
   routes,
   fastRefresh: {},
   webpack5: {},
-  define: {
-    BASE_URL: "https://apis.dev.oemaligner.com",
-    loginBASE_URL: "https://devsec.ulabsystems.net",
-  },
 });
