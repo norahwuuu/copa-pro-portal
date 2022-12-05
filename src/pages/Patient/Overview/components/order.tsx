@@ -25,7 +25,7 @@ const Order: FC<orderDataProps> = ({
             ),
         },
         {
-            name: "date",
+            name: "Date",
             value: (
                 <Text
                     variant={"body1"}
