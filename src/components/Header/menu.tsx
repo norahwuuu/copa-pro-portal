@@ -12,7 +12,7 @@ import Text from "../Text/text";
 const OverwriteStyleMenu = styled((StyledMenu))<MenuProps>(() => ({
   "& .MuiPaper-root": {
     borderRadius: "13px",
-    mariginTop: "-3px !important"
+    marginTop: "-3px !important"
   }
 }))
 
@@ -98,17 +98,18 @@ const CustomizedMenus: FC = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        transitionDuration={50}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "center",
         }}
         sx={{ borderRadius: "13px", }}
       >
-        <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "5px 10px", mb: 3 }} >
+        <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "0px 10px 5px 10px", mb: 3 }} >
           <FTitle label={"Brenda Smith"} isOpen={open} sxProps={{ minWidth: "170px" }} />
         </MenuItem>
         <MenuItem

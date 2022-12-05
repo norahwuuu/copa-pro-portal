@@ -121,7 +121,9 @@ export default connect(
       dispatch({
         type: `loginSpace/login`,
         payload,
-        cb: () => { history.push({ pathname: "/patient/list" }) }
+        cb: () => {
+          history.push({ pathname: "/patients/list" });
+        }
       });
     },
   })

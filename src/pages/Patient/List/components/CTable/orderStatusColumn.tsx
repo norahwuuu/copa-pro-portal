@@ -6,56 +6,45 @@
  *
  */
 import ICons from "@/components/Icons/icons";
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import { FC } from "react";
 import { IRow } from "./table";
 import { ORDER_STATUS } from "./table.config";
 import React from "react";
 
-const OrderStatusColumn: FC<{ row: IRow }> = ({ row }) => {
-  let template;
-
-  switch (row.orderSatus) {
+type props = {
+  icon: string
+  sxProps: SxProps
+}
+const OrderStatusColumn: FC<{ row: IRow, dataKey: string }> = ({ row, dataKey }) => {
+  const input = row[dataKey as keyof typeof row]
+  let obj: props = {} as props
+  switch (input) {
     case ORDER_STATUS.DELIVERED:
-      template = (
-        <>
-          <ICons icon={"ActiveIcon"} sxProps={{ color: "secondary.main" }} />
-          {row.orderSatus}
-        </>
-      );
+      obj = {
+        icon: "ActiveIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" }
+      }
       break;
     case ORDER_STATUS.IN_PRODUCTION:
-      template = (
-        <>
-          <ICons
-            icon={"InCompleteIcon"}
-            sxProps={{ color: "secondary.main" }}
-          />
-          {row.orderSatus}
-        </>
-      );
+      obj = {
+        icon: "InCompleteIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" }
+      }
       break;
     case ORDER_STATUS.RETAINERS_SENT:
-      template = (
-        <>
-          <ICons icon={"ActiveIcon"} sxProps={{ color: "secondary.main" }} />
-          {row.orderSatus}
-        </>
-      );
+      obj = {
+        icon: "ActiveIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" }
+      }
       break;
     case ORDER_STATUS.SHIPPED:
-      template = (
-        <>
-          <ICons
-            icon={"InProgressIcon"}
-            sxProps={{ color: "secondary.main" }}
-          />
-          {row.orderSatus}
-        </>
-      );
+      obj = {
+        icon: "InProgressIcon",
+        sxProps: { color: "secondary.main", marginRight: "8px !important" }
+      }
       break;
     default:
-      template = row.orderSatus;
       break;
   }
 
@@ -71,7 +60,8 @@ const OrderStatusColumn: FC<{ row: IRow }> = ({ row }) => {
         " > img": { marginRight: 1 },
       }}
     >
-      {template}
+      {obj && obj.icon && <ICons icon={obj.icon} sxProps={obj.sxProps} />}
+      {input}
     </Box>
   );
 };

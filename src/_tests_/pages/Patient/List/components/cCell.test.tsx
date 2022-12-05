@@ -25,6 +25,9 @@ function mockUmi() {
 }
 jest.mock("umi", () => mockUmi());
 
+const element = (column: IColumn, row: IRow, isLoading: boolean) => {
+    return <CCell column={column} row={row} isLoading={isLoading} />
+}
 
 describe("Component Patient Table Cell", () => {
     const rowObj: IRow = patientListMock[0];
@@ -32,31 +35,31 @@ describe("Component Patient Table Cell", () => {
 
 
     it("Should check patient table cell component rendered", () => {
-        renderWithWrapper(<CCell column={columnObj} row={rowObj} isLoading={false} />, {})
-        expect(screen.getByText(rowObj.lastName)).toBeInTheDocument();
+        renderWithWrapper(element(columnObj, rowObj, false), {})
+        expect(screen.getByText(rowObj.last_name)).toBeInTheDocument();
     })
 
     it("Should check patient table cell component rendered wit Skeleton", () => {
-        renderWithWrapper(<CCell column={columnObj} row={rowObj} isLoading={true} />, {})
+        renderWithWrapper(element(columnObj, rowObj, true), {})
         expect(screen.getByTestId("skeleton")).toBeInTheDocument();
     })
 
     it("Should check case details cell component rendered", () => {
         columnObj = tableData.columnDef[4];
-        renderWithWrapper(<CCell column={columnObj} row={rowObj} isLoading={false} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument();
+        renderWithWrapper(element(columnObj, rowObj, false), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument();
     })
 
     it("Should check order cell component rendered", () => {
         columnObj = tableData.columnDef[5];
-        renderWithWrapper(<CCell column={columnObj} row={rowObj} isLoading={false} />, {})
-        expect(screen.getByText(rowObj.orderSatus)).toBeInTheDocument();
+        renderWithWrapper(element(columnObj, rowObj, false), {})
+        expect(screen.getByText(rowObj.order_status)).toBeInTheDocument();
     })
 
     it("Should check dental monitoring cell component rendered", () => {
         columnObj = tableData.columnDef[6];
-        renderWithWrapper(<CCell column={columnObj} row={rowObj} isLoading={false} />, {})
-        expect(screen.getByText(rowObj.dentalMonitoring)).toBeInTheDocument();
+        renderWithWrapper(element(columnObj, rowObj, false), {})
+        expect(screen.getByText(rowObj.dental_monitoring)).toBeInTheDocument();
     })
 
     afterEach(cleanup);

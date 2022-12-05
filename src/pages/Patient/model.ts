@@ -2,17 +2,14 @@ import type { ReactElement } from "react";
 import type { Effect, Reducer, Subscription } from "umi";
 
 enum Type {
-  info,
-  warning,
-  other,
+  ErrorIcon,
 }
 export interface AlertModelState {
   isAlert: boolean;
   method?: string;
-  text?: string | any[];
+  title: { text: string; sxProps: object };
   content?: ReactElement | string;
-  btnList?: [];
-  title?: string;
+  btnList?: Array<ReactElement>;
 }
 export interface AlertModelType {
   namespace: "alert";
@@ -31,8 +28,7 @@ const AlertModel: AlertModelType = {
     isAlert: false,
     method: Type[0],
     btnList: [],
-    text: "",
-    title: "Title",
+    title: { text: "", sxProps: { color: "primary", variant: "h6" } },
     content: "",
   },
   effects: {

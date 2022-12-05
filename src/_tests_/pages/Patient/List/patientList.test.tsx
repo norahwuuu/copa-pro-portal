@@ -1,17 +1,12 @@
 import { createPatientUrlObj } from "@/pages/Patient/Create/createPatient.route";
-import CTable from "@/pages/Patient/List/components/CTable/cTable";
-import PatientList from "@/pages/Patient/List/list";
+import { PatientList } from "@/pages/Patient/List/list";
 import { act, cleanup, screen } from "@testing-library/react";
 import { history } from "umi";
-import React from "react"
+import React, { ReactElement } from "react"
 import { renderWithWrapper } from "@/_tests_/util/test";
 import { PatientListProps } from "@/pages/Patient/List/type";
 import patientListMock from "./patientList.mock";
-
-jest.mock("@/pages/Patient/List/components/CTable/cTable");
-
-(CTable as jest.Mock).mockReturnValue(<div data-testid="patient_table_id" />);
-
+import { getDefaultFilter } from "@/_tests_/util/help";
 
 function mockUmi() {
     const original = jest.requireActual("umi");
@@ -32,21 +27,30 @@ function mockUmi() {
 }
 jest.mock("umi", () => mockUmi());
 
-xdescribe("Page Patient List", () => {
-    const patientListProps: PatientListProps = {
-        patientListState: {
-            lists: patientListMock,
-            resultType: 'records',
-            totalRecords: 15
-        },
-        fetchPatients: jest.fn()
-    }
+const element = (patientListProps: PatientListProps): ReactElement => {
+    return <PatientList patientListState={patientListProps.patientListState} fetchPatients={patientListProps.fetchPatients} updateFilter={patientListProps.updateFilter} resetFilter={patientListProps.resetFilter} />
+}
+
+const patientListProps: PatientListProps = {
+    patientListState: {
+        lists: patientListMock,
+        resultType: 'records',
+        totalRecords: 15,
+        filters: getDefaultFilter()
+    },
+    fetchPatients: jest.fn(),
+    updateFilter: jest.fn(),
+    resetFilter: jest.fn()
+}
+
+describe("Page Patient List", () => {
+
     it("Should check patient list component rendered", () => {
-        renderWithWrapper(<PatientList patientListState={patientListProps.patientListState} fetchPatients={patientListProps.fetchPatients} />, {});
+        renderWithWrapper(element(patientListProps), {});
         expect(screen.getByText(/button.addNewPatient/)).toBeInTheDocument();
     });
     it("Should check able to redirect add new patient", () => {
-        const { user } = renderWithWrapper(<PatientList patientListState={patientListProps.patientListState} fetchPatients={patientListProps.fetchPatients} />, {});
+        const { user } = renderWithWrapper(element(patientListProps), {});
         act(() => {
             user.click(screen.getByText(/button.addNewPatient/));
         });

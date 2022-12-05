@@ -24,24 +24,24 @@ import CFilter from "./cFilter";
 import CFilteredChips from "./cFilteredChips";
 import CPagination from "./cPagination";
 import CSearch from "./cSearch";
-import { IColumn, IRow, ITableParams } from "./table";
+import { IColumn, IFilterChips, IRow, ITableParams } from "./table";
 import { tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
 import { StyledTableCell, StyledTableRow } from "./table.style";
 
 
-const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePatientList }) => {
+const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, updateFilter, resetFilter }) => {
   const translate = useIntl()
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
-  const [width, setWidth] = useState(1);
-  const [height, setHeight] = useState(1);
+  const [width, setWidth] = useState<number>(1);
+  const [height, setHeight] = useState<number>(1);
   const [page, setPage] = useState<number>(0);
-  const [filters, setFilters] = useState<{ [key: string]: string[] }>({})
+  const [search, setSearch] = useState<string>("");
   const rowsPerPage = ["xl"].includes(windowSize.breakpoint) ? TABLE_CONFIG.NO_OF_ROWS_LARGE_DEVICE : TABLE_CONFIG.NO_OF_ROWS
 
   useEffect(() => {
-    updatePatientList({ page, rowsPerPage })
-  }, [page])
+    updatePatientList({ page, rowsPerPage, filters: tableProps.filters, search })
+  }, [page, tableProps.filters, search])
 
   useLayoutEffect(() => {
     setWidth(tableRef.current.clientWidth);
@@ -50,15 +50,15 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
 
   const updatePage = (page: number) => {
     setPage(page);
-    updatePatientList({ page, rowsPerPage })
+    updatePatientList({ page, rowsPerPage, filters: tableProps.filters, search })
 
   };
 
-  const updateFilterChpis = (obj: any) => {
-    setFilters({ ...filters, ...obj })
+  const updateFilterChpis = (obj: IFilterChips) => {
+    updateFilter({ filters: { ...obj } })
   }
 
-  const emptyRows = Math.max(0, (1 + page) * rowsPerPage - totalRecords);
+  const emptyRows = Math.max(0, (1 + page) * rowsPerPage - tableProps.totalRecords);
 
 
   return (
@@ -73,15 +73,15 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
           "> div": { mx: 1, alignSelf: "center" },
         }}
       >
-        <CSearch />
+        <CSearch search={search} updateSearch={setSearch} />
         {Object.entries(TABLE_FILTER).map(([key, item]) => (
           <Box component={"div"} sx={{ my: 1 }} key={key}>
-            <CFilter filter={item} filters={filters} updateFilters={updateFilterChpis} />
+            <CFilter filter={item} filters={tableProps.filters} updateFilters={updateFilterChpis} />
           </Box>
         ))}
       </Box>
 
-      <CFilteredChips chips={filters} updateFilters={updateFilterChpis} />
+      <CFilteredChips chips={{ ...tableProps.filters }} updateFilters={updateFilterChpis} resetFilter={resetFilter} />
 
       <Box component={"div"} sx={{ position: "absolute", width: "100%" }}>
         <TableContainer
@@ -99,20 +99,20 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
             <TableHead>
               <StyledTableRow>
                 {tableData.columnDef.map((column) => (
-                  <StyledTableCell key={column.name} sx={{ ...column.cell?.style }} > {translate.formatMessage({ id: column.translate })} </StyledTableCell>
+                  < StyledTableCell key={column.name} sx={{ ...column.cell?.style }} > {translate.formatMessage({ id: column.translate })} </StyledTableCell>
                 ))}
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {lists.map((row) => (
-                <StyledTableRow hover key={row.id} onClick={() => history.push(patientUrlObj.overviewPatient)}>
+              {lists.map((row, index) => (
+                <StyledTableRow hover key={`${row.id}${index}`} onClick={() => history.push(patientUrlObj.overviewPatient)}>
                   {tableData.columnDef.map((col: IColumn) => {
                     return (
                       <StyledTableCell key={col.id} sx={{ ...col.cell?.style }}>
                         <CCell
                           column={col}
                           row={row}
-                          isLoading={tableAction === "fetching"}
+                          isLoading={tableProps.resultType === "fetching"}
                         />
                       </StyledTableCell>
                     );
@@ -120,21 +120,21 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
                 </StyledTableRow>
               ))}
 
-              {tableAction === "fetching" && Array(10).fill({} as IRow).map((row, index) => (
+              {tableProps.resultType === "fetching" && Array(rowsPerPage).fill({} as IRow).map((row, index) => (
                 <StyledTableRow key={index}>
                   {tableData.columnDef.map((col: IColumn) => {
                     return (
                       <StyledTableCell key={col.id}>
                         <CCell
                           column={col}
-                          isLoading={tableAction === "fetching"}
+                          isLoading={tableProps.resultType === "fetching"}
                         />
                       </StyledTableCell>
                     );
                   })}
                 </StyledTableRow>
               ))}
-              {!totalRecords && (tableAction === "noRecords" || tableAction === "filterEmpty") && (
+              {!tableProps.totalRecords && (tableProps.resultType === "noRecords" || tableProps.resultType === "filterEmpty") && (
                 <>
                   <StyledTableRow style={{ height: 40 * emptyRows }}>
                     {tableData.columnDef.map((col: IColumn) => {
@@ -151,65 +151,67 @@ const CTable: FC<ITableParams> = ({ tableAction, lists, totalRecords, updatePati
             </TableBody>
           </Table>
         </TableContainer>
-        {totalRecords > 0 && tableAction === "records" && (
+        {tableProps.totalRecords > 0 && (tableProps.resultType === "records" || tableProps.resultType === "fetching") && (
           <CPagination
             rowsPerPage={rowsPerPage}
             page={page}
             updatePage={updatePage}
-            totalRecords={totalRecords}
+            totalRecords={tableProps.totalRecords}
           />
         )}
       </Box>
-      {!totalRecords && (
-        <Box
-          component={"div"}
-          sx={{
-            position: "absolute",
-            opacity: 1,
-            width: width,
-            height: height,
-            color: (theme) => theme.palette.gray?.main,
-            ...ColumnCenterAlign,
-          }}
-        >
-          {tableAction === "noRecords" && (
-            <>
-              <Text variant={"h6"}>
-                <ICons
-                  icon={"FolderOffIcon"}
-                  fontSize={"large"}
-                  sxProps={{ color: "gray.darken", fontSize: "xxx-large" }}
-                />
-              </Text>
-              <Text variant={"h6"}>
-                {translate.formatMessage({ id: "noPatients" })}
-              </Text>
-            </>
-          )}
-          {tableAction === "filterEmpty" && (
-            <>
-              <Text variant={"h6"}>
-                <ICons
-                  icon={"ResultOffIcon"}
-                  fontSize={"large"}
-                  sxProps={{ color: "gray.darken", height: "60px" }}
-                />
-              </Text>
-              <Text variant={"h6"}>
-                {translate.formatMessage({ id: "patientSearchResultsEmpty" })}
-              </Text>
-              <Text
-                variant={"body1"}
-                sxProp={{ fontWeight: 300, color: "gray.main", mt: 2 }}
-              >
-                {translate.formatMessage({ id: "patientSearchResultsEmptySubText" })}
+      {
+        !tableProps.totalRecords && (
+          <Box
+            component={"div"}
+            sx={{
+              position: "absolute",
+              opacity: 1,
+              width: width,
+              height: height,
+              color: (theme) => theme.palette.gray?.main,
+              ...ColumnCenterAlign,
+            }}
+          >
+            {tableProps.resultType === "noRecords" && (
+              <>
+                <Text variant={"h6"}>
+                  <ICons
+                    icon={"FolderOffIcon"}
+                    fontSize={"large"}
+                    sxProps={{ color: "gray.darken", fontSize: "xxx-large" }}
+                  />
+                </Text>
+                <Text variant={"h6"}>
+                  {translate.formatMessage({ id: "noPatients" })}
+                </Text>
+              </>
+            )}
+            {tableProps.resultType === "filterEmpty" && (
+              <>
+                <Text variant={"h6"}>
+                  <ICons
+                    icon={"ResultOffIcon"}
+                    fontSize={"large"}
+                    sxProps={{ color: "gray.darken", height: "60px" }}
+                  />
+                </Text>
+                <Text variant={"h6"}>
+                  {translate.formatMessage({ id: "patientSearchResultsEmpty" })}
+                </Text>
+                <Text
+                  variant={"body1"}
+                  sxProp={{ fontWeight: 300, color: "gray.main", mt: 2 }}
+                >
+                  {translate.formatMessage({ id: "patientSearchResultsEmptySubText" })}
 
-              </Text>
-            </>
-          )}
-        </Box>
-      )}
-    </Box>
+                </Text>
+              </>
+            )}
+          </Box>
+        )
+      }
+    </Box >
   );
 };
 

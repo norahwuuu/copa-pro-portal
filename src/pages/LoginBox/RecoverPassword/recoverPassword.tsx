@@ -14,7 +14,7 @@ import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
 export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
   const translate = useIntl();
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("mockEmail");
   const [emailType, setEmailType] = useState<string>("noError");
   const [password, setPassWord] = useState<string>("");
   const [passType, setPassType] = useState<string>("noError");
@@ -74,7 +74,6 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
   return (
     <Container>
       <CenterRectangle
-        className={styles.box}
         mainTitle={recoverPasswordText.mainTitle}
         LogoIconMt={15}
       >
@@ -92,6 +91,7 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
             type={"text"}
             name="Email"
             label="Email"
+            disabled
           />
           <InputField
             style={{ marginTop: 20 }}
