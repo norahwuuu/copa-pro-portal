@@ -7,10 +7,8 @@ import {
 import { authClient } from "@/utils/common";
 import type { Effect, Reducer } from "umi";
 import { history } from "umi";
+import { LoginState } from "./type";
 
-export interface LoginState {
-  isShowLoginError: boolean;
-}
 export interface LoginModelType {
   namespace: "loginSpace";
   state: LoginState;
@@ -31,7 +29,7 @@ const MainModel: LoginModelType = {
   },
 
   effects: {
-    *login({ payload }, { call, put }) {
+    *login({ payload, cb }, { call, put }) {
       yield put({
         type: "setData",
         payload: {
@@ -45,9 +43,7 @@ const MainModel: LoginModelType = {
           authClient.tokenManager.setTokens(tokens);
           localStorage.token = JSON.stringify(tokens.accessToken);
           localStorage.idToken = JSON.stringify(tokens.idToken);
-          history.push({
-            pathname: "/patient/list",
-          });
+          cb();
         } else if (status === "LOCKED_OUT") {
           yield put({
             type: "setData",

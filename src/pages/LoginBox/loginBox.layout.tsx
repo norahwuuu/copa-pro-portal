@@ -5,7 +5,7 @@ import { FC, ReactChildren } from "react";
 
 const LoginBox: FC<{ children: ReactChildren }> = ({ children }) => {
   return (
-    <Box sx={{ width: '100%', minWidth: "1280px", maxWidth: '1920px', height: 'calc(100% - 60px)' }}>
+    <Box sx={{ width: '100%', minWidth: "1280px", height: 'calc(100% - 60px)', display: 'flex', justifyContent: 'center' }}>
       <LoginBg>
         {children}
       </LoginBg>
