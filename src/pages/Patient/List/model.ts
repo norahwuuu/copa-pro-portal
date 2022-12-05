@@ -77,6 +77,7 @@ const PatientListModel: PatientListModelType = {
 
     },
     resetFilter(state) {
+      state.filters = {}
       Object.keys(TABLE_FILTER).map((f) => {
         state.filters[f] = [] as string[]
         if (f === "sort_by") {
