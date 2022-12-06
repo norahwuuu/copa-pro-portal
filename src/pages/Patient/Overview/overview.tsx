@@ -162,7 +162,7 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
                   [theme.breakpoints.down("xl")]: { height: "275px" },
                 }}
               >
-                <UserInfo patientName="Monkey D Luffy" avatar={testPng} address="East sea" email="luffy@123.com" mobile="luffy 123 456" birthDate="05/05/1994" achiveStatus={2} />
+                <UserInfo patientName="Monkey D Luffy" avatar={testPng} address="East sea" email="luffy@123.com" mobile="luffy 123 456" birthDate="05/05/1994" achiveStatus={1} />
               </ShadowBox>
             </Grid>
             <Grid item xs={6} xl={6}>

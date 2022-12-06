@@ -213,7 +213,13 @@ const UserInfo: FC<PatientInfoProps> = ({
                   variant="outlined"
                   startIcon={
                     <SvgIcon
-                      sx={{ width: "14px", height: "14px" }}
+                      sx={{
+                        width: "14px",
+                        height: "14px",
+                        "&:hover": {
+                          color: "ruby.main"
+                        }
+                      }}
                       id="Icon_material-archive"
                       data-name="Icon material-archive"
                       xmlns="http://www.w3.org/2000/svg"
@@ -238,6 +244,11 @@ const UserInfo: FC<PatientInfoProps> = ({
                   sx={{
                     fontSize: "16px",
                     color: "gray.darken4",
+                    "&:hover": {
+                      '.MuiSvgIcon-root': {
+                        color: "ruby.main"
+                      }
+                    }
                   }}
                   variant="shade"
                   startIcon={
@@ -245,7 +256,7 @@ const UserInfo: FC<PatientInfoProps> = ({
                       sx={{
                         width: "14px",
                         height: "14px",
-                        color: 'gray.main'
+                        color: 'gray.main',
                       }}
                       id="Icon_material-archive"
                       data-name="Icon material-archive"
@@ -261,7 +272,7 @@ const UserInfo: FC<PatientInfoProps> = ({
                     </SvgIcon>
                   }
                 >
-                  {translate.formatMessage({ id: "userInfo.archived" })}
+                  {translate.formatMessage({ id: "userInfo.archive" })}
                 </Button>
               )
           }
