@@ -65,5 +65,8 @@
   "userInfo.archived": "Archived",
   "userInfo.Unarchive": "Unarchive",
   "userInfo.Prospective": "Prospective",
-  "button.addNewPatient": "Add a new patient"
+  "button.addNewPatient": "Add a new patient",
+  "clinical.leftTitle": "Clinical information *",
+  "clinical.selectYN.error": "Select an option to continue.",
+  "clinical.selectYN.title": "Does this patient have any of the following conditions?"
 }
