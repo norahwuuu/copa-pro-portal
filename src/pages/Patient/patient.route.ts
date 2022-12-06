@@ -1,13 +1,13 @@
 import newPatientRoute from "./Create/createPatient.route";
 
 export const patientUrlObj = {
-  createPatient: "/patient/new",
-  overviewPatient: "/patient/overview",
-  patientList: "/patient/list",
+  createPatient: "/patients/new",
+  overviewPatient: "/patients/overview",
+  patientList: "/patients",
 };
 
 export default {
-  path: "/patient",
+  path: "/patients",
   component: "@/pages/Patient/patient.layout",
   routes: [
     {

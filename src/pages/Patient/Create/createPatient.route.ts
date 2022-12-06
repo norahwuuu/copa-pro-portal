@@ -1,12 +1,12 @@
 export const createPatientUrlObj = {
-  createPatientInformation: "/patient/new/information",
-  createPatinetClinicalInformation: "/patient/new/clinicalinformation",
-  createPatinetScans: "/patient/new/scans",
-  createPatinetPhotograph: "/patient/new/photograph",
+  createPatientInformation: "/patients/new/information",
+  createPatinetClinicalInformation: "/patients/new/clinicalinformation",
+  createPatinetScans: "/patients/new/scans",
+  createPatinetPhotograph: "/patients/new/photograph",
 };
 
 export default {
-  path: "/patient/new",
+  path: "/patients/new",
   component: "@/pages/Patient/Create/createPatient.layout",
   routes: [
     {

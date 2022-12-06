@@ -16,7 +16,8 @@ const Item: FC<ItemProps> = ({ title, dataSource, status }) => {
   const statusColumn = {
     temp: { text: 'Temporary health issue', color: theme.palette.primary.darken },
     inProgress: { text: 'Awaiting patient payment', color: theme.palette.secondary.main },
-    review: { text: 'Needs doctor review', color: `${theme.palette.warning.main}` }
+    review: { text: 'Needs doctor review', color: `${theme.palette.warning.main}` },
+    archived: { text: 'Archived', color: `gray.darken1` }
   }
   return (
     <AdaptionBox sx={{ position: 'relative' }}>
@@ -29,7 +30,7 @@ const Item: FC<ItemProps> = ({ title, dataSource, status }) => {
             borderRadius: "4px",
           }}> {statusColumn[status].text}</Text>
         </Box>}
-      {status && status === 'review' &&
+      {status && (status === 'review' || status === 'archived') &&
         < Box sx={{ textAlign: 'right', position: 'absolute', right: 0, top: '4px' }}>
           <Text variant="body1" sxProp={{
             color: 'white',
@@ -38,6 +39,7 @@ const Item: FC<ItemProps> = ({ title, dataSource, status }) => {
             borderRadius: "4px",
           }}> {statusColumn[status].text}</Text>
         </Box>}
+
       <AdaptionUpperBox
         borderColor={"gray.lighten2"}
         sx={{ borderBottomStyle: "solid", borderBottomWidth: "1px" }}

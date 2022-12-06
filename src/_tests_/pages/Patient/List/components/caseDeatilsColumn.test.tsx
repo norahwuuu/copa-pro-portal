@@ -21,45 +21,49 @@ function mockUmi() {
 }
 jest.mock("umi", () => mockUmi());
 
+const element = (row: IRow) => {
+    return <CaseDeatilsColumn row={row} dataKey={'case_detail'} />
+}
+
 describe("Component patient table case details column", () => {
 
     it("Should check patient table case details column rendered", () => {
         const rowObj: IRow = patientListMock[0]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
     })
 
     it("Should check patient table case details column rendered by status", () => {
         let rowObj: IRow = patientListMock[1]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
 
         rowObj = patientListMock[2]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
 
         rowObj = patientListMock[3]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
         rowObj = patientListMock[4]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
         rowObj = patientListMock[5]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
         rowObj = patientListMock[6]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
 
         rowObj = patientListMock[12]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
         rowObj = patientListMock[13]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
         rowObj = patientListMock[14]
-        renderWithWrapper(<CaseDeatilsColumn row={rowObj} />, {})
-        expect(screen.getByText(rowObj.caseDetails)).toBeInTheDocument()
+        renderWithWrapper(element(rowObj), {})
+        expect(screen.getByText(rowObj.case_detail)).toBeInTheDocument()
 
     })
 

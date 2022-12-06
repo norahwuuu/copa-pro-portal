@@ -5,7 +5,6 @@ import { RowCenterAlign } from "@/theme/themen.util";
 
 import { Box, Checkbox, MenuItem, SxProps } from "@mui/material";
 import React, { FC, ReactElement, useEffect, useState } from "react";
-import { IFilter, IFilterOption } from "./table";
 
 
 
@@ -76,24 +75,20 @@ const FItem: FC<IFilterItemProps> = ({ option, type, selectedItems, updateFilter
       sx={{ py: 1 }}
       icon={<ICons icon={"CheckedIcon"} sxProps={{ color: "gray.lighten" }} />}
       checkedIcon={<ICons icon={"CheckedIcon"} sxProps={{ color: "secondary.main" }} />}
-      checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} />
+      checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled', 'data-testid': option.id }} />
 
   } else {
-    actionTemplate = <Checkbox color={"secondary"} size={"small"} sx={{ py: 1 }} checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} />
+    actionTemplate = <Checkbox color={"secondary"} size={"small"} sx={{ py: 1 }} checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled', 'data-testid': option.id }} />
   }
   return (
     <OptionLabel sx={{ width: "100%", mx: 0, }} control={actionTemplate} label={option.text} />
   )
 }
 
-const CFilter: FC<{ filter: IFilter, filters: { [key: string]: string[] }, updateFilters: (filter: any) => void }> = ({ filter, filters, updateFilters }) => {
+const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
   const filterKey = filter.id;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-
-  if (!filters[filterKey]) {
-    filters[filterKey] = []
-  }
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -111,20 +106,10 @@ const CFilter: FC<{ filter: IFilter, filters: { [key: string]: string[] }, updat
 
 
   const updateFilter = (key: string) => {
-    console.log(".updateFilter...");
-
-    if (!filters[filterKey]) {
-      filters[filterKey] = [];
-    }
     const index = filters[filterKey].indexOf(key)
-    //we can able to sorty by any one condtion 
+    //we can able to sort by atleast one condtion 
     if (filterKey === "sortBy") {
-      if (index !== -1) {
-        filters[filterKey] = filters[filterKey].filter(a => a === key);
-      } else {
-        filters[filterKey] = [key]
-      }
-
+      filters[filterKey] = [key]
     } else {
       if (index !== -1) {
         if (key === 'all') {
@@ -142,10 +127,6 @@ const CFilter: FC<{ filter: IFilter, filters: { [key: string]: string[] }, updat
         }
       }
     }
-    //here set default sortby  if sorty by empty
-    // if (filters[filterKey].length === 0 && filterKey === "sortBy") {
-    //   filters[filterKey] = ([...TABLE_CONFIG.SORT_BY_DEFAULT])
-    // }
     updateFilters(filters)
   }
 
@@ -167,13 +148,14 @@ const CFilter: FC<{ filter: IFilter, filters: { [key: string]: string[] }, updat
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        transitionDuration={50}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "right",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "right",
         }}
 
       >

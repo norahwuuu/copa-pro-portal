@@ -1,6 +1,6 @@
 import CTable from "@/pages/Patient/List/components/CTable/cTable";
 import { cleanup, screen } from "@testing-library/react";
-import React from "react"
+import React, { ReactElement } from "react"
 import useWindowSize from "@/hooks/useWindowSize";
 import CFilter from "@/pages/Patient/List/components/CTable/cFilter";
 import CFilteredChips from "@/pages/Patient/List/components/CTable/cFilteredChips";
@@ -10,6 +10,8 @@ import { tableData } from "@/pages/Patient/List/components/CTable/table.config";
 import CCell from "@/pages/Patient/List/components/CTable/cCell";
 import { renderWithWrapper } from '../../../../util/test';
 import patientListMock from "../patientList.mock";
+import { ITableParams } from "@/pages/Patient/List/components/CTable/table";
+import { getDefaultFilter } from "@/_tests_/util/help";
 
 jest.mock("@/hooks/useWindowSize");
 jest.mock("@/pages/Patient/List/components/CTable/cSearch");
@@ -66,14 +68,26 @@ function mockReact() {
 }
 jest.mock("react", () => mockReact());
 
+const obj: ITableParams = {
+    lists: patientListMock,
+    updatePatientList: jest.fn(),
+    updateFilter: jest.fn(),
+    resetFilter: jest.fn(),
+    tableProps: {
+        resultType: "records",
+        totalRecords: patientListMock.length,
+        filters: getDefaultFilter()
+    }
+}
 
+const element = (params: ITableParams): ReactElement => {
+    return <CTable tableProps={params.tableProps} lists={params.lists} updatePatientList={params.updatePatientList} updateFilter={params.updateFilter} resetFilter={params.resetFilter} />
+}
 
 describe("Component Patient Table", () => {
-    beforeEach(() => {
-        renderWithWrapper(<CTable tableAction={"records"} lists={patientListMock} totalRecords={15} updatePatientList={jest.fn} />)
 
-    })
     it("Should check patient table component rendered", () => {
+        renderWithWrapper(element(obj), {})
         expect(screen.getByTestId("patient_search")).toBeInTheDocument();
         expect(screen.getByTestId("patient_filter_chips")).toBeInTheDocument();
         expect(screen.getAllByTestId("patient_filter")).toBeTruthy()
@@ -83,21 +97,26 @@ describe("Component Patient Table", () => {
 
     });
     it("Should check patient table header render", () => {
+        renderWithWrapper(element(obj), {})
         tableData.columnDef.map((col) => {
             expect(screen.getByText(col.translate)).toBeInTheDocument()
         })
 
-
     });
     it("Should check patient table render if 'no patients '", () => {
-        renderWithWrapper(<CTable tableAction={"noRecords"} lists={[]} totalRecords={0} updatePatientList={jest.fn} />)
+        obj.tableProps.resultType = "noRecords";
+        obj.tableProps.totalRecords = 0;
+        obj.lists = [];
+        renderWithWrapper(element(obj), {})
         expect(screen.getByText("noPatients")).toBeInTheDocument()
 
     });
 
     it("Should check patient table render if 'search result is empty '", () => {
-        renderWithWrapper(<CTable tableAction={"filterEmpty"} lists={[]} totalRecords={0} updatePatientList={jest.fn} />)
-
+        obj.tableProps.resultType = "filterEmpty";
+        obj.tableProps.totalRecords = 0;
+        obj.lists = [];
+        renderWithWrapper(element(obj), {})
         expect(screen.getByText("patientSearchResultsEmpty")).toBeInTheDocument()
 
     });

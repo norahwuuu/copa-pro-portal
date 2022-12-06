@@ -71,8 +71,8 @@ export const PATIENT_STATUS_CASE_MAP = {
 
 
 export const TABLE_FILTER = {
-  "patientStatus": {
-    id: "patientStatus",
+  "status": {
+    id: "status",
     name: "Patient Staus",
     type: "filter",
     styleProps: {
@@ -102,8 +102,8 @@ export const TABLE_FILTER = {
     }]
 
   },
-  "caseDetails": {
-    id: "caseDetails",
+  "case_detail": {
+    id: "case_detail",
     name: "Case details",
     type: "filter",
     styleProps: {
@@ -135,8 +135,8 @@ export const TABLE_FILTER = {
       text: "Under quality check"
     }]
   },
-  "orderStatus": {
-    id: "orderStatus",
+  "order_status": {
+    id: "order_status",
     type: "filter",
     name: "Order status",
     styleProps: {
@@ -160,8 +160,8 @@ export const TABLE_FILTER = {
     }]
 
   },
-  "dentalMonitoring": {
-    id: "dentalMonitoring",
+  "dental_monitoring": {
+    id: "dental_monitoring",
     type: "filter",
     name: "Dental monitoring",
     styleProps: {
@@ -192,37 +192,40 @@ export const TABLE_FILTER = {
       id: "lastModifiedDate",
       text: "Last modified date"
     }, {
-      id: "lastName",
+      id: "last_name",
       text: "Last name (A-Z)"
     }, {
-      id: "firstName",
+      id: "first_name",
       text: "First name (A-Z)"
     }, {
-      id: "DateOfBirth",
+      id: "patient_dob",
       text: "Date of birth"
     }, {
-      id: "lastMonitoringScan",
+      id: "last_monitoring",
       text: "Last monitoring scan"
     }]
   }
 }
 
 export const columnKeys = {
-  CASE_DETAILS: "caseDetails",
-  PATIENT_STATUS: "patientStatus",
+  CASE_DETAILS: "case_detail",
+  PATIENT_STATUS: "status",
   ORDER_STATUS: "orderSatus",
-  DENTAL_MONITORING: "dentalMonitoring",
+  DENTAL_MONITORING: "dental_monitoring",
   LAST_MONITORING_SCAN: "lastMonitoringScan",
-  LAST_NAME: "lastName",
-  FIRST_NAME: "firstName",
+  LAST_NAME: "last_name",
+  FIRST_NAME: "first_name",
+  PATIENT_DOB: "patient_dob",
+
 };
 
 export const tableData = {
   columnDef: [
     {
       name: "Last name",
-      id: "lastName",
+      id: "last_name",
       translate: "lastName",
+      dataKey: "last_name",
       cell: {
         style: {
           fontWeight: "bold !important",
@@ -234,7 +237,8 @@ export const tableData = {
     },
     {
       name: "First name",
-      id: "firstName",
+      id: "first_name",
+      dataKey: "first_name",
       translate: "firstName",
       cell: {
         style: {
@@ -245,13 +249,16 @@ export const tableData = {
     },
     {
       name: "Date of birth",
-      id: "dateOfBirth",
+      id: "patient_dob",
       translate: "dateOfBirth",
+      dataKey: "patient_dob",
+
     },
     {
       name: "Patient Status",
       id: columnKeys.PATIENT_STATUS,
       translate: "patientStatus",
+      dataKey: "status",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -262,6 +269,7 @@ export const tableData = {
       name: "Case Details",
       id: columnKeys.CASE_DETAILS,
       translate: "caseDetails",
+      dataKey: "case_detail",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -273,6 +281,7 @@ export const tableData = {
       name: "Order status",
       id: columnKeys.ORDER_STATUS,
       translate: "orderStatus",
+      dataKey: "order_status",
       cell: {
         style: {
           background: "#F8F8F8 0% 0% no-repeat padding-box",
@@ -283,11 +292,14 @@ export const tableData = {
       name: "Dental monitoring®",
       translate: "dentalMonitoring",
       id: columnKeys.DENTAL_MONITORING,
+      dataKey: "dental_monitoring",
+
     },
     {
       name: "Last monitoring Scan",
       id: "lastMonitoringScan",
       translate: "lastMonitoringScan",
+      dataKey: "last_monitoring"
     },
   ],
 };

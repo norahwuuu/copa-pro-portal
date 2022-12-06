@@ -82,8 +82,8 @@ export const changePasswordText = {
   back: "Back to login",
 };
 export const footerText = {
-  supportN: "Customer support: (123) 457-7890",
-  supportE: `support@aligners.com`,
+  supportN: "Customer support: (866) 219-0001",
+  supportE: `dentistsupport@colgatealigners.com`,
   mid: ` © 2016-2022 Aligners Inc. All Rights Reserved. `,
   v: "V. 1.0.0",
 };

@@ -14,7 +14,7 @@ import testPng from "@/assets/images/test.jpg";
 import testAnterior from '@/assets/images/test2.png';
 import React from 'react';
 import { AlertModelState, connect } from "umi";
-import { PatientOverviewProps } from "./type";
+import { caseStatusType, PatientOverviewProps } from "./type";
 import Treatment from "./components/treatment";
 import Monitoring from "./components/monitoring";
 import Order from "./components/order";
@@ -22,36 +22,88 @@ import Order from "./components/order";
 
 
 
-export const PatientOverview: FC<PatientOverviewProps> = ({ treatmentData, dentalData, orderData, setAlert }) => {
+export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmentData, dentalData, orderData, setAlert }) => {
   const theme = useTheme();
 
-  function popupFunc() {
+  function reviewPopup() {
     setAlert({
       isAlert: true,
       method: "ErrorIcon",
       btnList: [
         <Btn variant={"outlined"} btnLabel={"Got it!"} onClickHandler={() => setAlert({ isAlert: false })} />,
       ],
-      content: <Grid container direction={'column'} component={"div"} >
-        <Text variant="body1" color={"gray.main"}>
+      content: <Grid container direction={'column'} component={"div"} width={'333px'}>
+        <Text variant="body1" >
           {"This patient's treatment plan has been reviewed and some changes have been made."}
         </Text>
-        <Text variant="body1" color={"gray.main"} sxProp={{ fontWeight: "bold", marginTop: '20px' }}>
+        <Text variant="body1" sxProp={{ fontWeight: "bold", marginTop: '20px' }}>
           {"Comment from our reviewer:"}
         </Text>
-        <Text variant="body1" color={"gray.main"} >
+        <Text variant="body1"  >
           {"We have changed …"}
         </Text>
-        <Text variant="h6" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+        <Text variant="h6" sxProp={{ marginTop: '20px', letterSpacing: '-0.5px' }}>
           {" Please review Tx plan and approve changes."}
         </Text>
-        <Text variant="body1" color={"gray.main"} sxProp={{ marginTop: '20px' }}>
+        <Text variant="body1" sxProp={{ marginTop: '20px', letterSpacing: '-0.5px' }}>
           {"If you have further questions, call 1-123-456-7890"}
         </Text>
       </Grid>,
-      title: 'This case need your attention.'
+      title: { text: 'This case need your attention.' }
     })
   }
+  function archivedPopup() {
+    setAlert({
+      isAlert: true,
+      method: "ErrorIcon",
+      title: { text: 'You are about to archive this patient. Are you sure you want to continue?', sxProps: { color: 'gray.main', fontWeight: "normal", fontSize: '14px', lineHeight: '18px' } },
+      btnList: [
+        <Btn variant={"outlined"} btnLabel={"Yes, archive this patient"} onClickHandler={() => setAlert({ isAlert: false })} />,
+        <Btn variant={"text"} btnLabel={"No,Cancel"} onClickHandler={() => setAlert({ isAlert: false })} />,
+      ],
+
+    })
+  }
+  function unArchivedPopup() {
+    setAlert({
+      isAlert: true,
+      method: "ErrorIcon",
+      title: {
+        text: 'The action you are trying to perform cannot be done because this patient has been archived. ', sxProps: { color: 'gray.main', fontSize: '14px' }
+      },
+      content: <Text variant={"body1"} sxProp={{ width: '329px', display: 'block', }}>
+        Do you want to unarchive this patient?</Text>,
+      btnList: [
+        <Btn variant={"outlined"} btnLabel={"Yes, unarchive this patient"} onClickHandler={() => setAlert({ isAlert: false })} />,
+        < Btn variant={"text"} btnLabel={"No,Cancel"} onClickHandler={() => setAlert({ isAlert: false })} />,
+      ],
+
+    })
+  }
+  function notePopup() {
+    setAlert({
+      isAlert: true,
+      method: false,
+      title: {
+        text: 'Treatment notes', sxProps: { variant: 'body1', margin: 'auto' }
+      },
+      content: <Text variant={"body1"} sxProp={{ width: '350px', fontWeight: "normal", display: 'block', letterSpacing: '-0.5px', color: 'gray.main' }}>
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</Text>,
+      btnList: [
+        <Btn variant={"outlined"} btnLabel={"Close"} onClickHandler={() => setAlert({ isAlert: false })} />,
+      ],
+
+    })
+  }
+  useEffect(() => {
+    /* Case need to be reviewed overlay This overlay is automatically displayed when user clicks on a patient to access the patient overview, in the case that the treatment plan has been reviewed and needs approval by the doctor. When user clicks Got it, the overlay disparears. */
+    /* in 'Needs doctor review' case ,the overlay disparears */
+    if (caseStatus === 'review') {
+      reviewPopup()
+    }
+
+  }, [caseStatus])
+
 
   return (
     <>
@@ -123,7 +175,7 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ treatmentData, denta
 
             <Grid item xs={12} xl={12}>
               <ShadowBox>
-                <Treatment stages={treatmentData.stages} retainerDate={treatmentData.retainerDate} endDate={treatmentData.endDate} />
+                <Treatment caseStatus={caseStatus} stages={treatmentData.stages} retainerDate={treatmentData.retainerDate} endDate={treatmentData.endDate} notePopup={notePopup} />
               </ShadowBox>
             </Grid>
             <Grid item xs={6} xl={6}>
@@ -146,7 +198,13 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ treatmentData, denta
 
 export default connect(
   () => {
-    return { treatmentData: { stages: 18, retainerDate: '12/14/2023', endDate: '12/14/2023' }, dentalData: { status: 'Tracking', date: '12/14/2023' }, orderData: { status: 'Delivered', date: '12/14/2023' } };
+    let caseStatus = 'review'
+    return {
+      treatmentData: { stages: 18, retainerDate: '12/14/2023', endDate: '12/14/2023' },
+      dentalData: { status: 'Tracking', date: '12/14/2023' },
+      orderData: { status: 'Delivered', date: '12/14/2023' },
+      caseStatus: caseStatus as caseStatusType,
+    };
   },
   (dispatch) => ({
     setAlert: (payload: AlertModelState) => {
