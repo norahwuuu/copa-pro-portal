@@ -57,6 +57,7 @@ export type IFilter = {
   name: string;
   id: string;
   type: "filter" | "sort";
+  translateKey: string;
   styleProps?: IKeyValue;
   options: IFilterOption[];
 };
