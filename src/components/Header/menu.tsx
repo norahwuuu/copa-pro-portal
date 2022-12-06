@@ -1,4 +1,5 @@
 import { accountUrlObj } from "@/pages/Account/account.route";
+import { loginUrlObj } from "@/pages/LoginBox/loginBox.route";
 import { StyledMenu, StyledMenuButton } from "@/theme/filterMenu.style";
 import { RowCenterAlign } from "@/theme/themen.util";
 import { Box, MenuItem, MenuProps, styled, SxProps } from "@mui/material";
@@ -118,7 +119,7 @@ const CustomizedMenus: FC = () => {
         >
           <FormattedMessage id="myAccountMenu" />
         </MenuItem>
-        <MenuItem disableRipple onClick={handleClose}>
+        <MenuItem disableRipple onClick={() => redirectTo(loginUrlObj.changePassword)}>
           <FormattedMessage id="changePasswordMenu" />
         </MenuItem>
         <MenuItem

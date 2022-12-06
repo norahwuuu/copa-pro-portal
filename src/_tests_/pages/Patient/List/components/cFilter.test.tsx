@@ -8,6 +8,22 @@ import { cleanup, screen, act } from "@testing-library/react";
 import React, { ReactElement } from "react"
 import { renderWithWrapper } from '../../../../util/test';
 
+function mockUmi() {
+    const original = jest.requireActual("umi");
+    return {
+        ...original,
+        useIntl: () => {
+            return {
+                formatMessage: (msg: { id: string }) => msg.id,
+            };
+        },
+        history: {
+            push: jest.fn(),
+        }
+    };
+}
+jest.mock("umi", () => mockUmi());
+
 
 const tableFilterProps: ITableFilter = {
     filter: TABLE_FILTER.case_detail, filters: getDefaultFilter(), updateFilters: jest.fn()
@@ -23,12 +39,12 @@ describe("Component Patient Table Filter", () => {
     it("Should check patient table  filter component rendered", () => {
         tableFilterProps.filter = TABLE_FILTER.order_status
         renderWithWrapper(element(tableFilterProps), {})
-        expect(screen.getByText(tableFilterProps.filter.name)).toBeInTheDocument();
+        expect(screen.getByText(tableFilterProps.filter.translateKey)).toBeInTheDocument();
     })
     it("Should check able to open filter ", async () => {
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         act(() => {
-            user.click(screen.getByText(tableFilterProps.filter.name))
+            user.click(screen.getByText(tableFilterProps.filter.translateKey))
         })
         expect(screen.getByText(tableFilterProps.filter.options[0].text)).toBeInTheDocument();
     })
@@ -38,7 +54,7 @@ describe("Component Patient Table Filter", () => {
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         const option = tableFilterProps.filter.options[1];
         act(() => {
-            user.click(screen.getByText(tableFilterProps.filter.name))
+            user.click(screen.getByText(tableFilterProps.filter.translateKey))
         })
 
         expect(screen.getByText(option.text)).toBeInTheDocument();
@@ -56,7 +72,7 @@ describe("Component Patient Table Filter", () => {
         const option = tableFilterProps.filter.options[0];
 
         act(() => {
-            user.click(screen.getByText(tableFilterProps.filter.name))
+            user.click(screen.getByText(tableFilterProps.filter.translateKey))
         })
 
         expect(screen.getByText(option.text)).toBeInTheDocument();
@@ -87,7 +103,7 @@ describe("Component patient table sort", () => {
         tableFilterProps.filter = TABLE_FILTER.sort_by
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         act(() => {
-            user.click(screen.getByText(tableFilterProps.filter.name))
+            user.click(screen.getByText(tableFilterProps.filter.translateKey))
         })
         expect(screen.getByText(tableFilterProps.filter.options[0].text)).toBeInTheDocument();
     })
@@ -96,7 +112,7 @@ describe("Component patient table sort", () => {
         tableFilterProps.filter = TABLE_FILTER.sort_by
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         act(() => {
-            user.click(screen.getByText(tableFilterProps.filter.name))
+            user.click(screen.getByText(tableFilterProps.filter.translateKey))
         })
         expect(screen.getByText(tableFilterProps.filter.options[0].text)).toBeInTheDocument();
     })
@@ -107,7 +123,7 @@ describe("Component patient table sort", () => {
 
         const { user } = renderWithWrapper(element(tableFilterProps), {})
         act(() => {
-            user.click(screen.getByText(tableFilterProps.filter.name))
+            user.click(screen.getByText(tableFilterProps.filter.translateKey))
         })
         const elem = screen.getByTestId(option.id);
         expect(elem.checked).toBeFalsy()

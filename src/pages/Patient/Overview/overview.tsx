@@ -128,18 +128,21 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
             marginBottom: "13px",
             display: "flex",
             zIndex: "999",
+            marginTop: '4px'
+
           }}
-          href="login"
+          href=""
           color={"gray.main"}
           underline="hover"
         >
           {
             <ArrowBackIcon
               sx={{
-                fontSize: "17px",
-                fontWeight: "inherit",
+                fontSize: "16px",
+                fontWeight: "blod",
                 alignSelf: "center",
                 marginRight: "5px",
+                color: "gray.main"
               }}
             />
           }
