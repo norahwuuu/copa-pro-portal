@@ -108,7 +108,7 @@ const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
   const updateFilter = (key: string) => {
     const index = filters[filterKey].indexOf(key)
     //we can able to sort by atleast one condtion 
-    if (filterKey === "sortBy") {
+    if (filterKey === "sort_by") {
       filters[filterKey] = [key]
     } else {
       if (index !== -1) {

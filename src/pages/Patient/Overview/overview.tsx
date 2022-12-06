@@ -201,7 +201,7 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
 
 export default connect(
   () => {
-    let caseStatus = 'review'
+    const caseStatus = 'review'
     return {
       treatmentData: { stages: 18, retainerDate: '12/14/2023', endDate: '12/14/2023' },
       dentalData: { status: 'Tracking', date: '12/14/2023' },
