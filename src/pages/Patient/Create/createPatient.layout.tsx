@@ -14,9 +14,12 @@ const PatientCreate: FC<{ children: ReactChildren }> = ({ children }) => {
     <Box sx={{
       // my: 2,
       margin: "auto",
+      paddingRight: "5px",
+      paddingLeft: "5px",
       display: "flex",
       flexDirection: "column",
       minWidth: '1280px',
+
       maxWidth: '1920px',
       [theme.breakpoints.up("xl")]: { width: "1560px", paddingTop: "71px" },
       [theme.breakpoints.down("xl")]: {
