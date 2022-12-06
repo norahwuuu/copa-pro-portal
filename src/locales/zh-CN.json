@@ -68,5 +68,7 @@
   "button.addNewPatient": "Add a new patient",
   "clinical.leftTitle": "Clinical information *",
   "clinical.selectYN.error": "Select an option to continue.",
-  "clinical.selectYN.title": "Does this patient have any of the following conditions?"
+  "clinical.selectYN.title": "Does this patient have any of the following conditions?",
+  "clinical.select.title": "Check all that applies:",
+  "clinical.note.optional": "Note (optional)"
 }
