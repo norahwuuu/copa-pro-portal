@@ -5,17 +5,20 @@ import { RowCenterAlign } from "@/theme/themen.util";
 
 import { Box, Checkbox, MenuItem, SxProps } from "@mui/material";
 import React, { FC, ReactElement, useEffect, useState } from "react";
+import { useIntl } from "umi";
 
 
 
 const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxProps: SxProps }> = ({ label, isOpen, type, sxProps }) => {
+  const translate = useIntl()
   return (
     <>
       <Box component={"div"} sx={{
         ...RowCenterAlign,
         ...sxProps,
         justifyContent: "space-between",
-
+        paddingTop: "2px",
+        paddingBottom: "2px"
       }}>
         <Text
           variant={"body1"}
@@ -29,7 +32,7 @@ const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxPr
           {type === 'filter' && <ICons icon="FilterAltIcon" sxProps={{ color: "inherit", fontSize: "18px", marginRight: "5px" }} />}
           {type === 'sort' && <ICons icon="SortIcon" sxProps={{ color: "inherit", fontSize: "18px", marginRight: "5px" }} />}
 
-          {label}
+          {translate.formatMessage({ id: label })}
         </Text>
 
         {isOpen && (
@@ -98,7 +101,7 @@ const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
   };
 
   const patientStatusFilterStyle = (isLast: boolean) => {
-    if (isLast && filterKey === "patientStatus") {
+    if (isLast && filterKey === "status") {
       return { "> label": { borderTop: "1px solid #EEEEEE", py: 1 } }
     }
     return {};
@@ -139,7 +142,7 @@ const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <FTitle label={filter.name} isOpen={open} sxProps={filter.styleProps} type={filter.type} />
+        <FTitle label={filter.translateKey} isOpen={open} sxProps={filter.styleProps} type={filter.type} />
       </StyledMenuButton>
 
       <StyledMenu
@@ -159,8 +162,16 @@ const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
         }}
 
       >
-        <MenuItem onClick={handleClose} sx={{ borderBottom: "1px solid #EEEEEE", padding: "2px 10px", mb: 3 }} >
-          <FTitle label={filter.name} isOpen={open} sxProps={{ ...filter.styleProps }} type={filter.type} />
+        <MenuItem onClick={handleClose} sx={{
+          borderBottom: "1px solid #EEEEEE",
+          mb: 3,
+          paddingLeft: "10px",
+          paddingRight: "10px",
+          paddingTop: "1px",
+          height: "27px"
+
+        }} >
+          <FTitle label={filter.translateKey} isOpen={open} sxProps={{ ...filter.styleProps }} type={filter.type} />
         </MenuItem>
         {filter.options.map((option: IFilterOption, index: number) => (
           <MenuItem sx={{ p: 0, ...patientStatusFilterStyle(filter.options.length === index + 1) }} key={option.id}>

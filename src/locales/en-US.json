@@ -46,6 +46,7 @@
   "orderStatus": "Order status",
   "dentalMonitoring": "Dental monitoring®",
   "lastMonitoringScan": "Last monitoring scan",
+  "sortyBy": "Sort by",
   "caseTooComplex": "Case too complex",
   "caseTooComplexTooltip": "This case was dismissed as it should be referred to an orthodontist.",
   "patientDeclined": "Patient declined",
