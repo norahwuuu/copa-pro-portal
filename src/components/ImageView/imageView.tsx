@@ -69,6 +69,7 @@ const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp, testId = '' })
         width: 84,
         height: 65,
         border: "1px solid #ccc",
+        borderRadius: "4px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -91,8 +92,8 @@ const ImageView: FC<ImageViewProps> = ({ src = undefined, sxProp, testId = '' })
             width: "100%",
             height: "100%",
             background: `url(${src}) no-repeat center`,
-            backgroundSize: "80% 70%",
             display: "flex",
+            backgroundSize: "contain"
           }}
         >
           <Container
