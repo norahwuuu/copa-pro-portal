@@ -1,13 +1,65 @@
-import React, { FC } from "react";
-import { Box, Grid, useTheme, Divider, Button, List, ListItem, Checkbox, FormControlLabel, TextField } from "@mui/material";
-import { useIntl } from 'umi';
+import React, { FC, useEffect } from "react";
+import { Box, Grid, useTheme, Divider, Button, List, ListItem, Checkbox, FormControlLabel, SvgIcon } from "@mui/material";
+import { useIntl, connect } from 'umi';
 import ShadowBox from "@/pages/Components/shadowBox";
 import Text from "@/components/Text/text";
 import { conditions } from "./column";
-import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
-const PatientClinicalInformation: FC = () => {
+import { ReactComponent as unchecked } from '@/assets/svgs/checkBox-unchecked.svg';
+import { ReactComponent as checked } from '@/assets/svgs/checkBox-checked.svg';
+import styles from './clinicalInformation.less';
+import { AlertModelState } from "@/pages/Patient/model";
+export const PatientClinicalInformation: FC = ({ setAlert }) => {
   const translate = useIntl();
   const theme = useTheme();
+  // check applies Implants/Bridges/Primary tooth will show
+  const IBPappliesModel = () => {
+    setAlert({
+      isAlert: true,
+      method: "ErrorIcon",
+      title: {
+        text: translate.formatMessage({ id: "clinical.pop.sorryTitle" }),
+        sxProps: { color: 'gray.main', fontSize: '14px' },
+      },
+      content: <Box sx={{ width: "100%" }}>
+        <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
+          {translate.formatMessage({ id: "clinical.note.optional" })}
+        </Text>
+        <textarea style={{ width: "390px", height: "102px" }} className={styles.area} placeholder="Write your note here…"></textarea>
+      </Box>,
+      btnList: [
+        <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => setAlert({ isAlert: false })}>{`Ok,save and close`}</Button>,
+        < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => setAlert({ isAlert: false })}>{`Cancel`}</Button>,
+      ],
+
+    })
+  }
+  // check Excessive will show
+  const ExcessiveModel = () => {
+    setAlert({
+      isAlert: true,
+      method: "ErrorIcon",
+      title: {
+        text: translate.formatMessage({ id: "clinical.pop.sorryTitle" }),
+        sxProps: { color: 'gray.main', fontSize: '14px' },
+        subText: translate.formatMessage({ id: "clinical.pop.clean" })
+      },
+      content: <Box sx={{ width: "100%" }}>
+        <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
+          {translate.formatMessage({ id: "clinical.note.optional" })}
+        </Text>
+        <textarea style={{ width: "390px", height: "102px" }} className={styles.area} placeholder="Write your note here…"></textarea>
+      </Box>,
+      btnList: [
+        <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => setAlert({ isAlert: false })}>{`Ok,save and close`}</Button>,
+        < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => setAlert({ isAlert: false })}>{`Cancel`}</Button>,
+      ],
+
+    })
+  }
+  useEffect(() => {
+    // IBPappliesModel();
+    // ExcessiveModel()
+  }, [])
   return <Grid container sx={{ width: '100%' }}>
     <Grid item xs={12} xl={12}>
       <ShadowBox sxProp={{
@@ -109,14 +161,36 @@ const PatientClinicalInformation: FC = () => {
                             color: "gray.main",
                             fontSize: "14px",
                             display: "flex",
-                            alignItems: "center"
+                            alignItems: "center",
                           }} key={i.name}>
-                            <FormControlLabel label={i.name} control={
+                            <FormControlLabel sx={{
+                              marginLeft: "2px",
+                              marginTop: "2px",
+                              marginRight: "0",
+                              height: "18px",
+                              '& .MuiCheckbox-root': {
+                                width: "18px",
+                                height: "18px"
+                              },
+                              "& .MuiTypography-root": {
+                                marginTop: "-5px",
+                                marginLeft: "4px"
+                              }
+                            }} label={i.name} control={
                               <Checkbox
-                                icon={<CheckBoxOutlineBlankOutlinedIcon sx={{ color: "#777" }} />}
-                                inputProps={{
-                                  'aria-label': i.name,
+                                sx={{
+                                  padding: "0",
+
                                 }}
+                                icon={
+                                  <SvgIcon sx={{ width: "24px", height: "24px" }} component={unchecked} />
+
+                                }
+                                checkedIcon={
+                                  <SvgIcon sx={{ width: "24px", height: "24px" }} component={checked} />
+
+                                }
+
                                 name={i.name}
                               />
                             } />
@@ -140,7 +214,7 @@ const PatientClinicalInformation: FC = () => {
               <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
                 {translate.formatMessage({ id: "clinical.note.optional" })}
               </Text>
-              <textarea placeholder="Write your note here…" style={{ width: "478px", height: "132px", paddingTop: "12px", borderColor: "#999", borderRadius: "4px", textIndent: "12px" }}></textarea>
+              <textarea className={styles.area} placeholder="Write your note here…"></textarea>
             </Grid>
           </Grid>
         </>
@@ -153,4 +227,16 @@ const PatientClinicalInformation: FC = () => {
   </Grid>;
 };
 
-export default PatientClinicalInformation;
+export default connect(
+  (store) => {
+    return store
+  },
+  (dispatch) => ({
+    setAlert: (payload: AlertModelState) => {
+      dispatch({
+        type: `alert/setAlert`,
+        payload,
+      });
+    },
+  })
+)(PatientClinicalInformation);
