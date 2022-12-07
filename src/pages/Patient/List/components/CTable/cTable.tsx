@@ -40,7 +40,7 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
 
   useEffect(() => {
     updatePatientList({ page, rowsPerPage, filters: tableProps.filters, search })
-  }, [page, tableProps.filters, search])
+  }, [tableProps.filters, search])
 
   useLayoutEffect(() => {
     setHeight(tableRef.current.clientHeight);

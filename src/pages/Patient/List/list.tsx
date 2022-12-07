@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "@/components/Button/button";
 import { Box, Container } from "@mui/material";
 import { FC } from "react";
@@ -11,10 +11,6 @@ import { IFilterChips } from "./components/CTable/table";
 
 export const PatientList: FC<PatientListProps> = ({ patientListState, fetchPatients, resetFilter, updateFilter }) => {
   const translate = useIntl();
-
-  useEffect(() => {
-    resetFilter()
-  }, [])
 
   const updatePatientList = ({ page = 0, rowsPerPage = 10, filters, search }: PatientListParams) => {
     fetchPatients({ page, rowsPerPage, filters, search })

@@ -1,4 +1,5 @@
 import { fetchPatientList } from "@/services/patient.service";
+import { patientUrlObj } from "../patient.route";
 import { TABLE_CONFIG, TABLE_FILTER } from "./components/CTable/table.config";
 import { PatientListModelType } from "./type";
 
@@ -96,8 +97,12 @@ const PatientListModel: PatientListModelType = {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
-        console.log("pathname....", pathname);
-        console.log("query....", query);
+        console.log(pathname, ".....path, query", query)
+        if (pathname === patientUrlObj.patientList) {
+          dispatch({
+            type: 'resetFilter',
+          });
+        }
       });
     },
   },

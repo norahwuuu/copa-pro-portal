@@ -9,6 +9,9 @@ export const patientUrlObj = {
 export default {
   path: "/patients",
   component: "@/pages/Patient/patient.layout",
+  wrappers: [
+    '@/wrappers/auth',
+  ],
   routes: [
     {
       path: patientUrlObj.patientList,
