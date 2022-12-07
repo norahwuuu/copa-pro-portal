@@ -155,7 +155,7 @@ export const TABLE_FILTER = {
     }, {
       id: "inProduction",
       text: "In Production",
-      dataKey: "20",
+      dataKey: "30",
     }, {
       id: "retainersSent",
       text: "Retainers sent",
