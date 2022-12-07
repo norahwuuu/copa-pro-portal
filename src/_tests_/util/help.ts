@@ -6,7 +6,7 @@ export const getDefaultFilter = () => {
     const filters = {}
     Object.keys(TABLE_FILTER).map((f) => {
         filters[f] = [] as string[]
-        if (f === "sortBy") {
+        if (f === "sort_by") {
             filters[f] = [...TABLE_CONFIG.SORT_BY_DEFAULT];
         }
     })

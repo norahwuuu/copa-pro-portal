@@ -33,7 +33,6 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
   const translate = useIntl()
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
-  const [width, setWidth] = useState<number>(1);
   const [height, setHeight] = useState<number>(1);
   const [page, setPage] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
@@ -44,7 +43,6 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
   }, [page, tableProps.filters, search])
 
   useLayoutEffect(() => {
-    setWidth(tableRef.current.clientWidth);
     setHeight(tableRef.current.clientHeight);
   }, [tableRef]);
 
@@ -167,7 +165,7 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
             sx={{
               position: "absolute",
               opacity: 1,
-              width: width,
+              width: "100%",
               height: height,
               color: (theme) => theme.palette.gray?.main,
               ...ColumnCenterAlign,

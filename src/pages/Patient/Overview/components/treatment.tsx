@@ -55,7 +55,7 @@ const Treatment: FC<treatmentProps> = ({
             ),
         },
         stages && caseStatus !== 'temp' && {
-            name: ` `,
+            name: '\u00A0',
             value: (
                 <Link
                     variant={"body1"}
@@ -68,7 +68,7 @@ const Treatment: FC<treatmentProps> = ({
             ),
         },
         stages && {
-            name: ` `,
+            name: '\u00A0',
             value: (
                 <Link
                     variant={"body1"}

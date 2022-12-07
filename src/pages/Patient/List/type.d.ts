@@ -21,7 +21,7 @@ export interface PatientListParams {
     filters: {
         [key: string]: string[]
     },
-    search: string
+    search?: string
 
 
 }

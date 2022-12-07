@@ -128,18 +128,21 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
             marginBottom: "13px",
             display: "flex",
             zIndex: "999",
+            marginTop: '4px'
+
           }}
-          href="login"
+          href=""
           color={"gray.main"}
           underline="hover"
         >
           {
             <ArrowBackIcon
               sx={{
-                fontSize: "17px",
-                fontWeight: "inherit",
+                fontSize: "16px",
+                fontWeight: "blod",
                 alignSelf: "center",
                 marginRight: "5px",
+                color: "gray.main"
               }}
             />
           }
@@ -198,7 +201,7 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
 
 export default connect(
   () => {
-    let caseStatus = 'review'
+    const caseStatus = 'review'
     return {
       treatmentData: { stages: 18, retainerDate: '12/14/2023', endDate: '12/14/2023' },
       dentalData: { status: 'Tracking', date: '12/14/2023' },

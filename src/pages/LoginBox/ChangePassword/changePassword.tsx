@@ -63,7 +63,6 @@ export const ChangePassword: FC<any> = ({ changePasswordFn }) => {
   return (
     <Container>
       <CenterRectangle
-        sxProp={{ top: "107px" }}
         mainTitle={changePasswordText.mainTitle}
         LogoIconMt={26}
       >
