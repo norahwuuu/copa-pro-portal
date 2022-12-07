@@ -49,26 +49,21 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     border: "1px solid gray.light3",
     borderTopLeftRadius: '60px',
     borderBottomRightRadius: '60px',
-    paddingTop: '50px',
-    paddingBottom: '30px',
+    padding: "50px 30px 30px 30px",
     width: '450px'
   },
   "& .MuiDialogTitle-root": {
     padding: 0,
-    paddingLeft: '30px',
-    paddingRight: '30px',
     display: 'flex',
     alignItems: 'center',
 
 
   },
   "& .MuiDialogContent-root": {
-    margin: '0 auto',
     padding: 0,
     marginTop: '30px',
     letterSpacing: '-0.5px',
     position: 'relative',
-    left: '11px',
     fontWeight: 'normal'
   },
 
@@ -99,11 +94,19 @@ export default function AlertDialog({ isAlert, method, title, content, btnList, 
         <DialogTitle sx={{ paddingLeft: '30px', }} id="alert-dialog-title" color={'gray.main'}>
           {method && <ICons icon={method || 'ErrorIcon'}
             sxProps={{ width: '30px', height: '25px', marginRight: '11px' }} />}
-          <Text variant={'h6'} color={'primary'} sxProp={{ fontWeight: 'normal', ...title.sxProps }}>
+          <Text variant={'h6'} color={'primary'} sxProp={{ fontWeight: 'normal', display: "block", ...title.sxProps }}>
             {title.text}
           </Text>
+
         </DialogTitle>
-        {content && <DialogContent >
+        {
+          title.subText && (
+            <Text variant={'h6'} color={'primary'} sxProp={{ fontWeight: 'normal', color: "gray.main", marginTop: "10px", paddingLeft: "40px", fontSize: "14px", display: "block" }}>
+              {title.subText}
+            </Text>
+          )
+        }
+        {content && <DialogContent sx={{ marginTop: title.subText ? '10px!important' : "30px" }} >
           <DialogContentText id="alert-dialog-description" component={"div"} color={'gray.main'}>
             {content}
           </DialogContentText>

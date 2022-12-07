@@ -71,5 +71,7 @@
   "clinical.selectYN.error": "Select an option to continue.",
   "clinical.selectYN.title": "Does this patient have any of the following conditions?",
   "clinical.select.title": "Check all that applies:",
-  "clinical.note.optional": "Note (optional)"
+  "clinical.note.optional": "Note (optional)",
+  "clinical.pop.sorryTitle": "We are sorry, but this patient is not recommended for these aligners at this moment.",
+  "clinical.pop.clean": "Cleaning is required prior to scanning for aligners."
 }
