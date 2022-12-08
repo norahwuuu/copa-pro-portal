@@ -1,7 +1,6 @@
 import { fetchPatientList } from "@/services/patient.service";
-import { patientUrlObj } from "../patient.route";
-import { TABLE_CONFIG, TABLE_FILTER } from "./components/CTable/table.config";
-import { PatientListModelType } from "./type";
+import { constructQueryParams } from "./list.config";
+import { PatientListModelType, PatientQueryparams } from "./type";
 
 const PatientListModel: PatientListModelType = {
   namespace: "patientListModal",
@@ -9,11 +8,6 @@ const PatientListModel: PatientListModelType = {
     lists: [],
     resultType: "noRecords",
     totalRecords: 0,
-    filters: {
-      "sort_by": [...TABLE_CONFIG.SORT_BY_DEFAULT]
-    },
-    search: ""
-
   },
   effects: {
     *fetchPatientList({ payload }, { call, put }) {
@@ -32,15 +26,18 @@ const PatientListModel: PatientListModelType = {
           totalRecords: 0,
         },
       });
+      const userObj = localStorage.getItem("user");
+      const { ulab_orgId } = JSON.parse(userObj)
+      const params: PatientQueryparams = constructQueryParams(payload)
       try {
-        const { totalRecords, data } = yield call(fetchPatientList, payload);
-        if (totalRecords > 0) {
+        const { result, paging } = yield call(fetchPatientList, params, ulab_orgId);
+        if (result && result.length > 0) {
           yield put({
             type: "setPatientList",
             payload: {
               resultType: "records",
-              lists: data,
-              totalRecords
+              lists: result,
+              totalRecords: paging.total_count
             },
           });
 
@@ -72,38 +69,10 @@ const PatientListModel: PatientListModelType = {
     }
   },
   reducers: {
-    updateFilter(state, { payload: { filters } }) {
-      state.filters = { ...state.filters, ...filters }
-      return { ...state };
-
-    },
-    resetFilter(state) {
-      state.filters = {}
-      Object.keys(TABLE_FILTER).map((f) => {
-        state.filters[f] = [] as string[]
-        if (f === "sort_by") {
-          state.filters[f] = [...TABLE_CONFIG.SORT_BY_DEFAULT];
-        }
-      })
-      //reset search Box
-      state.search = "";
-      return { ...state };
-    },
     setPatientList(state, { payload: { resultType, lists, totalRecords } }) {
       return { ...state, lists, totalRecords, resultType };
     },
-  },
-  subscriptions: {
-    setup({ dispatch, history }) {
-      return history.listen(({ pathname }: { pathname: string }) => {
-        if (pathname === patientUrlObj.patientList) {
-          dispatch({
-            type: 'resetFilter',
-          });
-        }
-      });
-    },
-  },
+  }
 };
 
 export default PatientListModel;

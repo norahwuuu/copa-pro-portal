@@ -9,6 +9,7 @@ export const patientUrlObj = {
 export default {
   path: "/patients",
   component: "@/pages/Patient/patient.layout",
+  //TODO: Once enable global validation we can remove this 
   wrappers: [
     '@/wrappers/auth',
   ],

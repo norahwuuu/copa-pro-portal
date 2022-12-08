@@ -25,22 +25,25 @@ import CFilteredChips from "./cFilteredChips";
 import CPagination from "./cPagination";
 import CSearch from "./cSearch";
 import { IColumn, IFilterChips, IRow, ITableParams } from "./table";
-import { tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
+import { DEFAULT_FILTER, tableData, TABLE_CONFIG, TABLE_FILTER } from "./table.config";
 import { StyledTableCell, StyledTableRow } from "./table.style";
 
 
-const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, updateFilter, resetFilter }) => {
+
+
+const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList }) => {
   const translate = useIntl()
   const windowSize = useWindowSize();
   const tableRef = useRef(null);
+  const [filters, setFilters] = useState<IFilterChips>(DEFAULT_FILTER())
+  const [search, setSearch] = useState<string>("")
   const [height, setHeight] = useState<number>(1);
   const [page, setPage] = useState<number>(0);
-  const [search, setSearch] = useState<string>("");
   const rowsPerPage = ["xl"].includes(windowSize.breakpoint) ? TABLE_CONFIG.NO_OF_ROWS_LARGE_DEVICE : TABLE_CONFIG.NO_OF_ROWS
 
   useEffect(() => {
-    updatePatientList({ page, rowsPerPage, filters: tableProps.filters, search })
-  }, [tableProps.filters, search])
+    updatePatientList({ page, rowsPerPage, filters, search })
+  }, [filters, search])
 
   useLayoutEffect(() => {
     setHeight(tableRef.current.clientHeight);
@@ -48,12 +51,16 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
 
   const updatePage = (page: number) => {
     setPage(page);
-    updatePatientList({ page, rowsPerPage, filters: tableProps.filters, search })
+    updatePatientList({ page, rowsPerPage, filters, search })
 
   };
 
+  const resetFilter = () => {
+    setFilters(DEFAULT_FILTER())
+    setSearch("")
+  }
   const updateFilterChpis = (obj: IFilterChips) => {
-    updateFilter({ filters: { ...obj } })
+    setFilters({ ...filters, ...obj })
   }
 
   const emptyRows = Math.max(0, (1 + page) * rowsPerPage - tableProps.totalRecords);
@@ -74,12 +81,12 @@ const CTable: FC<ITableParams> = ({ tableProps, lists, updatePatientList, update
         <CSearch search={search} updateSearch={setSearch} />
         {Object.entries(TABLE_FILTER).map(([key, item]) => (
           <Box component={"div"} sx={{ my: 1 }} key={key}>
-            <CFilter filter={item} filters={tableProps.filters} updateFilters={updateFilterChpis} />
+            <CFilter filter={item} filters={filters} updateFilters={updateFilterChpis} />
           </Box>
         ))}
       </Box>
 
-      <CFilteredChips chips={{ ...tableProps.filters }} updateFilters={updateFilterChpis} resetFilter={resetFilter} />
+      <CFilteredChips chips={{ ...filters }} updateFilters={updateFilterChpis} resetFilter={resetFilter} />
 
       <Box component={"div"} sx={{ position: "absolute", width: "100%" }}>
         <TableContainer

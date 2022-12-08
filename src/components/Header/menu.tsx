@@ -117,7 +117,10 @@ const CustomizedMenus: FC = () => {
         </MenuItem>
         <MenuItem
           disableRipple
-          onClick={handleClose}
+          onClick={() => {
+            localStorage.clear();
+            history.push("/")
+          }}
           sx={{ "> svg": { marginLeft: 2 } }}
         >
           <FormattedMessage id="logoutMenu" />
