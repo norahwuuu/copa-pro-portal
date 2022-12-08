@@ -2,10 +2,10 @@ import InputField, { emailRegex, LogTextField } from "@/components/InputField/in
 import Text from "@/components/Text/text";
 import ShadowBox from "@/pages/Components/shadowBox";
 import { errorTypes } from "@/pages/LoginBox/Login/column";
-import { Box, FormHelperText, Grid, styled, useFormControl, useTheme } from "@mui/material";
+import { Box, Button, FormHelperText, Grid, styled, useFormControl, useTheme } from "@mui/material";
 import React from "react";
 import { FC, useState } from "react";
-import { useIntl } from "umi";
+import { AlertModelState, connect, useIntl } from "umi";
 
 const Input = styled(LogTextField)`
   & .MuiOutlinedInput-root {
@@ -74,7 +74,7 @@ const PatientInformation: FC = () => {
     if (value === '') {
       return errorWords
     }
-    return ''
+    return ' '
   }
   const checkEmail = () => {
     if (email === "") {
@@ -91,18 +91,15 @@ const PatientInformation: FC = () => {
         sxProp={{
           height: "372px",
           padding: "30px 0",
-          [theme.breakpoints.up("xl")]: { padding: "50px 0", height: "408px" },
+          paddingLeft: "30px",
+          [theme.breakpoints.up("xl")]: { padding: "50px 0", paddingLeft: "50px", height: "408px" },
           flex: "1",
         }}
       >
         <Grid container height={"100%"}>
           {/*  //left */}
-          <Grid item sm={6} sx={{ paddingLeft: "30px" }}>
-            <Text
-              variant={"h4"}
-              color={"gray.main"}
-              sxProp={{ display: "inline-block" }}
-            >
+          <Grid item sm={6} >
+            <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", display: "block" }} variant="h5">
               {`${translate.formatMessage({
                 id: "patient.Info",
               })}*`}
@@ -111,9 +108,8 @@ const PatientInformation: FC = () => {
             <Box component="form" autoComplete="off">
               <Grid
                 mt={"43px"}
-                mb={"23px"}
                 container
-                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: 9 }}
+                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: "100px" }}
               >
                 <Grid item>
                   <Input
@@ -165,9 +161,14 @@ const PatientInformation: FC = () => {
                 </Grid>
               </Grid>
               <Text
-                sxProp={{ display: "block" }}
+                sxProp={{
+                  display: "block",
+                  [theme.breakpoints.up("xl")]: { marginTop: '25px', },
+                }}
                 variant="body1"
                 color={"gray.main"}
+
+
               >
                 {`${translate.formatMessage({
                   id: "DateOfBirth",
@@ -181,7 +182,6 @@ const PatientInformation: FC = () => {
                 <Grid item>
                   <ShortInput
                     onChange={(event) => {
-
                       const value = event.target.value;
                       const regex = /^(0?[1-9]|1[0-2])$/
                       if (value === "" || regex.test(value)) {
@@ -242,8 +242,11 @@ const PatientInformation: FC = () => {
 
               <Grid
                 mt={"41px"}
+                sx={{
+                  [theme.breakpoints.up("xl")]: { mt: "47px" },
+                }}
                 container
-                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: 9 }}
+                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: "100px" }}
               >
                 <Grid item sx={{
                   ".MuiOutlinedInput-root": {
@@ -281,13 +284,12 @@ const PatientInformation: FC = () => {
           <Grid
             item
             sm={6}
-            sx={{ paddingLeft: "30px", borderLeft: "1px solid #CCCCCC" }}
+            sx={{
+              paddingLeft: "50px", borderLeft: "1px solid #CCCCCC",
+
+            }}
           >
-            <Text
-              variant={"h4"}
-              color={"gray.main"}
-              sxProp={{ display: "inline-block" }}
-            >
+            <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", display: "block" }} variant="h5">
               {`${translate.formatMessage({
                 id: "patient.address",
               })}*`}
@@ -297,7 +299,7 @@ const PatientInformation: FC = () => {
               <Grid
                 mt={"43px"}
                 container
-                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: 9 }}
+                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: "232px" }}
               >
                 <Grid item>
                   <Input value={address1} type={"text"} label="Address1" />
@@ -329,7 +331,10 @@ const PatientInformation: FC = () => {
               <Grid
                 mt={"45px"}
                 container
-                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: 9 }}
+                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: "232px" }}
+                sx={{
+                  [theme.breakpoints.up("xl")]: { marginTop: '59px', },
+                }}
               >
                 <Grid item>
                   <Input value={city} type={"text"} label="City" />
@@ -342,7 +347,10 @@ const PatientInformation: FC = () => {
               <Grid
                 mt={"48px"}
                 container
-                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: 9 }}
+                columnSpacing={{ sm: 9, md: 9, lg: 9, xl: "232px" }}
+                sx={{
+                  [theme.breakpoints.up("xl")]: { marginTop: '64px', },
+                }}
               >
                 <Grid item>
                   <Input value={email} type={"text"} label="Email *" />
@@ -353,10 +361,29 @@ const PatientInformation: FC = () => {
               </Grid>
             </Box>
           </Grid>
+
         </Grid >
       </ShadowBox >
+      <Box sx={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "30px" }}>
+        <Button sx={{ marginRight: "30px" }}>Cancel</Button>
+        <Button variant="contained">Next</Button>
+      </Box>
     </Grid >
   );
 };
 
-export default PatientInformation;
+export default connect(
+  () => {
+    return {
+
+    };
+  },
+  (dispatch) => ({
+    setAlert: (payload: AlertModelState) => {
+      dispatch({
+        type: `alert/setAlert`,
+        payload,
+      });
+    },
+  })
+)(PatientInformation);
