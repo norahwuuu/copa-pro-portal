@@ -82,5 +82,9 @@
   "clinical.btn.okSave": "Ok,save and close",
   "clinical.choseRadio.title": "Choose one that fit your patient’s situation:",
   "clinical.radio.temporary": "There is a temporary health issue that can be resolved.",
-  "clinical.radio.permanent": "There is a permanent health issue which prevent aligner treatment."
+  "clinical.radio.permanent": "There is a permanent health issue which prevent aligner treatment.",
+  "patient.Info": "Patient information",
+  "patient.address": "Patient address",
+  "patient.address.title": "We will ship final retainer and gifts directly to the patient.",
+  "DateOfBirth": "Date of birth"
 }
