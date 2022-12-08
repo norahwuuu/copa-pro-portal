@@ -1,8 +1,7 @@
 import React from 'react';
 import Footer from "@/components/Footer/footer";
 import theme from "@/theme/theme";
-import { Box, ThemeProvider } from "@mui/material";
-import { ReactChildren } from "react";
+import { Paper, ThemeProvider } from "@mui/material";
 import Alert from '@/components/Alert/alert';
 import { AlertModelState, connect } from 'umi';
 interface propsType {
@@ -15,7 +14,9 @@ function Layout({ children, setAlert, alertProps }: propsType) {
   return (
     <ThemeProvider theme={theme}>
       <Alert setAlert={setAlert} {...alertProps} />
-      {children}
+      <Paper elevation={0} sx={{ overflowY: "auto", height: "90%", p: 0, borderRadius: "0px" }}>
+        {children}
+      </Paper>
       <Footer />
     </ThemeProvider>
   );

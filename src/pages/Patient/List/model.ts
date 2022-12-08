@@ -17,9 +17,9 @@ const PatientListModel: PatientListModelType = {
   effects: {
     *fetchPatientList({ payload }, { call, put }) {
       let filterCount = 0;
-      if (payload.filter) {
-        Object.keys((payload.filter)).map((k) => {
-          filterCount += payload.filter[k].length
+      if (payload.filters) {
+        Object.keys((payload.filters)).map((k) => {
+          filterCount += payload.filters[k].length
         })
       }
 

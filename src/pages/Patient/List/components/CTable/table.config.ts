@@ -73,7 +73,8 @@ export const PATIENT_STATUS_CASE_MAP = {
 export const TABLE_FILTER = {
   "status": {
     id: "status",
-    name: "Patient Staus",
+    name: "Patient Status",
+    translateKey: "patientStatus",
     type: "filter",
     styleProps: {
       minWidth: "160px"
@@ -105,6 +106,7 @@ export const TABLE_FILTER = {
   "case_detail": {
     id: "case_detail",
     name: "Case details",
+    translateKey: "caseDetails",
     type: "filter",
     styleProps: {
       minWidth: "210px"
@@ -138,6 +140,7 @@ export const TABLE_FILTER = {
   "order_status": {
     id: "order_status",
     type: "filter",
+    translateKey: "orderStatus",
     name: "Order status",
     styleProps: {
       minWidth: "160px"
@@ -152,7 +155,7 @@ export const TABLE_FILTER = {
     }, {
       id: "inProduction",
       text: "In Production",
-      dataKey: "20",
+      dataKey: "30",
     }, {
       id: "retainersSent",
       text: "Retainers sent",
@@ -167,6 +170,7 @@ export const TABLE_FILTER = {
   },
   "dental_monitoring": {
     id: "dental_monitoring",
+    translateKey: "dentalMonitoring",
     type: "filter",
     name: "Dental monitoring",
     styleProps: {
@@ -189,6 +193,7 @@ export const TABLE_FILTER = {
   "sort_by": {
     id: "sort_by",
     name: "Sort by",
+    translateKey: "sortyBy",
     type: "sort",
     styleProps: {
       minWidth: "175px"

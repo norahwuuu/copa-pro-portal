@@ -46,6 +46,7 @@
   "orderStatus": "Order status",
   "dentalMonitoring": "Dental monitoring®",
   "lastMonitoringScan": "Last monitoring scan",
+  "sortyBy": "Sort by",
   "caseTooComplex": "Case too complex",
   "caseTooComplexTooltip": "This case was dismissed as it should be referred to an orthodontist.",
   "patientDeclined": "Patient declined",
@@ -72,5 +73,7 @@
   "patient.Info": "Patient information",
   "patient.address": "Patient address",
   "patient.address.title": "We will ship final retainer and gifts directly to the patient.",
-  "DateOfBirth": "Date of birth"
+  "DateOfBirth": "Date of birth",
+  "clinical.select.title": "Check all that applies:",
+  "clinical.note.optional": "Note (optional)"
 }
