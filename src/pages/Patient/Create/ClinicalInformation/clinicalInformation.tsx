@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from "react";
-import { Box, Grid, useTheme, Divider, Button, List, ListItem, Checkbox, FormControlLabel, SvgIcon } from "@mui/material";
+import React, { FC, useEffect, useState } from "react";
+import { Box, Grid, useTheme, Divider, Button, List, ListItem, Checkbox, FormControlLabel, SvgIcon, Radio, RadioGroup } from "@mui/material";
 import { useIntl, connect } from 'umi';
 import ShadowBox from "@/pages/Components/shadowBox";
 import Text from "@/components/Text/text";
@@ -11,6 +11,8 @@ import { AlertModelState } from "@/pages/Patient/model";
 export const PatientClinicalInformation: FC = ({ setAlert }) => {
   const translate = useIntl();
   const theme = useTheme();
+  // check Yes or No value 
+  const [checkYN, setCheckYN] = useState<string>('nothing');//nothing/No/Yes
   // check applies Implants/Bridges/Primary tooth will show
   const IBPappliesModel = () => {
     setAlert({
@@ -27,8 +29,8 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
         <textarea style={{ width: "390px", height: "102px" }} className={styles.area} placeholder="Write your note here…"></textarea>
       </Box>,
       btnList: [
-        <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => setAlert({ isAlert: false })}>{`Ok,save and close`}</Button>,
-        < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => setAlert({ isAlert: false })}>{`Cancel`}</Button>,
+        <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => setAlert({ isAlert: false })}>{translate.formatMessage({ id: "clinical.btn.okSave" })}</Button>,
+        < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => setAlert({ isAlert: false })}>{translate.formatMessage({ id: "btnCancel" })}</Button>,
       ],
 
     })
@@ -50,15 +52,161 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
         <textarea style={{ width: "390px", height: "102px" }} className={styles.area} placeholder="Write your note here…"></textarea>
       </Box>,
       btnList: [
-        <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => setAlert({ isAlert: false })}>{`Ok,save and close`}</Button>,
-        < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => setAlert({ isAlert: false })}>{`Cancel`}</Button>,
+        <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => setAlert({ isAlert: false })}>{translate.formatMessage({ id: "clinical.btn.okSave" })}</Button>,
+        < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => setAlert({ isAlert: false })}>{translate.formatMessage({ id: "btnCancel" })}</Button>,
       ],
 
     })
   }
+  // check Periodontal will show
+  const PeriodontalModel = () => {
+    setAlert({
+      isAlert: true,
+      method: "ErrorIcon",
+      title: {
+        text: translate.formatMessage({ id: "clinical.pop.sorryLongTitle" }),
+        sxProps: { color: 'gray.main', fontSize: '14px' },
+        subText: ""
+      },
+      content: <Box sx={{ width: "100%" }}>
+        <Box sx={{ widtt: "100%", paddingLeft: "40px" }}>
+          {/* <Text color="error.main" sxProp={{ fontSize: '14px', fontWeight: "normal", display: "block" }} variant="body1">
+            {translate.formatMessage({ id: "clinical.selectYN.error" })}
+          </Text> */}
+          <Text color="gray.main" sxProp={{ fontSize: '14px', height: "14px", lineHeight: "14px", display: "block", marginBottom: "20px" }} variant="h5">
+            {translate.formatMessage({ id: "clinical.choseRadio.title" })}
+          </Text>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            <FormControlLabel
+              sx={{
+                color: "gray.main",
+                fontSize: "14px",
+                marginBottom: "20px",
+                alignItems: "start"
+              }}
+              value="temporary"
+              control={
+                <Radio
+                  sx={{
+                    "&.MuiButtonBase-root": {
+                      padding: "0",
+                      margin: "0 9px"
+                    }
+                  }}
+                  size="small"
+                  color="secondary"
+                />}
+              label={translate.formatMessage({ id: "clinical.radio.temporary" })}
+            />
+            <Box sx={{ width: "100%", marginBottom: "20px" }}>
+              <Button variant="shade" sx={{
+                width: "94px",
+                height: "28px",
+                color: "gray.main",
+                borderRadius: '4px',
+                fontSize: "14px",
+                padding: "0",
+                minWidth: "auto",
+                border: '1px solid',
+                borderColor: "gray.lighten2",
+
+                "&:hover": {
+                  borderColor: "gray.darken"
+                },
+                "&:focus": {
+                  color: "common.white",
+                  backgroundColor: "secondary.main",
+                  borderColor: "secondary.main"
+                }
+              }} >0-3 months</Button>
+              <Button variant="shade" sx={{
+                width: "94px",
+                height: "28px",
+                color: "gray.main",
+                borderRadius: '4px',
+                margin: "0 15px",
+                fontSize: "14px",
+                padding: "0",
+                minWidth: "auto",
+                border: '1px solid',
+                borderColor: "gray.lighten2",
+                "&:hover": {
+                  borderColor: "gray.darken"
+                },
+                "&:focus": {
+                  color: "common.white",
+                  backgroundColor: "secondary.main",
+                  borderColor: "secondary.main"
+                }
+              }} >3-6 months</Button>
+              <Button variant="shade" sx={{
+                width: "94px",
+                height: "28px",
+                color: "gray.main",
+                borderRadius: '4px',
+                fontSize: "14px",
+                padding: "0",
+                minWidth: "auto",
+                border: '1px solid',
+                borderColor: "gray.lighten2",
+                "&:hover": {
+                  borderColor: "gray.darken"
+                },
+                "&:focus": {
+                  color: "common.white",
+                  backgroundColor: "secondary.main",
+                  borderColor: "secondary.main"
+                }
+              }} >6+ months</Button>
+            </Box>
+            <FormControlLabel
+              sx={{
+                color: "gray.main",
+                fontSize: "14px",
+                marginBottom: "20px",
+                alignItems: "start"
+              }}
+              value="permanent"
+              control={
+                <Radio
+                  sx={{
+                    "&.MuiButtonBase-root":
+                    {
+                      padding: "0",
+                      margin: "0 9px"
+                    }
+                  }}
+                  size="small"
+                  color="secondary"
+                />}
+              label={translate.formatMessage({ id: "clinical.radio.permanent" })}
+            />
+          </RadioGroup>
+        </Box>
+        <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
+          {translate.formatMessage({ id: "clinical.note.optional" })}
+        </Text>
+        <textarea style={{ width: "390px", height: "102px" }} className={styles.area} placeholder="Write your note here…"></textarea>
+      </Box>,
+      btnList: [
+        <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => setAlert({ isAlert: false })}>{translate.formatMessage({ id: "clinical.btn.okSave" })}</Button>,
+        < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => setAlert({ isAlert: false })}>{translate.formatMessage({ id: "btnCancel" })}</Button>,
+      ],
+
+    })
+  }
+  // click No or Yes button event
+  const clickNoOrYes = (type: string) => {
+    console.log(type);
+  }
   useEffect(() => {
     // IBPappliesModel();
-    // ExcessiveModel()
+    // ExcessiveModel();
+    // PeriodontalModel();
   }, [])
   return <Grid container sx={{ width: '100%' }}>
     <Grid item xs={12} xl={12}>
@@ -89,6 +237,27 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
                 <Text color="gray.main" sxProp={{ fontSize: '14px' }} variant="h5">
                   {translate.formatMessage({ id: "clinical.selectYN.title" })}
                 </Text>
+                <Button variant="shade"
+                  sx={{
+                    color: checkYN === "No" ? "common.white" : "gray.main",
+                    borderRadius: '4px',
+                    fontSize: "14px",
+                    padding: "4px 7px",
+                    minWidth: "auto",
+                    border: '1px solid',
+                    borderColor: "gray.lighten2",
+                    margin: "0 30px",
+                    "&:hover": {
+                      borderColor: "gray.darken"
+                    },
+                    "&:focus": {
+                      color: "common.white",
+                      backgroundColor: "secondary.main",
+                      borderColor: "secondary.main"
+                    }
+                  }}
+                  onClick={() => { clickNoOrYes('No') }}
+                >No</Button>
                 <Button variant="shade" sx={{
                   color: "gray.main",
                   borderRadius: '4px',
@@ -97,7 +266,6 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
                   minWidth: "auto",
                   border: '1px solid',
                   borderColor: "gray.lighten2",
-                  margin: "0 30px",
                   "&:hover": {
                     borderColor: "gray.darken"
                   },
@@ -106,24 +274,9 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
                     backgroundColor: "secondary.main",
                     borderColor: "secondary.main"
                   }
-                }} >No</Button>
-                <Button variant="shade" sx={{
-                  color: "gray.main",
-                  borderRadius: '4px',
-                  fontSize: "14px",
-                  padding: "4px 7px",
-                  minWidth: "auto",
-                  border: '1px solid',
-                  borderColor: "gray.lighten2",
-                  "&:hover": {
-                    borderColor: "gray.darken"
-                  },
-                  "&:focus": {
-                    color: "common.white",
-                    backgroundColor: "secondary.main",
-                    borderColor: "secondary.main"
-                  }
-                }} >Yes</Button>
+                }}
+                  onClick={() => { clickNoOrYes('Yes') }}
+                >Yes</Button>
               </Box>
               <Box sx={{ width: "100%", paddingLeft: '8px' }}>
                 <List sx={{ padding: "0" }}>
