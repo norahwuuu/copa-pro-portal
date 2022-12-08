@@ -68,5 +68,9 @@
   "button.addNewPatient": "Add a new patient",
   "clinical.leftTitle": "Clinical information *",
   "clinical.selectYN.error": "Select an option to continue.",
-  "clinical.selectYN.title": "Does this patient have any of the following conditions?"
+  "clinical.selectYN.title": "Does this patient have any of the following conditions?",
+  "patient.Info": "Patient information",
+  "patient.address": "Patient address",
+  "patient.address.title": "We will ship final retainer and gifts directly to the patient.",
+  "DateOfBirth": "Date of birth"
 }
