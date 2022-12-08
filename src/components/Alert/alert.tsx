@@ -106,7 +106,7 @@ export default function AlertDialog({ isAlert, method, title, content, btnList, 
             </Text>
           )
         }
-        {content && <DialogContent sx={{ marginTop: title.subText ? '10px!important' : "30px" }} >
+        {content && <DialogContent sx={{ marginTop: title.subText !== undefined ? '10px!important' : "30px" }} >
           <DialogContentText id="alert-dialog-description" component={"div"} color={'gray.main'}>
             {content}
           </DialogContentText>

@@ -73,5 +73,10 @@
   "clinical.select.title": "Check all that applies:",
   "clinical.note.optional": "Note (optional)",
   "clinical.pop.sorryTitle": "We are sorry, but this patient is not recommended for these aligners at this moment.",
-  "clinical.pop.clean": "Cleaning is required prior to scanning for aligners."
+  "clinical.pop.clean": "Cleaning is required prior to scanning for aligners.",
+  "clinical.pop.sorryLongTitle": "We are sorry, but this patient is not recommended for these aligners due to oral health issue(s).",
+  "clinical.btn.okSave": "Ok,save and close",
+  "clinical.choseRadio.title": "Choose one that fit your patient’s situation:",
+  "clinical.radio.temporary": "There is a temporary health issue that can be resolved.",
+  "clinical.radio.permanent": "There is a permanent health issue which prevent aligner treatment."
 }
