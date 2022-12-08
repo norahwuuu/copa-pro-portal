@@ -93,11 +93,9 @@ const PatientListModel: PatientListModelType = {
       return { ...state, lists, totalRecords, resultType };
     },
   },
-  //TODO: to be removed after api integartion
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
-        console.log(pathname, ".....path, query", query)
+      return history.listen(({ pathname }: { pathname: string }) => {
         if (pathname === patientUrlObj.patientList) {
           dispatch({
             type: 'resetFilter',

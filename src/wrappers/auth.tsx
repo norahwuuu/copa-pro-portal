@@ -3,7 +3,7 @@ import { Redirect } from 'umi'
 
 
 const AuthWrapper: FC<{ children: ReactElement }> = ({ children }) => {
-    const isLogin = localStorage.getItem("user");
+    const isLogin = localStorage.getItem("user") && localStorage.getItem("token");
     if (isLogin) {
         return <div>{children}</div>;
     } else {

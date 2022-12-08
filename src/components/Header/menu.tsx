@@ -2,20 +2,13 @@ import { accountUrlObj } from "@/pages/Account/account.route";
 import { loginUrlObj } from "@/pages/LoginBox/loginBox.route";
 import { StyledMenu, StyledMenuButton } from "@/theme/filterMenu.style";
 import { RowCenterAlign } from "@/theme/themen.util";
-import { Box, MenuItem, MenuProps, styled, SxProps } from "@mui/material";
+import { Box, MenuItem, SxProps } from "@mui/material";
 import React, { FC, useCallback, useState } from "react";
 import { FormattedMessage, history } from "umi";
 import ICons from "../Icons/icons";
 import Text from "../Text/text";
 
 
-
-const OverwriteStyleMenu = styled((StyledMenu))<MenuProps>(() => ({
-  "& .MuiPaper-root": {
-    borderRadius: "13px",
-    marginTop: "-3px !important"
-  }
-}))
 
 const FTitle: FC<{ label: string, isOpen: boolean, sxProps: SxProps }> = ({ label, isOpen, sxProps }) => {
   return (
@@ -93,7 +86,7 @@ const CustomizedMenus: FC = () => {
 
       </StyledMenuButton>
 
-      <OverwriteStyleMenu
+      <StyledMenu
         id="user-menu"
         aria-labelledby="user-button"
         anchorEl={anchorEl}
@@ -130,7 +123,7 @@ const CustomizedMenus: FC = () => {
           <FormattedMessage id="logoutMenu" />
           <ICons icon={"LogoutIcon"} sxProps={{ color: "inherit" }} />
         </MenuItem>
-      </OverwriteStyleMenu>
+      </StyledMenu>
     </>
   );
 };
