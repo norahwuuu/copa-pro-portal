@@ -17,7 +17,7 @@ const LoginBg: FC<{ children: ReactChildren }> = ({ children }) => {
   return (
     <BgBox
       sx={{
-        position: "absolute",
+        position: "relative",
         borderBottomRightRadius: "60%",
         borderBottomLeftRadius: "20%",
         backgroundColor: "#f6f6f6",
@@ -25,7 +25,8 @@ const LoginBg: FC<{ children: ReactChildren }> = ({ children }) => {
         alignItems: "center",
         justifyContent: "center",
         minWidth: '1220px',
-        maxWidth: '1820px'
+        maxWidth: '1820px',
+        flex: "1"
         // backgroundImage: `url(${login1680})`,
       }}
 

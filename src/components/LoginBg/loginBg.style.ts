@@ -2,17 +2,17 @@ import { Box, styled } from "@mui/system";
 export const BgBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down(1365)]: {
     width: "calc(100% - 60px)",
-    height: "calc(100% - 120px)",
+    // height: "calc(100% - 120px)",
     margin: "30px",
   },
   [theme.breakpoints.between(1365, 1920)]: {
     width: "calc(100% - 70px)",
-    height: "calc(100% - 140px)",
+    // height: "calc(100% - 140px)",
     margin: "35px",
   },
   [theme.breakpoints.up(1920)]: {
     width: "calc(100% - 100px)",
-    height: "calc(100% - 150px)",
+    // height: "calc(100% - 150px)",
     margin: "50px",
   },
 }));
