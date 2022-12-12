@@ -159,6 +159,95 @@ const MainModel: LoginModelType = {
       }
       return;
     },
+    *getResetInfo({ payload }, { call, put }) {
+      try {
+        const {
+          stateToken,
+          _embedded,
+          status,
+          errorSummary
+        } =
+          // JSON.parse(
+          //   ` {
+          //     "stateToken": "00d1adBFtmdNHjNy2TKysWxYsmM_KngjH_qqi8OKmp",
+          //     "expiresAt": "2022-12-09T10:44:36.000Z",
+          //     "status": "RECOVERY",
+          //     "recoveryType": "PASSWORD",
+          //     "_embedded": {
+          //       "user": {
+          //         "id": "00u7j86m9xtMZcL1u5d7",
+          //         "passwordChanged": "2022-12-07T09:39:50.000Z",
+          //         "profile": {
+          //           "login": "hospital@mailinator.com",
+          //           "firstName": "COPA",
+          //           "lastName": "China",
+          //           "locale": "en_US",
+          //           "timeZone": "America/Los_Angeles"
+          //         },
+          //         "recovery_question": {
+          //           "question": "In what city or town was your first job?"
+          //         }
+          //       }
+          //     },
+          //     "_links": {
+          //       "next": {
+          //         "name": "answer",
+          //         "href": "https://qasec.ulabsystems.net/api/v1/authn/recovery/answer",
+          //         "hints": {
+          //           "allow": [
+          //             "POST"
+          //           ]
+          //         }
+          //       },
+          //       "cancel": {
+          //         "href": "https://qasec.ulabsystems.net/api/v1/authn/cancel",
+          //         "hints": {
+          //           "allow": [
+          //             "POST"
+          //           ]
+          //         }
+          //       }
+          //     }
+          //   }`
+          // )
+          yield call(getResetInfoServer, payload)
+        const question = _embedded.user.recovery_question.question
+        const useId = _embedded.user.id
+        const usesname = _embedded.user.profile.login
+        if (status === "RECOVERY") {
+          yield put({
+            type: "setData",
+            payload: {
+              resetPasswordData: {
+                stateToken,
+                question,
+                useId,
+                usesname
+              },
+            },
+          });
+        } else {
+          yield put({
+            type: "setData",
+            payload: {
+              resetPasswordData: {
+                errorSummary: 'You have accessed an account recovery link that has expired or been previously used.'
+              },
+            },
+          });
+        }
+      } catch {
+        yield put({
+          type: "setData",
+          payload: {
+            resetPasswordData: {
+              errorSummary: 'You have accessed an account recovery link that has expired or been previously used.'
+            },
+          },
+        });
+      }
+      return;
+    },
   },
   reducers: {
     setData(state, { payload }) {
