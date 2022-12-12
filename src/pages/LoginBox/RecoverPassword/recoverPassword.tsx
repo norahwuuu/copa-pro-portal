@@ -14,7 +14,6 @@ import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
 import { StoreProps } from '../Login/type';
 export const RecoverPassword: FC<recoverProps> = ({ resetPassword, resetPasswordData, getResetInfo }) => {
-  console.log('resetPasswordData: ', resetPasswordData);
   const { token } = useParams<any>();
   useEffect(() => {
     getResetInfo({
@@ -23,7 +22,6 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, resetPassword
   }, [])
 
   const translate = useIntl();
-  // const [email, setEmail] = useState<string>(resetPasswordData.usesname);
   const [emailType, setEmailType] = useState<string>("noError");
   const [password, setPassWord] = useState<string>("");
   const [passType, setPassType] = useState<string>("noError");
@@ -57,7 +55,6 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, resetPassword
     checkPass()
     if (
       password !== "" &&
-
       verifyQustion !== "" &&
       checkPass()
     ) {
@@ -65,7 +62,7 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, resetPassword
         username: resetPasswordData.usesname,
         reset_password_token: token,
         okta_user_id: resetPasswordData.useId,
-        password: password,
+        password: window.btoa(password),
         answer: verifyQustion,
         state_token: resetPasswordData.stateToken,
       });
@@ -84,7 +81,7 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, resetPassword
         mainTitle={recoverPasswordText.mainTitle}
         LogoIconMt={15}
         headerInfo={{
-          show: resetPasswordData.errorSummary !== '',
+          show: resetPasswordData.errorSummary && resetPasswordData.errorSummary !== '',
           type: "error",
           info: resetPasswordData.errorSummary || '',
         }}

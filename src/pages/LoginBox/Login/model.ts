@@ -85,10 +85,31 @@ const MainModel: LoginModelType = {
       }
       return;
     },
-    * resetPassword({ payload }, { call }) {
-      const { response_code } = yield call(resetPasswordServer, payload);
-      if (response_code === 200) {
-        history.push("/");
+    * resetPassword({ payload }, { call, put }) {
+      try {
+        const { response_code } = yield call(resetPasswordServer, payload);
+        if (response_code === 200) {
+          history.push("/");
+        } else {
+          yield put({
+            type: "setData",
+            payload: {
+              resetPasswordData: {
+                errorSummary: 'username, okta_user_id, state_token, answer and password has to be provided in request...'
+              },
+            },
+          });
+        }
+      } catch (err) {
+        console.log('err: ', err);
+        yield put({
+          type: "setData",
+          payload: {
+            resetPasswordData: {
+              errorSummary: ''
+            },
+          },
+        });
       }
       return;
     },
@@ -100,49 +121,6 @@ const MainModel: LoginModelType = {
           status,
           errorSummary
         } =
-          // JSON.parse(
-          //   ` {
-          //     "stateToken": "00d1adBFtmdNHjNy2TKysWxYsmM_KngjH_qqi8OKmp",
-          //     "expiresAt": "2022-12-09T10:44:36.000Z",
-          //     "status": "RECOVERY",
-          //     "recoveryType": "PASSWORD",
-          //     "_embedded": {
-          //       "user": {
-          //         "id": "00u7j86m9xtMZcL1u5d7",
-          //         "passwordChanged": "2022-12-07T09:39:50.000Z",
-          //         "profile": {
-          //           "login": "hospital@mailinator.com",
-          //           "firstName": "COPA",
-          //           "lastName": "China",
-          //           "locale": "en_US",
-          //           "timeZone": "America/Los_Angeles"
-          //         },
-          //         "recovery_question": {
-          //           "question": "In what city or town was your first job?"
-          //         }
-          //       }
-          //     },
-          //     "_links": {
-          //       "next": {
-          //         "name": "answer",
-          //         "href": "https://qasec.ulabsystems.net/api/v1/authn/recovery/answer",
-          //         "hints": {
-          //           "allow": [
-          //             "POST"
-          //           ]
-          //         }
-          //       },
-          //       "cancel": {
-          //         "href": "https://qasec.ulabsystems.net/api/v1/authn/cancel",
-          //         "hints": {
-          //           "allow": [
-          //             "POST"
-          //           ]
-          //         }
-          //       }
-          //     }
-          //   }`
-          // )
           yield call(getResetInfoServer, payload)
         const question = _embedded.user.recovery_question.question
         const useId = _embedded.user.id

@@ -147,7 +147,6 @@ async function request<T>(
       errorHandler, // 默认错误处理
     });
   } else {
-
     eRequest = extend({
       prefix: OKTA_URL, //"https://devsec.ulabsystems.net",
       errorHandler, // 默认错误处理
