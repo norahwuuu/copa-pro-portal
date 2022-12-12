@@ -43,7 +43,7 @@ interface AlertProps extends AlertModelState {
   setAlert: Function;
 }
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
   "& .MuiDialog-paper": {
     border: "1px solid gray.light3",
