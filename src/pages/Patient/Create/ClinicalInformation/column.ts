@@ -1,3 +1,13 @@
+export const YNbtns = [
+  {
+    name: "No",
+    label: "No",
+  },
+  {
+    name: "Yes",
+    label: "Yes",
+  },
+];
 export const conditions = [
   {
     name: "Implants",

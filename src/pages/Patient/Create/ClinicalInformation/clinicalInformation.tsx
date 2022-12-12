@@ -3,7 +3,7 @@ import { Box, Grid, useTheme, Divider, Button, List, ListItem, Checkbox, FormCon
 import { useIntl, connect } from 'umi';
 import ShadowBox from "@/pages/Components/shadowBox";
 import Text from "@/components/Text/text";
-import { conditions, monthBtns } from "./column";
+import { conditions, monthBtns, YNbtns } from "./column";
 import { ReactComponent as unchecked } from '@/assets/svgs/checkBox-unchecked.svg';
 import { ReactComponent as checked } from '@/assets/svgs/checkBox-checked.svg';
 import { ReactComponent as radioUnchecked } from '@/assets/svgs/radio-unchecked.svg';
@@ -192,43 +192,32 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
                     <Text color="gray.main" sxProp={{ fontSize: '14px' }} variant="h5">
                       {translate.formatMessage({ id: "clinical.selectYN.title" })}
                     </Text>
-                    <Button variant="shade"
-
-                      sx={{
-                        margin: "0 30px",
-                        color: isOptionError ? "gray.darken4" : (checkYN === "No" ? "common.white" : "gray.main"),
-                        borderRadius: '4px',
-                        fontSize: "14px",
-                        padding: "4px 7px",
-                        minWidth: "auto",
-                        border: '1px solid',
-                        borderColor: isOptionError ? "error.main" : (checkYN === "No" ? "secondary.main" : "gray.lighten2"),
-                        backgroundColor: isOptionError ? "common.white" : (checkYN === "No" ? "secondary.main" : "gray.lighten1"),
-                        "&:hover": {
-                          borderColor: checkYN === "No" ? "secondary.main" : "gray.darken",
-                          backgroundColor: checkYN === "No" ? "secondary.main" : "",
-                          color: checkYN === "No" ? "common.white" : ""
-                        },
-                      }}
-                      onClick={() => { clickNoOrYes('No') }}
-                    >No</Button>
-                    <Button variant="shade" sx={{
-                      color: isOptionError ? "gray.darken4" : (checkYN === "Yes" ? "common.white" : "gray.main"),
-                      borderRadius: '4px',
-                      fontSize: "14px",
-                      padding: "4px 7px",
-                      minWidth: "auto",
-                      border: '1px solid',
-                      borderColor: isOptionError ? "error.main" : (checkYN === "Yes" ? "secondary.main" : "gray.lighten2"),
-                      backgroundColor: isOptionError ? "common.white" : (checkYN === "Yes" ? "secondary.main" : "gray.lighten1"),
-                      "&:hover": {
-                        borderColor: checkYN === "Yes" ? "secondary.main" : "gray.darken",
-                        backgroundColor: checkYN === "Yes" ? "secondary.main" : "",
-                        color: checkYN === "Yes" ? "common.white" : ""
-                      },
-                    }}
-                      onClick={() => { clickNoOrYes('Yes') }}
-                    >Yes</Button>
+                    {
+                      YNbtns.map((i, j) => {
+                        return (
+                          <Button variant="shade"
+                            key={i.name}
+                            sx={{
+                              margin: j === 0 ? "0 30px" : "",
+                              color: isOptionError ? "gray.darken4" : (checkYN === i.name ? "common.white" : "gray.main"),
+                              borderRadius: '4px',
+                              fontSize: "14px",
+                              padding: "4px 7px",
+                              minWidth: "auto",
+                              border: '1px solid',
+                              borderColor: isOptionError ? "error.main" : (checkYN === i.name ? "secondary.main" : "gray.lighten2"),
+                              backgroundColor: isOptionError ? "common.white" : (checkYN === i.name ? "secondary.main" : "gray.lighten1"),
+                              "&:hover": {
+                                borderColor: checkYN === i.name ? "secondary.main" : "gray.darken",
+                                backgroundColor: checkYN === i.name ? "secondary.main" : "",
+                                color: checkYN === i.name ? "common.white" : ""
+                              },
+                            }}
+                            onClick={() => { clickNoOrYes(i.name) }}
+                          >{i.label}</Button>
+                        )
+                      })
+                    }
                   </Box>
                   <Box sx={{ width: "100%", paddingLeft: '8px' }}>
                     {
