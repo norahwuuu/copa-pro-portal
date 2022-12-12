@@ -13,7 +13,9 @@ import styles from './clinicalInformation.less';
 import { AlertModelState } from "@/pages/Patient/model";
 import { BootstrapDialog } from "@/components/Alert/alert";
 import ICons from "@/components/Icons/icons";
-export const PatientClinicalInformation: FC = ({ setAlert }) => {
+import { ClinicalTypes } from "./type";
+
+export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
   const translate = useIntl();
   const theme = useTheme();
   // should show Select an option to continue error tips up of No and Yes button(显示没有选中Yes或者No按钮错误开关)
@@ -182,7 +184,7 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
                     paddingLeft: '50px'
                   }
                 }} >
-                  <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "20px", display: "block" }} variant="h5">
+                  <Text data-testid="leftTitle" color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "20px", display: "block" }} variant="h5">
                     {translate.formatMessage({ id: "clinical.leftTitle" })}
                   </Text>
                   <Text color="error.main" sxProp={{ fontSize: '14px', fontWeight: "normal", display: isOptionError ? "block" : "none", marginTop: "-10px" }} variant="body1">
@@ -314,7 +316,7 @@ export const PatientClinicalInformation: FC = ({ setAlert }) => {
                     paddingLeft: '54px'
                   }
                 }}>
-                  <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
+                  <Text color="gray.main" data-testid={'noteOptional'} sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
                     {translate.formatMessage({ id: "clinical.note.optional" })}
                   </Text>
                   <textarea className={styles.area} placeholder="Write your note here…"></textarea>
