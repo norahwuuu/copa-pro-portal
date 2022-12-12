@@ -3,7 +3,7 @@ export const loginUrlObj = {
   forgotUsername: "/login/forgotUsername",
   forgotPassword: "/login/forgotPassword",
   forgotPasswordEmail: "/login/forgotPasswordEmail",
-  recoverPassword: "/login/recoverPassword",
+  recoverPassword: `/login/recoverPassword/:token`,
   changePassword: "/login/changePassword",
 };
 
@@ -30,15 +30,16 @@ export default {
     {
       path: loginUrlObj.recoverPassword,
       component: "@/pages/LoginBox/RecoverPassword/recoverPassword",
+      exact: false
     },
     {
       path: loginUrlObj.changePassword,
       component: "@/pages/LoginBox/ChangePassword/changePassword",
     },
 
-    {
-      path: "**", //No match redirect to default route
-      redirect: "/",
-    },
+    // {
+    //   path: "**", //No match redirect to default route
+    //   redirect: "/",
+    // },
   ],
 };

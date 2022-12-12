@@ -9,3 +9,6 @@ export interface ForgotPasswordParamsType {
 export interface forgotPasswordProps {
   forgotPassword?: (arg: ForgotPasswordParamsType) => void;
 }
+export interface getResetInfoServerProps {
+  recoveryToken: string;
+}
