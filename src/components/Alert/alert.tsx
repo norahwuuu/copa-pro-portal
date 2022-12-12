@@ -40,7 +40,7 @@ setAlert({
       
 */
 interface AlertProps extends AlertModelState {
-  setAlert: Function;
+  setAlert: (arg0: AlertModelState) => void;
 }
 
 export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
