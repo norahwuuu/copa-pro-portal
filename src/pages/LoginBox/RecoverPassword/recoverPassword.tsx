@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from "@/components/Button/button";
 import CenterRectangle from "@/components/CenterRectangle/centerRectangle";
 import InputField from "@/components/InputField/inputField";
@@ -8,13 +8,20 @@ import {
 } from "@/pages/LoginBox/RecoverPassword/type";
 import { Container, Grid, Typography } from "@mui/material";
 import { FC, useState } from "react";
-import { connect, history, useIntl } from "umi";
+import { connect, history, useIntl, useParams } from "umi";
 import { specialCharacters } from "../ChangePassword/changePassword";
 import { errorTypes, recoverPasswordText } from "../Login/column";
 import styles from "./recoverPassword.less";
-export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
+import { StoreProps } from '../Login/type';
+export const RecoverPassword: FC<recoverProps> = ({ resetPassword, resetPasswordData, getResetInfo }) => {
+  const { token } = useParams<any>();
+  useEffect(() => {
+    getResetInfo({
+      recoveryToken: token
+    })
+  }, [])
+
   const translate = useIntl();
-  const [email, setEmail] = useState<string>("mockEmail");
   const [emailType, setEmailType] = useState<string>("noError");
   const [password, setPassWord] = useState<string>("");
   const [passType, setPassType] = useState<string>("noError");
@@ -38,9 +45,7 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
     }
   };
   const loginClick = () => {
-    if (email === "") {
-      setEmailType("emailEmpty");
-    }
+
     if (password === "") {
       setPassType("passEmpty");
     }
@@ -50,17 +55,16 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
     checkPass()
     if (
       password !== "" &&
-      email !== "" &&
       verifyQustion !== "" &&
       checkPass()
     ) {
       resetPassword && resetPassword({
-        username: email,
-        reset_password_token: "dfp3XBKtQFgU4PxZC8zS",
-        okta_user_id: "00u6bza7n52Ejf3lV5d7",
-        password: password,
+        username: resetPasswordData.usesname,
+        reset_password_token: token,
+        okta_user_id: resetPasswordData.useId,
+        password: window.btoa(password),
         answer: verifyQustion,
-        state_token: "00ZgbBRTzXiT641BqstP44ExK5T1inCw0bS_BJZrt9",
+        state_token: resetPasswordData.stateToken,
       });
     }
   };
@@ -76,6 +80,11 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
       <CenterRectangle
         mainTitle={recoverPasswordText.mainTitle}
         LogoIconMt={15}
+        headerInfo={{
+          show: resetPasswordData.errorSummary && resetPasswordData.errorSummary !== '',
+          type: "error",
+          info: resetPasswordData.errorSummary || '',
+        }}
       >
         <div className={styles.recoverUsername}>
           <Typography color="white" variant="body1">
@@ -84,8 +93,7 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
           <InputField
             inputType="email"
             className={styles.inputContainer}
-            inputValue={email}
-            setInputValue={setEmail}
+            inputValue={resetPasswordData.usesname}
             errorType={emailType}
             setErrorType={setEmailType}
             type={"text"}
@@ -132,7 +140,7 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
             textAlign="left"
             sx={{ marginTop: "8px" }}
           >
-            {recoverPasswordText.name}
+            {resetPasswordData.question}
           </Typography>
           <InputField
             onChange={(v) => {
@@ -183,13 +191,23 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, }) => {
   );
 };
 export default connect(
-  () => {
-    return {};
+  (store: StoreProps) => {
+    const { loginSpace } = store;
+    const { resetPasswordData } = loginSpace
+    return {
+      resetPasswordData
+    };
   },
   (dispatch) => ({
     resetPassword: (payload: resetPasswordParamsType) => {
       dispatch({
         type: `loginSpace/resetPassword`,
+        payload,
+      });
+    },
+    getResetInfo: (payload: any) => {
+      dispatch({
+        type: `loginSpace/getResetInfo`,
         payload,
       });
     },

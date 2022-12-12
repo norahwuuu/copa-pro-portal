@@ -2,10 +2,12 @@ import InputField, { emailRegex, LogTextField } from "@/components/InputField/in
 import Text from "@/components/Text/text";
 import ShadowBox from "@/pages/Components/shadowBox";
 import { errorTypes } from "@/pages/LoginBox/Login/column";
-import { Box, Button, FormHelperText, Grid, styled, useFormControl, useTheme } from "@mui/material";
+import { Box, Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, styled, useFormControl, useTheme } from "@mui/material";
 import React from "react";
 import { FC, useState } from "react";
 import { AlertModelState, connect, useIntl } from "umi";
+import { SelectBox } from "./patientInfo.style";
+import { StateList } from "./state";
 
 const Input = styled(LogTextField)`
   & .MuiOutlinedInput-root {
@@ -18,6 +20,9 @@ const Input = styled(LogTextField)`
 
 `;
 const ShortInput = styled(LogTextField)`
+
+
+,
   & .MuiOutlinedInput-root {
     width: 54px;
   }
@@ -28,6 +33,14 @@ const ShortInput = styled(LogTextField)`
   & .MuiInputLabel-root{
      top:-6px;
      padding: 0 2px;
+  }
+  & .MuiFormLabel-filled
+  {
+    font-size: 10px; 
+    transform: scale(0.83333); 
+    transform-origin: 0 0;
+    position: absolute;
+    left: 9px;
   }
 `;
 
@@ -67,8 +80,10 @@ const PatientInformation: FC = () => {
     IsDDOnFocus: false,
     IsYYYYOnfcus: false
   })
-
-
+  const [state, setstate] = useState('')
+  const handleChange = (event: SelectChangeEvent) => {
+    setstate(event.target.value as string);
+  };
   const IsEmpty = (name: string, value: string) => {
     const errorWords = errorTypes[name] ? errorTypes[name].tip : 'Please enter wrords'
     if (value === '') {
@@ -124,8 +139,8 @@ const PatientInformation: FC = () => {
                     }}
                     label="First name "
                     type={"text"}
-                    error={firstName === ''}
-                    helperText={IsEmpty('firstName', firstName)}
+                    // error={firstName === ''}
+                    helperText={' '}
                   />
                 </Grid>
                 <Grid item>
@@ -133,7 +148,7 @@ const PatientInformation: FC = () => {
                     required
                     onChange={(event) => {
                       const value = event.target.value;
-                      if (value !== "" && !ALPHA_NUMERIC_DASH_REGEX.test(value)) {               //only letters
+                      if (value !== "" && !ALPHA_NUMERIC_DASH_REGEX.test(value)) {  //only letters
                         return;
                       }
                       setlastName(value);
@@ -270,7 +285,7 @@ const PatientInformation: FC = () => {
                     setErrorType={setEmailType}
                     type={"text"}
                     name="Email"
-                    label="Email"
+                    label="Email*"
 
                   />
                 </Grid>
@@ -353,10 +368,60 @@ const PatientInformation: FC = () => {
                 }}
               >
                 <Grid item>
-                  <Input value={email} type={"text"} label="Email *" />
+                  <SelectBox>
+                    <FormControl sx={{ m: 0, minWidth: 200 }} disabled>
+                      <InputLabel id="demo-simple-select-disabled-label">Country</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-disabled-label"
+                        id="demo-simple-select-disabled"
+                        value={'United States'}
+                        label="Country"
+                        renderValue={(value) => `${value}`}
+                        sx={{
+                          height: '36px',
+                          'border-radius': "18px",
+                          color: 'red'
+                        }}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </SelectBox>
+
                 </Grid>
-                <Grid item>
-                  <Input value={phone} type={"text"} label="Cell phone *" />
+                <Grid item >
+                  <SelectBox sx={{
+                    minWidth: 200,
+                  }}>
+                    <FormControl fullWidth >
+                      <Select
+                        sx={{
+                          height: '36px',
+                          'border-radius': "18px",
+
+                        }}
+                        displayEmpty
+                        id="demo-simple-select"
+                        value={state}
+                        label="State"
+                        onChange={handleChange}
+                        input={<OutlinedInput />}
+                        inputProps={{ 'aria-label': 'Without label' }}
+
+                      >
+                        <MenuItem disabled value="">
+                          Select option
+                        </MenuItem>
+                        {StateList.map(({ name, value }, index) => (
+                          <MenuItem key={index} value={value}>{name}</MenuItem>
+                        ))}
+
+                      </Select>
+                    </FormControl>
+                  </SelectBox>
+
                 </Grid>
               </Grid>
             </Box>
