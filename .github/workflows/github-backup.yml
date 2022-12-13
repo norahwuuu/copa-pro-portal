@@ -1,0 +1,32 @@
+name: Backup Github code to S3 bucket
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  SERVICE_NAME: ${{ github.repository }}
+  BACKUP_BUCKET: ulab-github-backup
+
+jobs:
+  backup-github:
+    name: backup the github code to S3 bucket
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Branch name
+        id: branch
+        run: echo "BRANCH=$(echo ${GITHUB_HEAD_REF##*/})" >> $GITHUB_ENV}
+
+      - name: S3 Backup
+        uses: peter-evans/s3-backup@v1
+        env:
+          ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          MIRROR_TARGET: ${{ env.BACKUP_BUCKET }}/${{ env.SERVICE_NAME }}
+        with:
+          args: --overwrite --remove
