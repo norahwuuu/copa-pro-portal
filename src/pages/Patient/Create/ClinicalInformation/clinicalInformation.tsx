@@ -158,6 +158,14 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
     }
     setIsPeriodontalShow(false);
   }
+  // click next button （点击next按钮）
+  const nextClick = () => {
+    if (checkYN === "Default") {
+      setIsOptionError(true);
+    } else if (checkYN === "Yes") {
+      submitApplies();
+    }
+  }
   useEffect(() => {
     // IBPappliesModel();
     // ExcessiveModel();
@@ -187,7 +195,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
                   <Text data-testid="leftTitle" color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "20px", display: "block" }} variant="h5">
                     {translate.formatMessage({ id: "clinical.leftTitle" })}
                   </Text>
-                  <Text color="error.main" sxProp={{ fontSize: '14px', fontWeight: "normal", display: isOptionError ? "block" : "none", marginTop: "-10px" }} variant="body1">
+                  <Text data-testid="optionError" color="error.main" sxProp={{ fontSize: '14px', fontWeight: "normal", display: isOptionError ? "block" : "none", marginTop: "-10px" }} variant="body1">
                     {translate.formatMessage({ id: "clinical.selectYN.error" })}
                   </Text>
                   <Box sx={{ width: '100%', marginBottom: "25px" }}>
@@ -247,7 +255,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
                         </List>
                       ) : (
                         <Box sx={{ width: "100%" }}>
-                          <Text variant="body1" sxProp={{ display: "block", color: "gray.main", fontSize: "14px", marginBottom: "10px" }}>{translate.formatMessage({ id: "clinical.select.title" })}</Text>
+                          <Text data-testid="selectTitle" variant="body1" sxProp={{ display: "block", color: "gray.main", fontSize: "14px", marginBottom: "10px" }}>{translate.formatMessage({ id: "clinical.select.title" })}</Text>
                           <List sx={{ padding: "0", marginBottom: "22px" }}>
                             {
                               conditions.map((i) => {
@@ -319,7 +327,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
                   <Text color="gray.main" data-testid={'noteOptional'} sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
                     {translate.formatMessage({ id: "clinical.note.optional" })}
                   </Text>
-                  <textarea className={styles.area} placeholder="Write your note here…"></textarea>
+                  <textarea data-testid="leftArea" className={styles.area} placeholder="Write your note here…"></textarea>
                 </Grid>
               </Grid>
             </>
@@ -327,7 +335,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
         </Grid>
         <Box sx={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "30px" }}>
           <Button sx={{ marginRight: "30px" }}>Cancel</Button>
-          <Button variant="contained">Next</Button>
+          <Button onClick={() => { nextClick() }} variant="contained">Next</Button>
         </Box>
 
       </Grid>
@@ -348,10 +356,10 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
           <DialogContentText id="alert-dialog-description" component={"div"} color={'gray.main'}>
             <Box sx={{ width: "100%" }}>
               <Box sx={{ widtt: "100%", paddingLeft: "40px" }}>
-                <Text color="error.main" sxProp={{ fontSize: '14px', fontWeight: "normal", display: isPeriodontalError ? "block" : "none" }} variant="body1">
+                <Text color="error.main" data-testid="periodontalError" sxProp={{ fontSize: '14px', fontWeight: "normal", display: isPeriodontalError ? "block" : "none" }} variant="body1">
                   {translate.formatMessage({ id: "clinical.selectYN.error" })}
                 </Text>
-                <Text color="gray.main" sxProp={{ fontSize: '14px', height: "14px", lineHeight: "14px", display: "block", marginBottom: "20px" }} variant="h5">
+                <Text data-testid="radioTitle" color="gray.main" sxProp={{ fontSize: '14px', height: "14px", lineHeight: "14px", display: "block", marginBottom: "20px" }} variant="h5">
                   {translate.formatMessage({ id: "clinical.choseRadio.title" })}
                 </Text>
                 <RadioGroup
@@ -359,6 +367,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
                   name="radio-buttons-group"
                 >
                   <FormControlLabel
+                    data-testid="temporary"
                     sx={{
                       color: isPeriodontalError ? "error.main" : "gray.main",
                       fontSize: "14px",
@@ -386,7 +395,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
                   />
 
 
-                  <Box sx={{ width: "100%", marginBottom: "20px", marginTop: "-10px", display: radioVal === "temporary" ? "block" : "none" }}>
+                  <Box data-testid="monthBox" sx={{ width: "100%", marginBottom: "20px", marginTop: "-10px", display: radioVal === "temporary" ? "block" : "none" }}>
                     {
                       monthBtns.map((i, j) => {
                         return (
@@ -416,6 +425,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
                     }
                   </Box>
                   <FormControlLabel
+                    data-testid="permanent"
                     sx={{
                       color: isPeriodontalError ? "error.main" : "gray.main",
                       fontSize: "14px",
@@ -444,16 +454,16 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
                   />
                 </RadioGroup>
               </Box>
-              <Text color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
+              <Text data-testid="perNoteTitle" color="gray.main" sxProp={{ fontSize: '16px', fontWeight: "bold", marginBottom: "6px", display: "block" }} variant="h5">
                 {translate.formatMessage({ id: "clinical.note.optional" })}
               </Text>
-              <textarea style={{ width: "390px", height: "102px" }} className={styles.area} placeholder="Write your note here…"></textarea>
+              <textarea data-testid="perArea" style={{ width: "390px", height: "102px" }} className={styles.area} placeholder="Write your note here…"></textarea>
             </Box>
           </DialogContentText>
         </DialogContent>
         <Grid textAlign={'center'} marginTop={'31px'} container direction={'column'} spacing={2}>
           <Grid item>
-            <Button sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => okPeridontalClick()}>{translate.formatMessage({ id: "clinical.btn.okSave" })}</Button>
+            <Button data-testid="periodontalOk" sx={{ height: "40px" }} key={'ok'} variant={"outlined"} onClick={() => okPeridontalClick()}>{translate.formatMessage({ id: "clinical.btn.okSave" })}</Button>
           </Grid>
           <Grid item >
             < Button sx={{ height: "40px" }} key={'cancel'} variant={"text"} onClick={() => cancelPeridontalClick()}>{translate.formatMessage({ id: "btnCancel" })}</Button>
