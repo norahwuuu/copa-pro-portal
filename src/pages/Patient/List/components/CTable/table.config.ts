@@ -12,6 +12,18 @@ export const TABLE_CONFIG = {
   SORT_BY_DEFAULT: ["last_name"] //["lastModifiedDate"]
 };
 
+
+export const DEFAULT_FILTER = () => {
+  const filters = {};
+  Object.keys(TABLE_FILTER).map((f) => {
+    filters[f] = [] as string[]
+    if (f === "sort_by") {
+      filters[f] = [...TABLE_CONFIG.SORT_BY_DEFAULT];
+    }
+  })
+  return filters
+}
+
 export const PATIENT_STATUS = {
   PROSPECTIVE: "Prospective",
   PENDING: "Pending",

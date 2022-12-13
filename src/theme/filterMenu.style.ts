@@ -5,9 +5,10 @@ import { Button, ButtonProps, FormControlLabel, FormControlLabelProps, Menu, Men
 export const StyledMenu = styled(Menu)<MenuProps>(
     ({ theme }) => ({
         "& .MuiPaper-root": {
-            borderRadius: "18px",
+            borderRadius: "13px",
             boxShadow: "none",
             border: "1px solid #777777 !important",
+            marginTop: "-3px !important",
             "& .MuiList-root": {
                 paddingRight: "5px",
                 paddingLeft: "5px"
