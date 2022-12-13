@@ -8,11 +8,6 @@ export interface PatientListState {
     lists: IRow[],
     resultType: ResultType,
     totalRecords: number
-    filters: {
-        [key: string]: string[]
-    },
-    search: string
-
 }
 
 export interface PatientListParams {
@@ -34,13 +29,7 @@ export interface PatientListModelType {
     };
     reducers: {
         setPatientList: Reducer<PatientListState>,
-        updateFilter: Reducer<PatientListState>,
-        resetFilter: Reducer<PatientListState>,
     };
-    subscriptions: {
-        setup: Subscription
-    }
-
 }
 
 export interface PatientListProps {
@@ -50,3 +39,15 @@ export interface PatientListProps {
     resetFilter: () => void
 }
 
+
+export interface PatientQueryparams {
+    sort_by?: string,
+    sort_type?: string,
+    order_status?: string,
+    dental_monitoring?: string,
+    case_detail?: string,
+    status?: string,
+    page: number,
+    page_size: number,
+    search: string
+}
