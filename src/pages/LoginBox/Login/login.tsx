@@ -9,6 +9,7 @@ import { connect, history, useIntl } from "umi";
 import styles from "./login.less";
 import { LoginParamsType, loginProps, StoreProps } from "./type";
 import React from 'react';
+import { patientUrlObj } from "@/pages/Patient/patient.route";
 
 const secondaryMain = colorObj.secondary.main;
 export const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) => {
@@ -122,7 +123,7 @@ export default connect(
         type: `loginSpace/login`,
         payload,
         cb: () => {
-          history.push({ pathname: "/patients/list" });
+          history.push({ pathname: patientUrlObj.patientList });
         }
       });
     },
