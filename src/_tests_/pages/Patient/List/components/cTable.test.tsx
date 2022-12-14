@@ -11,7 +11,6 @@ import CCell from "@/pages/Patient/List/components/CTable/cCell";
 import { renderWithWrapper } from '../../../../util/test';
 import patientListMock from "../patientList.mock";
 import { ITableParams } from "@/pages/Patient/List/components/CTable/table";
-import { getDefaultFilter } from "@/_tests_/util/help";
 
 jest.mock("@/hooks/useWindowSize");
 jest.mock("@/pages/Patient/List/components/CTable/cSearch");
