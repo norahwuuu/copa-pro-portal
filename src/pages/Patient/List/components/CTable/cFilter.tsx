@@ -17,8 +17,7 @@ const FTitle: FC<{ label: string, isOpen: boolean, type: "sort" | "filter", sxPr
         ...RowCenterAlign,
         ...sxProps,
         justifyContent: "space-between",
-        paddingTop: "2px",
-        paddingBottom: "2px"
+
       }}>
         <Text
           variant={"body1"}
@@ -141,6 +140,7 @@ const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        sx={{ height: open ? "32px !important" : "inherit" }}
       >
         <FTitle label={filter.translateKey} isOpen={open} sxProps={filter.styleProps} type={filter.type} />
       </StyledMenuButton>
@@ -154,21 +154,18 @@ const CFilter: FC<ITableFilter> = ({ filter, filters, updateFilters }) => {
         transitionDuration={50}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "center",
         }}
 
       >
         <MenuItem onClick={handleClose} sx={{
           borderBottom: "1px solid #EEEEEE",
           mb: 3,
-          paddingLeft: "10px",
-          paddingRight: "10px",
-          paddingTop: "1px",
-          height: "27px"
+          padding: "0px 10px 5px 10px",
 
         }} >
           <FTitle label={filter.translateKey} isOpen={open} sxProps={{ ...filter.styleProps }} type={filter.type} />

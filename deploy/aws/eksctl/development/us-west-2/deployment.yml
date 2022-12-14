@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pro-portal
+  name: copa-pro-portal
   namespace: public
 spec:
   selector:
     matchLabels:
-      app: pro-portal
+      app: copa-pro-portal
   replicas: 1
   template:
     metadata:
       labels:
-        app: pro-portal
+        app: copa-pro-portal
         version: "v1"
     spec:
       containers:
-      - name: pro-portal
-        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/pro-portal:v1.0.0.9198be8cc8c90ea8cce5fd525d3a665309e0e687.20221118_033631Z
+      - name: copa-pro-portal
+        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/copa-pro-portal:v1.0.0.9198be8cc8c90ea8cce5fd525d3a665309e0e687.20221118_033631Z
         ports:
         - name: http
           containerPort: 80

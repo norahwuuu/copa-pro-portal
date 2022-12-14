@@ -71,17 +71,14 @@ jest.mock("react", () => mockReact());
 const obj: ITableParams = {
     lists: patientListMock,
     updatePatientList: jest.fn(),
-    updateFilter: jest.fn(),
-    resetFilter: jest.fn(),
     tableProps: {
         resultType: "records",
         totalRecords: patientListMock.length,
-        filters: getDefaultFilter()
     }
 }
 
 const element = (params: ITableParams): ReactElement => {
-    return <CTable tableProps={params.tableProps} lists={params.lists} updatePatientList={params.updatePatientList} updateFilter={params.updateFilter} resetFilter={params.resetFilter} />
+    return <CTable tableProps={params.tableProps} lists={params.lists} updatePatientList={params.updatePatientList} />
 }
 
 describe("Component Patient Table", () => {

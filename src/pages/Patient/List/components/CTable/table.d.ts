@@ -65,12 +65,9 @@ export type IFilter = {
 export type ITableParams = {
   lists: IRow[],
   updatePatientList: (payload: PatientListParams) => void,
-  updateFilter: (payload: IFilterChips) => void,
-  resetFilter: () => void,
   tableProps: {
     resultType: ResultType;
     totalRecords: number;
-    filters: IFilterChips
   }
 }
 
