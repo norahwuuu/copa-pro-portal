@@ -13,6 +13,7 @@ import FolderOffOutlinedIcon from "@mui/icons-material/FolderOffOutlined";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import ImageIcon from '@mui/icons-material/Image';
 import CloseIcon from '@mui/icons-material/Close';
 import { FC } from "react";
 
@@ -38,6 +39,8 @@ import activeSvg from "../../assets/svgs/icons/active.svg";
 import inProgressSvg from "../../assets/svgs/icons/inprogress.svg";
 import warningSvg from "../../assets/svgs/icons/warning.svg";
 import underReviewSvg from "../../assets/svgs/icons/underreview.svg";
+import trashSvg from "../../assets/svgs/icons/trash.svg";
+
 
 
 interface IConsProps {
@@ -170,6 +173,18 @@ const ICons: FC<IConsProps> = ({ icon, fontSize, sxProps }) => {
         <CloseIcon
           fontSize={fontSize}
           sx={{ ...sxProps }}
+        />
+      );
+    case "ImagePlaceholder":
+      return <ImageIcon fontSize={fontSize} sx={sxProps} />;
+    case "DeleteIcon":
+      return (
+        <Box
+          component="img"
+          src={trashSvg}
+          alt={"delete"}
+          loading="lazy"
+          sx={{ height: "16px", ...sxProps }}
         />
       );
     default:
