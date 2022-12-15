@@ -21,3 +21,5 @@
 *.css
 /coverage
 .vscode/launch.json
+
+.eslintcache

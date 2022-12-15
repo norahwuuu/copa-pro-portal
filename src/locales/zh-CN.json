@@ -83,8 +83,14 @@
   "clinical.choseRadio.title": "Choose one that fit your patient’s situation:",
   "clinical.radio.temporary": "There is a temporary health issue that can be resolved.",
   "clinical.radio.permanent": "There is a permanent health issue which prevent aligner treatment.",
-  "patient.Info": "Patient information",
-  "patient.address": "Patient address",
-  "patient.address.title": "We will ship final retainer and gifts directly to the patient.",
-  "DateOfBirth": "Date of birth"
+  "radiograph.title": "Radiograph *",
+  "radiograph.panorex": "Panorex",
+  "radiograph.photograph": "Photographs (optional)",
+  "radiograph.fullface": "Full face",
+  "radiograph.retractedsmile": "Retracted smile",
+  "radiograph.image.note": "Accepted formats: {formats}.",
+  "radiograph.panorex.required": "Upload panorex.",
+  "radiograph.image.invalidFormat": "{filename} has failed to upload. Try again with {formats} files only.",
+  "radiograph.button.upload": "upload file",
+  "radiograph.upload.note": "Drag and drop or"
 }
