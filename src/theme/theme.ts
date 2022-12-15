@@ -76,10 +76,14 @@ const customThemeOptions: ThemeOptions = {
         text: {
           color: colorObj.gray.darken4,
           textDecoration: "underline",
+          border: "1px solid #FFFFFF",
+          backgroundColor: "#FFFFFF",
           "&:hover": {
             textDecoration: "underline",
             backgroundColor: "#FFFFFF",
             border: "1px solid #707070",
+            boxShadow: "none",
+
           },
         },
         sizeMedium: {
