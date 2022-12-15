@@ -38,6 +38,7 @@ export const ORDER_STATUS = {
   SHIPPED: "Shipped",
   DELIVERED: "Delivered",
   RETAINERS_SENT: "Retainers sent",
+  AWATING_PAYMENT: "Awaiting payment"
 };
 
 export const DENTAL_MONITORING_STATUS = {
@@ -171,6 +172,11 @@ export const TABLE_FILTER = {
     }, {
       id: "retainersSent",
       text: "Retainers sent",
+      dataKey: "40",
+
+    }, {
+      id: "awaitingPayment",
+      text: "Awaiting payment",
       dataKey: "40",
 
     }, {

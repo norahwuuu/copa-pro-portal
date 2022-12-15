@@ -2,6 +2,8 @@ import { footerText } from "@/pages/LoginBox/Login/column";
 import { Typography } from "@mui/material";
 import React from "react";
 import styles from "./footer.less";
+import packageJson from '../../../package.json';
+
 
 const Footer = () => {
   return (
@@ -22,7 +24,7 @@ const Footer = () => {
           {footerText.mid}
         </Typography>
         <Typography color="white" variant="body2" fontWeight="300">
-          {footerText.v}
+          {packageJson.version}
         </Typography>
       </div>
       <div className={styles.container}></div>
