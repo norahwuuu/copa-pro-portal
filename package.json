@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "start": "cross-env PORT=3000 umi dev",
     "build": "cross-env UMI_ENV=dev umi build",
@@ -48,6 +48,7 @@
     "ahooks": "^3.7.2",
     "commitizen": "^4.2.5",
     "cross-env": "^7.0.3",
+    "uview-3d": "1.0.35",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.39",
