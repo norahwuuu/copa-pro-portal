@@ -24,7 +24,7 @@ const Footer = () => {
           {footerText.mid}
         </Typography>
         <Typography color="white" variant="body2" fontWeight="300">
-          {packageJson.version}
+          {`V. ${packageJson.version}`}
         </Typography>
       </div>
       <div className={styles.container}></div>
