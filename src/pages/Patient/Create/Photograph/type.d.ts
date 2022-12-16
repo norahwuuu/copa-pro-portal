@@ -1,7 +1,17 @@
+import { SxProps, Theme } from "@mui/material";
 import { Effect, Reducer } from "umi";
 
 
 
+
+export interface IImageBoxProps {
+    id: string;
+    title: string;
+    imgBoxSxProps: SxProps<Theme>;
+    isImageRequired?: boolean;
+    imgPath: string | File;
+    updateImagePath: React.Dispatch<React.SetStateAction<string | File>>;
+}
 
 export interface PatientRadiographProps {
     patientRadiographState: PatientRadiographState;

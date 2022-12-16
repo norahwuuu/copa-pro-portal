@@ -64,7 +64,7 @@ export const PatientPhotograph: FC<PatientRadiographProps> = ({ patientRadiograp
           <Text variant={"h6"} color={"gray.main"} sxProp={{ mb: 2 }}>{translate.formatMessage({ id: "radiograph.title" })}</Text>
           <Grid container sx={{ mt: 2 }}>
             <Container maxWidth={"md"} sx={{ paddingLeft: "0 !important" }}>
-              <ImageBox title={"Panorex"} imgBoxSxProps={{
+              <ImageBox id={"panorex"} title={translate.formatMessage({ id: "radiograph.panorex" })} imgBoxSxProps={{
                 objectFit: "contain",
                 width: "560px",
                 height: "240px",
@@ -77,7 +77,7 @@ export const PatientPhotograph: FC<PatientRadiographProps> = ({ patientRadiograp
           <Grid container sx={{ mt: 2 }}>
             <Grid item sm={5} md={6} >
               <Container maxWidth={"sm"} sx={{ paddingLeft: "0 !important" }}>
-                <ImageBox title={translate.formatMessage({ id: "radiograph.fullface" })} imgBoxSxProps={{
+                <ImageBox id={"fullface"} title={translate.formatMessage({ id: "radiograph.fullface" })} imgBoxSxProps={{
                   objectFit: "contain",
                   width: "178px",
                   height: "237px"
@@ -86,7 +86,7 @@ export const PatientPhotograph: FC<PatientRadiographProps> = ({ patientRadiograp
             </Grid>
             <Grid item sm={5}>
               <Container maxWidth={"sm"} sx={{ paddingLeft: "0 !important" }}>
-                <ImageBox title={translate.formatMessage({ id: "radiograph.retractedsmile" })} imgBoxSxProps={{
+                <ImageBox id={"retractedsmile"} title={translate.formatMessage({ id: "radiograph.retractedsmile" })} imgBoxSxProps={{
                   objectFit: "contain",
                   width: "237px",
                   height: "178px"
@@ -103,14 +103,14 @@ export const PatientPhotograph: FC<PatientRadiographProps> = ({ patientRadiograp
       <Box sx={{ ...RowCenterAlign, mt: 6 }}>
         <Btn
           variant={"text"}
-          btnLabel={"Cancel"}
+          btnLabel={translate.formatMessage({ id: "btnCancel" })}
           sxProp={{
             mr: 6
           }}
         />
         <Btn
           variant={"contained"}
-          btnLabel={"Next"}
+          btnLabel={translate.formatMessage({ id: "btnNext" })}
           onClickHandler={goNext}
         />
       </Box>

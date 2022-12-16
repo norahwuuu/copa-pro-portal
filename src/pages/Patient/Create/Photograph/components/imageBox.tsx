@@ -14,15 +14,9 @@ import React, {
   useState,
 } from "react";
 import { useIntl } from "umi";
+import { IImageBoxProps } from "../type";
 const validExtensions = ["png", "jpeg", "jpg", "tiff", "bmp"];
 
-interface IImageBoxProps {
-  title: string;
-  imgBoxSxProps: SxProps<Theme>;
-  isImageRequired?: boolean;
-  imgPath: string | File;
-  updateImagePath: React.Dispatch<React.SetStateAction<string | File>>;
-}
 
 const ValidationAlert: FC<{ filename: string }> = ({ filename }) => {
   const translate = useIntl()
@@ -75,6 +69,7 @@ const ImagePreview: FC<{ imgBoxSxProps: SxProps<Theme>; path: string }> = ({
 };
 
 const ImageBox: FC<IImageBoxProps> = ({
+  id,
   title,
   imgBoxSxProps,
   imgPath,
@@ -175,13 +170,15 @@ const ImageBox: FC<IImageBoxProps> = ({
       <Box
         component={"form"}
         onDragEnter={handleDrag}
+        data-testid={`box-${id}`}
         sx={{ ...imgBoxSxProps, ...imgBoxStyle, mt: 2, position: "relative" }}
       >
         <input
           hidden
           ref={inputRef}
           accept="image/*"
-          id="input-file-upload"
+          id={id}
+          data-testid={id}
           type="file"
           onChange={handleChange}
         />
@@ -217,6 +214,7 @@ const ImageBox: FC<IImageBoxProps> = ({
         {dragActive && (
           <Box
             component={"div"}
+            data-testid={`drop-${id}`}
             sx={{
               position: "absolute",
               width: "100%",
@@ -275,7 +273,7 @@ const ImageBox: FC<IImageBoxProps> = ({
       {invalidFile && <ValidationAlert filename={filename} />}
 
       {
-        isRequired && (
+        isRequired && !invalidFile && (
           <Text variant={"body2"} sxProp={{ fontWeight: 300 }} color={"error"}>
             {translate.formatMessage({ id: "radiograph.panorex.required" })}
           </Text>
