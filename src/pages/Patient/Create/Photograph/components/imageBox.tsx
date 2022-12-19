@@ -2,6 +2,7 @@ import ICons from "@/components/Icons/icons";
 import Text from "@/components/Text/text";
 import theme from "@/theme/theme";
 import { ColumnCenterAlign, RowCenterAlign } from "@/theme/themen.util";
+import { appConstants } from "@/utils/appConstants";
 import { Theme } from "@emotion/react";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Box, Card, Container, IconButton, SxProps } from "@mui/material";
@@ -18,8 +19,7 @@ import { IImageBoxProps } from "../type";
 const validExtensions = ["png", "jpeg", "jpg", "tiff", "bmp"];
 
 
-const ValidationAlert: FC<{ filename: string }> = ({ filename }) => {
-  const translate = useIntl()
+const ValidationAlert: FC<{ filename: string, errorMessage: string }> = ({ filename, errorMessage }) => {
   return (
     <Container maxWidth={"md"} sx={{ paddingLeft: "0 !important" }}>
       <Box
@@ -40,10 +40,7 @@ const ValidationAlert: FC<{ filename: string }> = ({ filename }) => {
         </Box>
         <Box>
           <Text variant={"body2"} color={"error"} sxProp={{ fontWeight: 300 }}>
-            {translate.formatMessage({ id: "radiograph.image.invalidFormat" }, {
-              filename,
-              formats: validExtensions.join(", ")
-            })}
+            {errorMessage}
           </Text>
         </Box>
       </Box>
@@ -82,6 +79,7 @@ const ImageBox: FC<IImageBoxProps> = ({
   const inputRef = useRef();
   const [preview, setPreview] = useState<string>("");
   const [invalidFile, setInvalidFile] = useState<boolean>(false);
+  const [invalidFileSize, setInvalidFileSize] = useState<boolean>(false);
   const [isRequired, setIsRequired] = useState<boolean>(false);
 
   useEffect(() => {
@@ -97,18 +95,30 @@ const ImageBox: FC<IImageBoxProps> = ({
   }, [isImageRequired]);
 
   const handleFile = (files: FileList) => {
+    setInvalidFileSize(false);
+    setInvalidFile(false)
+    setIsRequired(false);
     const file = files[0];
     const fileExtension = file.type.split("/")[1];
+    const fileSizeKiloBytes = file.size / appConstants.ALLOWED_FILE_SIZE
+
     setFilename(file.name);
-    if (validExtensions.includes(fileExtension)) {
+    if (!validExtensions.includes(fileExtension)) {
+      setInvalidFile(true);
+    } if (!validExtensions.includes(fileExtension)) {
+      setInvalidFile(true);
+    }
+    else if (fileSizeKiloBytes > appConstants.ALLOWED_FILE_SIZE) {
+      setInvalidFileSize(true)
+    }
+    else {
       setInvalidFile(false);
       const url = URL.createObjectURL(files[0]);
       console.log("url", url);
       setPreview(url);
       updateImagePath(files[0]);
-    } else {
-      setInvalidFile(true);
     }
+
   };
 
   // handle drag events
@@ -270,7 +280,13 @@ const ImageBox: FC<IImageBoxProps> = ({
         )
       }
 
-      {invalidFile && <ValidationAlert filename={filename} />}
+      {invalidFile && <ValidationAlert filename={filename} errorMessage={translate.formatMessage({ id: "radiograph.image.invalidFormat" }, {
+        filename,
+        formats: validExtensions.join(", ")
+      })} />}
+      {invalidFileSize && <ValidationAlert filename={filename} errorMessage={translate.formatMessage({ id: "radiograph.image.invalidfilesize" }, {
+        filename,
+      })} />}
 
       {
         isRequired && !invalidFile && (
