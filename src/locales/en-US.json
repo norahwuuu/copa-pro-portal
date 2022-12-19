@@ -93,5 +93,6 @@
   "radiograph.panorex.required": "Upload panorex.",
   "radiograph.image.invalidFormat": "{filename} has failed to upload. Try again with {formats} files only.",
   "radiograph.button.upload": "upload file",
-  "radiograph.upload.note": "Drag and drop or"
+  "radiograph.upload.note": "Drag and drop or",
+  "radiograph.image.invalidfilesize": "We are sorry but the image you are trying to upload is too large. It should be less than 20Mb."
 }
