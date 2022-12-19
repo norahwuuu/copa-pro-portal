@@ -32,8 +32,8 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
       btnList: [
         <Btn variant={"outlined"} btnLabel={"Got it!"} onClickHandler={() => setAlert({ isAlert: false })} />,
       ],
-      content: <Grid container direction={'column'} component={"div"} width={'333px'}>
-        <Text variant="body1" >
+      content: <Grid container direction={'column'} component={"div"} width={'333px'} paddingLeft={"42px"}>
+        <Text variant="body1" sxProp={{ width: '330px' }} >
           {"This patient's treatment plan has been reviewed and some changes have been made."}
         </Text>
         <Text variant="body1" sxProp={{ fontWeight: "bold", marginTop: '20px' }}>
@@ -71,7 +71,7 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
       title: {
         text: 'The action you are trying to perform cannot be done because this patient has been archived. ', sxProps: { color: 'gray.main', fontSize: '14px' }
       },
-      content: <Text variant={"body1"} sxProp={{ width: '329px', display: 'block', }}>
+      content: <Text variant={"body1"} sxProp={{ width: '329px', display: 'block', paddingLeft: '42px' }}>
         Do you want to unarchive this patient?</Text>,
       btnList: [
         <Btn variant={"outlined"} btnLabel={"Yes, unarchive this patient"} onClickHandler={() => setAlert({ isAlert: false })} />,
@@ -87,7 +87,7 @@ export const PatientOverview: FC<PatientOverviewProps> = ({ caseStatus, treatmen
       title: {
         text: 'Treatment notes', sxProps: { variant: 'body1', margin: 'auto' }
       },
-      content: <Text variant={"body1"} sxProp={{ width: '350px', fontWeight: "normal", display: 'block', letterSpacing: '-0.5px', color: 'gray.main' }}>
+      content: <Text variant={"body1"} sxProp={{ width: '350px', fontWeight: "normal", display: 'block', letterSpacing: '-0.5px', color: 'gray.main', paddingLeft: '20px' }}>
         - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</Text>,
       btnList: [
         <Btn variant={"outlined"} btnLabel={"Close"} onClickHandler={() => setAlert({ isAlert: false })} />,

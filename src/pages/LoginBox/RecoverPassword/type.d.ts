@@ -10,7 +10,16 @@ export interface resetPasswordParamsType {
   answer: string;
   state_token: string;
 }
+export interface resetInfoParamsType {
+  stateToken: string,
+  question: string,
+  useId: string,
+  usesname: string
+  errorSummary?: String;
+}
 
 export interface recoverProps {
   resetPassword?: (arg: resetPasswordParamsType) => void;
+  resetPasswordData: resetInfoParamsType
+  getResetInfo: any
 }

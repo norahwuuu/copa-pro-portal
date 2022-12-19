@@ -40,10 +40,10 @@ setAlert({
       
 */
 interface AlertProps extends AlertModelState {
-  setAlert: Function;
+  setAlert: (arg0: AlertModelState) => void;
 }
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
   "& .MuiDialog-paper": {
     border: "1px solid gray.light3",

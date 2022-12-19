@@ -171,7 +171,7 @@ async function request<T>(
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 eRequest.interceptors.request.use(async (url, options) => {
     const token = await localStorage.getItem("token") || null;
-    if (token && url.includes("/api/patient-mgmt/")) {
+    if (token && url.includes("patient-mgmt/")) {
         const { accessToken } = JSON.parse(token)
         options.headers = {
             "Authorization": `Bearer ${accessToken}`
