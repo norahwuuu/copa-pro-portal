@@ -27,7 +27,7 @@ describe("Page massagebox", () => {
     it("Should render page correctly", () => {
         const setAlert = jest.fn();
 
-        renderWithRouter(<AlertDialog isAlert={true} title='Title' content='testContent' btnList={[
+        renderWithRouter(<AlertDialog isAlert={true} title={{ text: 'Title' }} content='testContent' btnList={[
             <Btn variant={"outlined"} btnLabel={"Got it!"} />,
         ]} setAlert={setAlert} />);
         expect(screen.getAllByText('Title').length).toBe(1);
