@@ -21,6 +21,7 @@ const Text: FC<TitleProps> = ({
   noWrap,
   component = "span",
   children,
+  ...props
 }) => {
   return (
     <Typography
@@ -29,6 +30,7 @@ const Text: FC<TitleProps> = ({
       color={color}
       noWrap={noWrap}
       sx={{ ...sxProp, opacity: 1 }}
+      {...props}
     >
       {children}
     </Typography>

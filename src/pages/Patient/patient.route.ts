@@ -2,7 +2,7 @@ import newPatientRoute from "./Create/createPatient.route";
 
 export const patientUrlObj = {
   createPatient: "/patients/new",
-  overviewPatient: "/patients/overview",
+  overviewPatient: "/patients/:patientId/overview",
   patientList: "/patients",
 };
 

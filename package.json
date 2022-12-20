@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.5",
   "scripts": {
     "start": "cross-env PORT=3000 umi dev",
     "build:development": "cross-env UMI_ENV=dev umi build",

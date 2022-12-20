@@ -7,7 +7,7 @@ enum Type {
 export interface AlertModelState {
   isAlert: boolean;
   method?: string;
-  title: { text: string; sxProps: object };
+  title?: { text: string; subText?: string; sxProps: object };
   content?: ReactElement | string;
   btnList?: Array<ReactElement>;
 }

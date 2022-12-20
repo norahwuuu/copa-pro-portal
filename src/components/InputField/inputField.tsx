@@ -21,11 +21,10 @@ import { useEffect, useState } from "react";
 import styles from "./inputField.less";
 import { InputFieldType } from "./type";
 export type InputFieldProps = TextFieldProps & InputFieldType;
-import React from 'react';
 
 const errorMain = colorObj.error.main;
 const commonWhite = colorObj.common.white;
-const LogTextField = styled(TextField)`
+export const LogTextField = styled(TextField)`
   & .MuiOutlinedInput-root {
     width: 220px;
     padding: 0;
@@ -126,6 +125,12 @@ const LogTextField = styled(TextField)`
     margin-left: -4px;
   }
 `;
+// 校验是否是email 格式
+export const emailRegex = (email: string | number) => {
+  email = email.toString();
+  const email_Regex = new RegExp("^.+@[A-Z0-9a-z]+.[a-zA-Z]+$");
+  return email_Regex.test(email);
+};
 
 const InputField: FC<InputFieldProps> = ({
   subLink = "",
@@ -142,13 +147,6 @@ const InputField: FC<InputFieldProps> = ({
   const [showType, setShowType] = useState<boolean>(false);
   // password is hidden
   const [isHide, setIsHide] = useState<boolean>(true);
-  // 校验是否是email 格式
-  const emailRegex = (email: string | number) => {
-    email = email.toString();
-    const email_Regex = new RegExp("^.+@[A-Z0-9a-z]+.[a-zA-Z]+$");
-    return email_Regex.test(email);
-  };
-
   // 校验eamil格式
   const checkEmail = () => {
     if (inputValue === "") {

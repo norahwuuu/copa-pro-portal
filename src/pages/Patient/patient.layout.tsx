@@ -35,7 +35,7 @@ const Patient: FC<{ children: ReactChildren }> = ({ children }) => {
       <Header>
         <PatientHeader />
       </Header>
-      <Grid>{children}</Grid>
+      <Grid width={"100%"}>{children}</Grid>
     </>
   );
 };

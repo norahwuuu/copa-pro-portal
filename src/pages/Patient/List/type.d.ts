@@ -1,4 +1,4 @@
-import { Effect, Reducer, Subscription } from "umi";
+import { Effect, Reducer } from "umi";
 import { IRow } from "./components/CTable/table";
 
 
