@@ -16,5 +16,7 @@ export default defineConfig({
   define: {
     BASE_URL: "/api",
     OKTA_URL: "/sss",
+    CLIENT_ID: "0oa6s60ztcLzLKNhT5d7",
+    ISSUER: "https://ulab-ciam-dev.okta.com/oauth2/aus6exjzwihWqpfxl5d7",
   },
 });

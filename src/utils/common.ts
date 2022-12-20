@@ -1,7 +1,7 @@
 import { OktaAuth } from "@okta/okta-auth-js";
 export const authClient = new OktaAuth({
-  issuer: "https://ulab-ciam-dev.okta.com/oauth2/aus6exjzwihWqpfxl5d7",
-  clientId: "0oa6s60ztcLzLKNhT5d7",
+  issuer: ISSUER,
+  clientId: CLIENT_ID,
   redirectUri: window.location.origin + "/login/callback",
   postLogoutRedirectUri: window.location.origin,
   scopes: ["openid", "profile", "email"],
