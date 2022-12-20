@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "scripts": {
     "start": "cross-env PORT=3000 umi dev",
-    "build": "cross-env UMI_ENV=dev umi build",
+    "build:development": "cross-env UMI_ENV=dev umi build",
     "start:qa": "cross-env PORT=3000 UMI_ENV=qa umi dev",
     "build:qa": "cross-env UMI_ENV=qa umi build",
     "start:prod": "cross-env PORT=3000 UMI_ENV=prod umi dev",
