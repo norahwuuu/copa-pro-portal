@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: copa-pro-portal
-        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/copa-pro-portal:v1.0.0.9198be8cc8c90ea8cce5fd525d3a665309e0e687.20221118_033631Z
+        image: 927876825924.dkr.ecr.us-west-2.amazonaws.com/copa-pro-portal:v1.0.0.82a2b16a02ff3aca601db809dd9862ee99e5ef43.20221220_220500Z
         ports:
         - name: http
           containerPort: 80
