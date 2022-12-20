@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ShadowBox from "@/pages/Components/shadowBox";
 import Text from "@/components/Text/text";
 
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, useTheme } from "@mui/material";
 import { FC } from "react";
 import { RowCenterAlign } from "@/theme/themen.util";
 import Btn from "@/components/Button/button";
@@ -11,6 +11,7 @@ import { connect, useIntl } from "umi";
 import { PatientRadiographProps, PatientRadiographState } from "./type";
 
 export const PatientPhotograph: FC<PatientRadiographProps> = ({ patientRadiographState, updatePatientRadiograph }) => {
+  const theme = useTheme();
   const translate = useIntl();
   const [panorexImg, setPanorexImg] = useState<string | File>("");
   const [fullFaceImg, setFullfaceImg] = useState<string | File>("");
@@ -66,8 +67,14 @@ export const PatientPhotograph: FC<PatientRadiographProps> = ({ patientRadiograp
             <Container maxWidth={"md"} sx={{ paddingLeft: "0 !important" }}>
               <ImageBox id={"panorex"} title={translate.formatMessage({ id: "radiograph.panorex" })} imgBoxSxProps={{
                 objectFit: "contain",
-                width: "560px",
                 height: "240px",
+                [theme.breakpoints.up('md')]: {
+                  width: "560px",
+                },
+                [theme.breakpoints.down('md')]: {
+                  width: "460px",
+                }
+
               }} imgPath={panorexImg} updateImagePath={setPanorexImg} isImageRequired={panorexImgRequired} />
             </Container>
           </Grid>

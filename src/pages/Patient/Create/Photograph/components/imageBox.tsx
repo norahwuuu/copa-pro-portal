@@ -19,7 +19,7 @@ import { IImageBoxProps } from "../type";
 const validExtensions = ["png", "jpeg", "jpg", "tiff", "bmp"];
 
 
-const ValidationAlert: FC<{ filename: string, errorMessage: string }> = ({ filename, errorMessage }) => {
+const ValidationAlert: FC<{ errorMessage: string }> = ({ errorMessage }) => {
   return (
     <Container maxWidth={"md"} sx={{ paddingLeft: "0 !important" }}>
       <Box
@@ -213,7 +213,7 @@ const ImageBox: FC<IImageBoxProps> = ({
               {translate.formatMessage({ id: "radiograph.upload.note" })}
               <Box
                 component={"button"}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: "pointer", ml: "2px" }}
                 onClick={onButtonClick}
               >
                 {translate.formatMessage({ id: "radiograph.button.upload" })}
@@ -280,11 +280,11 @@ const ImageBox: FC<IImageBoxProps> = ({
         )
       }
 
-      {invalidFile && <ValidationAlert filename={filename} errorMessage={translate.formatMessage({ id: "radiograph.image.invalidFormat" }, {
+      {invalidFile && <ValidationAlert errorMessage={translate.formatMessage({ id: "radiograph.image.invalidFormat" }, {
         filename,
         formats: validExtensions.join(", ")
       })} />}
-      {invalidFileSize && <ValidationAlert filename={filename} errorMessage={translate.formatMessage({ id: "radiograph.image.invalidfilesize" }, {
+      {invalidFileSize && <ValidationAlert errorMessage={translate.formatMessage({ id: "radiograph.image.invalidfilesize" }, {
         filename,
       })} />}
 
