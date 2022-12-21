@@ -62,6 +62,7 @@ export const ForgotPassword: FC<forgotPasswordProps> = (props) => {
               sxProp={{
                 marginTop: "15px",
                 color: "white",
+                backgroundColor: 'transparent',
                 border: "1px solid transparent",
                 "&:hover": {
                   color: "#333",

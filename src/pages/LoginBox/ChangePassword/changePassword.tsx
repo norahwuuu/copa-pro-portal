@@ -125,6 +125,8 @@ export const ChangePassword: FC<any> = ({ changePasswordFn }) => {
               marginTop: "5px",
               color: "white",
               border: "1px solid transparent",
+              backgroundColor: 'transparent',
+
               "&:hover": {
                 color: "#333",
               },

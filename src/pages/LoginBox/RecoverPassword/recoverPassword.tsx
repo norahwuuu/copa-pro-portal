@@ -175,6 +175,7 @@ export const RecoverPassword: FC<recoverProps> = ({ resetPassword, resetPassword
               marginTop: "15px",
               color: "white",
               border: "1px solid transparent",
+              backgroundColor: 'transparent',
               "&:hover": {
                 color: "#333",
               },
