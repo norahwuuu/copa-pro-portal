@@ -20,7 +20,8 @@
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint-staged": "lint-staged",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "release": "release-it"
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
@@ -75,6 +76,7 @@
     "file-loader": "^6.2.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.7.1",
+    "release-it": "^15.5.1",
     "typescript": "^4.1.2",
     "yorkie": "^2.0.0"
   }
