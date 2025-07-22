@@ -1,5 +1,7 @@
-import { Box, styled } from "@mui/system";
-export const BgBox = styled(Box)(({ theme }) => ({
+import { Box, styled } from "@mui/material";
+import { Theme } from "@mui/material/styles";
+
+export const BgBox = styled(Box)(({ theme }: { theme: Theme }) => ({
   [theme.breakpoints.down(1365)]: {
     width: "calc(100% - 60px)",
     // height: "calc(100% - 120px)",
