@@ -9,8 +9,8 @@ export type centerRectanglePropsType = {
   width?: string | number;
   className?: string;
   children?: React.ReactNode;
-  mainTitle?: string; //第一行标题
-  subtitle?: string; //第二行标题
+  mainTitle?: string; // First-line title
+  subtitle?: string; // Second-line title
   LogoIconMt?: number; //LogoIconMt marginbottom
   sxProp?: SxProps<Theme>;
   headerInfo?: {
@@ -21,9 +21,9 @@ export type centerRectanglePropsType = {
 };
 
 /**
- * description：水平盒子
+ * description: Horizontal box
  *
- * param:width?:盒子宽度默认409px;className?: 样式;children?: 盒子内容;mainTitle?:一级标题;subtitle:二级标题;headerInfo：盒子顶部提示语，show:是否开启，type：类型,info：文字；
+ * param: width?: box width, default 409px; className?: styles; children?: box content; mainTitle?: primary title; subtitle: secondary title; headerInfo: banner at the top of the box, show: whether to display, type: type, info: text;
  *
  * return <CenterRectangle/>
  */

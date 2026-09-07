@@ -18,22 +18,22 @@ import { ClinicalTypes } from "./type";
 export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
   const translate = useIntl();
   const theme = useTheme();
-  // should show Select an option to continue error tips up of No and Yes button(显示没有选中Yes或者No按钮错误开关)
+  // should show "Select an option to continue" error tips above the No and Yes buttons
   const [isOptionError, setIsOptionError] = useState<boolean>(false);
-  // should show Periodontal model error（显示Periodontal弹窗的错误开关）
+  // should show Periodontal modal error
   const [isPeriodontalError, setIsPeriodontalError] = useState<boolean>(false);
 
-  // check Yes or No value （选中的是Yes\No）
+  // check Yes or No value
   const [checkYN, setCheckYN] = useState<string>('Default');//Default/No/Yes/Error
-  // check 0-3\3-6\6+moths value( 选中时间月份)
+  // check 0-3\3-6\6+ months value
   const [checkMonth, setCheckMonth] = useState<string>('Default');//Default/0-3/3-6/6+
-  // chose checkbox applies (选中的checkBox数组)
+  // chosen checkbox applies
   const [checkBoxArr, setCheckArr] = useState<Array<string>>([]);
-  // Periodontal Model show boolean（显示选中Periodontal的弹窗开关）
+  // Periodontal modal show boolean
   const [isPeriodontalShow, setIsPeriodontalShow] = useState<boolean>(false);
-  // chose temporary or permanent radio（选中的radio---   temporary/permanent）
+  // chosen temporary or permanent radio
   const [radioVal, setRadioVal] = useState<string>('Default');//Default/temporary/permanent
-  // check applies Implants/Bridges/Primary tooth will show (选中前三个 Implants/Bridges/Primary 的弹窗调用方法)
+  // show modal when Implants/Bridges/Primary tooth applies are checked
   const IBPappliesModel = () => {
     setAlert({
       isAlert: true,
@@ -55,7 +55,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
 
     })
   }
-  // check Excessive will show (选中Excessive 的弹窗调用方法)
+  // show modal when Excessive is checked
   const ExcessiveModel = () => {
     setAlert({
       isAlert: true,
@@ -78,7 +78,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
 
     })
   }
-  // click No or Yes button event （点击yes、no的方法）
+  // click No or Yes button event
   const clickNoOrYes = (type: string) => {
     if (isOptionError) {
       setIsOptionError(false);
@@ -90,7 +90,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
     }
   }
 
-  // checkBox event （选中checkbox的方法）
+  // checkbox event
   const handleCheckBox = (name: string) => {
     const arr = checkBoxArr.concat();
     if (arr.includes(name)) {
@@ -104,7 +104,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
     setRadioVal(v);
     setIsPeriodontalError(false);
   }
-  // click submit button of applies event （点击applies checkbox的submit按钮的方法）
+  // click submit button of applies event
   const submitApplies = () => {
     if (checkBoxArr.length) {
       if (checkBoxArr.includes('Implants') || checkBoxArr.includes('Bridges') || checkBoxArr.includes('Primary tooth (teeth)')) {
@@ -119,7 +119,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
       setIsOptionError(true);
     }
   }
-  // click months button event （点击月份时间的方法）
+  // click months button event
   const clickMonth = (val: string) => {
     if (isPeriodontalError) {
       setIsPeriodontalError(false);
@@ -130,7 +130,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
       setCheckMonth(val);
     }
   }
-  // click Ok,save button of Peridontal （点击Peridontal 弹窗里面的Ok,save方法）
+  // click Ok, save button of Periodontal modal
   const okPeridontalClick = () => {
     if (radioVal === 'Default') {
       setIsPeriodontalError(true);
@@ -145,7 +145,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
       setIsPeriodontalShow(false);
     }
   }
-  //click close button of Peridontal （点击Peridontal 弹窗里面的cancel方法）
+  // click close button of Periodontal modal
   const cancelPeridontalClick = () => {
     if (radioVal !== "Default") {
       setRadioVal('Default');
@@ -158,7 +158,7 @@ export const PatientClinicalInformation: FC<ClinicalTypes> = ({ setAlert }) => {
     }
     setIsPeriodontalShow(false);
   }
-  // click next button （点击next按钮）
+  // click next button
   const nextClick = () => {
     if (checkYN === "Default") {
       setIsOptionError(true);
