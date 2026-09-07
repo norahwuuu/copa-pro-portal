@@ -16,15 +16,15 @@ export const Login: FC<loginProps> = ({ loginUser, isShowLoginError = false }) =
   const translate = useIntl();
   // username
   const [email, setEmail] = useState<string>("");
-  // username  错误类型
+  // username error type
   const [emailType, setEmailType] = useState<string>("noError");
 
   // password
   const [password, setPassWord] = useState<string>("");
-  // password 错误类型
+  // password error type
   const [passType, setPassType] = useState<string>("noError");
 
-  // 点击login-btn
+  // click login button
   const loginClick = () => {
     if (email === "") {
       setEmailType("emailEmpty");

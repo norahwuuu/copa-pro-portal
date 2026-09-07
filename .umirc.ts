@@ -21,7 +21,7 @@ export default defineConfig({
     localsConvention: "camelCase",
   },
   chainWebpack: (config) => {
-    // 源文件编译opt文件
+    // Compile source .otf files
     config.module
       .rule("otf")
       .test(/\.otf$/i)

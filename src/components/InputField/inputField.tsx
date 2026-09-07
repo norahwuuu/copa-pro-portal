@@ -1,14 +1,14 @@
 /**
- * global TextField : 带效果的输入框  (Input box with effect)
+ * global TextField: Input box with effect
  * @param
- * className:类名(class name)
- * subLink: 输入框右下方文字(Text at the bottom right of the input box)
- * subLinkClick: 输入框右下角文字点击方法回调(Click the method callback in the lower right corner of the input box)
- * inputType: 输入框类型(types of input)--- email\pass\default
- * inputValue: 输入框的值(value of input)
- * setInputValue: 设置输入框值得方法(How to set the value of the input box)
- * errorType: 错误类型(types of error)---noError\emailEmpty\passEmpty\nonvalidEmail
- * setErrorType: 设置错误类型的方法(How to set the error type)
+ * className: class name
+ * subLink: Text at the bottom right of the input box
+ * subLinkClick: Click callback for the text in the lower right corner of the input box
+ * inputType: types of input --- email\pass\default
+ * inputValue: value of input
+ * setInputValue: How to set the value of the input box
+ * errorType: types of error --- noError\emailEmpty\passEmpty\nonvalidEmail
+ * setErrorType: How to set the error type
  * @returns
  */
 import { errorTypes } from "@/pages/LoginBox/Login/column";
@@ -78,7 +78,7 @@ export const LogTextField = styled(TextField)`
     font-size: 1rem;
   }
   ,
-  // 错误提示
+  // error hint
   & .MuiFormLabel-colorError {
     color: ${errorMain} !important;
   }
@@ -99,7 +99,7 @@ export const LogTextField = styled(TextField)`
 
   ,
 
-  //后缀图标
+  // suffix icon
   & .MuiInputBase-root .MuiInputAdornment-positionEnd .MuiIconButton-edgeEnd {
     margin-right: 10px;
     padding: 0;
@@ -125,7 +125,7 @@ export const LogTextField = styled(TextField)`
     margin-left: -4px;
   }
 `;
-// 校验是否是email 格式
+// Validate whether the value is in email format
 export const emailRegex = (email: string | number) => {
   email = email.toString();
   const email_Regex = new RegExp("^.+@[A-Z0-9a-z]+.[a-zA-Z]+$");
@@ -147,7 +147,7 @@ const InputField: FC<InputFieldProps> = ({
   const [showType, setShowType] = useState<boolean>(false);
   // password is hidden
   const [isHide, setIsHide] = useState<boolean>(true);
-  // 校验eamil格式
+  // Validate email format
   const checkEmail = () => {
     if (inputValue === "") {
       setErrorType && setErrorType("emailEmpty");
@@ -157,7 +157,7 @@ const InputField: FC<InputFieldProps> = ({
       setErrorType && setErrorType("noError");
     }
   };
-  // 校验密码是否格式正确
+  // Validate whether the password format is correct
   // const checkPass = () => {
   //   if (inputValue === "") {
   //     setErrorType && setErrorType("passEmpty");

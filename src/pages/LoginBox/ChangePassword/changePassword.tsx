@@ -9,7 +9,7 @@ import styles from "./changePassword.less";
 import * as React from 'react';
 
 export const specialCharacters =
-  /[`~!@#$%^&*()_\-+=<>?:"{}|,.;/'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im; // 特殊字符
+  /[`~!@#$%^&*()_\-+=<>?:"{}|,.;/'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im; // special characters
 
 export const ChangePassword: FC<any> = ({ changePasswordFn }) => {
   const translate = useIntl();
